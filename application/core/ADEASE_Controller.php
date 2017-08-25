@@ -36,7 +36,7 @@ class ADEASE_Controller extends CI_Controller {
 			$data['user']['avatar'] = $this->session->userdata('avatar') !== '' ? '/resources/images/avatar/' . $this->session->userdata('avatar') : '/resources/images/photos/loggeduser.png';
 			$this->assign('user', $data['user']);
 		} else {
-			redirect('https://www.adease.com/user/login', 'auto ', 301);
+			redirect('https://www.adlinkx.com/user/login', 'auto ', 301);
 		}
 
 	}

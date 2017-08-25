@@ -773,15 +773,16 @@ strong {
 }
 
 .pageheader h2 {
-    font-size: 28px;
+    font-size: 15px;
     color: #1D2939;
     letter-spacing: -0.5px;
     margin: 0;
+    font-weight: bold;
 }
 
 .pageheader .glyphicon,
 .pageheader .fa {
-    font-size: 24px;
+    font-size: 14px;
     margin-right: 5px;
     padding: 6px 7px;
     border: 2px solid #1D2939;
@@ -4112,7 +4113,15 @@ div.error label.error:before {
     display: inline-block;
 }
 
-
+/** footer-bar **/
+.footer-bar{ 
+    width:100%;
+    height:60px;
+    line-height:60px;
+    text-align:center;
+    color:#aeafaf;
+    border-top:1px solid #aeafaf;
+}
 
 /********** 18. MEDIA QUERIES **********/
 /***************************************/
@@ -4406,7 +4415,7 @@ div.error label.error:before {
     }
 
     .pageheader h2 {
-        font-size: 18px;
+        font-size: 15px;
     }
 
     .pageheader .glyphicon,
