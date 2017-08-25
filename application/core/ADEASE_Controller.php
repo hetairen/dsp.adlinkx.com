@@ -27,7 +27,7 @@ class ADEASE_Controller extends CI_Controller {
 	}
 
 	public function initialization() {
-		if (is_array($this->session->userdata()) && ($this->session->userdata('uid') != '' || $this->session->userdata('name') != '')) {
+		if (is_array($this->session->userdata()) && ($this->session->has_userdata('uid') || $this->session->has_userdata('name'))) {
 			$this->uid = $this->session->userdata('uid');
 			$data['user']['uid'] = $this->session->userdata('uid') !== '' ? $this->session->userdata('uid') !== '' : 'root';
 			$data['user']['permissions'] = $this->session->userdata('permissions') !== '' ? $this->session->userdata('permissions') : '';
@@ -36,7 +36,7 @@ class ADEASE_Controller extends CI_Controller {
 			$data['user']['avatar'] = $this->session->userdata('avatar') !== '' ? '/resources/images/avatar/' . $this->session->userdata('avatar') : '/resources/images/photos/loggeduser.png';
 			$this->assign('user', $data['user']);
 		} else {
-			redirect('https://www.adease.com/user/login', 'auto ', 301);
+			redirect('https://www.adlink.com/user/login', 'auto ', 301);
 		}
 
 	}

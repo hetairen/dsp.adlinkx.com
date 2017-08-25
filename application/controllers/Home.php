@@ -17,7 +17,7 @@ class Home extends ADEASE_Controller {
 
 	public function index() {
 		$data = array();
-
-		$this->display('home/index.html');
+		$smarty_cache_id = 'home_index';
+		$this->display('home/index.html',$smarty_cache_id);
 	}
 }
