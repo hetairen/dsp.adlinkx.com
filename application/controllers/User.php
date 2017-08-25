@@ -9,22 +9,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * | Date
  * |--------------------------------------------------------------
  */
-class User extends CI_Controller {
+class User extends ADEASE_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->helper('cookie');
-		$this->load->helper('url');
+		// $this->initialization();
 		$this->load->model('user_model', 'user');
 		$this->load->model('loger_model', 'loger');
 	}
 
 	public function login() {
-		$this->load->view('user/login.html');
+		$this->display('user/login.html');
 	}
 
 	public function register() {
-		$this->load->view('user/register.html');
+		$this->display('user/register.html');
 	}
 
 	public function sign_in() {
@@ -173,6 +171,6 @@ class User extends CI_Controller {
 	public function sign_out() {
 		$sesion_items = array('uid', 'group', 'permissions', 'name', 'avatar');
 		$this->session->unset_userdata($sesion_items);
-		redirect('https://www.adease.com/user/login', 'auto ', 301);
+		redirect('https://www.adlinkx.com/user/login', 'auto ', 301);
 	}
 }

@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *| Date 2017-01-04
  *|---------------------------------------------------------------------------------------------------------------
  */
-$config['smarty']['template_dir'] = APPPATH . 'views' . DIRECTORY_SEPARATOR;
+$config['smarty']['template_dir'] = APPPATH . 'views' . DIRECTORY_SEPARATOR ;
 $config['smarty']['config_dir'] = APPPATH . '..' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'smarty' . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR;
 $config['smarty']['compile_dir'] = APPPATH . '..' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'smarty' . DIRECTORY_SEPARATOR . 'templates_c' . DIRECTORY_SEPARATOR;
 $config['smarty']['plugins_dir'] = APPPATH . '..' . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'smarty' . DIRECTORY_SEPARATOR . 'plugins_dir' . DIRECTORY_SEPARATOR;

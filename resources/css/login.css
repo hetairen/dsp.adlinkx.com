@@ -17,7 +17,7 @@ input{display:block;float:left;width:390px;height:36px;line-height:36px;border:1
 #phone{background:#FFF url("../images/phone.png") no-repeat 95% center;}
 .account-tip,.passwd-tip,.confirm-passwd-tip,.email-tip,.phone-tip{width:100%;height:30px;margin-left:50px;color:#d22a0e;display:none;}
 .simulation-submit-buts{display:inline-block;width:400px;height:40px;line-height:40px;background:#1CAF9A;border:1px solid #17a08c;font-size:15px;color:#FFF;margin-left:50px;border-radius:5px;text-align:center;}
-.simulation-submit-buts:hover{background:#17a08c;}
+.simulation-submit-buts:hover{background:#17a08c;color:#FFF;text-decoration:none;}
 .simulation-ckeckbox-but{display:block;float:left;width:200px;height:40px;line-height:40px;padding-left:30px;background:url("../images/check_box_checked_icon.png") no-repeat 5px 11px;color:#8a8a8a;margin-left:50px;}
 .link-block{display:block;float:right;width:150px;height:40px;line-height:40px;margin-right:40px;}
 .link-block a{color:#1CAF9A;}
