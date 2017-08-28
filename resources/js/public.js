@@ -6,16 +6,12 @@
  * @Email thebulelife@outlook.com
  * @Data 2017-01-02
  */
-function Adease($) {
-<<<<<<< HEAD
-    this.domain = 'https://www.adlink.com';
-=======
+function Adlinkx($) {
     this.domain = 'https://www.adlinkx.com';
->>>>>>> cc24a48a8e40a32b21cb7f42e34925dcadfcba49
     this.winW = document.documentElement.clientWidth || document.body.clientWidth;
     this.winH = document.documentElement.clientHeight || document.body.clientHeight;
     this.description = '此JS类是根据当前项目需要扩展的一些快捷使用的方法。有些方法可能常用的JS类库中已有，有些可能原生的JS中已支持，为了兼容低版本浏览器做了一些修改[覆盖]，主要还是看那些库中文档有点麻烦就自己根据项目需求写了一些方法';
-    this.className = 'Adease';
+    this.className = 'Adlinkx';
     this.author = 'bluelife';
     this.version = '0.0.1';
     this.date = '2017-01-02';
@@ -27,7 +23,7 @@ function Adease($) {
  * 显示信息
  * @return {[type]} [description]
  */
-Adease.prototype.information = function() {
+Adlinkx.prototype.information = function() {
     if (arguments.length > 0) {
         for (var i = 0; i < arguments.length; i++) {
             console.log(this.ucfirst(arguments[i]) + ':' + this[arguments[i]]);
@@ -48,9 +44,9 @@ Adease.prototype.information = function() {
  * @Authoe bluelife
  * @Email thebulelife@outlook.com
  * @Data 2017-01-02
- * @uses  ADEASE.alert('正在注册......'[,s[,callback]]);
+ * @uses  Adlinkx.alert('正在注册......'[,s[,callback]]);
  */
-Adease.prototype.alert = function() {
+Adlinkx.prototype.alert = function() {
     var _this = this;
     var text = 'alert message',
         timer = 2000,
@@ -142,7 +138,7 @@ Adease.prototype.alert = function() {
  * @Email thebulelife@outlook.com
  * @Data 2017-01-02
  */
-Adease.prototype.createElement = function(els, opations, fn) {
+Adlinkx.prototype.createElement = function(els, opations, fn) {
     var i = '';
     var createElement = document.createElement(els);
     for (i in opations) {
@@ -168,7 +164,7 @@ Adease.prototype.createElement = function(els, opations, fn) {
  * @Email thebulelife@outlook.com
  * @Data 2017-01-02
  */
-Adease.prototype.appendChild = function(els) {
+Adlinkx.prototype.appendChild = function(els) {
     return document.body.appendChild(els) ? true : false;
 }
 
@@ -179,7 +175,7 @@ Adease.prototype.appendChild = function(els) {
  * @Email thebulelife@outlook.com
  * @Data 2017-01-02
  */
-Adease.prototype.removeChild = function(els) {
+Adlinkx.prototype.removeChild = function(els) {
     return document.body.removeChild(els) ? true : false;
 }
 
@@ -189,7 +185,7 @@ Adease.prototype.removeChild = function(els) {
  * @param {Function} fn [description]
  * @param {[type]}   s  [description]
  */
-Adease.prototype.setTimeOut = function(fn, s) {
+Adlinkx.prototype.setTimeOut = function(fn, s) {
     setTimeout(fn, s);
 }
 
@@ -199,7 +195,7 @@ Adease.prototype.setTimeOut = function(fn, s) {
  * @param  {[type]} json  [description]
  * @return {[type]}       [description]
  * @uses  
- *  ADEASE.confirm('您确定要删除创意吗？', {
+ *  Adlinkx.confirm('您确定要删除创意吗？', {
         'confirm': {
             'title': '确定',
             'callback': function() { alert('确定'); }
@@ -210,7 +206,7 @@ Adease.prototype.setTimeOut = function(fn, s) {
         }
     });
  */
-Adease.prototype.confirm = function(title, json) {
+Adlinkx.prototype.confirm = function(title, json) {
     var _this = this,
         text = title ? title : 'confirm widget !',
         confirm_buts_title = json.confirm.title ? json.confirm.title : 'confirm',
@@ -268,7 +264,7 @@ Adease.prototype.confirm = function(title, json) {
  * @param  {[type]} num [description]
  * @return {[type]}     [description]
  */
-Adease.prototype.ucwords = function() {
+Adlinkx.prototype.ucwords = function() {
     var argus = arguments,
         tmp = [],
         ucwords = '';
@@ -306,12 +302,12 @@ Adease.prototype.ucwords = function() {
  * @param  {[type]} str [description]
  * @return {[type]}     [description]
  */
-Adease.prototype.ucfirst = function(str) {
+Adlinkx.prototype.ucfirst = function(str) {
     return str ? str.charAt(0).toUpperCase() + str.substr(1, parseInt(str.length - 1)) : '';
 }
 
 
-Adease.prototype.addEvent = function(els, ev, fn) {
+Adlinkx.prototype.addEvent = function(els, ev, fn) {
     els.attachEvent ? (els.attachEvent('on' + ev, function() {
         fn.call(els);
         window.event.cancelBubble = true; //IE,阻止冒泡 
@@ -326,7 +322,7 @@ Adease.prototype.addEvent = function(els, ev, fn) {
 }
 
 
-Adease.prototype.forEach = function(arr, fn) {
+Adlinkx.prototype.forEach = function(arr, fn) {
     alert(arr.length);
     if (Array.forEach == void 0 || !Array.forEach || Array.forEach == null) {
         Array.prototype.forEach = function(callback) {
@@ -339,14 +335,14 @@ Adease.prototype.forEach = function(arr, fn) {
     arr.forEach(fn);
 }
 
-Adease.prototype.json = function(json, fn) {
+Adlinkx.prototype.json = function(json, fn) {
     var i = '';
     for (i in json) {
         fn.call(this, i, json[i]);
     }
 }
 
-Adease.prototype.attr = function() {
+Adlinkx.prototype.attr = function() {
     if (arguments.length == 2) {
         if (typeof arguments[1] == 'string') {
             return arguments[0].getAttribute(arguments[1]);
@@ -361,7 +357,7 @@ Adease.prototype.attr = function() {
 }
 
 
-Adease.prototype.ckeckLogin = function() {
+Adlinkx.prototype.ckeckLogin = function() {
     var _this = this;
     var crrentPage = window.location.href.toString().split('\/').pop();
     if (crrentPage == 'login' || crrentPage == 'register') {
@@ -391,6 +387,6 @@ Adease.prototype.ckeckLogin = function() {
 }
 
 
-window.ADEASE = new Adease(jQuery);
-ADEASE.information('className', 'description', 'author', 'version', 'date', 'email');
-ADEASE.ckeckLogin();
+window.ADLINKX = new Adlinkx(jQuery);
+ADLINKX.information('className', 'description', 'author', 'version', 'date', 'email');
+ADLINKX.ckeckLogin();

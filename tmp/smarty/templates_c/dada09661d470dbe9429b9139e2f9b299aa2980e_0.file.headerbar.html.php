@@ -1,3 +1,27 @@
+<?php
+/* Smarty version 3.1.30, created on 2017-08-28 00:48:02
+  from "/Users/bluelife/www/www.adlinkx.com/application/views/common/headerbar.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_59a2f7c25cd180_00207020',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'dada09661d470dbe9429b9139e2f9b299aa2980e' => 
+    array (
+      0 => '/Users/bluelife/www/www.adlinkx.com/application/views/common/headerbar.html',
+      1 => 1503852190,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_59a2f7c25cd180_00207020 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <div class="headerbar">
                 <a class="menutoggle"><i class="fa fa-bars"></i></a>
                 <form class="searchform" action="index.html" method="post">
@@ -181,7 +205,9 @@
                         
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-uid="{$user.uid}" data-group="{$user.group}" data-permissions="{$user.permissions}">
-                                    <img src="<{$user.avatar}>" alt="" /><{$user.name}>
+                                    <img src="<?php echo $_smarty_tpl->tpl_vars['user']->value['avatar'];?>
+" alt="" /><?php echo $_smarty_tpl->tpl_vars['user']->value['name'];?>
+
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -200,4 +226,5 @@
                     </ul>
                 </div>
                 <!-- header-right -->
-            </div>
+            </div><?php }
+}

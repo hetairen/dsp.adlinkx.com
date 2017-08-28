@@ -2,14 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * |--------------------------------------------------------------
- * | ADEASE_Controller Controller extended class
+ * | ADLINKX_Controller Controller extended class
  * |--------------------------------------------------------------
  * | Author bluelife
  * | Email thebulelife@outlook.com
  * | Date
  * |--------------------------------------------------------------
  */
-class ADEASE_Controller extends CI_Controller {
+class ADLINKX_Controller extends CI_Controller {
 	public $uid;
 	public function __construct() {
 		parent::__construct();
@@ -36,11 +36,7 @@ class ADEASE_Controller extends CI_Controller {
 			$data['user']['avatar'] = $this->session->userdata('avatar') !== '' ? '/resources/images/avatar/' . $this->session->userdata('avatar') : '/resources/images/photos/loggeduser.png';
 			$this->assign('user', $data['user']);
 		} else {
-<<<<<<< HEAD
-			redirect('https://www.adlink.com/user/login', 'auto ', 301);
-=======
 			redirect('https://www.adlinkx.com/user/login', 'auto ', 301);
->>>>>>> cc24a48a8e40a32b21cb7f42e34925dcadfcba49
 		}
 
 	}

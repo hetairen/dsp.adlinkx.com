@@ -8,7 +8,7 @@
  * | Date 2017-01-07
  * |--------------------------------------------------------------
  */
-class Account_model extends ADEASE_Model {
+class Account_model extends ADLINKX_Model {
 	public function __construct() {
 		parent::__construct();
 	}

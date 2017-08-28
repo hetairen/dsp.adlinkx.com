@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * | Date
  * |--------------------------------------------------------------
  */
-class AdsenseMange extends ADEASE_Controller {
+class AdsenseMange extends ADLINKX_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->initialization();

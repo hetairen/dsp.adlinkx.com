@@ -8,7 +8,7 @@
  * | Date
  * |--------------------------------------------------------------
  */
-class Loger_model extends ADEASE_Model {
+class Loger_model extends ADLINKX_Model {
 	public function __construct() {
 		parent::__construct();
 	}

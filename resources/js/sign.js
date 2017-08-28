@@ -141,15 +141,15 @@ $(document).ready(function() {
     $('.simulation-submit-buts').on('click', function() {
 
         if ($('.QapTcha input').val() !== '') {
-            ADEASE.alert('请按住滑块，拖动到最右侧！');
+            ADLINKX.alert('请按住滑块，拖动到最右侧！');
             return false;
         }
 
         if ($(this).attr('data-submit-type') == 'login') { //登录
-            var url = encodeURI(ADEASE.domain + '/user/sign_in');
+            var url = encodeURI(ADLINKX.domain + '/user/sign_in');
             var data = { 'account': account, 'passwd': passwd, 'isChecked': isChecked };
             if (isChecked) {
-                ADEASE.confirm('您确定要记住密码吗?', {
+                ADLINKX.confirm('您确定要记住密码吗?', {
                     'confirm': {
                         'title': '确定',
                         'callback': function() {
@@ -167,33 +167,33 @@ $(document).ready(function() {
 
         } else { //注册
             if (!account) {
-                ADEASE.alert('用户名不能为空！');
+                ADLINKX.alert('用户名不能为空！');
                 return false;
             }
             if (!passwd) {
-                ADEASE.alert('密码不能为空！');
+                ADLINKX.alert('密码不能为空！');
                 return false;
             }
             if (!confirmPasswd) {
-                ADEASE.alert('请再次输入密码！');
+                ADLINKX.alert('请再次输入密码！');
                 return false;
             } else if (confirmPasswd !== passwd) {
-                ADEASE.alert('两次输入密码不同！');
+                ADLINKX.alert('两次输入密码不同！');
                 return false;
             }
             if (!email) {
-                ADEASE.alert('邮箱不能为空！');
+                ADLINKX.alert('邮箱不能为空！');
                 return false;
             }
             if (!phone) {
-                ADEASE.alert('手机号码不能为空！');
+                ADLINKX.alert('手机号码不能为空！');
                 return false;
             }
             if (isChecked == 0 || !isChecked) {
-                ADEASE.alert('您必须同意服务和隐私政策的条款');
+                ADLINKX.alert('您必须同意服务和隐私政策的条款');
                 return false;
             }
-            var url = encodeURI(ADEASE.domain + '/user/sigin_up');
+            var url = encodeURI(ADLINKX.domain + '/user/sigin_up');
             var data = { 'account': account, 'passwd': passwd, 'confirmPasswd': confirmPasswd, 'email': email, 'phone': phone, 'isChecked': isChecked }
             postData(url, data);
         }
@@ -207,7 +207,7 @@ $(document).ready(function() {
      * @return {[type]}      [description]
      */
     function postData(url, data) {
-        ADEASE.alert('正在提交数据。。。。。', 0.2, false);
+        ADLINKX.alert('正在提交数据。。。。。', 0.2, false);
         $.ajax({
             url: url,
             type: 'POST',
@@ -217,15 +217,15 @@ $(document).ready(function() {
                 console.log(typeof res);
                 res = typeof res == 'string' ? (JSON.parse ? JSON.parse(res) : jQuery.parseJSON(res)) : res;
                 if (res.code == 0) {
-                    ADEASE.alert((type == 'agreement' ? '注册成功' : '登录成功'), 2, function() {
+                    ADLINKX.alert((type == 'agreement' ? '注册成功' : '登录成功'), 2, function() {
                         if (type == 'agreement') { //注册成功，跳转至登录
-                            window.location.href = ADEASE.domain + '/user/login';
+                            window.location.href = ADLINKX.domain + '/user/login';
                         } else { //登录成功跳转至首页
-                            window.location.href = ADEASE.domain;
+                            window.location.href = ADLINKX.domain;
                         }
                     });
                 } else {
-                    ADEASE.alert((type == 'agreement' ? '注册失败' : '登录失败'));
+                    ADLINKX.alert((type == 'agreement' ? '注册失败' : '登录失败'));
                     return false;
                 }
             },

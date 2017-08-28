@@ -8,7 +8,7 @@
  * | Date
  * |--------------------------------------------------------------
  */
-class User_model extends ADEASE_Model {
+class User_model extends ADLINKX_Model {
 	public function __construct() {
 		parent::__construct();
 	}

@@ -2,14 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * |--------------------------------------------------------------
- * | ADEASE_Model Model extended class
+ * | ADLINKX_Model Model extended class
  * |--------------------------------------------------------------
  * | Author bluelife
  * | Email thebulelife@outlook.com
  * | Date 2017-01-07
  * |--------------------------------------------------------------
  */
-class ADEASE_Model extends CI_Model {
+class ADLINKX_Model extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();

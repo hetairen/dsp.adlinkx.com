@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * | Date 2017-01-07
  * |--------------------------------------------------------------
  */
-class Account extends ADEASE_Controller {
+class Account extends ADLINKX_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->initialization();

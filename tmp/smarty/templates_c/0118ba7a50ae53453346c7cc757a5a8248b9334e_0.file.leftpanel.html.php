@@ -1,3 +1,27 @@
+<?php
+/* Smarty version 3.1.30, created on 2017-08-28 10:44:45
+  from "/Users/bluelife/www/www.adlinkx.com/application/views/common/leftpanel.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_59a3839da23ce8_54958660',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '0118ba7a50ae53453346c7cc757a5a8248b9334e' => 
+    array (
+      0 => '/Users/bluelife/www/www.adlinkx.com/application/views/common/leftpanel.html',
+      1 => 1503887848,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_59a3839da23ce8_54958660 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <div class="leftpanel" style="background:#1d2939;">
             <div class="logopanel">
                 <h1><img src="/resources/images/logo.png"></h1>
@@ -105,4 +129,5 @@
                 <!-- infosummary -->
             </div>
             <!-- leftpanelinner -->
-        </div>
+        </div><?php }
+}
