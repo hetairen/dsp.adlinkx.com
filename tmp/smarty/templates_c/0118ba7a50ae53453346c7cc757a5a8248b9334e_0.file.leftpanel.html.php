@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-08-28 14:07:46
+/* Smarty version 3.1.30, created on 2017-08-28 17:14:02
   from "/Users/bluelife/www/www.adlinkx.com/application/views/common/leftpanel.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59a3b3323f1d75_62982045',
+  'unifunc' => 'content_59a3deda2284c0_77646671',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0118ba7a50ae53453346c7cc757a5a8248b9334e' => 
     array (
       0 => '/Users/bluelife/www/www.adlinkx.com/application/views/common/leftpanel.html',
-      1 => 1503900345,
+      1 => 1503911628,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59a3deda2284c0_77646671 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="leftpanel" style="background:#1d2939;">
             <div class="logopanel">
@@ -52,29 +52,29 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
 <?php echo $_smarty_tpl->tpl_vars['action']->value;?>
 
                     <?php if ($_smarty_tpl->tpl_vars['model']->value == 'campaign') {?>
-                        <li class="active"><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
-                            <ul class="children">
+                        <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
+                            <ul class="children" style="display: block;">
                                 <?php if ($_smarty_tpl->tpl_vars['action']->value == 'launch') {?>
-                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                     <li class="active"><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                     <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
                                 <?php } elseif ($_smarty_tpl->tpl_vars['action']->value == 'strategy') {?>
-                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                     <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li class="active"><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                     <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
                                 <?php } elseif ($_smarty_tpl->tpl_vars['action']->value == 'creative') {?>
-                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                     <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                     <li class="active"><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
                                 <?php } else { ?>
-                                    <li class="active"><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li class="active"><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
                                     <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
-                                    <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                                    <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li> -->
                                 <?php }?>
                             </ul>
                         </li>
@@ -111,7 +111,7 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
                         <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
@@ -124,8 +124,8 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
                                 <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
                             </ul>
                         </li> -->
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
-                            <ul class="children">
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
+                            <ul class="children" style="display: block;">
                                 <li class="active"><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
                             </ul>
                         </li>
@@ -150,7 +150,7 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
                         <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
@@ -168,8 +168,8 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
                                 <li><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
                             </ul>
                         </li>
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
-                            <ul class="children">
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
+                            <ul class="children" style="display: block;">
                                 <li class="active"><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
                             </ul>
                         </li>
@@ -189,7 +189,7 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
                         <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
@@ -212,8 +212,8 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
                                 <li><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
                             </ul>
                         </li>
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
-                            <ul class="children">
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
+                            <ul class="children" style="display: block;">
                                 <li class="active"><a href="/store/lists/store/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
                             </ul>
                         </li>
@@ -228,7 +228,7 @@ function content_59a3b3323f1d75_62982045 (Smarty_Internal_Template $_smarty_tpl)
                         <li class="active"><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>

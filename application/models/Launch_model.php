@@ -2,36 +2,35 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * |--------------------------------------------------------------
- * | Store Controller
+ * | Launch_model Controller
  * |--------------------------------------------------------------
  * | Author bluelife
  * | Email thebulelife@outlook.com
- * | Date 2017-01-07
+ * | Date
  * |--------------------------------------------------------------
  */
-class Store extends ADLINKX_Controller{
+class Launch_model ADLINKX_Model {
 	public function __construct() {
 		parent::__construct();
-		$this->initialization();
 	}
 
-	public function add(){
-		
-	}
-
-	public function get(){
+	public function add($data = array()){
 
 	}
 
-	public function lists(){
-		
-	}
-
-	public function delete(){
+	public function get($where = array()){
 
 	}
 
-	public function update(){
+	public function lists($where = array(), $num = 0, $offset = 20, $key = 'id', $stor = 'desc', $fields = '*'){
+
+	}
+
+	public function update($data = array(), $where = =array()){
+
+	}
+
+	public function delete($where = =array()){
 
 	}
 }

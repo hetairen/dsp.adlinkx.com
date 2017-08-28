@@ -26,29 +26,29 @@
                     <{$model}>
 <{$action}>
                     <{if $model eq 'campaign'}>
-                        <li class="active"><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
-                            <ul class="children">
+                        <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
+                            <ul class="children" style="display: block;">
                                 <{if $action eq 'launch'}>
-                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                     <li class="active"><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                     <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
                                 <{elseif  $action eq 'strategy'}>
-                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                     <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li class="active"><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                     <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
                                 <{elseif  $action eq 'creative'}>
-                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                     <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                     <li class="active"><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
                                 <{else}>
-                                    <li class="active"><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <!-- <li class="active"><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
                                     <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                     <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
-                                    <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                                    <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li> -->
                                 <{/if}>
                             </ul>
                         </li>
@@ -85,7 +85,7 @@
                         <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
@@ -98,8 +98,8 @@
                                 <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
                             </ul>
                         </li> -->
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
-                            <ul class="children">
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
+                            <ul class="children" style="display: block;">
                                 <li class="active"><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
                             </ul>
                         </li>
@@ -124,7 +124,7 @@
                         <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
@@ -142,8 +142,8 @@
                                 <li><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
                             </ul>
                         </li>
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
-                            <ul class="children">
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
+                            <ul class="children" style="display: block;">
                                 <li class="active"><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
                             </ul>
                         </li>
@@ -163,7 +163,7 @@
                         <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
@@ -186,8 +186,8 @@
                                 <li><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
                             </ul>
                         </li>
-                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
-                            <ul class="children">
+                        <li class="nav-parent nav-active active"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
+                            <ul class="children" style="display: block;">
                                 <li class="active"><a href="/store/lists/store/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
                             </ul>
                         </li>
@@ -202,7 +202,7 @@
                         <li class="active"><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
                         <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
                             <ul class="children">
-                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <!-- <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li> -->
                                 <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
                                 <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
                                 <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>

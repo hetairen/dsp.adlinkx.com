@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-08-28 16:44:12
-  from "/Users/bluelife/www/www.adlinkx.com/application/views/campaign/list.html" */
+/* Smarty version 3.1.30, created on 2017-08-28 16:52:46
+  from "/Users/bluelife/www/www.adlinkx.com/application/views/launch/lists.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59a3d7dcc330b1_00368230',
+  'unifunc' => 'content_59a3d9dedf7925_42478371',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '2c37aea264de10c613ae372ffa5318a713820bfd' => 
+    '287238abd1c7306f4c9a2353c78e378bd1824fe5' => 
     array (
-      0 => '/Users/bluelife/www/www.adlinkx.com/application/views/campaign/list.html',
-      1 => 1503909648,
+      0 => '/Users/bluelife/www/www.adlinkx.com/application/views/launch/lists.html',
+      1 => 1503910201,
       2 => 'file',
     ),
   ),
@@ -24,13 +24,15 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:common/footerbar.html' => 1,
   ),
 ),false)) {
-function content_59a3d7dcc330b1_00368230 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59a3d9dedf7925_42478371 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
-<?php $_smarty_tpl->_subTemplateRender("file:common/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+<head>
+    <?php $_smarty_tpl->_subTemplateRender("file:common/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
+</head>
 <body>
     <!-- Preloader -->
     <div id="preloader">
@@ -47,17 +49,20 @@ function content_59a3d7dcc330b1_00368230 (Smarty_Internal_Template $_smarty_tpl)
 
             <!-- headerbar -->
             <div class="pageheader">
-                <h2><i class="fa fa-sliders"></i>首页<span>活动管理</span> <span>活动管理</span></h2>
+                <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>投放管理</span></h2>
                 <div class="breadcrumb-wrapper">
-                    <label>品牌选择：</label>
+                    <div class="select-brands-title">品牌选择：</div>
+                    <div class="select-brands-but">全部</div>
+                    <div class="brands-lists-block">
+                        <div class="brands-lists">全部</div>
+                        <div class="brands-lists">汇合营销</div>
+                        <div class="brands-lists">酷宝数据</div>
+                    </div>
                 </div>
             </div>
             <div class="contentpanel">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div>活动管理</div>
-                        <div></div>
-                    </div>
+                    <div class="panel-heading">投放管理</div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table class="table table-striped" id="table2">
