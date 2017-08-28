@@ -23,44 +23,221 @@
                 </div> -->
                 <h5 class="sidebartitle">导航</h5>
                 <ul class="nav nav-pills nav-stacked nav-bracket">
-                    <li class="active"><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
-                    <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
-                        <ul class="children">
-                            <li><a href="/campaignMange/lists"><i class="fa fa-sliders"></i>活动管理</a></li>
-                            <li><a href="/launchMange/lists"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
-                            <li><a href="/strategyMange/lists"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
-                            <li><a href="/creativeMange/lists"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
-                        </ul>
-                    </li>
-                    <!-- <li class="nav-parent"><a href=""><i class="fa fa-tasks"></i> <span>资源管理</span></a>
-                        <ul class="children">
-                            <li><a href="/adsenseMange/lists"><i class="fa fa-map-marker" aria-hidden="true"></i>广告位管理</a></li>
-                            <li><a href="/pmpMange/lists"><i class="fa fa-pie-chart" aria-hidden="true"></i>PMP管理</a></li>
-                            <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
-                        </ul>
-                    </li> -->
-                    <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
-                        <ul class="children">
-                            <li><a href="/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
-                        <ul class="children">
-                            <li><a href="/operationLoger/index"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
-                        <ul class="children">
-                            <li><a href="/operationLoger/index"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
-                        </ul>
-                    </li>
-                    <!-- <li class="nav-parent"><a href=""><i class="fa fa-user-circle"></i> <span>帐号管理</span></a>
-                        <ul class="children">
-                            <li><a href="/account/mange"><i class="fa fa-cogs" aria-hidden="true"></i>帐号设置</a></li>
-                            <li><a href="/account/invite_code"><i class="fa fa-cogs" aria-hidden="true"></i>邀请码</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/mail/lists"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li> -->
+                    <{$model}>
+<{$action}>
+                    <{if $model eq 'campaign'}>
+                        <li class="active"><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
+                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
+                            <ul class="children">
+                                <{if $action eq 'launch'}>
+                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <li class="active"><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                    <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                    <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                                <{elseif  $action eq 'strategy'}>
+                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                    <li class="active"><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                    <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                                <{elseif  $action eq 'creative'}>
+                                    <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                    <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                    <li class="active"><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                                <{else}>
+                                    <li class="active"><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                    <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                    <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                    <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                                <{/if}>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-tasks"></i> <span>资源管理</span></a>
+                            <ul class="children">
+                                <li><a href="/adsenseMange/lists"><i class="fa fa-map-marker" aria-hidden="true"></i>广告位管理</a></li>
+                                <li><a href="/pmpMange/lists"><i class="fa fa-pie-chart" aria-hidden="true"></i>PMP管理</a></li>
+                                <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
+                            <ul class="children">
+                                <li><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
+                            <ul class="children">
+                                <li><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
+                            <ul class="children">
+                                <li><a href="/store/lists/store/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-user-circle"></i> <span>帐号管理</span></a>
+                            <ul class="children">
+                                <li><a href="/account/mange"><i class="fa fa-cogs" aria-hidden="true"></i>帐号设置</a></li>
+                                <li><a href="/account/invite_code"><i class="fa fa-cogs" aria-hidden="true"></i>邀请码</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/mail/lists"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li> -->
+                    <{elseif $model eq 'report'}>
+                        <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
+                            <ul class="children">
+                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-tasks"></i> <span>资源管理</span></a>
+                            <ul class="children">
+                                <li><a href="/adsenseMange/lists"><i class="fa fa-map-marker" aria-hidden="true"></i>广告位管理</a></li>
+                                <li><a href="/pmpMange/lists"><i class="fa fa-pie-chart" aria-hidden="true"></i>PMP管理</a></li>
+                                <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
+                            <ul class="children">
+                                <li class="active"><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
+                            <ul class="children">
+                                <li><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
+                            <ul class="children">
+                                <li><a href="/store/lists/store/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-user-circle"></i> <span>帐号管理</span></a>
+                            <ul class="children">
+                                <li><a href="/account/mange"><i class="fa fa-cogs" aria-hidden="true"></i>帐号设置</a></li>
+                                <li><a href="/account/invite_code"><i class="fa fa-cogs" aria-hidden="true"></i>邀请码</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/mail/lists"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li> -->
+                    <{elseif $model eq 'loger'}>
+                        <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
+                            <ul class="children">
+                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-tasks"></i> <span>资源管理</span></a>
+                            <ul class="children">
+                                <li><a href="/adsenseMange/lists"><i class="fa fa-map-marker" aria-hidden="true"></i>广告位管理</a></li>
+                                <li><a href="/pmpMange/lists"><i class="fa fa-pie-chart" aria-hidden="true"></i>PMP管理</a></li>
+                                <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
+                            <ul class="children">
+                                <li><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
+                            <ul class="children">
+                                <li class="active"><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
+                            <ul class="children">
+                                <li><a href="/store/lists/store/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-user-circle"></i> <span>帐号管理</span></a>
+                            <ul class="children">
+                                <li><a href="/account/mange"><i class="fa fa-cogs" aria-hidden="true"></i>帐号设置</a></li>
+                                <li><a href="/account/invite_code"><i class="fa fa-cogs" aria-hidden="true"></i>邀请码</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/mail/lists"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li> -->
+                    <{elseif $model eq 'store'}>
+                        <li class=""><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
+                            <ul class="children">
+                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-tasks"></i> <span>资源管理</span></a>
+                            <ul class="children">
+                                <li><a href="/adsenseMange/lists"><i class="fa fa-map-marker" aria-hidden="true"></i>广告位管理</a></li>
+                                <li><a href="/pmpMange/lists"><i class="fa fa-pie-chart" aria-hidden="true"></i>PMP管理</a></li>
+                                <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
+                            <ul class="children">
+                                <li><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
+                            <ul class="children">
+                                <li><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent nav-active"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
+                            <ul class="children">
+                                <li class="active"><a href="/store/lists/store/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-user-circle"></i> <span>帐号管理</span></a>
+                            <ul class="children">
+                                <li><a href="/account/mange"><i class="fa fa-cogs" aria-hidden="true"></i>帐号设置</a></li>
+                                <li><a href="/account/invite_code"><i class="fa fa-cogs" aria-hidden="true"></i>邀请码</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/mail/lists"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li> -->
+                    <{else}>
+                        <li class="active"><a href="https://www.adlinkx.com/"><i class="fa fa-tachometer"></i> <span>首页</span></a></li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-rocket"></i> <span>活动管理</span></a>
+                            <ul class="children">
+                                <li><a href="/campaignMange/lists/campaign/campaign"><i class="fa fa-sliders"></i>活动管理</a></li>
+                                <li><a href="/launchMange/lists/campaign/launch"><i class="fa fa-paper-plane" aria-hidden="true"></i>投放管理</a></li>
+                                <li><a href="/strategyMange/lists/campaign/strategy"><i class="fa fa-cogs" aria-hidden="true"></i>策略管理</a></li>
+                                <li><a href="/creativeMange/lists/campaign/creative"><i class="fa fa-picture-o" aria-hidden="true"></i>创意管理</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-tasks"></i> <span>资源管理</span></a>
+                            <ul class="children">
+                                <li><a href="/adsenseMange/lists"><i class="fa fa-map-marker" aria-hidden="true"></i>广告位管理</a></li>
+                                <li><a href="/pmpMange/lists"><i class="fa fa-pie-chart" aria-hidden="true"></i>PMP管理</a></li>
+                                <li><a href="/creativeTemplate/lists"><i class="fa fa-cubes" aria-hidden="true"></i>创意模板</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>数据报表</span></a>
+                            <ul class="children">
+                                <li><a href="/report/lists/report/lists"><i class="fa fa-line-chart" aria-hidden="true"></i>投放报表</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>运营管理</span></a>
+                            <ul class="children">
+                                <li><a href="/operationLoger/index/loger/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>操作日志</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>店铺管理</span></a>
+                            <ul class="children">
+                                <li><a href="/store/lists/store/lists"><i class="fa fa-file-text-o" aria-hidden="true"></i>店铺</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-parent"><a href=""><i class="fa fa-user-circle"></i> <span>帐号管理</span></a>
+                            <ul class="children">
+                                <li><a href="/account/mange"><i class="fa fa-cogs" aria-hidden="true"></i>帐号设置</a></li>
+                                <li><a href="/account/invite_code"><i class="fa fa-cogs" aria-hidden="true"></i>邀请码</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/mail/lists"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li> -->
+                    <{/if}>
                 </ul>
                 <div class="infosummary">
                     <h5 class="sidebartitle">综合概览</h5>

@@ -94,3 +94,26 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE,
 );
+
+
+$db['aliyum'] = array(
+	'dsn' => '',
+	'hostname' => 'rm-bp161jfen84tpr7d2o.mysql.rds.aliyuncs.com',
+	'username' => 'huihex',
+	'password' => 'koolma2010',
+	'database' => 'koolbao_iseller_system',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE,
+);
