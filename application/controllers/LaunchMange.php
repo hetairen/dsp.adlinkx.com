@@ -13,6 +13,7 @@ class LaunchMange extends ADLINKX_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->initialization();
+		$this->load->model('store_model','store');
 	}
 	public function index() {
 
@@ -35,6 +36,8 @@ class LaunchMange extends ADLINKX_Controller {
 	}
 
 	public function lists() {
+		$store_lists = $this->store->lists($this->session->userdata('uid'));
+		$this->assign('store_lists',$store_lists);
 		$this->display('launch/lists.html');
 	}
 }

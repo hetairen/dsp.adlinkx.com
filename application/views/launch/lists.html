@@ -22,9 +22,10 @@
                             <div class="select-brands-title">品牌选择：</div>
                             <div class="select-brands-but">全部</div>
                             <div class="brands-lists-block" style="display:none;">
-                                <div class="brands-lists">全部</div>
-                                <div class="brands-lists">汇合营销</div>
-                                <div class="brands-lists">酷宝数据</div>
+                                <div class="brands-lists" data-shop-id="">全部</div>
+                                <{foreach $store_lists item=store key=i}>
+                                    <div class="brands-lists" data-shop-id="<{$store.shop_id}>"><{$store.shop_title}></div>
+                                <{/foreach}>
                             </div>
                         </div>
                     </div>
@@ -67,7 +68,18 @@
     <script src="/resources/js/libarays/custom.js"></script>
     <script>
     jQuery(document).ready(function() {
+        $(document).on('click','.select-brands-but',function(e){
+            e.stopPropagation();
+            $('.brands-lists-block').css('display','block');
+        });
+        $(document).on('click','.brands-lists',function(e){
+            $('.select-brands-but').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
+            $('.brands-lists-block').css('display','none');
 
+        });
+        $(document).on('click',function(){
+            $('.brands-lists-block').css('display','none');
+        });
     });
     </script>
 </body>
