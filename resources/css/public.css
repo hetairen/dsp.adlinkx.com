@@ -1,11 +1,128 @@
-html{font-size:14px;}
-body{width:100%;height:100%;background:#1d2939;padding:0;margin:0;}
-a{text-decoration:none;}
-ul{padding:0;margin:0;list-style-type:none}
-li,p,hr,h1,h2,h3,h4,h5,h6{padding:0;margin:0;}
-label,input{padding:0;margin:0;}
+html {
+    font-size: 14px;
+}
 
-.page-bg-block{width:500px;background:#FFF;border-radius:5px;border:1px solid #c1c1c1;margin:230px auto;position:relative;-moz-box-shadow:2px 2px 4px #626262;-webkit-box-shadow:2px 2px 4px #626262;-ms-box-shadow:2px 2px 4px #626262;-o-box-shadow:2px 2px 4px #626262;box-shadow:2px 2px 4px #626262;}
-.h440{height:440px;}
-.h480{height:480px;}
-.h710{height:710px;}
+body {
+    width: 100%;
+    height: 100%;
+    background: #1d2939;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none
+}
+
+li,
+p,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+}
+
+label,
+input {
+    padding: 0;
+    margin: 0;
+}
+
+.page-bg-block {
+    width: 500px;
+    background: #FFF;
+    border-radius: 5px;
+    border: 1px solid #c1c1c1;
+    margin: 230px auto;
+    position: relative;
+    -moz-box-shadow: 2px 2px 4px #626262;
+    -webkit-box-shadow: 2px 2px 4px #626262;
+    -ms-box-shadow: 2px 2px 4px #626262;
+    -o-box-shadow: 2px 2px 4px #626262;
+    box-shadow: 2px 2px 4px #626262;
+}
+
+.h440 {
+    height: 440px;
+}
+
+.h480 {
+    height: 480px;
+}
+
+.h710 {
+    height: 710px;
+}
+
+
+
+/** 
+ * add style by junmei for 2017-08-29
+ */
+
+.launch-page-title {
+    float: left;
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.add-launch-but-block {
+    float: left;
+    width: 50%;
+    height: 30px;
+}
+
+.add-launch-buts {
+    display: block;
+    float: right;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    background: #24ac45;
+    border: 1px solid #1e8e39;
+    border-radius: 2px;
+    color: #FFF;
+}
+
+.add-launch-buts:hover{
+	color:#FFF;
+}
+
+.space-box {
+    clear: both;
+}
+
+.add-icon-write {
+    display: block;
+    float: left;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #FFF;
+    color: #24ac45;
+    line-height: 100%;
+    text-align: center;
+    margin: 8px 8px 0 8px;
+}
+
+.add-but-text {
+    display: block;
+    float: left;
+    width:auto;
+    height:30px;
+}
