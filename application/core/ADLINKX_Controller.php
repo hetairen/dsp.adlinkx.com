@@ -32,9 +32,7 @@ class ADLINKX_Controller extends CI_Controller {
 			$m = $this->uri->segment(3);
 			$a = $this->uri->segment(4);
 			$data['user']['uid'] = $this->session->userdata('uid') !== '' ? $this->session->userdata('uid') !== '' : 'root';
-			$data['user']['permissions'] = $this->session->userdata('permissions') !== '' ? $this->session->userdata('permissions') : '';
-			$data['user']['group'] = $this->session->userdata('group') !== '' ? $this->session->userdata('group') : '';
-			$data['user']['name'] = $this->session->userdata('name') !== '' ? $this->session->userdata('name') : '';
+			$data['user']['username'] = $this->session->userdata('username') !== '' ? $this->session->userdata('username') : '';
 			$data['user']['avatar'] = $this->session->userdata('avatar') !== '' ? '/resources/images/avatar/' . $this->session->userdata('avatar') : '/resources/images/photos/loggeduser.png';
 			$this->assign('user', $data['user']);
 			$this->assign('model',$m);

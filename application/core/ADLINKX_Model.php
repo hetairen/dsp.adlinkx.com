@@ -10,10 +10,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * |--------------------------------------------------------------
  */
 class ADLINKX_Model extends CI_Model {
+	private $aliyun;
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();
 	}
+
+	public static $id_space = array(
+		"website" => 0x400000000000000,
+	);
 
 	/**
 	 * 获取指定数据库
@@ -21,6 +26,12 @@ class ADLINKX_Model extends CI_Model {
 	 * @return [type]     [description]
 	 */
 	public function get_database($db) {
-		$this->load->database($db, TRUE);
+		return $this->load->database($db, TRUE);
+	}
+
+	public function get_seq_id() {
+		$this->aliyun = $this->get_database('aliyun');
+		$this->aliyun->query("REPLACE INTO sequence.sequence (`stub`) VALUES ('a');");
+		return $this->aliyun->insert_id();
 	}
 }

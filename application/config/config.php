@@ -91,6 +91,8 @@ $config['language'] = 'english';
  */
 $config['charset'] = 'UTF-8';
 
+$config['salt'] = "!>M|]A/zeoZ[&yrK(wSn/";
+
 /*
 |--------------------------------------------------------------------------
 | Enable/Disable System Hooks

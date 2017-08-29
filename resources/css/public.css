@@ -13,8 +13,9 @@ body {
 a {
     text-decoration: none;
 }
-a:hover{
-	text-decoration: none;
+
+a:hover {
+    text-decoration: none;
 }
 
 ul {
@@ -70,26 +71,39 @@ input {
 
 
 
+
 /** 
  * add style by junmei for 2017-08-29
  */
 
-.launch-page-title {
+.page-title {
     float: left;
     width: 50%;
     height: 30px;
     line-height: 30px;
 }
 
-.add-launch-but-block {
+.add-but-block {
     float: left;
     width: 50%;
     height: 30px;
 }
 
-.add-launch-buts {
-    display: block;
+.add-buts,.export-buts{
     float: right;
+    color: #FFF;
+}
+
+.add-buts:hover,.export-buts:hover{
+    color: #FFF;
+}
+
+.space-box {
+    clear: both;
+}
+
+.but-24ac45 {
+    display: block;
     width: 100px;
     height: 30px;
     line-height: 30px;
@@ -99,30 +113,56 @@ input {
     color: #FFF;
 }
 
-.add-launch-buts:hover{
-	color:#FFF;
+.but-0781ec{
+	display:block;
+	width:100px;
+	height:30px;
+	line-height:30px;
+	background:#0781ec;
+	border:1px solid #066eca;
+	border-radius:3px;
 }
 
-.space-box {
-    clear: both;
+.ml10 {
+    margin-left: 10px;
 }
 
-.add-icon-write {
-    display: block;
-    float: left;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: #FFF;
-    color: #24ac45;
-    line-height: 100%;
-    text-align: center;
-    margin: 8px 8px 0 8px;
+.mr1 {
+    margin-right: 1px;
 }
 
-.add-but-text {
-    display: block;
-    float: left;
-    width:auto;
-    height:30px;
+.mr2 {
+    margin-right: 2px;
+}
+
+.mr3 {
+    margin-right: 3px;
+}
+
+.mr4 {
+    margin-right: 4px;
+}
+
+.mr5 {
+    margin-right: 5px;
+}
+
+.mr6 {
+    margin-right: 6px;
+}
+
+.mr7 {
+    margin-right: 7px;
+}
+
+.mr8 {
+    margin-right: 8px;
+}
+
+.mr9 {
+    margin-right: 9px;
+}
+
+.mr10 {
+    margin-right: 10px;
 }

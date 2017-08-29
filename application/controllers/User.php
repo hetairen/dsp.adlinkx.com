@@ -10,9 +10,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * |--------------------------------------------------------------
  */
 class User extends ADLINKX_Controller {
+	private $salt;
 	public function __construct() {
 		parent::__construct();
 		// $this->initialization();
+		$this->salt = $this->config->item('salt');
 		$this->load->model('user_model', 'user');
 		$this->load->model('loger_model', 'loger');
 	}
@@ -33,20 +35,19 @@ class User extends ADLINKX_Controller {
 		$check_status = $this->check_password($input_data);
 		if ($check_status && isset($check_status) && !empty($check_status)) {
 
-			$signin_date = time();
-			$loger_data = array(
-				'uid' => $check_status['uid'],
-				'actions' => '用户登录',
-				'remarks' => '尊敬的用户[' . $check_status['name'] . ']:您于' . date('Y-m-d', $signin_date) . '登录成功。<a href="https://www.adease.com">www.adease.com</a>',
-				'ip' => sprintf("%u", ip2long($_SERVER['REMOTE_ADDR'])),
-				'is_del' => 0,
-				'timer' => $signin_date,
-				'group' => '',
-				'permissions' => 'rw',
-			);
-			$loger_status = $this->loger->add($loger_data);
+			// $signin_date = time();
+			// $loger_data = array(
+			// 	'uid' => $check_status['uid'],
+			// 	'actions' => '用户登录',
+			// 	'remarks' => '尊敬的用户[' . $check_status['name'] . ']:您于' . date('Y-m-d', $signin_date) . '登录成功。<a href="https://www.adease.com">www.adease.com</a>',
+			// 	'ip' => sprintf("%u", ip2long($_SERVER['REMOTE_ADDR'])),
+			// 	'is_del' => 0,
+			// 	'timer' => $signin_date,
+			// 	'group' => '',
+			// 	'permissions' => 'rw',
+			// );
+			// $loger_status = $this->loger->add($loger_data);
 
-			unset($check_status['enctype']);
 			unset($check_status['password']);
 			$this->session->set_userdata($check_status); //设置session
 			if ($remember) {
@@ -75,14 +76,14 @@ class User extends ADLINKX_Controller {
 		foreach ($this->input->post() AS $key => $value) {
 			array_push($input_data, $value);
 		}
-		list($account, $passwd, $confirmPasswd, $email, $phone, $isChecked) = $input_data;
+		list($account, $passwd, $email, $phone, $isChecked) = $input_data;
 		$data = array();
-		$data['uid'] = FN_generator_id();
-		$data['enctype'] = FN_md5_enctype();
-		$data['is_del'] = 0;
-		$data['add_time'] = time();
-		$data['group'] = '';
-		$data['permissions'] = 'rw';
+		// $data['uid'] = FN_generator_id();
+		// $data['enctype'] = FN_md5_enctype();
+		// $data['is_del'] = 0;
+		// $data['add_time'] = time();
+		// $data['group'] = '';
+		// $data['permissions'] = 'rw';
 		$result = array();
 
 		if (empty($account)) {
@@ -97,7 +98,8 @@ class User extends ADLINKX_Controller {
 			$result['msg'] = '';
 			$result['data'] = '';
 		} else {
-			$data['password'] = FN_md5_password($passwd, $data['enctype']);
+			// $data['password'] = FN_md5_password($passwd, $data['enctype']);
+			$data['password'] = $passwd;
 		}
 		if (empty($email)) {
 			$result['code'] = 2;
@@ -116,20 +118,19 @@ class User extends ADLINKX_Controller {
 
 		// var_dump($data);
 		$user_status = $this->user->add($data);
+		// $loger_data = array(
+		// 	'uid' => $data['uid'],
+		// 	'actions' => '用户注册',
+		// 	'remarks' => '尊敬的用户[' . $data['name'] . ']:您于' . date('Y-m-d', $data['add_time']) . '注册成功。<a href="https://www.adease.com">www.adease.com</a>',
+		// 	'ip' => sprintf("%u", ip2long($_SERVER['REMOTE_ADDR'])),
+		// 	'is_del' => 0,
+		// 	'timer' => $data['add_time'],
+		// 	'group' => '',
+		// 	'permissions' => 'rw',
+		// );
+		// $loger_status = $this->loger->add($loger_data);
 
-		$loger_data = array(
-			'uid' => $data['uid'],
-			'actions' => '用户注册',
-			'remarks' => '尊敬的用户[' . $data['name'] . ']:您于' . date('Y-m-d', $data['add_time']) . '注册成功。<a href="https://www.adease.com">www.adease.com</a>',
-			'ip' => sprintf("%u", ip2long($_SERVER['REMOTE_ADDR'])),
-			'is_del' => 0,
-			'timer' => $data['add_time'],
-			'group' => '',
-			'permissions' => 'rw',
-		);
-		$loger_status = $this->loger->add($loger_data);
-
-		if ($user_status && $loger_status) {
+		if ($user_status) {
 			$result['code'] = 0;
 			$result['msg'] = 'SUCCESS';
 			$result['data'] = '';
@@ -154,12 +155,11 @@ class User extends ADLINKX_Controller {
 	}
 
 	public function check_password($data) {
-		$where = array('name' => $data['account']);
+		$where = array('username' => $data['account']);
 		$passwd = $data['passwd'];
-		$query = $this->user->get($where, array('uid', 'name', 'password', 'enctype', 'group', 'permissions', 'avatar'));
-		// var_dump($query);
+		$query = $this->user->get($where, array('uid','username','password'));
 		return is_array($query) && !empty($query) ? (
-			FN_md5_password_verify($passwd, $query['password'], $query['enctype']) ? $query : false
+			FN_md5_password_verify($passwd, $query['password'],$this->salt) ? $query : false
 		) : false;
 	}
 

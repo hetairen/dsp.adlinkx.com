@@ -96,12 +96,12 @@ $db['default'] = array(
 );
 
 
-$db['aliyum'] = array(
+$db['aliyun'] = array(
 	'dsn' => '',
 	'hostname' => 'rm-bp161jfen84tpr7d2o.mysql.rds.aliyuncs.com',
 	'username' => 'huihex',
 	'password' => 'koolma2010',
-	'database' => 'koolbao_iseller_system',
+	'database' => 'huihe_marketing_system',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

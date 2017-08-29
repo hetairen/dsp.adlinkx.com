@@ -180,8 +180,8 @@
                         <li>
                         
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-uid="{$user.uid}" data-group="{$user.group}" data-permissions="{$user.permissions}">
-                                    <img src="<{$user.avatar}>" alt="" /><{$user.name}>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-uid="<{$user.uid}>" />
+                                    <!--img src="<{$user.avatar}>" alt="" /--><{$user.username}>
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -192,11 +192,11 @@
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        <!-- <li>
                             <button id="chatview" class="btn btn-default tp-icon chat-icon">
                                 <i class="glyphicon glyphicon-comment"></i>
                             </button>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <!-- header-right -->

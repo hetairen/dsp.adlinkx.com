@@ -194,7 +194,7 @@ $(document).ready(function() {
                 return false;
             }
             var url = encodeURI(ADLINKX.domain + '/user/sigin_up');
-            var data = { 'account': account, 'passwd': passwd, 'confirmPasswd': confirmPasswd, 'email': email, 'phone': phone, 'isChecked': isChecked }
+            var data = { 'account': account, 'passwd': passwd, 'email': email, 'phone': phone, 'isChecked': isChecked }
             postData(url, data);
         }
     });
