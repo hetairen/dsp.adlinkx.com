@@ -18,7 +18,7 @@ class Store_model extends ADLINKX_Model{
 
 	public function add($data = array()){
 		$seq_id = $this->get_seq_id();
-		$shop_id = parent::$id_space['website'] + $seq_id;
+		$shop_id = parent::$id_space['website'] + $seq_id+time();
 		$param = array(
 			"shop_id" => sprintf("%.0f", $shop_id),
 			"shop_title" => $data['title'],
@@ -39,23 +39,20 @@ class Store_model extends ADLINKX_Model{
 
 	}
 
-	public function lists($where = array(), $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*'){
-		$this->db->select($fields);
-		$this->db->from('store');
-		$this->db->where($where);
-		$this->db->limit(intval(($offset-1)*$num), $num);
-		$this->db->order_by($key, $stor);
-		$this->db->join('user','store.own_id=user.uid','left');
-		$query = $this->db->get();
-		// var_dump($this->db->last_query());
+	public function lists($own_id, $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*'){
+		$sql = 'select * from (select * from `huihe_marketing_system`.`store` where `own_id`="'.$own_id.'" and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id`';
+		$query = $this->db->query($sql);
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
 
 	public function update($data = array(), $where =array()){
-
+		$this->db->where($where);
+		$query = $this->db->update('store', $data);
+		return $query && $this->db->affected_rows() > 0 ? true: false;
 	}
 
-	public function delete($where = array()){
-
+	public function delete($shop_id){
+		$query = $this->update(array('is_del' => 1),array('shop_id' => $shop_id));
+		return $query ? true : false;
 	}
 }

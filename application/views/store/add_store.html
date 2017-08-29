@@ -36,7 +36,7 @@
                     <div class="panel-body">
                         <input type="hidden" name="user-id" id="user-id" value="<{$smarty.session.uid}>">
                         <div class="website-name-box"><label for="website-name">网站名称：<input type="text" id="website-name" name="website-name" value="" /></label></div>
-                        <div class="website-url-box"><label for="website-url">网&nbsp;站&nbsp;接&nbsp;：<input type="text" id="website-url" name="website-url" value=""></label></div>
+                        <div class="website-url-box"><label for="website-url">网&nbsp;站&nbsp;接&nbsp;：<input type="text" id="website-url" name="website-url" value="" placeholder="http://"></label></div>
                         <div class="website-plant-category-box">
                             <div class="category-box">
                                 <div class="category-title">tanx行业类目：</div>
@@ -109,11 +109,11 @@
             },
             success:function(res){
                 console.log(res);
-                // if(res.code ==1 && res.msg == 'success'){
-                //     window.location.href="/store/lists/store/lists";
-                // }else{
-                //     window.location.reload();
-                // }
+                if(res.code ==1 && res.msg == 'success'){
+                    window.location.href="/store/lists/store/lists";
+                }else{
+                    window.location.reload();
+                }
             },
             error:function(err){
                 console.log(err);

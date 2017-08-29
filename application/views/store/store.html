@@ -49,6 +49,7 @@
                                         <th>总消耗帐金额</th>
                                         <th>总消耗点击</th>
                                         <th>添加时间</th>
+                                        <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,10 +68,12 @@
                                             <td colspan="" rowspan="" headers="">0.0</td>
                                             <td colspan="" rowspan="" headers="">0</td>
                                             <td colspan="" rowspan="" headers=""><{$store.update_time}></td>
+                                            <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>">删除</a><a href="javascript:void(0);" class="edit-store" data-shop-id="<{$store.shop_id}>">编辑</a></td>
                                         </tr>
                                     <{/foreach}>
                                 </tbody>
                             </table>
+                            <div id="pages-box"></div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +91,27 @@
     <script>
     jQuery(document).ready(function() {
 
-        
+        $(document).on('click','.delete-store',function(){
+            $.ajax({
+                url:'/store/delete/'+$(this).attr('data-shop-id'),
+                type:'GET',
+                success:function(res){
+                    console.log(res);
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        });
 
     });
     </script>
