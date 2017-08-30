@@ -9,9 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * | Date
  * |--------------------------------------------------------------
  */
-class Launch_model ADLINKX_Model {
+class Launch_model extends ADLINKX_Model {
+	private $db;
 	public function __construct() {
 		parent::__construct();
+		$this->db = $this->get_database('aliyun');
 	}
 
 	public function add($data = array()){
@@ -23,14 +25,19 @@ class Launch_model ADLINKX_Model {
 	}
 
 	public function lists($where = array(), $num = 0, $offset = 20, $key = 'id', $stor = 'desc', $fields = '*'){
+		// $this->db->select();
+		// $this->db->from();
+		// $this->db->where();
+		// $this->db->order();
+		// $this->db->limit();
+		// $this->db->get();
+	}
+
+	public function update($data = array(), $where =array()){
 
 	}
 
-	public function update($data = array(), $where = =array()){
-
-	}
-
-	public function delete($where = =array()){
+	public function delete($where =array()){
 
 	}
 }

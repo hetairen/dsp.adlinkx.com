@@ -36,7 +36,9 @@ class CreativeMange extends ADLINKX_Controller {
 	}
 
 	public function lists() {
-		$store_lists = $this->store->lists($this->session->userdata('uid'));
+		$count = 0;
+		$store_lists = $this->store->lists(array('own_id' =>$this->session->userdata('uid'), 'start_date' => date('Y-m-d',time()),
+			'end_date' => date('Y-m-d',time())),20,1,'shop_id','desc','*',$count);
 		$this->assign('store_lists',$store_lists);
 		$this->display('creative/list.html');
 	}

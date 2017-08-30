@@ -382,10 +382,55 @@ Adlinkx.prototype.ckeckLogin = function() {
             }
         });
     }
-
-
 }
 
+Adlinkx.prototype.pages = function(json){
+    var _this = this;
+    var href = json.is_ajax ? 'javascript:void(0);': json.url;
+    var tmp = '';
+    var pages_html = '';
+    var first_html = '<a href="'+(json.is_ajax ? href:(href+'0'))+'" class="pages-buts" data-but-fn="next" data-num="0">'+(json.first.text ? json.first.text:'first')+'</a>';
+    var last_html = '<a href="'+(json.is_ajax ? href:(href+json.count))+'" class="pages-buts" data-but-fn="last" data-num="'+json.count+'">'+(json.last.text ? json.last.text:'last')+'</a>'
+    var next_but_html = '<a href="'+(json.is_ajax ? href:(href+(parseInt(json.current)+1)))+'" class="pages-buts" data-but-fn="next"  data-num="'+(parseInt(json.current)+1)+'">'+(json.next.text ? json.next.text:'next')+'</a>';
+    var previ_but_html = '<a href="'+(json.is_ajax ? href:(href+(parseInt(json.current)-1)))+'" class="pages-buts" data-but-fn="previ"  data-num="'+(parseInt(json.current)-1)+'">'+(json.previ.text ? json.previ.text: 'previ')+'</a>';
+    var search_html = '<div class="pages-search-bloxk-box"><input type="text" name="search-number" id="search-number" value="'+json.current+'" /><a href="'+(json.is_ajax ? href:href)+'" class="pages-search-but">'+(json.search.text ? json.search.text : 'search')+'</a></div>';
+    for(var i=0;i<json.count;i++){
+        if((i+1) == json.current){
+            tmp += '<a href="'+(json.is_ajax ? href:(href+i))+'" class="pages-buts native" data-but-fn="pages-but" data-num="'+(i+1)+'">'+(i+1)+'</a>';
+        }else{
+            tmp += '<a href="'+(json.is_ajax ? href:(href+i))+'" class="pages-buts" data-but-fn="pages-but" data-num="'+(i+1)+'">'+(i+1)+'</a>';
+        }
+    }
+    pages_html += (json.count == 1 ? (tmp+'<div class="pages-show-text">共<span style="margin:0 4px;">'+json.count+'</span>页，当前第<span style="margin:0 4px;">'+json.current+'</span>页</div>'):((json.first.enable ? first_html : '')+(json.previ.enable? previ_but_html : '')+tmp+(json.next.enable ? next_but_html: '')+(json.last.enable ? last_html: '')+'<div class="pages-show-text">共<span style="margin:0 4px;">'+json.count+'</span>页，当前第<span style="margin:0 4px;">'+json.current+'</span>页</div>'+(json.search.enable ? search_html :'')))+
+    '<style>'+
+        '.pages-buts{display:block;float:left;width:auto;padding:0 10px;height:30px;line-height:30px;text-align:center;background:#FFF;border:1px solid '+json.color+';border-radius:2px;color:'+json.color+';text-decoration:none;margin:0 0 0 4px;}'+
+        '.native,.pages-buts:hover,.pages-search-but:hover{background:'+json.color+';color:#FFF;}'+
+        '.pages-show-text{float:left;width:auto;height:30px;line-height:30px;padding:0 8px;}'+
+        '.pages-search-bloxk-box{float:left;width:auto;height:30px;}'+
+        '#search-number{display:block;float:left;width:50px;height:30px;line-height:30px;text-align:crent;border:1px solid #c1c1c1;padding:0;border-right:none;}'+
+        '.pages-search-but{display:block;float:left;width:80px;height:30px;line-height:30px;text-align:center;border:1px solid '+json.color+';border-radius:0 2px 2px 0;background:'+json.color+';color:#FFF;text-decoration:none;}'+
+    '</style>';
+    this.jQuery('#'+json.id).html(pages_html);
+    this.jQuery(document).on('click','.pages-buts',function(){
+        var offset = _this.jQuery(this).attr('data-num');
+        var key_words = _this.jQuery('#search-keywords-box') ? _this.jQuery('#search-keywords-box').val(): '';
+        _this.jQuery.ajax({
+            url:encodeURI(json.url+key_words+'/'+offset+'/'+json.num),
+            type:'GET',
+            success:json.callback,
+            error:function(err){
+                console.error(err);
+            }
+        });
+    });
+    // document.getElementById(json.id).innerHTML = pages_html;
+    // var page_buts = document.getElementsByClassName('pages-buts');
+    // for(var j=0;j<page_buts.length;j++){
+    //     page_buts[i].onclick = function(){
+    //         var offset = this.getAttribute('data-num');
+    //     }
+    // }
+}
 
 window.ADLINKX = new Adlinkx(jQuery);
 ADLINKX.information('className', 'description', 'author', 'version', 'date', 'email');

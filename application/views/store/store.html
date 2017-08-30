@@ -1,87 +1,109 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <{include file="common/header.html"}>
+    <{include file="common/header.html" }>
 </head>
+
 <body>
     <!-- Preloader -->
     <div id="preloader">
         <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
     </div>
     <section>
-        <{include file="common/leftpanel.html"}>
-        <!-- leftpanel -->
-        <div class="mainpanel">
-            <{include file="common/headerbar.html"}>
-            <!-- headerbar -->
-            <div class="pageheader">
-                <h2><i class="fa fa-tasks"></i>首页<span>店铺管理</span> <span>店铺列表</span></h2>
-                <div class="breadcrumb-wrapper">
-                    <span class="label">在这里</span>
-                    <ol class="breadcrumb">
-                        <li><a href="https://www.adlinkx.com">返回</a></li>
-                        <li class="active">首页</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="contentpanel">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="page-title">帐号列表</div>
-                                <div class="add-but-block"><a class="export-buts but-0781ec" href="/store/add/store/lists"><i class="fa fa-plus-circle ml10 mr4"></i>添加店铺</a></div>
-                                <div class="space-box"></div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="table2">
-                                <thead>
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>广告主</th>
-                                        <th>店铺名称</th>
-                                        <th>店铺地址</th>
-                                        <th>联系人</th>
-                                        <th>联系电话</th>
-                                        <th>帐户余额</th>
-                                        <th>所属渠道</th>
-                                        <th>昨日消耗</th>
-                                        <th>今日消耗</th>
-                                        <th>总消耗帐金额</th>
-                                        <th>总消耗点击</th>
-                                        <th>添加时间</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <{foreach $store_lists item=store key=i}>
-                                        <tr>
-                                            <td colspan="" rowspan="" headers=""><{$i}></td>
-                                            <td colspan="" rowspan="" headers=""><{$store.username}></td>
-                                            <td colspan="" rowspan="" headers=""><{$store.shop_title}></td>
-                                            <td colspan="" rowspan="" headers=""><a href="<{$store.website}>" target="_blank"><{$store.website}></a></td>
-                                            <td colspan="" rowspan="" headers=""></td>
-                                            <td colspan="" rowspan="" headers=""><{$store.phone}></td>
-                                            <td colspan="" rowspan="" headers=""><{$store.money}></td>
-                                            <td colspan="" rowspan="" headers="">领效</td>
-                                            <td colspan="" rowspan="" headers="">0.0</td>
-                                            <td colspan="" rowspan="" headers="">0.0</td>
-                                            <td colspan="" rowspan="" headers="">0.0</td>
-                                            <td colspan="" rowspan="" headers="">0</td>
-                                            <td colspan="" rowspan="" headers=""><{$store.update_time}></td>
-                                            <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>">删除</a><a href="javascript:void(0);" class="edit-store" data-shop-id="<{$store.shop_id}>">编辑</a></td>
-                                        </tr>
-                                    <{/foreach}>
-                                </tbody>
-                            </table>
-                            <div id="pages-box"></div>
+        <{include file="common/leftpanel.html" }>
+            <!-- leftpanel -->
+            <div class="mainpanel">
+                <{include file="common/headerbar.html" }>
+                    <!-- headerbar -->
+                    <div class="pageheader">
+                        <h2><i class="fa fa-tasks"></i>首页<span>店铺管理</span> <span>店铺列表</span></h2>
+                        <div class="breadcrumb-wrapper">
+                            <span class="label">在这里</span>
+                            <ol class="breadcrumb">
+                                <li><a href="https://www.adlinkx.com">返回</a></li>
+                                <li class="active">首页</li>
+                            </ol>
                         </div>
                     </div>
-                </div>
+                    <div class="contentpanel">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="page-title">帐号列表</div>
+                                <div class="add-but-block">
+                                    <a class="export-buts but-0781ec" href="/store/add/store/lists"><i class="fa fa-plus-circle ml10 mr4"></i>添加店铺</a>
+                                    <div class="search-box">
+                                        <input type="text" id="search-keywords-box" name="search-keywords-box" value="" placeholder="输入店铺名称或店铺id"><a href="javascript:void(0);" class="search-buts">搜索</a></div>
+                                </div>
+                                <div class="space-box"></div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table2">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>广告主</th>
+                                                <th>店铺名称</th>
+                                                <th>店铺地址</th>
+                                                <th>联系人</th>
+                                                <th>联系电话</th>
+                                                <th>帐户余额</th>
+                                                <th>所属渠道</th>
+                                                <th>昨日消耗</th>
+                                                <th>今日消耗</th>
+                                                <th>总消耗帐金额</th>
+                                                <th>总消耗点击</th>
+                                                <th>添加时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <{foreach $store_lists item=store key=i}>
+                                                <tr>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{$i}>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{$store.username}>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{$store.shop_title}>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <a href="<{$store.website}>" target="_blank">
+                                                            <{$store.website}>
+                                                        </a>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers=""></td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{$store.phone}>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{$store.money}>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers="">领效</td>
+                                                    <td colspan="" rowspan="" headers="">0.0</td>
+                                                    <td colspan="" rowspan="" headers="">0.0</td>
+                                                    <td colspan="" rowspan="" headers="">0.0</td>
+                                                    <td colspan="" rowspan="" headers="">0</td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{$store.update_time}>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>">删除</a><a href="javascript:void(0);" class="edit-store" data-shop-id="<{$store.shop_id}>">编辑</a></td>
+                                                </tr>
+                                                <{/foreach}>
+                                        </tbody>
+                                    </table>
+                                    <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- contentpanel -->
+                    <{include file="common/footerbar.html" }>
             </div>
-            <!-- contentpanel -->
-            <{include file="common/footerbar.html"}>
-        </div>
-        <!-- mainpanel -->
+            <!-- mainpanel -->
     </section>
     <script src="/resources/js/libarays/bootstrap.min.js"></script>
     <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
@@ -91,31 +113,133 @@
     <script>
     jQuery(document).ready(function() {
 
-        $(document).on('click','.delete-store',function(){
+        ADLINKX.pages({
+            id: 'pages-box',
+            first: {
+                text: '首页',
+                callback: null,
+                enable:true
+            },
+            last: {
+                text: '尾页',
+                callback: null,
+                enable:true
+            },
+            next: {
+                text: '下一页',
+                callback: null,
+                enable:true
+            },
+            previ: {
+                text: '上一页',
+                callback: null,
+                enable:true
+            },
+            search: {
+                text: '搜索',
+                callback: null,
+                enable:true
+            },
+            count: $('#pages-box').attr('data-count'),
+            current: $('#pages-box').attr('data-current'),
+            num:20,
+            color: '#0781ec',
+            is_ajax: true,
+            url:'/ajax_api/store/lists/0/0/',
+            callback:function(res){
+                console.log(res);
+            }
+        });
+
+        $(document).on('click', '.delete-store', function() {
             $.ajax({
-                url:'/store/delete/'+$(this).attr('data-shop-id'),
-                type:'GET',
-                success:function(res){
+                url: '/store/delete/' + $(this).attr('data-shop-id'),
+                type: 'GET',
+                success: function(res) {
                     console.log(res);
-                    if(res.code ==1 && res.msg == 'success'){
-                        ADLINKX.alert('删除成功',2,function(){
+                    if (res.code == 1 && res.msg == 'success') {
+                        ADLINKX.alert('删除成功', 2, function() {
                             window.location.reload();
                         });
-                    }else{
-                        ADLINKX.alert('删除失败',2,function(){
+                    } else {
+                        ADLINKX.alert('删除失败', 2, function() {
                             window.location.reload();
                         });
                     }
                 },
-                error:function(err){
+                error: function(err) {
                     console.log(err);
                 }
             });
         });
+
+        $(document).on('click', '.search-buts', function() {
+            var key_words = $('#search-keywords-box').val();
+            $.ajax({
+                url: encodeURI('/ajax_api/store/lists/0/0/' + key_words + '/1/20'),
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    if (res.code == 1 && res.msg == 'success') {
+                        current = res.data.current;
+                        count = res.data.count;
+                        $('#table2').find('tbody').html(output_data_table(res.data.lists));
+                        ADLINKX.pages({
+                            id: 'pages-box',
+                            next: {
+                                text: 'next',
+                                callback: null
+                            },
+                            previ: {
+                                text: 'next',
+                                callback: null
+                            },
+                            count: count,
+                            current: current,
+                            color: '',
+                            search: {
+                                text: '',
+                                callback: null
+                            },
+                            is_ajax: false
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        function output_data_table(data) {
+            var tmp = '';
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    tmp += '<tr>' +
+                        '<td colspan="" rowspan="" headers="">' + i + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['username'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['shop_title'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['website'] + '</td>' +
+                        '<td colspan="" rowspan="" headers=""></td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['phone'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['money'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">领效</td>' +
+                        '<td colspan="" rowspan="" headers="">0.0</td>' +
+                        '<td colspan="" rowspan="" headers="">0.0</td>' +
+                        '<td colspan="" rowspan="" headers="">0.0</td>' +
+                        '<td colspan="" rowspan="" headers="">0</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['update_time'] + '</td>' +
+                        '<td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="' + data[i]['shop_id'] + '">删除</a><a href="javascript:void(0);" class="edit-store" data-shop-id="' + data[i]['shop_id'] + '">编辑</a></td>' +
+                        +'</tr>';
+                }
+            } else {
+                tmp += '<tr><td cellspacing="14" style="text-align:center;">暂无数据</td></tr>';
+            }
+            return tmp;
+        }
 
     });
     </script>
 </body>
 
 </html>
-

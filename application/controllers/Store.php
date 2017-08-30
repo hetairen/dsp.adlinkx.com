@@ -47,15 +47,22 @@ class Store extends ADLINKX_Controller{
 	}
 
 	public function lists(){
-		$own_id =  $this->session->userdata('uid');
+		$count = 0;
+		$where =  array(
+			'own_id' => $this->session->userdata('uid'),
+			'start_date' => date('Y-m-d',time()),
+			'end_date' => date('Y-m-d',time())
+		);
 		$offset = $this->uri->segment(7) != '' ? $this->uri->segment(7) : 1 ;
 		$num = $this->uri->segment(8) != '' ? $this->uri->segment(8) : 20 ;
 		$stor = $this->uri->segment(9) != '' ? $this->uri->segment(9) : 'DESC' ;
 		$key = $this->uri->segment(10) != '' ? $this->uri->segment(10) : 'shop_id' ;
-		$fields = array('*');
-		$store_lists = $this->store->lists($own_id, $num, $offset, $key, $stor, $fields);
+		$fields = '*';
+		$store_lists = $this->store->lists($where, $num, $offset, $key, $stor, $fields, $count);
 		// var_dump($store_lists);
 		$this->assign('store_lists',$store_lists);
+		$this->assign('count',ceil($count/$num));
+		$this->assign('current',$offset);
 		$this->display('store/store.html');	
 	}
 
