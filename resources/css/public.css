@@ -123,6 +123,34 @@ input {
 	border-radius:3px;
 }
 
+
+.ml1 {
+    margin-left: 1px;
+}
+.ml2 {
+    margin-left: 2px;
+}
+.ml3 {
+    margin-left: 3px;
+}
+.ml4 {
+    margin-left: 4px;
+}
+.ml5 {
+    margin-left: 5px;
+}
+.ml6 {
+    margin-left: 6px;
+}
+.ml7 {
+    margin-left: 7px;
+}
+.ml8 {
+    margin-left: 8px;
+}
+.ml9 {
+    margin-left: 9px;
+}
 .ml10 {
     margin-left: 10px;
 }
@@ -191,3 +219,24 @@ input {
 .step-bar-step2{display:block;width:40px;height:40px;line-height:20px;text-align:center;background:#FFF;color:#1CB841;border:10px solid #1CB841;border-radius:50%;margin:0 0 0 20px;}
 .step-bar-step3{display:block;width:40px;height:40px;line-height:20px;text-align:center;background:#FFF;border:10px solid #DBDBDB;border-radius:50%;margin:0 0 0 20px;}
 .step-bar-text{display:block;width:80px;height:30px;line-height:30px;text-align:center;font-size:16px;font-weight: bold;}
+.step-content-block-box{width:100%;height:auto;margin:20px 0;}
+.step-public-block-box{width:80%;margin:0 auto;}
+.step-public-title-block{width:100%;height:50px;line-height:50px;border-bottom: 1px solid #c1c1c1;font-size:20px;}
+.form-group-block-box{width:100%;}
+.form-list-block-box{width:100%;height:40px;margin-bottom:20px;}
+.form-list-block-box:first-child{margin-top:60px;}
+.form-list-block-box:nth-child(1){margin-top:60px;}
+.form-controller{float:left;width:170px;height:40px;text-align: right;line-height: 40px;font-size:14px;font-weight: bold;color:#62687e;padding:0 10px 0 0;}
+.form-input-block{float:left;width:520px;height:40px;}
+.form-input-block select{width:100%;height:38px;line-height: 38px;border:1px solid #c1c1c1;border-radius:3px;padding:0 0 0 10px;}
+.form-input-block input{width:100%;height:38px;line-height: 38px;border:1px solid #c1c1c1;border-radius:3px;padding:0 0 0 10px;}
+.select-time-buts{display:block;float:left;width:40px;height:40px;line-height:40px;text-align:center;border:1px solid #c1c1c1;border-right: none;border-radius:3px 0 0 3px;}
+#hook-time-but{display:block;float:left;width:480px;height:40px;border:1px solid #c1c1c1;border-left: none;border-radius:0 3px 3px 0;}
+.form-tip-block{float:left;width:370px;height:40px;line-height:40px;padding:0 0 0 10px;}
+.buts-block-box{width:100%;height:40px;margin:100px 0 0 0;}
+.save-buts{display:block;float:right;width:auto;height:40px;line-height:40px;padding:0 20px;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:3px;margin:0 4px 0 0;}
+.save-buts:hover{background:#0081f4;border-color:#0053cd;color:#FFF;text-decoration: none;}
+.save-and-confirm-buts{display:block;float:right;width:auto;height:40px;line-height:40px;padding:0 20px;background:#30d357;color:#FFF;border:1px solid #29c14d;border-radius:3px;margin:0 4px 0 0;}
+.save-and-confirm-buts:hover{background:#00b032;border-color:#008b02;color:#FFF;text-decoration: none;}
+.callback-lists-buts{display:block;float:right;width:auto;height:40px;line-height:40px;padding:0 20px;background:#FFF;color:#333;border:1px solid #ccc;border-radius:3px;margin:0 200px 0 0;}
+.callback-lists-buts:hover{background:#e6e6e6;color:#333;border-color:#a5a5a5;text-decoration: none;}

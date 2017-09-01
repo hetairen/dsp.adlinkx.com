@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <{include file="common/header.html" }>
+    <script type="text/javascript">
+        <{if $action eq 'strategy' and $step eq 2}>
+            var url = '/strategyMange/add';
+            var fn = 'strategy';
+        <{elseif $action eq 'creative' and $step eq 3}>
+            var url = '/creativeMange/add';
+            var fn = 'creative';
+        <{else}>
+            var url = '/launchMange/add';
+            var fn = 'launch';
+        <{/if}>
+        
+    </script>
 </head>
+
 <body>
     <!-- Preloader -->
     <div id="preloader">
@@ -27,72 +42,154 @@
                     <div class="contentpanel">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                            	<{if $model eq 'campaign'}>
-                            		<div class="page-title"><span style="font-size:25px;font-weight:bold;margin-right:10px;">投放管理</span>
-	                            		<{if $action eq 'strategy'}>
-	                            			<span style="font-size:15px;">编辑策略</span>
-	                            		<{elseif  $action eq 'creative'}>
-	                            			<span style="font-size:15px;">编辑创意</span>
-	                            		<{else}>
-	                            			<span style="font-size:15px;">编辑投放</span>
-	                            		<{/if}>
-	                            	</div>
-	                            	<div class="space-box"></div>
-                            	<{/if}>
+                                <{if $model eq 'campaign'}>
+                                    <div class="page-title"><span style="font-size:25px;font-weight:bold;margin-right:10px;">投放管理</span>
+                                        <{if $action eq 'strategy'}>
+                                            <span style="font-size:15px;">编辑策略</span>
+                                            <{elseif $action eq 'creative'}>
+                                                <span style="font-size:15px;">编辑创意</span>
+                                                <{else}>
+                                                    <span style="font-size:15px;">编辑投放</span>
+                                                    <{/if}>
+                                    </div>
+                                    <div class="space-box"></div>
+                                    <{/if}>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <div class="step-bar">
-                                    	<div class="step-default-bg-bar"></div>
-                                    	<{if $step eq 2}>
-                                    		<div class="step-current-bg-bar" style="width:54%"></div>
-	                                    	<ul class="ste-bar-but-box">
-	                                    		<li class="step-bar-step1-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step1"><i class="fa fa-check"></i></a>
-	                                    			<span class="step-bar-text">添加投放</span>
-	                                    		</li>
-	                                    		<li class="step-bar-step2-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step2"><i class="fa fa-chevron-right"></i></a>
-	                                    			<span class="step-bar-text">添加策略</span>
-	                                    		</li>
-	                                    		<li class="step-bar-step3-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step3"><i class=""></i></a>
-	                                    			<span class="step-bar-text" style="color:#DBDBDB">添加创意</span>
-	                                    		</li>
-	                                    	</ul>
-                                    	<{elseif $step eq 3}>
-                                    		<div class="step-current-bg-bar" style="width:84%"></div>
-	                                    	<ul class="ste-bar-but-box">
-	                                    		<li class="step-bar-step1-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step1"><i class="fa fa-check"></i></a>
-	                                    			<span class="step-bar-text">添加投放</span>
-	                                    		</li>
-	                                    		<li class="step-bar-step2-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step2" style="color:#077FE6;border-color:#077FE6;"><i class="fa fa-check"></i></a>
-	                                    			<span class="step-bar-text">添加策略</span>
-	                                    		</li>
-	                                    		<li class="step-bar-step3-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step3" style="color:#1CB841;border-color:#1CB841"><i class="fa fa-chevron-right"></i></a>
-	                                    			<span class="step-bar-text">添加创意</span>
-	                                    		</li>
-	                                    	</ul>
-                                    	<{else}>
-                                    		<div class="step-current-bg-bar" style="width:24%"></div>
-	                                    	<ul class="ste-bar-but-box">
-	                                    		<li class="step-bar-step1-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step1" style="color:#1CB841;border-color:#1CB841"><i class="fa fa-chevron-right"></i></a>
-	                                    			<span class="step-bar-text">添加投放</span>
-	                                    		</li>
-	                                    		<li class="step-bar-step2-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step2" style="border:10px solid #DBDBDB;"><i class=""></i></a>
-	                                    			<span class="step-bar-text" style="color:#DBDBDB">添加策略</span>
-	                                    		</li>
-	                                    		<li class="step-bar-step3-box">
-	                                    			<a href="javascript:void(0);" class="step-bar-step3"><i class=""></i></a>
-	                                    			<span class="step-bar-text" style="color:#DBDBDB">添加创意</span>
-	                                    		</li>
-	                                    	</ul>
-                                    	<{/if}>
+                                        <div class="step-default-bg-bar"></div>
+                                        <{if $step eq 2}>
+                                            <div class="step-current-bg-bar" style="width:54%"></div>
+                                            <ul class="ste-bar-but-box">
+                                                <li class="step-bar-step1-box">
+                                                    <a href="javascript:void(0);" class="step-bar-step1"><i class="fa fa-check"></i></a>
+                                                    <span class="step-bar-text">添加投放</span>
+                                                </li>
+                                                <li class="step-bar-step2-box">
+                                                    <a href="javascript:void(0);" class="step-bar-step2"><i class="fa fa-chevron-right"></i></a>
+                                                    <span class="step-bar-text">添加策略</span>
+                                                </li>
+                                                <li class="step-bar-step3-box">
+                                                    <a href="javascript:void(0);" class="step-bar-step3"><i class=""></i></a>
+                                                    <span class="step-bar-text" style="color:#DBDBDB">添加创意</span>
+                                                </li>
+                                            </ul>
+                                            <{elseif $step eq 3}>
+                                                <div class="step-current-bg-bar" style="width:84%"></div>
+                                                <ul class="ste-bar-but-box">
+                                                    <li class="step-bar-step1-box">
+                                                        <a href="javascript:void(0);" class="step-bar-step1"><i class="fa fa-check"></i></a>
+                                                        <span class="step-bar-text">添加投放</span>
+                                                    </li>
+                                                    <li class="step-bar-step2-box">
+                                                        <a href="javascript:void(0);" class="step-bar-step2" style="color:#077FE6;border-color:#077FE6;"><i class="fa fa-check"></i></a>
+                                                        <span class="step-bar-text">添加策略</span>
+                                                    </li>
+                                                    <li class="step-bar-step3-box">
+                                                        <a href="javascript:void(0);" class="step-bar-step3" style="color:#1CB841;border-color:#1CB841"><i class="fa fa-chevron-right"></i></a>
+                                                        <span class="step-bar-text">添加创意</span>
+                                                    </li>
+                                                </ul>
+                                                <{else}>
+                                                    <div class="step-current-bg-bar" style="width:24%"></div>
+                                                    <ul class="ste-bar-but-box">
+                                                        <li class="step-bar-step1-box">
+                                                            <a href="javascript:void(0);" class="step-bar-step1" style="color:#1CB841;border-color:#1CB841"><i class="fa fa-chevron-right"></i></a>
+                                                            <span class="step-bar-text">添加投放</span>
+                                                        </li>
+                                                        <li class="step-bar-step2-box">
+                                                            <a href="javascript:void(0);" class="step-bar-step2" style="border:10px solid #DBDBDB;"><i class=""></i></a>
+                                                            <span class="step-bar-text" style="color:#DBDBDB">添加策略</span>
+                                                        </li>
+                                                        <li class="step-bar-step3-box">
+                                                            <a href="javascript:void(0);" class="step-bar-step3"><i class=""></i></a>
+                                                            <span class="step-bar-text" style="color:#DBDBDB">添加创意</span>
+                                                        </li>
+                                                    </ul>
+                                                    <{/if}>
+                                    </div>
+                                    <div class="step-content-block-box">
+                                        <{if $action eq 'strategy' and $step eq 2}>
+                                            <!--添加/编辑策略信息-->
+                                            <div class="step-public-block-box">
+                                                <div class="step-public-title-block">策略信息</div>
+                                            </div>
+                                            <{elseif $action eq 'creative' and $step eq 3}>
+                                                <!--添加/编辑创意信息-->
+                                                <div class="step-public-block-box">
+                                                    <div class="step-public-title-block">创意信息</div>
+                                                </div>
+                                                <{else}>
+                                                    <!--添加/编辑投放信息-->
+                                                    <div class="step-public-block-box">
+                                                        <div class="step-public-title-block">投放信息</div>
+                                                        <div class="form-group-block-box">
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">所属网站：</div>
+                                                                <div class="form-input-block">
+                                                                    <select name="select-store-id" id="select-store-id">
+                                                                        <{foreach $store_lists item=store key=i}>
+                                                                            <option value="<{$store.shop_id}>">
+                                                                                <{$store.shop_title}>
+                                                                            </option>
+                                                                            <{/foreach}>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-tip-block">投放所属网站</div>
+                                                            </div>
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">投放名称：</div>
+                                                                <div class="form-input-block">
+                                                                    <input type="" name="plan-name" value="" id="plan-name" placeholder="投放名称" />
+                                                                </div>
+                                                                <div class="form-tip-block">投放名称必填</div>
+                                                            </div>
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">每日预算：</div>
+                                                                <div class="form-input-block">
+                                                                    <input type="" name="budget-value" value="" id="budget-value" placeholder="每日预算" />
+                                                                </div>
+                                                                <div class="form-tip-block">每日预算(如：200)，不填则为不限</div>
+                                                            </div>
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">时间范围：</div>
+                                                                <div class="form-input-block"><a href="javascript:void(0);" class="select-time-buts" title="选择时间范围"><i class="fa fa-calendar"></i></a>
+                                                                    <input type="" name="hook-time-but" value="" id="hook-time-but" placeholder="选择时间范围，格式为YYYY-MM-DD - YYYY-MM-DD" readonly="readonly" />
+                                                                </div>
+                                                                <div class="form-tip-block">选择时间范围，格式为YYYY-MM-DD - YYYY-MM-DD</div>
+                                                            </div>
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">策略类型：</div>
+                                                                <div class="form-input-block">
+                                                                    <select name="device-type" id="device-type">
+                                                                        <option value="-1">请选择策略类型</option>
+                                                                        <option value="0">不限设备</option>
+                                                                        <option value="1">PC</option>
+                                                                        <option value="2">WAP</option>
+                                                                        <option value="3">APP</option>
+                                                                        <option value="4">Native</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-tip-block">此类型为下一步要创建的策略的类型，关系到投放的结果。</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <{/if}>
+                                    </div>
+                                    <div class="buts-block-box">
+                                        <{if $action eq 'strategy' and $step eq 2}>
+                                            <a href="/launchMange/lists/campaign/launch" class="callback-lists-buts">返回列表</a>
+                                            <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2">保存并创建创意&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                            <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1">保存</a>
+                                            <{elseif $action eq 'creative' and $step eq 3}>
+                                                <a href="/launchMange/lists/campaign/launch" class="submit-buts callback-lists-buts">返回列表</a>
+                                                <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                                <{else}>
+                                                    <a href="/launchMange/lists/campaign/launch" class="callback-lists-buts">返回列表</a>
+                                                    <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2">保存并创建策略&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                                    <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1">保存</a>
+                                                    <{/if}>
                                     </div>
                                 </div>
                             </div>
@@ -103,16 +200,88 @@
             </div>
             <!-- mainpanel -->
     </section>
-    <script src="/resources/js/libarays/bootstrap.min.js"></script>
-    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
-    <script src="/resources/js/libarays/toggles.min.js"></script>
-    <script src="/resources/js/libarays/jquery.cookies.js"></script>
-    <script src="/resources/js/libarays/custom.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/toggles.min.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/custom.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
     <script>
     jQuery(document).ready(function() {
 
-        
+        $('input').on('focus',function(){
+            $(this).css('border-color','#c1c1c1');
+        });
 
+        $('select').on('focus',function(){
+            $(this).css('border-color','#c1c1c1');
+        });
+
+        var insl = laydate.render({
+            elem: '#hook-time-but',
+            range: '~',
+        });
+
+        var data = {};
+
+        $('.submit-buts').on('click',function(){
+            switch(fn.toLowerCase()){
+                case 'strategy':
+                break;
+                case 'creative':
+                break;
+                default:
+                    if($('#select-store-id').val() == ''){
+                        $('#select-store-id').css('border-color','#F00');
+                    }else{
+                        data.shop_id = $('#select-store-id').val();
+                    }
+                    if($('#plan-name').val() == ''){
+                        $('#plan-name').css('border-color','#F00');
+                    }else{
+                        data.plan_name = $('#plan-name').val();
+                    }
+                    if($('#budget-value').val() == ''){
+                        data.budget = 0;
+                    }else{
+                        data.budget = $('#budget-value').val();
+                    }
+                    if($('#device-type').val() == '-1'){
+                        $('#device-type').css('border-color','#F00');
+                    }else{
+                        data.device = $('#device-type').val();
+                    }
+                    if($('#hook-time-but').val() == ''){
+                        $('#hook-time-but').css('border-color','#F00');
+                    }else{
+                        var timer = $('#hook-time-but').val().split(' ~ ');
+                        data.startdate = timer[0];
+                        data.enddate = timer[1];
+                    }
+                    if($('#hook-time-but').val() == ''){
+                        $('#hook-time-but').css('border-color','#F00');
+                    }else{
+                        
+                    }
+                break;
+            }
+            console.log(data);
+            // post_data(url,data,function(res){
+            //     console.log(res);
+            // },function(err){
+            //     console.error(err);
+            // });
+        });
+
+        function post_data(url,data,suc,err){
+            $.ajax({
+                url:url,
+                type:'POST',
+                data:data,
+                success:suc,
+                error:err
+            });
+        }
     });
     </script>
 </body>
