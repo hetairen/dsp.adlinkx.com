@@ -240,3 +240,11 @@ input {
 .save-and-confirm-buts:hover{background:#00b032;border-color:#008b02;color:#FFF;text-decoration: none;}
 .callback-lists-buts{display:block;float:right;width:auto;height:40px;line-height:40px;padding:0 20px;background:#FFF;color:#333;border:1px solid #ccc;border-radius:3px;margin:0 200px 0 0;}
 .callback-lists-buts:hover{background:#e6e6e6;color:#333;border-color:#a5a5a5;text-decoration: none;}
+.creative-source-switch-buts{display:block;float:left;width:140px;height:40px;line-height: 40px;padding:0 0 0 30px;background:url('/resources/images/radio_bg.png') no-repeat 0 10px;}
+.add-creative-block{width:100%;height:auto;display:none;}
+.upload-creative-buts{display:block;float:right;width:100px;height:40px;line-height:40px;background:#09c8ff;color:#FFF;border:1 solid #00b9ef;margin:0 120px 0 0;border-radius:3px;text-align:center;}
+.upload-creative-buts:hover{background:#00a7da;border-color:#008cb5;color:#FFF;}
+.creative-upload-show-box{width:100%;height:350px;border-bottom:1px solid #c1c1c1;}
+.creative-material-default-img-block{width:100%;height:300px;}
+.creative-material-default-img-link{width:100%;height:40px;line-height:40px;padding:0 0 0 120px;}
+#zyipload-mske-layer{display:none;width:100%;height:100%;background:#313131;position:fixed;left:0;top:0;opacity:.8;filter:alpha(opacity:80);z-index:98;}

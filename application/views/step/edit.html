@@ -3,19 +3,22 @@
 
 <head>
     <{include file="common/header.html" }>
-    <script type="text/javascript">
-        <{if $action eq 'strategy' and $step eq 2}>
-            var url = '/strategyMange/add';
-            var fn = 'strategy';
-        <{elseif $action eq 'creative' and $step eq 3}>
-            var url = '/creativeMange/add';
-            var fn = 'creative';
-        <{else}>
-            var url = '/launchMange/add';
-            var fn = 'launch';
-        <{/if}>
-        
-    </script>
+    <{if $action eq 'creative' and $step eq 3}>
+        <link rel="stylesheet" type="text/css" href="/resources/js/libarays/zyupload/css/zyUpload.css" />
+    <{/if}>
+        <script type="text/javascript">
+            window.local_tags = null;
+            <{if $action eq 'strategy' and $step eq 2}>
+                var url = '/strategyMange/add';
+                var fn = 'strategy';
+            <{elseif $action eq 'creative' and $step eq 3}>
+                var url = '/creativeMange/add';
+                var fn = 'creative';
+            <{else}>
+                var url = '/launchMange/add';
+                var fn = 'launch'; 
+            <{/if}>
+        </script>
 </head>
 
 <body>
@@ -114,11 +117,121 @@
                                             <!--添加/编辑策略信息-->
                                             <div class="step-public-block-box">
                                                 <div class="step-public-title-block">策略信息</div>
+                                                <div class="form-group-block-box">
+                                                    <div class="form-list-block-box">
+                                                        <div class="form-controller">策略名称：</div>
+                                                        <div class="form-input-block">
+                                                            <input type="" name="plan-name" value="" id="plan-name" placeholder="策略名称" />
+                                                        </div>
+                                                        <div class="form-tip-block">策略名称必填</div>
+                                                    </div>
+                                                    <div class="form-list-block-box">
+                                                        <div class="form-controller">设置出价：</div>
+                                                        <div class="form-input-block">
+                                                            <input type="" name="budget-value" value="" id="budget-value" placeholder="设置出价,建议0.5~3元" />
+                                                        </div>
+                                                        <div class="form-tip-block">设置出价。</div>
+                                                    </div>
+                                                </div>
+                                                <div class="label-market"></div>
                                             </div>
                                             <{elseif $action eq 'creative' and $step eq 3}>
                                                 <!--添加/编辑创意信息-->
                                                 <div class="step-public-block-box">
                                                     <div class="step-public-title-block">创意信息</div>
+                                                    <div class="form-group-block-box">
+                                                        <div class="form-list-block-box">
+                                                            <div class="form-controller">创意名称：</div>
+                                                            <div class="form-input-block">
+                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="创意名称" />
+                                                            </div>
+                                                            <div class="form-tip-block">创意名称必填</div>
+                                                        </div>
+                                                        <div class="form-list-block-box">
+                                                            <div class="form-controller">创意连接：</div>
+                                                            <div class="form-input-block">
+                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                            </div>
+                                                            <div class="form-tip-block">创意连接必填</div>
+                                                        </div>
+                                                        <div class="form-list-block-box">
+                                                            <div class="form-controller">第三方监测连接：</div>
+                                                            <div class="form-input-block">
+                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                            </div>
+                                                            <div class="form-tip-block">第三方监测连接必填</div>
+                                                        </div>
+                                                        <div class="form-list-block-box">
+                                                            <div class="form-controller">第三方爆光连接：</div>
+                                                            <div class="form-input-block">
+                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                            </div>
+                                                            <div class="form-tip-block">第三方爆光连接必填</div>
+                                                        </div>
+                                                        <div class="form-list-block-box" style="height:120px;">
+                                                            <div class="form-controller" style="height:120px;">有效素材尺寸：</div>
+                                                            <div class="form-tip-block" style="width:400px;height:120px;font-size:14px;line-height: 16px;">100*260, 100*300, 1000*90, 1190*90, 120*240, 120*600, 130*370, 160*600, 160*80, 170*160, 180*150, 180*90, 190*90, 200*200, 230*80, 240*240, 240*400, 250*250, 284*40, 300*100, 300*250, 300*50, 300*550, 300*600, 315*80, 320*48, 320*50, 336*280, 468*60, 500*200, 500*280, 500*50, 580*90, 610*100, 620*100, 640*100, 640*60, 640*90, 670*30, 728*90, 760*90, 950*90, 960*60, 960*90, 970*60, 970*90, 980*40, 980*90, 990*60,</div>
+                                                        </div>
+                                                        <div class="form-list-block-box">
+                                                            <div class="form-controller">有效素材格式：</div>
+                                                            <div class="form-tip-block">JPG,PNG,GIF,SWF,WMV,AVI,FLV,3GP</div>
+                                                        </div>
+                                                        <div class="form-list-block-box">
+                                                            <div class="form-controller">素材来源：</div>
+                                                            <div class="form-tip-block"><a href="javascript:void(0);" class="creative-source-switch-buts" data-is-checked="true" style="background:url(/resources/images/radio_checked_bg.png) no-repeat 0 10px;">上传素材</a><a href="javascript:void(0);" data-is-checked="false" class="creative-source-switch-buts">自定义地址</a></div>
+                                                        </div>
+                                                        <div class="add-creative-block" style="display:block;">
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">上传素材：</div>
+                                                                <div class="form-tip-block" style="width:750px;"><a href="javascript:void(0);" class="upload-creative-buts"><i class="fa fa-upload">上传</i></a></div>
+                                                            </div>
+                                                            <div class="creative-upload-show-box">
+                                                                <div class="creative-material-default-img-block">
+                                                                    <img class="img-thumbnail creative_material_default" id="creative_material_default" data-src="holder.js/310x260/text:未上传" alt="未上传" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMTAiIGhlaWdodD0iMjYwIj48cmVjdCB3aWR0aD0iMzEwIiBoZWlnaHQ9IjI2MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjE1NSIgeT0iMTMwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjE5cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+5pyq5LiK5LygPC90ZXh0Pjwvc3ZnPg==" style="width: 310px; height: 260px;margin:0 0 0 250px;z-index:0">
+                                                                </div>
+                                                                <div class="creative-material-default-img-link img-thumbnail-link">
+                                                                    http://baidu.com
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="add-creative-block">
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">素材地址：</div>
+                                                                <div class="form-input-block">
+                                                                    <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                                </div>
+                                                                <div class="form-tip-block">素材地址必填</div>
+                                                            </div>
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">素材尺寸：</div>
+                                                                <div class="form-input-block">
+                                                                    <div style="float:left;">
+                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">宽：</span><input type="" name="creative-width" value="" id="creative-width" placeholder="" style="width:120px;" />
+                                                                    </div>
+                                                                    <div style="float:left;margin:0 0 0 10px;">
+                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">高：</span><input type="" name="creative-height" value="" id="creative-height" placeholder="" style="width:120px;" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-tip-block">素材尺寸必填</div>
+                                                            </div>
+                                                            <div class="form-list-block-box">
+                                                                <div class="form-controller">素材格式：</div>
+                                                                <div class="form-input-block">
+                                                                    <select name="creative-type" id="creative-type">
+                                                                        <option value="jpg">JPG</option>
+                                                                        <option value="png">PNG</option>
+                                                                        <option value="gif">GIF</option>
+                                                                        <option value="swf">SWF</option>
+                                                                        <option value="wmv">WMV</option>
+                                                                        <option value="flv">FLV</option>
+                                                                        <option value="avi">AVI</option>
+                                                                        <option value="3gp">3GP</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-tip-block">第三方爆光连接必填</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <{else}>
                                                     <!--添加/编辑投放信息-->
@@ -198,6 +311,8 @@
                     <!-- contentpanel -->
                     <{include file="common/footerbar.html" }>
             </div>
+            <div id="zyipload-mske-layer"></div>
+            <div id="zyupload"></div>
             <!-- mainpanel -->
     </section>
     <script type="text/javascript" src="/resources/js/libarays/bootstrap.min.js"></script>
@@ -205,65 +320,72 @@
     <script type="text/javascript" src="/resources/js/libarays/toggles.min.js"></script>
     <script type="text/javascript" src="/resources/js/libarays/jquery.cookies.js"></script>
     <script type="text/javascript" src="/resources/js/libarays/custom.js"></script>
-    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
+    <{if $action eq 'strategy' and $step eq 2}>
+        <script type="text/javascript" src="/resources/js/labelMarket.js"></script>
+    <{elseif $action eq 'creative' and $step eq 3}>
+        <script type="text/javascript" src="/resources/js/libarays/zyupload/js/zyUpload.js"></script>
+        <script type="text/javascript" src="/resources/js/libarays/zyupload/zyFile.js"></script>
+    <{else}>
+        <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
+    <{/if}>
     <script>
     jQuery(document).ready(function() {
-
-        $('input').on('focus',function(){
-            $(this).css('border-color','#c1c1c1');
+        // new labelMarket($,local_tags).main();
+        $('input').on('focus', function() {
+            $(this).css('border-color', '#c1c1c1');
         });
 
-        $('select').on('focus',function(){
-            $(this).css('border-color','#c1c1c1');
+        $('select').on('focus', function() {
+            $(this).css('border-color', '#c1c1c1');
         });
 
-        var insl = laydate.render({
-            elem: '#hook-time-but',
-            range: '~',
-        });
+        // var insl = laydate.render({
+        //     elem: '#hook-time-but',
+        //     range: '~',
+        // });
 
         var data = {};
 
-        $('.submit-buts').on('click',function(){
-            switch(fn.toLowerCase()){
+        $('.submit-buts').on('click', function() {
+            switch (fn.toLowerCase()) {
                 case 'strategy':
-                break;
+                    break;
                 case 'creative':
-                break;
+                    break;
                 default:
-                    if($('#select-store-id').val() == ''){
-                        $('#select-store-id').css('border-color','#F00');
-                    }else{
+                    if ($('#select-store-id').val() == '') {
+                        $('#select-store-id').css('border-color', '#F00');
+                    } else {
                         data.shop_id = $('#select-store-id').val();
                     }
-                    if($('#plan-name').val() == ''){
-                        $('#plan-name').css('border-color','#F00');
-                    }else{
+                    if ($('#plan-name').val() == '') {
+                        $('#plan-name').css('border-color', '#F00');
+                    } else {
                         data.plan_name = $('#plan-name').val();
                     }
-                    if($('#budget-value').val() == ''){
+                    if ($('#budget-value').val() == '') {
                         data.budget = 0;
-                    }else{
+                    } else {
                         data.budget = $('#budget-value').val();
                     }
-                    if($('#device-type').val() == '-1'){
-                        $('#device-type').css('border-color','#F00');
-                    }else{
+                    if ($('#device-type').val() == '-1') {
+                        $('#device-type').css('border-color', '#F00');
+                    } else {
                         data.device = $('#device-type').val();
                     }
-                    if($('#hook-time-but').val() == ''){
-                        $('#hook-time-but').css('border-color','#F00');
-                    }else{
+                    if ($('#hook-time-but').val() == '') {
+                        $('#hook-time-but').css('border-color', '#F00');
+                    } else {
                         var timer = $('#hook-time-but').val().split(' ~ ');
                         data.startdate = timer[0];
                         data.enddate = timer[1];
                     }
-                    if($('#hook-time-but').val() == ''){
-                        $('#hook-time-but').css('border-color','#F00');
-                    }else{
-                        
+                    if ($('#hook-time-but').val() == '') {
+                        $('#hook-time-but').css('border-color', '#F00');
+                    } else {
+
                     }
-                break;
+                    break;
             }
             console.log(data);
             // post_data(url,data,function(res){
@@ -273,13 +395,67 @@
             // });
         });
 
-        function post_data(url,data,suc,err){
+        $('.creative-source-switch-buts').on('click',function(){
+            var index = $(this).index();
+            $('.creative-source-switch-buts').css('background','url(/resources/images/radio_bg.png) no-repeat 0 10px').attr('data-is-checked',false);
+            $(this).css('background','url(/resources/images/radio_checked_bg.png) no-repeat 0 10px').attr('data-is-checked',true);
+            $('.add-creative-block').css('display','none');
+            $('.add-creative-block').eq(index).css('display','block');
+        });
+
+        $('.upload-creative-buts').on('click',function(){
+            var W = $(window).width();
+            var H = $(window).height();
+            $('#zyipload-mske-layer').css('display','block');
+            $('#zyupload').css({'position':'fixed','left':(W-650)/2,'top':(H-400)/2,'z-index':99}).zyUpload({
+                width            :   "650px",                 // 宽度
+                height           :   "400px",                 // 宽度
+                itemWidth        :   "140px",                 // 文件项的宽度
+                itemHeight       :   "115px",                 // 文件项的高度
+                url              :   "/creativeMange/upload_files",              // 上传文件的路径
+                fileType         :   ["jpg","png","swf","flv",'avi','wmv','3gp'],// 上传文件的类型
+                fileSize         :   51200000,                // 上传文件的大小
+                multiple         :   false,                    // 是否可以多个文件上传
+                dragDrop         :   false,                    // 是否可以拖动上传文件
+                tailor           :   false,                    // 是否可以裁剪图片
+                del              :   false,                    // 是否可以删除文件
+                finishDel        :   false,                   // 是否在上传文件完成后删除预览
+                /* 外部获得的回调接口 */
+                onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+                    console.info("当前选择了以下文件：");
+                    console.info(selectFiles);
+                },
+                onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+                    console.info("当前删除了此文件：");
+                    console.info(file.name);
+                },
+                onSuccess: function(file, response){          // 文件上传成功的回调方法
+                    console.info("此文件上传成功：");
+                    console.info(file.name);
+                    console.info("此文件上传到服务器地址：");
+                    console.info(response);
+                    $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+                },
+                onFailure: function(file, response){          // 文件上传失败的回调方法
+                    console.info("此文件上传失败：");
+                    console.info(file.name);
+                },
+                onComplete: function(response){               // 上传完成的回调方法
+                    console.info("文件上传完成");
+                    console.info(response);
+                }
+            });
+        });
+
+        
+
+        function post_data(url, data, suc, err) {
             $.ajax({
-                url:url,
-                type:'POST',
-                data:data,
-                success:suc,
-                error:err
+                url: url,
+                type: 'POST',
+                data: data,
+                success: suc,
+                error: err
             });
         }
     });

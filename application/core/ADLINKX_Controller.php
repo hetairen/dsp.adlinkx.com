@@ -42,4 +42,22 @@ class ADLINKX_Controller extends CI_Controller {
 		}
 
 	}
+
+
+
+	public function output_json($fl = true, $msg = ''){
+		$result = array();
+		if($fl){
+			$result['code'] = 1;
+			$result['msg'] = 'success';
+			$result['data'] = $msg;
+		}else{
+			$result['code'] = 0;
+			$result['msg'] = 'error';
+			$result['data'] = $msg;
+		}
+		$this->output
+    		->set_content_type('application/json','utf-8')
+    		->set_output(json_encode($result));
+	}
 }

@@ -115,7 +115,7 @@ class User extends ADLINKX_Controller {
 		} else {
 			$data['phone'] = $phone;
 		}
-		$data['channel_id'] = 255;
+		$data['channel_id'] = 225;
 		$data['owner'] = '领效';
 		// var_dump($data);
 		$user_status = $this->user->add($data);
