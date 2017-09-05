@@ -24,13 +24,18 @@ class Launch_model extends ADLINKX_Model {
 
 	}
 
-	public function lists($where = array(), $num = 0, $offset = 20, $key = 'id', $stor = 'desc', $fields = '*'){
-		// $this->db->select();
-		// $this->db->from();
-		// $this->db->where();
-		// $this->db->order();
-		// $this->db->limit();
-		// $this->db->get();
+	public function lists($where = array(), $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*', &$count){
+		$count_sql = 'SELECT COUNT(*) AS `count` FROM `huihe_marketing_system`.`diy_plan` '. $this->build_where($where);
+		$sql = 'SELECT * FROM ``.`` '.$this->build_where($where);
+		// var_dump($count_sql);
+		$count = $this->db->query($count_sql)->result_array()[0]['count'];
+		$this->db->select($fields);
+		$this->db->from('diy_plan');
+		$this->db->where($where);
+		$this->db->limit($num, intval(($offset-1)*$num));
+		$this->db->order_by($key, $stor);
+		$query = $this->db->get();
+		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
 
 	public function update($data = array(), $where =array()){
@@ -39,5 +44,13 @@ class Launch_model extends ADLINKX_Model {
 
 	public function delete($where =array()){
 
+	}
+
+	public function build_where($where = array()){
+		$tmp = '';
+		foreach($where AS $k => $v){
+			$tmp .= '`' . $k . '`' . '=' . $v .' and ';
+		}
+		return 'where '. substr($tmp,0,intval(strlen($tmp)-5));
 	}
 }

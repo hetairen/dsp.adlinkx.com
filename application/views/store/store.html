@@ -39,6 +39,10 @@
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
+                                    <div class="table-header-bloxk-box">
+                                        <a class="select-all-buts"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                    </div>
                                     <table class="table table-striped" id="table2">
                                         <thead>
                                             <tr>
@@ -62,7 +66,7 @@
                                             <{foreach $store_lists item=store key=i}>
                                                 <tr>
                                                     <td colspan="" rowspan="" headers="">
-                                                        <{$i}>
+                                                        <a href="javascript:void(0);" class="select-buts"><i class="fa fa-square-o"></i>&nbsp;<{$i}></a>
                                                     </td>
                                                     <td colspan="" rowspan="" headers="">
                                                         <{$store.username}>
@@ -90,7 +94,7 @@
                                                     <td colspan="" rowspan="" headers="">
                                                         <{$store.update_time}>
                                                     </td>
-                                                    <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>">删除</a><a href="javascript:void(0);" class="edit-store" data-shop-id="<{$store.shop_id}>">编辑</a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" style="margin:0 0 0 10px;">分配配额</a></td>
+                                                    <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>" title="删除"><i class="fa fa-trash-o"></i></a><a href="javascript:void(0);" class="edit-store" data-shop-id="<{$store.shop_id}>" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" style="margin:0 0 0 10px;"  title="分配配额"><i class="fa fa-gg-circle"></i></a></td>
                                                 </tr>
                                                 <{/foreach}>
                                         </tbody>

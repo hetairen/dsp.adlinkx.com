@@ -232,7 +232,7 @@ input {
 .form-input-block input{width:100%;height:38px;line-height: 38px;border:1px solid #c1c1c1;border-radius:3px;padding:0 0 0 10px;}
 .select-time-buts{display:block;float:left;width:40px;height:40px;line-height:40px;text-align:center;border:1px solid #c1c1c1;border-right: none;border-radius:3px 0 0 3px;}
 #hook-time-but{display:block;float:left;width:480px;height:40px;border:1px solid #c1c1c1;border-left: none;border-radius:0 3px 3px 0;}
-.form-tip-block{float:left;width:370px;height:40px;line-height:40px;padding:0 0 0 10px;}
+.form-tip-block{float:left;width:370px;height:40px;line-height:40px;padding:0 0 0 10px;position:relative;}
 .buts-block-box{width:100%;height:40px;margin:100px 0 0 0;}
 .save-buts{display:block;float:right;width:auto;height:40px;line-height:40px;padding:0 20px;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:3px;margin:0 4px 0 0;}
 .save-buts:hover{background:#0081f4;border-color:#0053cd;color:#FFF;text-decoration: none;}
@@ -242,9 +242,27 @@ input {
 .callback-lists-buts:hover{background:#e6e6e6;color:#333;border-color:#a5a5a5;text-decoration: none;}
 .creative-source-switch-buts{display:block;float:left;width:140px;height:40px;line-height: 40px;padding:0 0 0 30px;background:url('/resources/images/radio_bg.png') no-repeat 0 10px;}
 .add-creative-block{width:100%;height:auto;display:none;}
-.upload-creative-buts{display:block;float:right;width:100px;height:40px;line-height:40px;background:#09c8ff;color:#FFF;border:1 solid #00b9ef;margin:0 120px 0 0;border-radius:3px;text-align:center;}
+.upload-creative-buts{display:block;float:right;width:100px;height:40px;line-height:40px;background:#09c8ff;color:#FFF;border:1 solid #00b9ef;border-radius:3px;text-align:center;position:absolute;left:600px;top:0;z-index:98;}
 .upload-creative-buts:hover{background:#00a7da;border-color:#008cb5;color:#FFF;}
 .creative-upload-show-box{width:100%;height:350px;border-bottom:1px solid #c1c1c1;}
 .creative-material-default-img-block{width:100%;height:300px;}
 .creative-material-default-img-link{width:100%;height:40px;line-height:40px;padding:0 0 0 120px;}
-#zyipload-mske-layer{display:none;width:100%;height:100%;background:#313131;position:fixed;left:0;top:0;opacity:.8;filter:alpha(opacity:80);z-index:98;}
+/*#upload-file-mske-layer{display:none;width:100%;height:100%;background:#313131;position:fixed;left:0;top:0;opacity:.8;filter:alpha(opacity:80);z-index:98;}*/
+#upload-file-but{display:block;width:100px;height:40px;z-index:99;position:absolute;left:600px;top:0;opacity:0;filter:alpha(opacity:0);}
+
+/**
+ * launch
+ */
+.launch-list-delete-but{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:2px;}
+.launch-list-edit-buts{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:2px;margin:0 0 0 8px;}
+.table-header-bloxk-box{width:100%;height:40px;background:#efefef;}
+.select-all-buts{display:inline-block;width:80px;height:40px;line-height:40px;color:#636e7b;padding:0 0 0 10px;}
+.delete-all-buts{display:inline-block;width:auto;height:40px;line-height:40px;color:#636e7b;margin-left:10px;padding:0 10px;}
+.start-buts{display:inline-block;width:auto;height:40px;line-height:40px;color:#636e7b;margin-left:10px;padding:0 10px;}
+.stop-buts{display:inline-block;width:auto;height:40px;line-height:40px;color:#636e7b;margin-left:20px;padding:0 10px;}
+.sreach-block-box{display:inline-block;float:right;width:300px;height:40px;}
+.sreach-block-box label{display:block;float:left;width:50px;height:30px;line-height:30px;margin:5px 0 0 0;}
+.sreach-block-box input{display:block;float:left;width:150;height:30px;line-height:28px;border:1px solid #c1c1c1;border-radius:2px 0 0 2px;margin:5px 0 0 0;padding:0 0 0 5px;border-right:none;}
+.sreach-block-box .launch-search-buts{display:block;float:left;width:60px;height:30px;line-height:30px;text-align:center;background:#0781ec;color:#fff;border:1px solid #0781ec;border-radius:0 2px 2px 0;margin:5px 0 0 0;}
+
+.select-buts{display:inline-block;width:auto;height:20px;line-height:20px;color:#636e7b;padding:0 0 0 10px;}

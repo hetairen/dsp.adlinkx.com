@@ -40,7 +40,7 @@ class Loger_model extends ADLINKX_Model {
 		// var_dump($this->db->last_query());
 		$query = $this->db->get();
 
-		return $query && $query->num_rows() ? $query->result_array() : array();
+		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
 
 	public function delete($where = array()) {

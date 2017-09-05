@@ -38,20 +38,50 @@
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
+                                    <div class="table-header-bloxk-box">
+                                        <a class="select-all-buts"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                        <a class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开户</a>
+                                        <a class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
+                                        <span class="sreach-block-box">
+                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=launch-search-keyword><a href="javascript:void(0);" class="launch-search-buts">确定</a>
+                                        </span>
+                                    </div>
                                     <table class="table table-striped" id="table2">
                                         <thead>
-                                            <tr>
-                                                <th>用户ID</th>
-                                                <th>记录</th>
-                                                <th>描述</th>
-                                                <th>IP</th>
-                                                <th>时间</th>
+                                            <tr>          
+                                                <th>序号</th>
+                                                <th>推广组</th>
+                                                <th>推广计划</th>
+                                                <th>状态</th>
+                                                <th>出价</th>
+                                                <th>展现量</th>
+                                                <th>点击数</th>
+                                                <th>点击率</th>
+                                                <th>点击单价</th>
+                                                <th>消耗</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <{foreach $result item=lists key=i}>
+                                                <tr>          
+                                                    <td><a href="javascript:void(0);" class="select-buts"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                    <td><a href="/creativeMange/lists/campaign/creative/<{$lists.unit_id}>/<{$lists.plan_id}>/<{$lists.shop_id}>"><{$lists.unit_name}></a></td>
+                                                    <td><{$lists.plan_name}></td>
+                                                    <td><{if $lists.status eq 1}>正在推广<{else}>停止推广<{/if}></td>
+                                                    <td><{$lists.price}></td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-unit-id="<$lists.unit_id>" class="launch-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2/<{$lists.unit_id}>/<{$lists.plan_id}>/<{$lists.shop_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                </tr>
+                                            <{/foreach}>
                                         </tbody>
                                     </table>
+                                    <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
                                 </div>
                             </div>
                         </div>
@@ -68,6 +98,43 @@
     <script src="/resources/js/libarays/custom.js"></script>
     <script>
     jQuery(document).ready(function() {
+        ADLINKX.pages({
+            id: 'pages-box',
+            first: {
+                text: '首页',
+                callback: null,
+                enable:true
+            },
+            last: {
+                text: '尾页',
+                callback: null,
+                enable:true
+            },
+            next: {
+                text: '下一页',
+                callback: null,
+                enable:true
+            },
+            previ: {
+                text: '上一页',
+                callback: null,
+                enable:true
+            },
+            search: {
+                text: '搜索',
+                callback: null,
+                enable:true
+            },
+            count: $('#pages-box').attr('data-count'),
+            current: $('#pages-box').attr('data-current'),
+            num:20,
+            color: '#0781ec',
+            is_ajax: true,
+            url:'/ajax_api/store/lists/0/0/',
+            callback:function(res){
+                console.log(res);
+            }
+        });
         $(document).on('click','.select-brands-but',function(e){
             e.stopPropagation();
             $('.brands-lists-block').css('display','block');

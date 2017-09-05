@@ -3,9 +3,9 @@
 
 <head>
     <{include file="common/header.html" }>
-    <{if $action eq 'creative' and $step eq 3}>
+    <!-- <{if $action eq 'creative' and $step eq 3}>
         <link rel="stylesheet" type="text/css" href="/resources/js/libarays/zyupload/css/zyUpload.css" />
-    <{/if}>
+    <{/if}> -->
         <script type="text/javascript">
             window.local_tags = null;
             <{if $action eq 'strategy' and $step eq 2}>
@@ -183,7 +183,7 @@
                                                         <div class="add-creative-block" style="display:block;">
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">上传素材：</div>
-                                                                <div class="form-tip-block" style="width:750px;"><a href="javascript:void(0);" class="upload-creative-buts"><i class="fa fa-upload">上传</i></a></div>
+                                                                <div class="form-tip-block" style="width:750px;"><a href="javascript:void(0);" class="upload-creative-buts"><i class="fa fa-upload">上传</i></a><input type="file" id="upload-file-but" name="files" /></div>
                                                             </div>
                                                             <div class="creative-upload-show-box">
                                                                 <div class="creative-material-default-img-block">
@@ -311,8 +311,8 @@
                     <!-- contentpanel -->
                     <{include file="common/footerbar.html" }>
             </div>
-            <div id="zyipload-mske-layer"></div>
-            <div id="zyupload"></div>
+            <!-- <div id="upload-file-mske-layer"></div>
+            <div id="upload-file-box"><input type="file" id="upliad-file-buts" name="upliad-file-buts" /></div> -->
             <!-- mainpanel -->
     </section>
     <script type="text/javascript" src="/resources/js/libarays/bootstrap.min.js"></script>
@@ -323,8 +323,9 @@
     <{if $action eq 'strategy' and $step eq 2}>
         <script type="text/javascript" src="/resources/js/labelMarket.js"></script>
     <{elseif $action eq 'creative' and $step eq 3}>
-        <script type="text/javascript" src="/resources/js/libarays/zyupload/js/zyUpload.js"></script>
-        <script type="text/javascript" src="/resources/js/libarays/zyupload/zyFile.js"></script>
+        <!-- <script type="text/javascript" src="/resources/js/libarays/zyupload/js/zyUpload.js"></script>
+        <script type="text/javascript" src="/resources/js/libarays/zyupload/zyFile.js"></script> -->
+        <script type="text/javascript" src="/resources/js/libarays/ajaxfileupload.js"></script>
     <{else}>
         <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
     <{/if}>
@@ -403,48 +404,31 @@
             $('.add-creative-block').eq(index).css('display','block');
         });
 
-        $('.upload-creative-buts').on('click',function(){
-            var W = $(window).width();
-            var H = $(window).height();
-            $('#zyipload-mske-layer').css('display','block');
-            $('#zyupload').css({'position':'fixed','left':(W-650)/2,'top':(H-400)/2,'z-index':99}).zyUpload({
-                width            :   "650px",                 // 宽度
-                height           :   "400px",                 // 宽度
-                itemWidth        :   "140px",                 // 文件项的宽度
-                itemHeight       :   "115px",                 // 文件项的高度
-                url              :   "/creativeMange/upload_files",              // 上传文件的路径
-                fileType         :   ["jpg","png","swf","flv",'avi','wmv','3gp'],// 上传文件的类型
-                fileSize         :   51200000,                // 上传文件的大小
-                multiple         :   false,                    // 是否可以多个文件上传
-                dragDrop         :   false,                    // 是否可以拖动上传文件
-                tailor           :   false,                    // 是否可以裁剪图片
-                del              :   false,                    // 是否可以删除文件
-                finishDel        :   false,                   // 是否在上传文件完成后删除预览
-                /* 外部获得的回调接口 */
-                onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
-                    console.info("当前选择了以下文件：");
-                    console.info(selectFiles);
-                },
-                onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
-                    console.info("当前删除了此文件：");
-                    console.info(file.name);
-                },
-                onSuccess: function(file, response){          // 文件上传成功的回调方法
-                    console.info("此文件上传成功：");
-                    console.info(file.name);
-                    console.info("此文件上传到服务器地址：");
-                    console.info(response);
-                    $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
-                },
-                onFailure: function(file, response){          // 文件上传失败的回调方法
-                    console.info("此文件上传失败：");
-                    console.info(file.name);
-                },
-                onComplete: function(response){               // 上传完成的回调方法
-                    console.info("文件上传完成");
-                    console.info(response);
-                }
-            });
+        $(document).on('change','#upload-file-but',function(){
+            // $(this).val($(this).val());
+            console.log($(this).val());
+            $.ajaxFileUpload({
+                type: "POST",  
+                url: "/creativeMange/upload_files",  
+                data:null,//要传到后台的参数，没有可以不写  
+                secureuri : false,//是否启用安全提交，默认为false  
+                fileElementId:'upload-file-but',//文件选择框的id属性  
+                dataType: 'json',//服务器返回的格式  
+                async : false,  
+                success: function(data){ 
+                    console.log(data);
+                    // if(data.result=='success'){  
+                    //     //coding  
+                    // }else{  
+                    //     //coding  
+                    // }  
+                },  
+                error: function (data, status, e){  
+                    console.log(data);
+                    console.log(status);
+                    console.log(e);
+                }  
+            });  
         });
 
         
