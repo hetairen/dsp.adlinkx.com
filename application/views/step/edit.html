@@ -584,13 +584,14 @@
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
                             ADLINKX.alert('保存成功',2,function(){
-                                window.location.href='/creativeMange/lists/campaign/strategy/2_1';
+                                window.location.href='/step/edit/campaign/strategy/2_1';
                             });
                         }else{
                             ADLINKX.alert('保存成功',2,function(){
                                 window.location.reload();
                             });
                         }
+
                     }else{
                         ADLINKX.alert('保存失败');
                     }
