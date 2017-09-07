@@ -174,4 +174,33 @@ class User extends ADLINKX_Controller {
 		$this->session->unset_userdata($sesion_items);
 		redirect('https://www.adlinkx.com/user/login', 'auto ', 301);
 	}
+
+
+	public function source_oa_to_sigma(){
+		$user_nick_oa = isset($_SESSION['user_nick_oa']) && !empty($_SESSION['user_nick_oa']) ? $_SESSION['user_nick_oa'] : (isset($_GET['user_nick']) && !empty($_GET['user_nick']) ? trim($_GET['user_nick']) : urldecode($this->uri->segment(3)));
+		$_SESSION['user_nick_oa'] = "";
+		$_SESSION['source_oa_flag'] = 2;
+		if ($user_nick_oa) {
+			$user_info = $this->user->get(array('username' => $user_nick_oa, 'channel_id' => 225));
+			if($user_info && !empty($user_info)){
+				$this->session->set_userdata('uid',$user_info['uid']);
+				$this->session->set_userdata('username',$user_info['username']);
+				$this->_redirect('http://dsp.adlinkx.com');
+			}else{
+				$this->_redirect('http://dsp.adlinkx.com/user/login');
+			}
+			
+			// $this->load->model('User_model');
+			// if (($user_info = $this->User_model->check_password($user_nick_oa, "koolma@#$")) !== FALSE) {
+			// 	$this->init_user_info($user_info);
+			// 	$source_oa_flag = $_SESSION['source_oa_flag'];
+			// 	//$source_oa_flag 为1跳转到付费页面 为2为项目主页
+			// 	if ($source_oa_flag == 1) {
+			// 		$this->_redirect("/user/recharge");
+			// 	} elseif ($source_oa_flag == 2) {
+			// 		$this->_redirect("/user/home");
+			// 	}
+			// }
+		}
+	}
 }

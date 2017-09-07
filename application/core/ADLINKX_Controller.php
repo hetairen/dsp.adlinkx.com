@@ -38,12 +38,14 @@ class ADLINKX_Controller extends CI_Controller {
 			$this->assign('model',$m);
 			$this->assign('action',$a);
 		} else {
-			redirect('http://dsp.adlinkx.com/user/login', 'auto ', 301);
+			$this->_redirect('http://dsp.adlinkx.com/user/login', 'auto ', 301);
 		}
 
 	}
 
-
+	public function _redirect($url,$method = 'auto', $code = 301){
+		redirect($url, $method, $code);
+	}
 
 	public function output_json($fl = true, $msg = ''){
 		$result = array();

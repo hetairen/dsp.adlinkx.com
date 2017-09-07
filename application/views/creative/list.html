@@ -22,7 +22,6 @@
                             <div class="select-brands-title">策略选择：</div>
                             <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$unit_lists[0].unit_id}>"><{$unit_lists[0].unit_name}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
                             <div class="brands-lists-block" style="display:none;">
-                                <div class="brands-lists" data-shop-id="">全部</div>
                                 <{foreach $unit_lists item=unit key=i}>
                                     <div class="brands-lists" data-shop-id="<{$unit.unit_id}>"><{$unit.unit_name}></div>
                                 <{/foreach}>
@@ -33,7 +32,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">创意管理</div>
-                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/creative/3/<{$unit_lists[0].unit_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增创意</a></div>
+                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/creative/3_1/<{$unit_lists[0].unit_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增创意</a></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
@@ -44,7 +43,7 @@
                                         <a class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
                                         <a class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
                                         <span class="sreach-block-box">
-                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=launch-search-keyword><a href="javascript:void(0);" class="launch-search-buts">确定</a>
+                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=creative-search-keyword><a href="javascript:void(0);" class="creative-search-buts">确定</a>
                                         </span>
                                     </div>
                                     <table class="table table-striped" id="table2">
@@ -67,7 +66,7 @@
                                         <tbody>
                                             <{foreach $creatives item=lists key=i}>
                                                 <tr>                 
-                                                <td><a class="select-buts" data-is-checked="false"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                <td><a class="select-buts" data-is-checked="false" data-id="<{$lists.id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
                                                 <td><{$lists.borad_name}></td>
                                                 <td><{$lists.unit_name}></td>
                                                 <td><{$lists.plan_name}></td>
@@ -78,7 +77,7 @@
                                                 <td>0</td>
                                                 <td>0</td>
                                                 <td>0</td>
-                                                <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="launch-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3/<{$lists.borad_id}>/<{$lists.shop_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.borad_id}>/<{$lists.shop_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
                                             </tr>
                                             <{/foreach}>
                                         </tbody>
@@ -101,43 +100,7 @@
     <script src="/resources/js/libarays/custom.js"></script>
     <script>
     jQuery(document).ready(function() {
-        ADLINKX.pages({
-            id: 'pages-box',
-            first: {
-                text: '首页',
-                callback: null,
-                enable:true
-            },
-            last: {
-                text: '尾页',
-                callback: null,
-                enable:true
-            },
-            next: {
-                text: '下一页',
-                callback: null,
-                enable:true
-            },
-            previ: {
-                text: '上一页',
-                callback: null,
-                enable:true
-            },
-            search: {
-                text: '搜索',
-                callback: null,
-                enable:true
-            },
-            count: $('#pages-box').attr('data-count'),
-            current: $('#pages-box').attr('data-current'),
-            num:20,
-            color: '#0781ec',
-            is_ajax: true,
-            url:'/ajax_api/store/lists/0/0/',
-            callback:function(res){
-                console.log(res);
-            }
-        });
+        get_pages('pages-box','/creativeMange/lists/campaign/creative/0');
 
         $(document).on('click','.select-all-buts',function(){
             if($(this).attr('data-is-checked') == 'false'){
@@ -150,6 +113,16 @@
                 $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
                 $('.select-buts').attr('data-is-checked',false);
                 $('.select-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.select-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
             }
         });
 
@@ -173,11 +146,196 @@
             $('.brands-lists-block').css('display','none');
             $('.add-buts').attr('href','/step/edit/campaign/launch/1/'+$(this).attr('data-shop-id'));
         });
+
+        $(document).on('click','.delete-all-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-id'));
+                }
+            });
+            if(ids.length > 0){
+                delete_creative(ids.toString());
+            }else{
+                ADLINKX.alert('请选择要删除的创意');
+            }
+        });
+
+        $(document).on('click','.creative-list-delete-but',function(){
+            var ids = $(this).attr('data-id');
+            delete_creative(ids);
+        });
+
+        $(document).on('click','.start-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-id'));
+                }
+            });
+            if(ids.length > 0){
+                update_creative(ids.toString(),'start');
+            }else{
+                ADLINKX.alert('请选择要开启的创意');
+            }
+        });
+
+        $(document).on('click','.stop-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-id'));
+                }
+            });
+            if(ids.length > 0){
+                update_creative(ids.toString(),'stop');
+            }else{
+                ADLINKX.alert('请选择要停止的创意');
+            }
+        });
+
+        $(document).on('click','.creative-search-buts',function(){
+            var key_words = $('#creative-search-keyword').val();
+            get_creative_list(key_words);
+        });
+
         $(document).on('click',function(){
             $('.select-brands-but').attr('data-is-click',false);
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
         });
+
+        function delete_creative(ids){
+            $.ajax({
+                url:'/creativeMange/delete',
+                type:'POST',
+                data:{'ids':ids},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                    console.error(err);
+                }
+            });
+        }
+
+
+        function update_creative(ids,action){
+            $.ajax({
+                url:'/creativeMange/status',
+                type:'POST',
+                data:{'ids':ids,'action':action},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('操作成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('操作失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                     console.error(err);
+                },
+            });
+        }
+
+
+        function get_creative_list(key_words){
+            $.ajax({
+                url:'/creativeMange/lists/campaign/creative/1/0/0/0/'+key_words,
+                type:'GET',
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        var html = '';
+                        var list = res.data.list;
+                        var count = res.data.count;
+                        var current = res.data.current;
+                        if(list.length > 0){
+                            for(var i=0;i<list.length;i++){
+                                html += '<tr>'+
+                                    '<td><a class="select-buts" data-is-checked="false" data-id="'+list[i].id+'"><i class="fa fa-square-o"></i>&nbsp;'+(i+1)+'</a></td>'+
+                                    '<td>'+list[i].borad_name+'</td>'+
+                                    '<td>'+list[i].unit_name+'</td>'+
+                                    '<td>'+list[i].plan_name+'</td>'+
+                                    '<td>'+(list[i].status ==1 ? '开启': '已暂停')+'</td>'+
+                                    '<td>'+list[i].ext+'</td>'+
+                                    '<td>'+list[i].pic_size+'</td>'+
+                                    '<td>0</td>'+
+                                    '<td>0</td>'+
+                                    '<td>0</td>'+
+                                    '<td>0</td>'+
+                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" data-shop-id="'+list[i].shop_id+'" data-plan-id="'+list[i].plan_id+'" data-plan-id="'+list[i].unit_id+'" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].borad_id+'/'+list[i].shop_id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                '</tr>';
+                            }
+                        }else{
+                            html = '<tr><td colspan="12">暂无数据</td></tr>';
+                        }
+                        $('#table2').find('tbody').html(html);
+                        $('#pages-box').attr('data-count',count);
+                        $('#pages-box').attr('data-current',current);
+                        $('.select-all-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                        get_pages('pages-box','/creativeMange/lists/campaign/creative/1/');
+                    }else{
+
+                    }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        }
+
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: el,
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable:true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable:true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable:true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable:true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable:true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num:20,
+                color: '#0781ec',
+                is_ajax: true,
+                url:url,
+                callback:function(res){
+                    console.log(res);
+                }
+            });
+        }
     });
     </script>
 </body>

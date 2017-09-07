@@ -64,13 +64,14 @@ class StrategyMange extends ADLINKX_Controller {
 	}
 
 	public function lists() {
-		$is_ajax = $this->uri->segment(5);
-		$plan_id = $this->uri->segment(6);
-		$shop_id = $this->uri->segment(7);
+		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
+		$plan_id = $this->uri->segment(6) ? $this->uri->segment(6) : '';
+		$shop_id = $this->uri->segment(7) ? $this->uri->segment(7) :'';
 		$key_words = $this->uri->segment(8) ? $this->uri->segment(8) : '';
-		$this->get_plan_lists($plan_id,$shop_id);
+		$uid = $this->session->userdata('uid');
+		$this->get_plan_lists($uid,$plan_id,$shop_id);
 		$count = 0;
-		$where = $plan_id && $shop_id && $key_words ? array('plan_id' => $plan_id, 'shop_id' => $shop_id, 'unit_name' => $key_words) : ($plan_id && $shop_id ? array('plan_id' => $plan_id,'shop_id' => $shop_id, 'is_del' => 0) : array());
+		$where = $plan_id && $shop_id && $key_words ? array('uid' => $uid, 'plan_id' => $plan_id, 'shop_id' => $shop_id, 'unit_name' => $key_words) : ($plan_id && $shop_id ? array('uid' => $uid, 'plan_id' => $plan_id,'shop_id' => $shop_id, 'is_del' => 0) : array('uid' => $uid, 'is_del' => 0));
 		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
 		$num = $this->uri->segment(10) ? $this->uri->segment(10) : 20;
 		$key = $this->uri->segment(11) ? $this->uri->segment(11) : 'unit_id';
@@ -89,9 +90,9 @@ class StrategyMange extends ADLINKX_Controller {
 		}
 	}
 
-	public function get_plan_lists($plan_id,$shop_id){
+	public function get_plan_lists($uid, $plan_id, $shop_id){
 		$count = 0;
-		$plan_lists = $this->launch->lists(array('plan_id' =>$plan_id, 'shop_id' => $shop_id),20,1,'shop_id','desc','*',$count);
+		$plan_lists = $this->launch->lists(array('uid' => $uid, 'plan_id' =>$plan_id, 'shop_id' => $shop_id),20,1,'shop_id','desc','*',$count);
 		$this->assign('plan_list',$plan_lists);
 		
 	}

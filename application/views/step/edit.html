@@ -143,31 +143,31 @@
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">创意名称：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="<{$creative.borad_name}>" id="plan-name" placeholder="创意名称" />
+                                                                <input type="" name="board-name" value="<{$creative.borad_name}>" id="board-name" placeholder="创意名称" />
                                                             </div>
                                                             <div class="form-tip-block">创意名称必填</div>
                                                         </div>
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">创意连接：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="<{$creative.borad_url}>" id="plan-name" placeholder="https://" />
+                                                                <input type="" name="url" value="<{$creative.borad_url}>" id="url" placeholder="https://" />
                                                             </div>
                                                             <div class="form-tip-block">创意连接必填</div>
                                                         </div>
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">第三方监测连接：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="<{$creative.gxb_monitor_url}>" id="plan-name" placeholder="https://" />
+                                                                <input type="" name="monitor-url" value="<{$creative.gxb_monitor_url}>" id="monitor-url" placeholder="https://" />
                                                             </div>
                                                             <div class="form-tip-block">第三方监测连接必填</div>
                                                         </div>
-                                                        <div class="form-list-block-box">
+                                                        <!-- <div class="form-list-block-box">
                                                             <div class="form-controller">第三方爆光连接：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="<{$creative.gxb_monitor_url}>" id="plan-name" placeholder="https://" />
+                                                                <input type="" name="exposure_url" value="<{$creative.gxb_monitor_url}>" id="exposure_url" placeholder="https://" />
                                                             </div>
                                                             <div class="form-tip-block">第三方爆光连接必填</div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="form-list-block-box" style="height:120px;">
                                                             <div class="form-controller" style="height:120px;">有效素材尺寸：</div>
                                                             <div class="form-tip-block" style="width:400px;height:120px;font-size:14px;line-height: 16px;">100*260, 100*300, 1000*90, 1190*90, 120*240, 120*600, 130*370, 160*600, 160*80, 170*160, 180*150, 180*90, 190*90, 200*200, 230*80, 240*240, 240*400, 250*250, 284*40, 300*100, 300*250, 300*50, 300*550, 300*600, 315*80, 320*48, 320*50, 336*280, 468*60, 500*200, 500*280, 500*50, 580*90, 610*100, 620*100, 640*100, 640*60, 640*90, 670*30, 728*90, 760*90, 950*90, 960*60, 960*90, 970*60, 970*90, 980*40, 980*90, 990*60,</div>
@@ -176,10 +176,10 @@
                                                             <div class="form-controller">有效素材格式：</div>
                                                             <div class="form-tip-block">JPG,PNG,GIF,SWF,WMV,AVI,FLV,3GP</div>
                                                         </div>
-                                                        <div class="form-list-block-box">
+                                                        <!-- <div class="form-list-block-box">
                                                             <div class="form-controller">素材来源：</div>
-                                                            <div class="form-tip-block"><a href="javascript:void(0);" class="creative-source-switch-buts" data-is-checked="true" style="background:url(/resources/images/radio_checked_bg.png) no-repeat 0 10px;">上传素材</a><a href="javascript:void(0);" data-is-checked="false" class="creative-source-switch-buts">自定义地址</a></div>
-                                                        </div>
+                                                            <div class="form-tip-block"><a href="javascript:void(0);" class="creative-source-switch-buts" data-is-checked="true" style="background:url(/resources/images/radio_checked_bg.png) no-repeat 0 10px;" data-type="upload">上传素材</a><a href="javascript:void(0);" data-is-checked="false" class="creative-source-switch-buts" data-type="self">自定义地址</a></div>
+                                                        </div> -->
                                                         <div class="add-creative-block" style="display:block;">
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">上传素材：</div>
@@ -195,15 +195,26 @@
                                                                 <{/if}>
                                                                 </div>
                                                                 <div class="creative-material-default-img-link img-thumbnail-link">
-                                                                    <a href="https://images.ztcadx.com/img/board/<{$creative.pic_path}>" target="_blank">https://images.ztcadx.com/img/board/<{$creative.pic_path}></a>
+                                                                    <{if $creative.pic_path neq ''}>
+                                                                        <a href="https://images.ztcadx.com/img/board/<{$creative.pic_path}>" class="show-creative-link" target="_blank">https://images.ztcadx.com/img/board/<{$creative.pic_path}></a>
+                                                                    <{else}>
+                                                                        <a href="" class="show-creative-link" target="_blank"></a>
+                                                                    <{/if}>
+                                                                    
                                                                 </div>
+                                                                <input type="hidden" name="unit-id" value="<{$unit_id}>" id="unit-id">
+                                                                <input type="hidden" name="upload-pic-path" value="" id="upload-pic-path" />
+                                                                <input type="hidden" name="upload-pic-width" value="" id="upload-pic-width" />
+                                                                <input type="hidden" name="upload-pic-height" value="" id="upload-pic-height" />
+                                                                <input type="hidden" name="upload-pic-ext" value="" id="upload-pic-ext" />
+                                                                <input type="hidden" name="board-id" value="" id="board-id" />
                                                             </div>
                                                         </div>
                                                         <div class="add-creative-block">
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">素材地址：</div>
                                                                 <div class="form-input-block">
-                                                                    <input type="" name="plan-name" value="https://images.ztcadx.com/img/board/<{$creative.pic_path}>" id="plan-name" placeholder="https://" />
+                                                                    <input type="" name="pic-path" value="https://images.ztcadx.com/img/board/<{$creative.pic_path}>" id="pic-path" placeholder="https://" />
                                                                 </div>
                                                                 <div class="form-tip-block">素材地址必填</div>
                                                             </div>
@@ -211,10 +222,10 @@
                                                                 <div class="form-controller">素材尺寸：</div>
                                                                 <div class="form-input-block">
                                                                     <div style="float:left;">
-                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">宽：</span><input type="" name="creative-width" value="<{$creative.pic_width}>" id="creative-width" placeholder="" style="width:120px;" />
+                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">宽：</span><input type="" name="pic-width" value="<{$creative.pic_width}>" id="pic-width" placeholder="" style="width:120px;" />
                                                                     </div>
                                                                     <div style="float:left;margin:0 0 0 10px;">
-                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">高：</span><input type="" name="creative-height" value="<{$creative.pic_height}>" id="creative-height" placeholder="" style="width:120px;" />
+                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">高：</span><input type="" name="pic-height" value="<{$creative.pic_height}>" id="pic-height" placeholder="" style="width:120px;" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-tip-block">素材尺寸必填</div>
@@ -328,8 +339,8 @@
                                             <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建创意&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                             <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存</a>
                                             <{elseif $action eq 'creative' and $step eq 3}>
-                                                <a href="/launchMange/lists/campaign/launch" class="submit-buts callback-lists-buts">返回列表</a>
-                                                <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                                <a href="/creativeMange/lists/campaign/creative/0/<{$unit_id}>" class="callback-lists-buts">返回列表</a>
+                                                <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>" data-unit-id="<{$unit_id}>">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                                 <{else}>
                                                     <a href="/launchMange/lists/campaign/launch" class="callback-lists-buts">返回列表</a>
                                                     <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建策略&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
@@ -428,7 +439,13 @@
                 });
             });
         <{elseif $action eq 'creative' and $step eq 3}>
+            var creative_type = '1';
             $('.creative-source-switch-buts').on('click',function(){
+                if($(this).attr('data-type') == 'upload'){
+                    creative_type = 1;
+                }else{
+                    creative_type = 2;
+                }
                 var index = $(this).index();
                 $('.creative-source-switch-buts').css('background','url(/resources/images/radio_bg.png) no-repeat 0 10px').attr('data-is-checked',false);
                 $(this).css('background','url(/resources/images/radio_checked_bg.png) no-repeat 0 10px').attr('data-is-checked',true);
@@ -447,13 +464,14 @@
                     fileElementId:'upload-file-but',//文件选择框的id属性  
                     dataType: 'json',//服务器返回的格式  
                     async : false,  
-                    success: function(data){ 
-                        console.log(data);
-                        // if(data.result=='success'){  
-                        //     //coding  
-                        // }else{  
-                        //     //coding  
-                        // }  
+                    success: function (data, status){
+                        $('.show-creative-link').attr('href','http://dsp.adlinkx.com/resources/images/board/'+data.upload_file_name).html('http://dsp.adlinkx.com/resources/images/board/'+data.upload_file_name);
+                        $('.creative-material-default-img-block').html('<a href="http://dsp.adlinkx.com/resources/images/board/'+data.upload_file_name+'" target="_blank" style="display:block;width:400px;height:450px;margin:0 auto;"><img src="http://dsp.adlinkx.com/resources/images/board/'+data.upload_file_name+'" style="display:block;width:300px;margin:50px;" title="点击查看素材图片"></a>');
+                        $('#upload-pic-path').val(data.upload_file_name);
+                        $('#upload-pic-ext').val(data.ext);
+                        $('#upload-pic-width').val(data.width);
+                        $('#upload-pic-height').val(data.height);
+                        $('#board-id').val(data.board_id);
                     },  
                     error: function (data, status, e){  
                         console.log(data);
@@ -461,6 +479,63 @@
                         console.log(e);
                     }  
                 });  
+            });
+
+
+            $(document).on('click','.submit-buts',function(){
+                if($('#board-name').val() == ''){
+                    $('#board-name').css('border-color', '#F00');
+                }else{
+                    data.board_name = $('#board-name').val();
+                }
+                if($('#url').val() == ''){
+                    $('#url').css('border-color', '#F00');
+                }else{
+                    data.url = $('#url').val();
+                }
+                if($('#monitor-url').val() == ''){
+                    $('#monitor-url').css('border-color', '#F00');
+                }else{
+                    data.monitor_url = $('#monitor-url').val();
+                }
+                if(creative_type == 1){
+                    data.pic_path = $('#upload-pic-path').val();
+                    data.pic_width = $('#upload-pic-width').val();
+                    data.pic_height = $('#upload-pic-height').val();
+                    data.pic_extension = $('#upload-pic-ext').val();
+                }else{
+                    if($('#pic-path').val() == ''){
+                        $('#pic-path').css('border-color', '#F00');
+                    }else{
+                        data.pic_path = $('#url').val();
+                    }
+                    if($('#pic-width').val() == ''){
+                        $('#pic-width').css('border-color', '#F00');
+                    }else{
+                        data.pic_width = $('#pic-width').val();
+                    }
+                    if($('#pic-height').val() == ''){
+                        $('#pic-height').css('border-color', '#F00');
+                    }else{
+                        data.pic_height = $('#pic-height').val();
+                    }
+                    data.pic_extension = $('#creative-type').val();
+                }
+                data.unit_id = $('#unit-id').val();
+                data.board_id = $('#board-id').val();
+                console.log(data);
+                 post_data(url,data,function(res){
+                    console.log(res);
+                    if(res.code == 1 && res.msg == 'success'){
+                        ADLINKX.alert('保存成功',2,function(){
+                            window.location.href = '/creativeMange/lists/campaign/creative/0/<{$unit_id}>';
+                        });
+                    }else{
+                        ADLINKX.alert('保存失败');
+                    }
+                 },function(err){
+                    console.error(err);
+                 });
             });
         <{else}>
             var insl = laydate.render({
@@ -470,7 +545,7 @@
             $(document).on('click', '.submit-buts', function() {
                 var type = $(this).attr('data-type');
                 if ($('#select-store-id').val() == '') {
-                            $('#select-store-id').css('border-color', '#F00');
+                        $('#select-store-id').css('border-color', '#F00');
                 } else {
                     data.shop_id = $('#select-store-id').val();
                 }
@@ -509,7 +584,7 @@
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
                             ADLINKX.alert('保存成功',2,function(){
-                                window.location.href='/step/edit/campaign/strategy/2_1/'+res.data.plan_id+'/'+data.shop_id;
+                                window.location.href='/creativeMange/lists/campaign/strategy/2_1';
                             });
                         }else{
                             ADLINKX.alert('保存成功',2,function(){

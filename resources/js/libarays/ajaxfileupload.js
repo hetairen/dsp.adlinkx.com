@@ -1,5 +1,17 @@
 
 jQuery.extend({
+    
+    handleError: function( s, xhr, status, e )      {  
+            // If a local callback was specified, fire it  
+            if ( s.error ) {  
+                s.error.call( s.context || s, xhr, status, e );  
+            }  
+  
+            // Fire the global callback  
+            if ( s.global ) {  
+                (s.context ? jQuery(s.context) : jQuery.event).trigger( "ajaxError", [xhr, s, e] );  
+            } 
+    },
 
     createUploadIframe: function(id, uri)
 	{
@@ -95,7 +107,7 @@ jQuery.extend({
                     if ( status != "error" )
 					{
                         // process the data (runs the xml through httpData regardless of callback)
-                        var data = jQuery.uploadHttpData( xml, s.dataType );    
+                        var data = jQuery.uploadHttpData( xml, s.dataType );
                         // If a local callback was specified, fire it and pass it the data
                         if ( s.success )
                             s.success( data, status );

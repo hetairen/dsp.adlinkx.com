@@ -87,12 +87,15 @@ class Strategy_model extends ADLINKX_Model {
 	public function build_where($where = array()){
 		$tmp = '';
 		foreach($where AS $k => $v){
-			if($k == 'unit_name'){
-				$tmp .= '`' . $k . '`' . ' like "%' . $v .'%" and ';
-			}else{
-				$tmp .= '`' . $k . '`' . '=' . $v .' and ';
+			if(!empty($v)){
+				if($k == 'unit_name'){
+					$tmp .= '`' . $k . '`' . ' like "%' . $v .'%" and ';
+				}else{
+					$tmp .= '`' . $k . '`' . '=' . $v .' and ';
+				}
 			}
+			
 		}
-		return 'WHERE '. substr($tmp,0,intval(strlen($tmp)-5));
+		return !empty($tmp) ? 'WHERE '. substr($tmp,0,intval(strlen($tmp)-5)) : '';
 	}
 }

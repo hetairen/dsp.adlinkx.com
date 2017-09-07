@@ -22,7 +22,6 @@
                             <div class="select-brands-title">投放选择：</div>
                             <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-plan-id="<{$plan_list[0].plan_id}>"><{$plan_list[0].plan_name}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
                             <div class="brands-lists-block" style="display:none;">
-                                <div class="brands-lists" data-shop-id="">全部</div>
                                 <{foreach $plan_list item=store key=i}>
                                     <div class="brands-lists" data-plan-id="<{$store.plan_id}>"><{$store.plan_name}></div>
                                 <{/foreach}>

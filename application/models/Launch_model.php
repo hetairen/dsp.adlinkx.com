@@ -79,13 +79,14 @@ class Launch_model extends ADLINKX_Model {
 	public function build_where($where = array()){
 		$tmp = '';
 		foreach($where AS $k => $v){
-			if($k == 'plan_name'){
-				$tmp .= '`' . $k . '`' . ' like "%' . $v .'%" and ';
-			}else{
-				$tmp .= '`' . $k . '`' . '=' . $v .' and ';
+			if(!empty($v)){
+				if($k == 'plan_name'){
+					$tmp .= '`' . $k . '`' . ' like "%' . $v .'%" and ';
+				}else{
+					$tmp .= '`' . $k . '`' . '=' . $v .' and ';
+				}
 			}
-			
 		}
-		return 'where '. substr($tmp,0,intval(strlen($tmp)-5));
+		return !empty($tmp) ? 'where '. substr($tmp,0,intval(strlen($tmp)-5)) : '';
 	}
 }
