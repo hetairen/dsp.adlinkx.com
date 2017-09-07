@@ -54,7 +54,7 @@ class User extends ADLINKX_Controller {
 //记住密码
 				foreach ($check_status AS $key => $value) {
 					//设置一周有效，域名www.adease.com，采用https加密传输cookie，共享javascript的cookie
-					set_cookie($key, $value, (time() + 3600 * 24 * 7), 'www.adease.com', '/', true, false);
+					set_cookie($key, $value, (time() + 3600 * 24 * 7), 'dsp.adease.com', '/', true, false);
 				}
 			}
 			$result['code'] = 0;

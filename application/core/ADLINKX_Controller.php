@@ -38,7 +38,7 @@ class ADLINKX_Controller extends CI_Controller {
 			$this->assign('model',$m);
 			$this->assign('action',$a);
 		} else {
-			redirect('https://www.adlinkx.com/user/login', 'auto ', 301);
+			redirect('http://dsp.adlinkx.com/user/login', 'auto ', 301);
 		}
 
 	}
