@@ -401,7 +401,7 @@ Adlinkx.prototype.pages = function(json){
             tmp += '<a href="'+(json.is_ajax ? href:(href+i))+'" class="pages-buts" data-but-fn="pages-but" data-num="'+(i+1)+'">'+(i+1)+'</a>';
         }
     }
-    pages_html += (json.count == 1 ? (tmp+'<div class="pages-show-text">共<span style="margin:0 4px;">'+json.count+'</span>页，当前第<span style="margin:0 4px;">'+json.current+'</span>页</div>'):((json.first.enable ? first_html : '')+(json.previ.enable? previ_but_html : '')+tmp+(json.next.enable ? next_but_html: '')+(json.last.enable ? last_html: '')+'<div class="pages-show-text">共<span style="margin:0 4px;">'+json.count+'</span>页，当前第<span style="margin:0 4px;">'+json.current+'</span>页</div>'+(json.search.enable ? search_html :'')))+
+    pages_html += (json.count == 0 ? tmp :(json.count == 1 ? (tmp+'<div class="pages-show-text">共<span style="margin:0 4px;">'+json.count+'</span>页，当前第<span style="margin:0 4px;">'+json.current+'</span>页</div>'):((json.first.enable ? first_html : '')+(json.previ.enable? previ_but_html : '')+tmp+(json.next.enable ? next_but_html: '')+(json.last.enable ? last_html: '')+'<div class="pages-show-text">共<span style="margin:0 4px;">'+json.count+'</span>页，当前第<span style="margin:0 4px;">'+json.current+'</span>页</div>'+(json.search.enable ? search_html :''))))+
     '<style>'+
         '.pages-buts{display:block;float:left;width:auto;padding:0 10px;height:30px;line-height:30px;text-align:center;background:#FFF;border:1px solid '+json.color+';border-radius:2px;color:'+json.color+';text-decoration:none;margin:0 0 0 4px;}'+
         '.native,.pages-buts:hover,.pages-search-but:hover{background:'+json.color+';color:#FFF;}'+

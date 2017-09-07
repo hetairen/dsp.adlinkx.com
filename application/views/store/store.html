@@ -40,8 +40,8 @@
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <div class="table-header-bloxk-box">
-                                        <a class="select-all-buts"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;全选</a>
-                                        <a class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                        <a href="javascript:void(0);" class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a href="javascript:void(0);" class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
                                     </div>
                                     <table class="table table-striped" id="table2">
                                         <thead>
@@ -58,6 +58,9 @@
                                                 <th>今日消耗</th>
                                                 <th>总消耗帐金额</th>
                                                 <th>总消耗点击</th>
+                                                <!-- <th>tanx行业类目</th>
+                                                <th>bes行业类目</th>
+                                                <th>vm行业类目</th> -->
                                                 <th>添加时间</th>
                                                 <th>操作</th>
                                             </tr>
@@ -66,7 +69,7 @@
                                             <{foreach $store_lists item=store key=i}>
                                                 <tr>
                                                     <td colspan="" rowspan="" headers="">
-                                                        <a href="javascript:void(0);" class="select-buts"><i class="fa fa-square-o"></i>&nbsp;<{$i}></a>
+                                                        <a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-shop-id="<{$store.shop_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i}></a>
                                                     </td>
                                                     <td colspan="" rowspan="" headers="">
                                                         <{$store.username}>
@@ -91,10 +94,13 @@
                                                     <td colspan="" rowspan="" headers="">0.0</td>
                                                     <td colspan="" rowspan="" headers="">0.0</td>
                                                     <td colspan="" rowspan="" headers="">0</td>
+                                                    <!-- <td colspan="" rowspan="" headers=""><{$store.tanx_category}></td>
+                                                    <td colspan="" rowspan="" headers=""><{$store.bes_industry_code}></td>
+                                                    <td colspan="" rowspan="" headers=""><{$store.vm_category}></td> -->
                                                     <td colspan="" rowspan="" headers="">
                                                         <{$store.update_time}>
                                                     </td>
-                                                    <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>" title="删除"><i class="fa fa-trash-o"></i></a><a href="javascript:void(0);" class="edit-store" data-shop-id="<{$store.shop_id}>" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" style="margin:0 0 0 10px;"  title="分配配额"><i class="fa fa-gg-circle"></i></a></td>
+                                                    <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>" title="删除"><i class="fa fa-trash-o"></i></a><a href="/store/edit/store/lists/<{$store.shop_id}>" class="edit-store" data-shop-id="<{$store.shop_id}>" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" style="margin:0 0 0 10px;"  title="分配配额"><i class="fa fa-gg-circle"></i></a></td>
                                                 </tr>
                                                 <{/foreach}>
                                         </tbody>
@@ -211,6 +217,60 @@
                 },
                 error: function(err) {
                     console.log(err);
+                }
+            });
+        });
+
+        $(document).on('click','.select-all-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+                $('.select-buts').attr('data-is-checked',true);
+                $('.select-buts').find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                $('.select-buts').attr('data-is-checked',false);
+                $('.select-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.select-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
+        $(document).on('click','.delete-all-buts',function(){
+            var shop_ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    shop_ids.push($(this).attr('data-shop-id'));
+                }
+            });
+            $.ajax({
+                url:'/store/delete/',
+                type:'POST',
+                data:{'shop_ids':shop_ids.toString()},
+                success:function(res){
+                    console.log(res);
+                    if(res.code == 1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功', 2, function() {
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败', 2, function() {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                    console.error(err);
                 }
             });
         });

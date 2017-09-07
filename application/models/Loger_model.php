@@ -56,4 +56,9 @@ class Loger_model extends ADLINKX_Model {
 		}
 		return 'where '. substr($tmp,0,intval(strlen($tmp)-5));
 	}
+
+	public function add_operation_log($data){
+		$query = $this->db->insert('dsp_user_operation_record',$data);
+		return $query && $this->db->affected_rows() > 0 ? true : false;
+	}
 }

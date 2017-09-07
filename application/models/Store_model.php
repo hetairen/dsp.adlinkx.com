@@ -36,13 +36,17 @@ class Store_model extends ADLINKX_Model{
 	}
 
 	public function get($where = array()){
-
+		$this->db->select('*');
+		$this->db->from('store');
+		$this->db->where($where);
+		$query = $this->db->get();
+		return $query && $query->num_rows() > 0 ? $query->row_array() : array() ;
 	}
 
 	public function lists($where, $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*',&$count){
 		unset($where['start_date']);
 		unset($where['end_date']);
-		$sql = 'select * from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id`';
+		$sql = 'select * from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` order by '. $key .' '.$stor . ' limit ' . intval(($offset-1)/$num) . ',' .$num;
 		$count_sql = 'select count(*) as count from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id`';
 		// $date_start = $where['start_date'];
 		// $date_end = $where['end_date'];
@@ -61,9 +65,13 @@ class Store_model extends ADLINKX_Model{
 		return $query && $this->db->affected_rows() > 0 ? true: false;
 	}
 
-	public function delete($shop_id){
-		$query = $this->update(array('is_del' => 1),array('shop_id' => $shop_id));
-		return $query ? true : false;
+	public function delete($where){
+		$FB = null;
+		for($i=0;$i<count($where);$i++){
+			$query = $this->update(array('is_del' => 1),$where[$i]);
+			$FB = $query ? true : false;
+		}
+		return $FB ? true : false ;
 	}
 
 	public function build_where($where){

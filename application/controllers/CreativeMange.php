@@ -13,7 +13,8 @@ class CreativeMange extends ADLINKX_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->initialization();
-		$this->load->model('store_model','store');
+		$this->load->model('strategy_model','strategy');
+		$this->load->model('creative_model','creative');
 	}
 	public function index() {
 
@@ -37,10 +38,28 @@ class CreativeMange extends ADLINKX_Controller {
 
 	public function lists() {
 		$count = 0;
-		$store_lists = $this->store->lists(array('own_id' =>$this->session->userdata('uid'), 'start_date' => date('Y-m-d',time()),
-			'end_date' => date('Y-m-d',time())),20,1,'shop_id','desc','*',$count);
-		
-		$this->assign('store_lists',$store_lists);
+		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
+		$unit_id = $this->uri->segment(6) ? $this->uri->segment(6) : '';
+		$plan_id = $this->uri->segment(7) ? $this->uri->segment(7) : '';
+		$shop_id = $this->uri->segment(8) ? $this->uri->segment(8) : '';
+		$this->get_unit_lists($plan_id,$shop_id,$unit_id);
+		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
+		$num = $this->uri->segment(10) ? $this->uri->segment(10) : 20;
+		$key = $this->uri->segment(11) ? $this->uri->segment(11) : 'id';
+		$stor = $this->uri->segment(12) ? $this->uri->segment(12) : 'DESC';
+		$fields = '*';
+		$where = array('unit_id' => $unit_id, 'plan_id' => $plan_id, 'shop_id' => $shop_id);
+		$creative_lists = $this->creative->lists($where, $offset, $num, $key, $stor, $fields, $count);
+		// var_dump($creative_lists);
+		if($creative_lists && !empty($creative_lists) && count($creative_lists) > 0){
+			for($i=0;$i<count($creative_lists);$i++){
+				$creative_lists[$i]['ext'] = explode('.',$creative_lists[$i]['pic_path'])[1];
+			}
+		}
+		$this->assign('count',ceil($count/$num));
+		$this->assign('current',$offset);
+		$this->assign('num',$num);
+		$this->assign('creatives',$creative_lists);
 		$this->display('creative/list.html');
 	}
 
@@ -80,5 +99,11 @@ class CreativeMange extends ADLINKX_Controller {
 			$this->output_json(false,'移动文件失败');
 			exit;
 		}
+	}
+
+	public function get_unit_lists($plan_id,$shop_id,$unit_id){
+		$count = 0;
+		$unit_lists = $this->strategy->lists(array('plan_id' => $plan_id, 'shop_id' => $shop_id, 'unit_id' => $unit_id),20,1,'shop_id','desc','*',$count);
+		$this->assign('unit_lists',$unit_lists);
 	}
 }

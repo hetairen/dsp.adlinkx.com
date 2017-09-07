@@ -19,12 +19,12 @@
                     <div class="pageheader">
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>策略管理</span></h2>
                         <div class="breadcrumb-wrapper">
-                            <div class="select-brands-title">品牌选择：</div>
-                            <div class="select-brands-but">全部</div>
+                            <div class="select-brands-title">投放选择：</div>
+                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-plan-id="<{$plan_list[0].plan_id}>"><{$plan_list[0].plan_name}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
                             <div class="brands-lists-block" style="display:none;">
                                 <div class="brands-lists" data-shop-id="">全部</div>
-                                <{foreach $store_lists item=store key=i}>
-                                    <div class="brands-lists" data-shop-id="<{$store.shop_id}>"><{$store.shop_title}></div>
+                                <{foreach $plan_list item=store key=i}>
+                                    <div class="brands-lists" data-plan-id="<{$store.plan_id}>"><{$store.plan_name}></div>
                                 <{/foreach}>
                             </div>
                         </div>
@@ -33,18 +33,18 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">策略管理</div>
-                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/strategy/2"><i class="fa fa-plus-circle ml10 mr4"></i>新增策略</a></div>
+                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/strategy/2_1/<{$plan_list[0].plan_id}>/<{$plan_list[0].shop_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增策略</a></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <div class="table-header-bloxk-box">
-                                        <a class="select-all-buts"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
                                         <a class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
-                                        <a class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开户</a>
+                                        <a class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
                                         <a class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
                                         <span class="sreach-block-box">
-                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=launch-search-keyword><a href="javascript:void(0);" class="launch-search-buts">确定</a>
+                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="strategy-search-keyword" value="" placeholder="输入要搜索的内容" id="strategy-search-keyword"><a href="javascript:void(0);" class="strategy-search-buts" data-shop-id="<{$plan_list[0].shop_id}>">确定</a>
                                         </span>
                                     </div>
                                     <table class="table table-striped" id="table2">
@@ -66,8 +66,8 @@
                                         <tbody>
                                             <{foreach $result item=lists key=i}>
                                                 <tr>          
-                                                    <td><a href="javascript:void(0);" class="select-buts"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
-                                                    <td><a href="/creativeMange/lists/campaign/creative/<{$lists.unit_id}>/<{$lists.plan_id}>/<{$lists.shop_id}>"><{$lists.unit_name}></a></td>
+                                                    <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-unit-id="<{$lists.unit_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                    <td><a href="/creativeMange/lists/campaign/creative/0/<{$lists.unit_id}>/<{$lists.plan_id}>/<{$lists.shop_id}>"><{$lists.unit_name}></a></td>
                                                     <td><{$lists.plan_name}></td>
                                                     <td><{if $lists.status eq 1}>正在推广<{else}>停止推广<{/if}></td>
                                                     <td><{$lists.price}></td>
@@ -76,7 +76,7 @@
                                                     <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-unit-id="<$lists.unit_id>" class="launch-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2/<{$lists.unit_id}>/<{$lists.plan_id}>/<{$lists.shop_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                    <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-unit-id="<{$lists.unit_id}>" class="strategy-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/<{$lists.unit_id}>/<{$lists.shop_id}>/<{$lists.plan_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
                                                 </tr>
                                             <{/foreach}>
                                         </tbody>
@@ -98,55 +98,249 @@
     <script src="/resources/js/libarays/custom.js"></script>
     <script>
     jQuery(document).ready(function() {
-        ADLINKX.pages({
-            id: 'pages-box',
-            first: {
-                text: '首页',
-                callback: null,
-                enable:true
-            },
-            last: {
-                text: '尾页',
-                callback: null,
-                enable:true
-            },
-            next: {
-                text: '下一页',
-                callback: null,
-                enable:true
-            },
-            previ: {
-                text: '上一页',
-                callback: null,
-                enable:true
-            },
-            search: {
-                text: '搜索',
-                callback: null,
-                enable:true
-            },
-            count: $('#pages-box').attr('data-count'),
-            current: $('#pages-box').attr('data-current'),
-            num:20,
-            color: '#0781ec',
-            is_ajax: true,
-            url:'/ajax_api/store/lists/0/0/',
-            callback:function(res){
-                console.log(res);
+        get_pages('pages-box','/launchMange/lists/campaign/strategy/1/');
+
+        $(document).on('click','.select-all-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+                $('.select-buts').attr('data-is-checked',true);
+                $('.select-buts').find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                $('.select-buts').attr('data-is-checked',false);
+                $('.select-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
             }
         });
+
+        $(document).on('click','.select-buts',function(){
+            if($(this).attr('data-is-checked') == 'false'){
+                $(this).attr('data-is-checked',true);
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+            }else{
+                $(this).attr('data-is-checked',false);
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+            }
+        });
+
         $(document).on('click','.select-brands-but',function(e){
             e.stopPropagation();
-            $('.brands-lists-block').css('display','block');
+            if($(this).attr('data-is-click') == 'false'){
+                $(this).attr('data-is-click',true);
+                $(this).find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+                $('.brands-lists-block').css('display','block');
+            }else{
+                $(this).attr('data-is-click',false);
+                $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+                $('.brands-lists-block').css('display','none');
+            }
+            
         });
         $(document).on('click','.brands-lists',function(e){
-            $('.select-brands-but').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
+            $('#store-title-box').html($(this).html()).attr('data-plan-id',$(this).attr('data-plan-id'));
+            $('.select-brands-but').attr('data-is-click',false);
+            $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
+            $('.add-buts').attr('href','/step/edit/campaign/launch/1/'+$(this).attr('data-shop-id'));
+            var shop_id = $('.strategy-search-buts').attr('data-shop-id');
+            get_strategy_list($(this).attr('data-plan-id'),shop_id,'');
+        });
 
+
+        $(document).on('click','.delete-all-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-unit-id'));
+                }
+            });
+            if(ids.length > 0){
+                delete_strategy(ids.toString());
+            }else{
+                ADLINKX.alert('请选择要删除的策略');
+            }
+            
         });
+
+        $(document).on('click','.strategy-list-delete-but',function(){
+            var ids = $(this).attr('data-unit-id');
+            delete_strategy(ids);
+        });
+
+        $(document).on('click','.start-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-unit-id'));
+                }
+            });
+            if(ids.length > 0){
+                update_strategy(ids.toString(),'start');
+            }else{
+                ADLINKX.alert('请选择要开启的策略');
+            }
+        });
+
+        $(document).on('click','.stop-buts',function(){
+            var ids = [];
+            $('.select-buts').each(function(index, el) {
+                if($(this).attr('data-is-checked') == 'true'){
+                    ids.push($(this).attr('data-unit-id'));
+                }
+            });
+            if(ids.length > 0){
+                update_strategy(ids.toString(),'stop');
+            }else{
+                ADLINKX.alert('请选择要停止的策略');
+            }
+        });
+
+
         $(document).on('click',function(){
+            $('.select-brands-but').attr('data-is-click',false);
+            $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
         });
+
+        $(document).on('click','.strategy-search-buts',function(){
+            var key_words = $('#strategy-search-keyword').val();
+            var shop_id = $(this).attr('data-shop-id');
+            var plan_id = $('#store-title-box').attr('data-plan-id');
+            
+            get_strategy_list(plan_id,shop_id,key_words);
+        });
+
+        function get_strategy_list(plan_id,shop_id,key_words){
+            $.ajax({
+                url:'/strategyMange/lists/campaign/strategy/1/'+plan_id+'/'+shop_id+'/'+key_words,
+                type:'GET',
+                success:function(res){
+                    console.log(res);
+                    if(res.code ==1 && res.msg == 'success'){
+                        var html = '';
+                        var list = res.data.list;
+                        var count = res.data.count;
+                        var current = res.data.current;
+                        if(list.length > 0){
+                            for(var i=0;i<list.length;i++){
+                                html += '<tr>'+
+                                    '<td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-unit-id="'+list[i].unit_id+'"><i class="fa fa-square-o"></i>&nbsp;'+(i+1)+'</a></td>'+
+                                    '<td><a href="/strategyMange/lists/campaign/strategy/0/'+list[i].unit_id+'/'+list[i].shop_id+'" class="">'+list[i].unit_name+'</a></td>'+
+                                    '<td>'+list[i].plan_name+'</td>'+
+                                    '<td>'+(list[i].status == 1 ? '开启' : '已暂停')+'</td>'+
+                                    '<td>'+list[i].price+'</td>'+
+                                    '<td>0</td>'+
+                                    '<td>0</td>'+
+                                    '<td>0</td>'+
+                                    '<td>0</td>'+
+                                    '<td>0</td>'+
+                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-unit-id="'+list[i].unit_id+'" class="strategy-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/'+list[i].unit_id+'/'+list[i].shop_id+'/'+list[i].plan_id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                '</tr>';
+                            }
+                        }else{
+                            html = '<tr><td colspan="12">暂无数据</td></tr>';
+                        }
+                        $('#table2').find('tbody').html(html);
+                        $('#pages-box').attr('data-count',count);
+                        $('#pages-box').attr('data-current',current);
+                        $('.select-all-buts').find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                        get_pages('pages-box','/launchMange/lists/campaign/strategy/1/');
+                    }else{
+
+                    }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        }
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: el,
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable:true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable:true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable:true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable:true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable:true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num:20,
+                color: '#0781ec',
+                is_ajax: true,
+                url:url,
+                callback:function(res){
+                    console.log(res);
+                }
+            });
+        }
+
+        function delete_strategy(ids){
+            console.log(ids);
+            $.ajax({
+                url:'/strategyMange/delete',
+                type:'POST',
+                data:{'ids':ids},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('删除成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('删除失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                    console.error(err);
+                }
+            });
+        }
+
+        function update_strategy(ids,action){
+            $.ajax({
+                url:'/strategyMange/status',
+                type:'POST',
+                data:{'ids':ids,'action':action},
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        ADLINKX.alert('操作成功',2,function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        ADLINKX.alert('操作失败',2,function(){
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(err){
+                     console.error(err);
+                },
+            });
+        }
+
     });
     </script>
 </body>

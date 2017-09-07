@@ -7,15 +7,15 @@
         <link rel="stylesheet" type="text/css" href="/resources/js/libarays/zyupload/css/zyUpload.css" />
     <{/if}> -->
         <script type="text/javascript">
-            window.local_tags = null;
             <{if $action eq 'strategy' and $step eq 2}>
-                var url = '/strategyMange/add';
+                var url = '/strategyMange/<{$but_fn}>';
                 var fn = 'strategy';
             <{elseif $action eq 'creative' and $step eq 3}>
+                window.local_tags = null;
                 var url = '/creativeMange/add';
                 var fn = 'creative';
             <{else}>
-                var url = '/launchMange/add';
+                var url = '/launchMange/<{$but_fn}>';
                 var fn = 'launch'; 
             <{/if}>
         </script>
@@ -121,19 +121,19 @@
                                                     <div class="form-list-block-box">
                                                         <div class="form-controller">策略名称：</div>
                                                         <div class="form-input-block">
-                                                            <input type="" name="plan-name" value="" id="plan-name" placeholder="策略名称" />
+                                                            <input type="" name="unit-name" value="<{$strategy.unit_name}>" id="unit-name" placeholder="策略名称" />
                                                         </div>
                                                         <div class="form-tip-block">策略名称必填</div>
                                                     </div>
                                                     <div class="form-list-block-box">
                                                         <div class="form-controller">设置出价：</div>
                                                         <div class="form-input-block">
-                                                            <input type="" name="budget-value" value="" id="budget-value" placeholder="设置出价,建议0.5~3元" />
+                                                            <input type="" name="price" value="<{$strategy.price}>" id="price" placeholder="设置出价,建议0.5~3元" />
                                                         </div>
                                                         <div class="form-tip-block">设置出价。</div>
                                                     </div>
                                                 </div>
-                                                <div class="label-market"></div>
+                                                <div class="label-market" data-value='<{$strategy.tags_value}>'></div>
                                             </div>
                                             <{elseif $action eq 'creative' and $step eq 3}>
                                                 <!--添加/编辑创意信息-->
@@ -143,28 +143,28 @@
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">创意名称：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="创意名称" />
+                                                                <input type="" name="plan-name" value="<{$creative.borad_name}>" id="plan-name" placeholder="创意名称" />
                                                             </div>
                                                             <div class="form-tip-block">创意名称必填</div>
                                                         </div>
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">创意连接：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                                <input type="" name="plan-name" value="<{$creative.borad_url}>" id="plan-name" placeholder="https://" />
                                                             </div>
                                                             <div class="form-tip-block">创意连接必填</div>
                                                         </div>
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">第三方监测连接：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                                <input type="" name="plan-name" value="<{$creative.gxb_monitor_url}>" id="plan-name" placeholder="https://" />
                                                             </div>
                                                             <div class="form-tip-block">第三方监测连接必填</div>
                                                         </div>
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">第三方爆光连接：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                                <input type="" name="plan-name" value="<{$creative.gxb_monitor_url}>" id="plan-name" placeholder="https://" />
                                                             </div>
                                                             <div class="form-tip-block">第三方爆光连接必填</div>
                                                         </div>
@@ -187,10 +187,15 @@
                                                             </div>
                                                             <div class="creative-upload-show-box">
                                                                 <div class="creative-material-default-img-block">
+                                                                
+                                                                <{if $creative.pic_path neq ''}>
+                                                                    <img src="https://images.ztcadx.com/img/board/<{$creative.pic_path}>" width="<{$creative.pic_width}>" height="<{$creative.pic_height}>" alt="" style="display:block;width:<{$creative.pic_width}>px;height:<{$creative.pic_height}>px;margin:0 auto;">
+                                                                <{else}>
                                                                     <img class="img-thumbnail creative_material_default" id="creative_material_default" data-src="holder.js/310x260/text:未上传" alt="未上传" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMTAiIGhlaWdodD0iMjYwIj48cmVjdCB3aWR0aD0iMzEwIiBoZWlnaHQ9IjI2MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjE1NSIgeT0iMTMwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjE5cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+5pyq5LiK5LygPC90ZXh0Pjwvc3ZnPg==" style="width: 310px; height: 260px;margin:0 0 0 250px;z-index:0">
+                                                                <{/if}>
                                                                 </div>
                                                                 <div class="creative-material-default-img-link img-thumbnail-link">
-                                                                    http://baidu.com
+                                                                    <a href="https://images.ztcadx.com/img/board/<{$creative.pic_path}>" target="_blank">https://images.ztcadx.com/img/board/<{$creative.pic_path}></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -198,7 +203,7 @@
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">素材地址：</div>
                                                                 <div class="form-input-block">
-                                                                    <input type="" name="plan-name" value="" id="plan-name" placeholder="https://" />
+                                                                    <input type="" name="plan-name" value="https://images.ztcadx.com/img/board/<{$creative.pic_path}>" id="plan-name" placeholder="https://" />
                                                                 </div>
                                                                 <div class="form-tip-block">素材地址必填</div>
                                                             </div>
@@ -206,10 +211,10 @@
                                                                 <div class="form-controller">素材尺寸：</div>
                                                                 <div class="form-input-block">
                                                                     <div style="float:left;">
-                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">宽：</span><input type="" name="creative-width" value="" id="creative-width" placeholder="" style="width:120px;" />
+                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">宽：</span><input type="" name="creative-width" value="<{$creative.pic_width}>" id="creative-width" placeholder="" style="width:120px;" />
                                                                     </div>
                                                                     <div style="float:left;margin:0 0 0 10px;">
-                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">高：</span><input type="" name="creative-height" value="" id="creative-height" placeholder="" style="width:120px;" />
+                                                                        <span style="display:block;float:left;width:30px;height:40px;line-height: 40px;">高：</span><input type="" name="creative-height" value="<{$creative.pic_height}>" id="creative-height" placeholder="" style="width:120px;" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-tip-block">素材尺寸必填</div>
@@ -254,21 +259,22 @@
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">投放名称：</div>
                                                                 <div class="form-input-block">
-                                                                    <input type="" name="plan-name" value="" id="plan-name" placeholder="投放名称" />
+                                                                <input type="hidden" name="plan-id" id="plan-id" value="<{$launch.plan_id}>" />
+                                                                    <input type="" name="plan-name" value="<{$launch.plan_name}>" id="plan-name" placeholder="投放名称" />
                                                                 </div>
                                                                 <div class="form-tip-block">投放名称必填</div>
                                                             </div>
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">每日预算：</div>
                                                                 <div class="form-input-block">
-                                                                    <input type="" name="budget-value" value="" id="budget-value" placeholder="每日预算" />
+                                                                    <input type="" name="budget-value" value="<{$launch.budget}>" id="budget-value" placeholder="每日预算" />
                                                                 </div>
                                                                 <div class="form-tip-block">每日预算(如：200)，不填则为不限</div>
                                                             </div>
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">时间范围：</div>
-                                                                <div class="form-input-block"><a href="javascript:void(0);" class="select-time-buts" title="选择时间范围"><i class="fa fa-calendar"></i></a>
-                                                                    <input type="" name="hook-time-but" value="" id="hook-time-but" placeholder="选择时间范围，格式为YYYY-MM-DD - YYYY-MM-DD" readonly="readonly" />
+                                                                <div class="form-input-block" style="border:1px solid #c1c1c1;border-radius:3px;"><a href="javascript:void(0);" class="select-time-buts" title="选择时间范围"><i class="fa fa-calendar" style="margin:12px 0 0 0;"></i></a>
+                                                                    <input type="" name="hook-time-but" value="<{if $launch.startdate neq '' and $launch.enddate neq ''}><{$launch.startdate}> ~ <{$launch.enddate}><{else}><{/if}>" id="hook-time-but" placeholder="选择时间范围，格式为YYYY-MM-DD - YYYY-MM-DD" readonly="readonly" />
                                                                 </div>
                                                                 <div class="form-tip-block">选择时间范围，格式为YYYY-MM-DD - YYYY-MM-DD</div>
                                                             </div>
@@ -277,11 +283,37 @@
                                                                 <div class="form-input-block">
                                                                     <select name="device-type" id="device-type">
                                                                         <option value="-1">请选择策略类型</option>
-                                                                        <option value="0">不限设备</option>
-                                                                        <option value="1">PC</option>
-                                                                        <option value="2">WAP</option>
-                                                                        <option value="3">APP</option>
-                                                                        <option value="4">Native</option>
+                                                                        <{if $launch.device eq 1}>
+                                                                            <option value="0">不限设备</option>
+                                                                            <option value="1" selected="selected">PC</option>
+                                                                            <option value="2">WAP</option>
+                                                                            <option value="3">APP</option>
+                                                                            <option value="4">Native</option>
+                                                                        <{elseif $launch.device eq 2}>
+                                                                            <option value="0">不限设备</option>
+                                                                            <option value="1">PC</option>
+                                                                            <option value="2" selected="selected">WAP</option>
+                                                                            <option value="3">APP</option>
+                                                                            <option value="4">Native</option>
+                                                                        <{elseif $launch.device eq 3}>
+                                                                            <option value="0">不限设备</option>
+                                                                            <option value="1">PC</option>
+                                                                            <option value="2">WAP</option>
+                                                                            <option value="3" selected="selected">APP</option>
+                                                                            <option value="4">Native</option>
+                                                                        <{elseif $launch.device eq 4}>
+                                                                            <option value="0">不限设备</option>
+                                                                            <option value="1">PC</option>
+                                                                            <option value="2">WAP</option>
+                                                                            <option value="3">APP</option>
+                                                                            <option value="4" selected="selected">Native</option>
+                                                                        <{else}>
+                                                                            <option value="0" selected="selected">不限设备</option>
+                                                                            <option value="1">PC</option>
+                                                                            <option value="2">WAP</option>
+                                                                            <option value="3">APP</option>
+                                                                            <option value="4">Native</option>
+                                                                        <{/if}>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-tip-block">此类型为下一步要创建的策略的类型，关系到投放的结果。</div>
@@ -292,16 +324,16 @@
                                     </div>
                                     <div class="buts-block-box">
                                         <{if $action eq 'strategy' and $step eq 2}>
-                                            <a href="/launchMange/lists/campaign/launch" class="callback-lists-buts">返回列表</a>
-                                            <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2">保存并创建创意&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
-                                            <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1">保存</a>
+                                            <a href="/strategyMange/lists/campaign/strategy/<{$plan_id}>/<{$shop_id}>" class="callback-lists-buts">返回列表</a>
+                                            <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建创意&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                            <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存</a>
                                             <{elseif $action eq 'creative' and $step eq 3}>
                                                 <a href="/launchMange/lists/campaign/launch" class="submit-buts callback-lists-buts">返回列表</a>
                                                 <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                                 <{else}>
                                                     <a href="/launchMange/lists/campaign/launch" class="callback-lists-buts">返回列表</a>
-                                                    <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2">保存并创建策略&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
-                                                    <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1">保存</a>
+                                                    <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建策略&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                                    <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存</a>
                                                     <{/if}>
                                     </div>
                                 </div>
@@ -331,7 +363,7 @@
     <{/if}>
     <script>
     jQuery(document).ready(function() {
-        // new labelMarket($,local_tags).main();
+        var data = {};
         $('input').on('focus', function() {
             $(this).css('border-color', '#c1c1c1');
         });
@@ -339,100 +371,159 @@
         $('select').on('focus', function() {
             $(this).css('border-color', '#c1c1c1');
         });
-
-        // var insl = laydate.render({
-        //     elem: '#hook-time-but',
-        //     range: '~',
-        // });
-
-        var data = {};
-
-        $('.submit-buts').on('click', function() {
-            switch (fn.toLowerCase()) {
-                case 'strategy':
-                    break;
-                case 'creative':
-                    break;
-                default:
-                    if ($('#select-store-id').val() == '') {
-                        $('#select-store-id').css('border-color', '#F00');
-                    } else {
-                        data.shop_id = $('#select-store-id').val();
+        <{if $action eq 'strategy' and $step eq 2}>
+            <{if $but_fn eq 'add'}>
+                data.shop_id = '<{$shop_id}>';
+                data.plan_id = '<{$plan_id}>';
+                data.plan_name = '<{$smarty.session.plan_name}>';
+            <{else}>
+                data.unit_id = '<{$strategy.unit_id}>';
+                data.shop_id = '<{$shop_id}>';
+                data.plan_id = '<{$plan_id}>';
+                data.plan_name = '<{$smarty.session.plan_name}>';
+            <{/if}>
+            
+            var local_tags = $('.label-market').attr('data-value') ? $('.label-market').attr('data-value') : '<{$strategy.tags_value}>';
+            new labelMarket($,local_tags).main();
+            $(document).on('click', '.submit-buts', function() {
+                var type = $(this).attr('data-type'),tmp = [],date_tmp=[];
+                if($('#unit-name').val() == ''){
+                     $('#unit-name').css('border-color', '#F00');
+                }else{
+                    data.unit_name = $('#unit-name').val();
+                }
+                if($('#price').val() == ''){
+                    $('#price').css('border-color', '#F00');
+                }else{
+                    data.price = $('#price').val();
+                }
+                $('.checkbox-buts').each(function(index, el) {
+                    if($(this).attr('data-checked') == 'true'){
+                        if($(this).attr('data-fn') == 'date'){
+                            date_tmp.push($(this).attr('data-value'));
+                        }
+                        tmp.push($(this).attr('data-value'));
                     }
-                    if ($('#plan-name').val() == '') {
-                        $('#plan-name').css('border-color', '#F00');
-                    } else {
-                        data.plan_name = $('#plan-name').val();
+                });
+                data.tags_value = '{"tags":['+tmp.toString()+']}';
+                data.date_value = JSON.stringify(date_tmp);
+                // console.log(data);
+                post_data(url,data,function(res){
+                    console.log(res);
+                    if(res.code ==1 && res.msg=='success'){
+                        if(type == 2){
+                            ADLINKX.alert('保存成功',2,function(){
+                                window.location.href='/step/edit/campaign/creative/3_1/'+data.shop_id+'/'+res.data.plan_id;
+                            });
+                        }else{
+                            ADLINKX.alert('保存成功',2,function(){
+                                window.location.reload();
+                            });
+                        }
+                    }else{
+                        ADLINKX.alert('保存失败');
                     }
-                    if ($('#budget-value').val() == '') {
-                        data.budget = 0;
-                    } else {
-                        data.budget = $('#budget-value').val();
+                },function(err){
+                    console.error(err);
+                });
+            });
+        <{elseif $action eq 'creative' and $step eq 3}>
+            $('.creative-source-switch-buts').on('click',function(){
+                var index = $(this).index();
+                $('.creative-source-switch-buts').css('background','url(/resources/images/radio_bg.png) no-repeat 0 10px').attr('data-is-checked',false);
+                $(this).css('background','url(/resources/images/radio_checked_bg.png) no-repeat 0 10px').attr('data-is-checked',true);
+                $('.add-creative-block').css('display','none');
+                $('.add-creative-block').eq(index).css('display','block');
+            });
+
+            $(document).on('change','#upload-file-but',function(){
+                // $(this).val($(this).val());
+                console.log($(this).val());
+                $.ajaxFileUpload({
+                    type: "POST",  
+                    url: "/creativeMange/upload_files",  
+                    data:null,//要传到后台的参数，没有可以不写  
+                    secureuri : false,//是否启用安全提交，默认为false  
+                    fileElementId:'upload-file-but',//文件选择框的id属性  
+                    dataType: 'json',//服务器返回的格式  
+                    async : false,  
+                    success: function(data){ 
+                        console.log(data);
+                        // if(data.result=='success'){  
+                        //     //coding  
+                        // }else{  
+                        //     //coding  
+                        // }  
+                    },  
+                    error: function (data, status, e){  
+                        console.log(data);
+                        console.log(status);
+                        console.log(e);
+                    }  
+                });  
+            });
+        <{else}>
+            var insl = laydate.render({
+                elem: '#hook-time-but',
+                range: '~',
+            });
+            $(document).on('click', '.submit-buts', function() {
+                var type = $(this).attr('data-type');
+                if ($('#select-store-id').val() == '') {
+                            $('#select-store-id').css('border-color', '#F00');
+                } else {
+                    data.shop_id = $('#select-store-id').val();
+                }
+                if ($('#plan-name').val() == '') {
+                    $('#plan-name').css('border-color', '#F00');
+                } else {
+                    data.plan_name = $('#plan-name').val();
+                }
+                if ($('#budget-value').val() == '') {
+                    data.budget = 0;
+                } else {
+                    data.budget = $('#budget-value').val();
+                }
+                if ($('#device-type').val() == '-1') {
+                    $('#device-type').css('border-color', '#F00');
+                } else {
+                    data.device = $('#device-type').val();
+                }
+                if ($('#hook-time-but').val() == '') {
+                    $('#hook-time-but').parent().css('border-color', '#F00');
+                } else {
+                    var timer = $('#hook-time-but').val().split(' ~ ');
+                    data.startdate = timer[0];
+                    data.enddate = timer[1];
+                }
+                if ($('#hook-time-but').val() == '') {
+                    $('#hook-time-but').css('border-color', '#F00');
+                } else {
+
+                }
+                <{if $but_fn eq 'update'}>
+                    data.plan_id='<{$launch.plan_id}>';
+                <{/if}>
+                post_data(url,data,function(res){
+                    console.log(res);
+                    if(res.code ==1 && res.msg=='success'){
+                        if(type == 2){
+                            ADLINKX.alert('保存成功',2,function(){
+                                window.location.href='/step/edit/campaign/strategy/2_1/'+res.data.plan_id+'/'+data.shop_id;
+                            });
+                        }else{
+                            ADLINKX.alert('保存成功',2,function(){
+                                window.location.reload();
+                            });
+                        }
+                    }else{
+                        ADLINKX.alert('保存失败');
                     }
-                    if ($('#device-type').val() == '-1') {
-                        $('#device-type').css('border-color', '#F00');
-                    } else {
-                        data.device = $('#device-type').val();
-                    }
-                    if ($('#hook-time-but').val() == '') {
-                        $('#hook-time-but').css('border-color', '#F00');
-                    } else {
-                        var timer = $('#hook-time-but').val().split(' ~ ');
-                        data.startdate = timer[0];
-                        data.enddate = timer[1];
-                    }
-                    if ($('#hook-time-but').val() == '') {
-                        $('#hook-time-but').css('border-color', '#F00');
-                    } else {
-
-                    }
-                    break;
-            }
-            console.log(data);
-            // post_data(url,data,function(res){
-            //     console.log(res);
-            // },function(err){
-            //     console.error(err);
-            // });
-        });
-
-        $('.creative-source-switch-buts').on('click',function(){
-            var index = $(this).index();
-            $('.creative-source-switch-buts').css('background','url(/resources/images/radio_bg.png) no-repeat 0 10px').attr('data-is-checked',false);
-            $(this).css('background','url(/resources/images/radio_checked_bg.png) no-repeat 0 10px').attr('data-is-checked',true);
-            $('.add-creative-block').css('display','none');
-            $('.add-creative-block').eq(index).css('display','block');
-        });
-
-        $(document).on('change','#upload-file-but',function(){
-            // $(this).val($(this).val());
-            console.log($(this).val());
-            $.ajaxFileUpload({
-                type: "POST",  
-                url: "/creativeMange/upload_files",  
-                data:null,//要传到后台的参数，没有可以不写  
-                secureuri : false,//是否启用安全提交，默认为false  
-                fileElementId:'upload-file-but',//文件选择框的id属性  
-                dataType: 'json',//服务器返回的格式  
-                async : false,  
-                success: function(data){ 
-                    console.log(data);
-                    // if(data.result=='success'){  
-                    //     //coding  
-                    // }else{  
-                    //     //coding  
-                    // }  
-                },  
-                error: function (data, status, e){  
-                    console.log(data);
-                    console.log(status);
-                    console.log(e);
-                }  
-            });  
-        });
-
-        
-
+                },function(err){
+                    console.error(err);
+                });
+            });
+        <{/if}>
         function post_data(url, data, suc, err) {
             $.ajax({
                 url: url,

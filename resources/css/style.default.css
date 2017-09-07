@@ -922,11 +922,14 @@ strong {
     border: 1px solid #c1c1c1;
     border-radius: 3px;
     padding: 0 0 0 10px;
+    position:relative;
 }
 
 .pageheader .breadcrumb-wrapper .select-brands-but:hover {
     cursor: pointer;
 }
+
+#store-title-box{display:inline-block;width:auto;height:28px;line-height:28px;}
 
 .pageheader .breadcrumb-wrapper .brands-lists-block {
     width: 200px;

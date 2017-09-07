@@ -17,6 +17,9 @@ class Store extends ADLINKX_Controller{
 	}
 
 	public function add(){
+		$store = array('shop_title' => '','website' => '');
+		$this->assign('fun','add');
+		$this->assign('store',$store);
 		$this->display('store/add_store.html');
 	}
 
@@ -42,8 +45,17 @@ class Store extends ADLINKX_Controller{
 
 	}
 
-	public function get(){
+	public function edit(){
+		$shop_id = $this->uri->segment(5);
+		$store = $this->get(array('shop_id' => $shop_id));
+		// var_dump($store);
+		$this->assign('fun','edit');
+		$this->assign('store',$store);
+		$this->display('store/add_store.html');
+	}
 
+	public function get($where){
+		return $this->store->get($where);
 	}
 
 	public function lists(){
@@ -67,8 +79,15 @@ class Store extends ADLINKX_Controller{
 	}
 
 	public function delete(){
-		$shop_id = $this->uri->segment(3);
-		$status = $this->store->delete($shop_id);
+		$shop_id = $this->uri->segment(3) ? $this->uri->segment(3) : $this->input->post('shop_ids');
+		$shop_id2arr = explode(',', $shop_id);
+		$where = array();
+		for($i=0;$i<count($shop_id2arr);$i++){
+			$where[$i]['shop_id'] = $shop_id2arr[$i];
+		}
+		// var_dump($where);
+		// exit;
+		$status = $this->store->delete($where);
 		if($status){
 			$result = array(
 				'code' => 1,
