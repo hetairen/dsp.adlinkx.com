@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn' => '',
-	'hostname' => '127.0.0.1',
-	'username' => 'root',
-	'password' => 'l19890608',
-	'database' => 'adease',
+	'hostname' => 'rm-bp161jfen84tpr7d2o.mysql.rds.aliyuncs.com',
+	'username' => 'huihex',
+	'password' => 'koolma2010',
+	'database' => 'huihe_marketing_system',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
