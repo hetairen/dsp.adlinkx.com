@@ -584,7 +584,7 @@
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
                             ADLINKX.alert('保存成功',2,function(){
-                                window.location.href='/step/edit/campaign/strategy/2_1';
+                                window.location.href='/step/edit/campaign/strategy/2_1/'+res.data.plan_id;
                             });
                         }else{
                             ADLINKX.alert('保存成功',2,function(){
