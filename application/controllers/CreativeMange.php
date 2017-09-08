@@ -60,18 +60,17 @@ class CreativeMange extends ADLINKX_Controller {
 		$count = 0;
 		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 		$unit_id = $this->uri->segment(6) && $this->uri->segment(6) !=0 ? $this->uri->segment(6) : '';
-		$plan_id = $this->uri->segment(7) && $this->uri->segment(7) !=0 ? $this->uri->segment(7) : '';
-		$shop_id = $this->uri->segment(8) && $this->uri->segment(8) !=0 ? $this->uri->segment(8) : '';
+		// $plan_id = $this->uri->segment(7) && $this->uri->segment(7) !=0 ? $this->uri->segment(7) : '';
+		// $shop_id = $this->uri->segment(8) && $this->uri->segment(8) !=0 ? $this->uri->segment(8) : '';
 		$key_words = $this->uri->segment(9) ? $this->uri->segment(9) : '';
-		$this->get_unit_lists($plan_id,$shop_id,$unit_id);
+		$this->get_unit($unit_id);
 		$offset = $this->uri->segment(10) ? $this->uri->segment(10) : 1;
 		$num = $this->uri->segment(11) ? $this->uri->segment(11) : 20;
 		$key = $this->uri->segment(12) ? $this->uri->segment(12) : 'id';
 		$stor = $this->uri->segment(13) ? $this->uri->segment(13) : 'DESC';
 		$fields = '*';
-		$where = array('uid' => $this->session->userdata('uid'),'unit_id' => $unit_id, 'plan_id' => $plan_id, 'shop_id' => $shop_id, 'is_del' => '0', 'borad_name' => $key_words);
+		$where = array('uid' => $this->session->userdata('uid'),'unit_id' => $unit_id, 'is_del' => '0', 'borad_name' => $key_words);
 		$creative_lists = $this->creative->lists($where, $offset, $num, $key, $stor, $fields, $count);
-		// var_dump($creative_lists);
 		if($creative_lists && !empty($creative_lists) && count($creative_lists) > 0){
 			for($i=0;$i<count($creative_lists);$i++){
 				$creative_lists[$i]['ext'] = explode('.',$creative_lists[$i]['pic_path'])[1];
@@ -130,10 +129,9 @@ class CreativeMange extends ADLINKX_Controller {
 		}
 	}
 
-	public function get_unit_lists($plan_id,$shop_id,$unit_id){
-		$count = 0;
-		$unit_lists = $this->strategy->lists(array('plan_id' => $plan_id, 'shop_id' => $shop_id, 'unit_id' => $unit_id),20,1,'shop_id','desc','*',$count);
-		$this->assign('unit_lists',$unit_lists);
+	public function get_unit($unit_id){
+		$unit = $this->strategy->get(array('unit_id' => $unit_id));
+		$this->assign('unit',$unit);
 	}
 
 	public function status(){

@@ -132,6 +132,12 @@
                                                         </div>
                                                         <div class="form-tip-block">设置出价。</div>
                                                     </div>
+                                                    <{if $but_fn eq 'add'}>
+                                                        <input type="hidden" name="plan-id" value="<{$plan_id}>" id="plan-id" />
+                                                    <{else}>
+                                                        <input type="hidden" name="unit-id" value="<{$unit_id}>" id="unit-id" />
+                                                    <{/if}>
+                                                    
                                                 </div>
                                                 <div class="label-market" data-value='<{$strategy.tags_value}>'></div>
                                             </div>
@@ -254,7 +260,7 @@
                                                     <div class="step-public-block-box">
                                                         <div class="step-public-title-block">投放信息</div>
                                                         <div class="form-group-block-box">
-                                                            <div class="form-list-block-box">
+                                                            <!-- <div class="form-list-block-box">
                                                                 <div class="form-controller">所属网站：</div>
                                                                 <div class="form-input-block">
                                                                     <select name="select-store-id" id="select-store-id">
@@ -266,7 +272,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-tip-block">投放所属网站</div>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="form-list-block-box">
                                                                 <div class="form-controller">投放名称：</div>
                                                                 <div class="form-input-block">
@@ -326,6 +332,12 @@
                                                                             <option value="4">Native</option>
                                                                         <{/if}>
                                                                     </select>
+                                                                    <{if $but_fn eq 'add'}>
+                                                                        <input type="hidden" value="<{$shop_id}>" name="shop-id" id="shop-id" />
+                                                                    <{else}>
+                                                                        <input type="hidden" value="<{$plan_id}>" name="plan-id" id="plan-id" />
+                                                                    <{/if}>
+                                                                    
                                                                 </div>
                                                                 <div class="form-tip-block">此类型为下一步要创建的策略的类型，关系到投放的结果。</div>
                                                             </div>
@@ -335,14 +347,14 @@
                                     </div>
                                     <div class="buts-block-box">
                                         <{if $action eq 'strategy' and $step eq 2}>
-                                            <a href="/strategyMange/lists/campaign/strategy/<{$plan_id}>/<{$shop_id}>" class="callback-lists-buts">返回列表</a>
+                                            <a href="/strategyMange/lists/campaign/strategy/0/<{if $but_fn eq 'add'}><{$plan_id}><{else}><{$strategy.plan_id}><{/if}>" class="callback-lists-buts">返回列表</a>
                                             <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建创意&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                             <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存</a>
                                             <{elseif $action eq 'creative' and $step eq 3}>
                                                 <a href="/creativeMange/lists/campaign/creative/0/<{$unit_id}>" class="callback-lists-buts">返回列表</a>
                                                 <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>" data-unit-id="<{$unit_id}>">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                                 <{else}>
-                                                    <a href="/launchMange/lists/campaign/launch" class="callback-lists-buts">返回列表</a>
+                                                    <a href="/launchMange/lists/campaign/launch/0" class="callback-lists-buts">返回列表</a>
                                                     <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建策略&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                                     <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存</a>
                                                     <{/if}>
@@ -384,14 +396,9 @@
         });
         <{if $action eq 'strategy' and $step eq 2}>
             <{if $but_fn eq 'add'}>
-                data.shop_id = '<{$shop_id}>';
-                data.plan_id = '<{$plan_id}>';
-                data.plan_name = '<{$smarty.session.plan_name}>';
+                data.plan_id = $('#plan-id').val();
             <{else}>
-                data.unit_id = '<{$strategy.unit_id}>';
-                data.shop_id = '<{$shop_id}>';
-                data.plan_id = '<{$plan_id}>';
-                data.plan_name = '<{$smarty.session.plan_name}>';
+                data.unit_id = $('#unit-id').val();
             <{/if}>
             
             var local_tags = $('.label-market').attr('data-value') ? $('.label-market').attr('data-value') : '<{$strategy.tags_value}>';
@@ -424,7 +431,7 @@
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
                             ADLINKX.alert('保存成功',2,function(){
-                                window.location.href='/step/edit/campaign/creative/3_1/'+data.shop_id+'/'+res.data.plan_id;
+                                window.location.href='/step/edit/campaign/creative/3_1/'+res.data.unit_id;
                             });
                         }else{
                             ADLINKX.alert('保存成功',2,function(){
@@ -528,7 +535,7 @@
                     console.log(res);
                     if(res.code == 1 && res.msg == 'success'){
                         ADLINKX.alert('保存成功',2,function(){
-                            window.location.href = '/creativeMange/lists/campaign/creative/0/<{$unit_id}>';
+                            window.location.href = '/creativeMange/lists/campaign/creative/0/'+data.unit_id;
                         });
                     }else{
                         ADLINKX.alert('保存失败');
@@ -544,11 +551,11 @@
             });
             $(document).on('click', '.submit-buts', function() {
                 var type = $(this).attr('data-type');
-                if ($('#select-store-id').val() == '') {
-                        $('#select-store-id').css('border-color', '#F00');
-                } else {
-                    data.shop_id = $('#select-store-id').val();
-                }
+                <{if $but_fn eq 'update'}>
+                    data.plan_id='<{$launch.plan_id}>';
+                <{else}>
+                    data.shop_id = $('#shop-id').val();
+                <{/if}>
                 if ($('#plan-name').val() == '') {
                     $('#plan-name').css('border-color', '#F00');
                 } else {
@@ -576,9 +583,7 @@
                 } else {
 
                 }
-                <{if $but_fn eq 'update'}>
-                    data.plan_id='<{$launch.plan_id}>';
-                <{/if}>
+                // console.log(data);
                 post_data(url,data,function(res){
                     console.log(res);
                     if(res.code ==1 && res.msg=='success'){

@@ -16,20 +16,22 @@ class Strategy_model extends ADLINKX_Model {
 		$this->db = $this->get_database('aliyun');
 		$this->table_name = 'diy_unit';
 		$this->load->model('dsp_rtb_rules_model','drrm');
+		$this->load->model('launch_model','launch');
 	}
 
 	public function add($data = array()){
+		$plan = $this->launch->get(array('plan_id' => $data['plan_id']));
 		$unit_id = $this->get_seq_id();
 		$set_data = array(
 			'unit_id'	=> $unit_id,
 			'unit_name'	=> $data['unit_name'],
-			'plan_id'	=> $data['plan_id'],
-			'plan_name'	=> $data['plan_name'],
+			'plan_id'	=> $plan['plan_id'],
+			'plan_name'	=> $plan['plan_name'],
 			'type'		=> 1,
-			'shop_id'	=> $data['shop_id'],
+			'shop_id'	=> $plan['shop_id'],
 			'plat_id'	=> 134,
 			'plat_name'	=> '秒针',
-			'uid'		=> $data['uid'],
+			'uid'		=> $plan['uid'],
 			'is_del'	=> 0,
 			'status'	=> 1,
 			'price'		=> $data['price'],
@@ -38,7 +40,7 @@ class Strategy_model extends ADLINKX_Model {
 		);
 		// var_dump($set_data);
 		$add_unit = $this->db->insert($this->table_name, $set_data);
-		//添加一条竟价规则
+		// 添加一条竟价规则
 		$add_rules = $this->drrm->set($data['plan_id'], $data['uid'], $unit_id, json_decode($data['date_value']));
 		return $add_unit && $add_rules ? $unit_id : false ;
 	}

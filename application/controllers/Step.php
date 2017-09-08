@@ -19,9 +19,7 @@ class Step extends ADLINKX_Controller {
 			case 2:
 				if($step2arr[1] == 1){
 					$plan_id = $this->uri->segment(6);
-					$shop_id = $this->uri->segment(7);
 					$this->assign('but_fn','add');
-					$this->assign('shop_id',$shop_id);
 					$this->assign('plan_id',$plan_id);
 					$strategy = array();
 					$strategy['shop_id'] = '';
@@ -33,12 +31,9 @@ class Step extends ADLINKX_Controller {
 
 				}else{
 					$unit_id = $this->uri->segment(6);
-					$shop_id = $this->uri->segment(7);
-					$plan_id = $this->uri->segment(8);
 					$strategy = $this->strategy->get(array('unit_id' => $unit_id));
 					$this->assign('but_fn','update');
-					$this->assign('shop_id',$shop_id);
-					$this->assign('plan_id',$plan_id);
+					$this->assign('unit_id',$unit_id);
 					if(empty($strategy)){
 						$strategy['unit_name'] = '';
 						$strategy['price'] = '';
@@ -74,11 +69,14 @@ class Step extends ADLINKX_Controller {
 			break;
 			default:
 				if($step2arr[1] == 1){
+					$shop_id = $this->uri->segment(6);
+					$this->assign('shop_id',$shop_id);
 					$this->assign('but_fn','add');
 				}else{
 					$this->assign('but_fn','update');
 				}
 				$plan_id = $this->uri->segment(6);
+				$this->assign('plan_id',$plan_id);
 				$launch = $this->launch->get(array('plan_id' => $plan_id));
 				if(empty($launch)){
 					$launch['plan_name'] = '';

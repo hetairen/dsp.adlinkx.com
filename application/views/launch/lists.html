@@ -64,22 +64,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <{foreach $result item=lists key=i}>
-                                                <tr>
-                                                    <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="<{$lists.plan_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
-                                                    <td><a href="/strategyMange/lists/campaign/strategy/0/<{$lists.plan_id}>/<{$lists.shop_id}>" class=""><{$lists.plan_name}></a></td>
-                                                    <td><{if $lists.status eq 1}>开启<{else}>已暂停<{/if}></td>
-                                                    <td><{$lists.startdate}>~<{$lists.enddate}></td>
-                                                    <td><{if $lists.budget eq 0}>不限<{else}><{$lists.budget}><{/if}></td>
-                                                    <td><{if $lists.device eq 1}>PC端<{elseif $lists.device eq 2}>无线端<{elseif $lists.device eq 3}>APP<{elseif $lists.device eq 4}>Native<{else}>不限设备<{/if}></td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" class="launch-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/<{$lists.plan_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
-                                                </tr>
-                                            <{/foreach}>
+                                            <{if $result|@count neq 0}>
+                                                <{foreach $result item=lists key=i}>
+                                                    <tr>
+                                                        <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="<{$lists.plan_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                        <td><a href="/strategyMange/lists/campaign/strategy/0/<{$lists.plan_id}>/<{$lists.shop_id}>" class=""><{$lists.plan_name}></a></td>
+                                                        <td><{if $lists.status eq 1}>开启<{else}>已暂停<{/if}></td>
+                                                        <td><{$lists.startdate}>~<{$lists.enddate}></td>
+                                                        <td><{if $lists.budget eq 0}>不限<{else}><{$lists.budget}><{/if}></td>
+                                                        <td><{if $lists.device eq 1}>PC端<{elseif $lists.device eq 2}>无线端<{elseif $lists.device eq 3}>APP<{elseif $lists.device eq 4}>Native<{else}>不限设备<{/if}></td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" class="launch-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/<{$lists.plan_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                    </tr>
+                                                <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="12" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
                                         </tbody>
                                     </table>
                                     <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
@@ -143,7 +148,7 @@
             $('.select-brands-but').attr('data-is-click',false);
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
-            $('.add-buts').attr('href','/step/edit/campaign/launch/1/'+$(this).attr('data-shop-id'));
+            $('.add-buts').attr('href','/step/edit/campaign/launch/1_1/'+$(this).attr('data-shop-id'));
             get_launch_list($(this).attr('data-shop-id'),'');
         });
         $(document).on('click',function(){

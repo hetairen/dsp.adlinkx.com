@@ -20,19 +20,19 @@
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>创意管理</span></h2>
                         <div class="breadcrumb-wrapper">
                             <div class="select-brands-title">策略选择：</div>
-                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$unit_lists[0].unit_id}>"><{$unit_lists[0].unit_name}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
-                            <div class="brands-lists-block" style="display:none;">
+                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$unit.unit_id}>"><{$unit.unit_name}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
+                            <!-- <div class="brands-lists-block" style="display:none;">
                                 <{foreach $unit_lists item=unit key=i}>
                                     <div class="brands-lists" data-shop-id="<{$unit.unit_id}>"><{$unit.unit_name}></div>
                                 <{/foreach}>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="contentpanel">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">创意管理</div>
-                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/creative/3_1/<{$unit_lists[0].unit_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增创意</a></div>
+                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/creative/3_1/<{$unit.unit_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增创意</a></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
@@ -64,22 +64,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <{foreach $creatives item=lists key=i}>
-                                                <tr>                 
-                                                <td><a class="select-buts" data-is-checked="false" data-id="<{$lists.id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
-                                                <td><{$lists.borad_name}></td>
-                                                <td><{$lists.unit_name}></td>
-                                                <td><{$lists.plan_name}></td>
-                                                <td><{if $lists.status eq 1}>开启<{else}>已暂停<{/if}></td>
-                                                <td><{$lists.ext}></td>
-                                                <td><{$lists.pic_size}></td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.borad_id}>/<{$lists.shop_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
-                                            </tr>
-                                            <{/foreach}>
+                                            <{if $creatives|@count neq 0}>
+                                                <{foreach $creatives item=lists key=i}>
+                                                    <tr>                 
+                                                    <td><a class="select-buts" data-is-checked="false" data-id="<{$lists.id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                    <td><{$lists.borad_name}></td>
+                                                    <td><{$lists.unit_name}></td>
+                                                    <td><{$lists.plan_name}></td>
+                                                    <td><{if $lists.status eq 1}>开启<{else}>已暂停<{/if}></td>
+                                                    <td><{$lists.ext}></td>
+                                                    <td><{$lists.pic_size}></td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                </tr>
+                                                <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="12" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
                                         </tbody>
                                     </table>
                                     <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>" data-num="<{$num}>"></div>

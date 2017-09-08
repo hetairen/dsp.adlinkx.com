@@ -90,7 +90,6 @@ class Creative_model extends ADLINKX_Model {
 		$count = $this->db->query($count_sql)->result_array()[0]['count'];
 		$sql = 'select '.$fields.' from `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where) . ' order by '.$key.' '.$stor. ' limit '.intval(($offset-1)/$num).','.$num;
 		$query = $this->db->query($sql);
-		// var_dump($sql);
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array() ;
 	}
 
