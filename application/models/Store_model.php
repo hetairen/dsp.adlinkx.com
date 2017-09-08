@@ -80,9 +80,9 @@ var_dump($sql);
 		$tmp = '';
 		foreach($where AS $key => $value){
 			if(in_array($key,$filter_list)){
-				$tmp .= $key .' like "'. $value .'%" and ';
+				$tmp .= '`'.$key .'` like "%'. $value .'%" and ';
 			}else{
-				$tmp .= $key .' = '. $value . ' and ';
+				$tmp .= '`'.$key .'` = '. $value . ' and ';
 			}
 		}
 		return $tmp != '' ? substr($tmp,0,strlen($tmp)-5): '';
