@@ -25,13 +25,13 @@ class Ajax_api extends ADLINKX_Controller {
 				$where =array();
 				$count = 0;
 				///ajax_api/store/lists/start_date/end_data/key_words/offset/num/key/stor
-				$start_date = !empty($this->uri->segment(4)) ? $this->uri->segment(4): date('Y-m-d',time());
-				$end_start = !empty($this->uri->segment(5)) ? $this->uri->segment(5): date('Y-m-d',time());
-				$key_words = !empty($this->uri->segment(6)) ? urldecode($this->uri->segment(6)): '';
-				$offset = !empty($this->uri->segment(7)) ? $this->uri->segment(7): 1;
-				$num = !empty($this->uri->segment(8)) ? $this->uri->segment(8): 20;
-				$key = !empty($this->uri->segment(9)) ? $this->uri->segment(9): 'shop_id';
-				$stor = !empty($this->uri->segment(10)) ? $this->uri->segment(10): 'DESC';
+				$start_date = $this->uri->segment(4) ? $this->uri->segment(4): date('Y-m-d',time());
+				$end_start = $this->uri->segment(5) ? $this->uri->segment(5): date('Y-m-d',time());
+				$key_words = $this->uri->segment(6) ? urldecode($this->uri->segment(6)): '';
+				$offset = $this->uri->segment(7) ? $this->uri->segment(7): 1;
+				$num = $this->uri->segment(8) ? $this->uri->segment(8): 20;
+				$key = $this->uri->segment(9) ? $this->uri->segment(9): 'shop_id';
+				$stor = $this->uri->segment(10) ? $this->uri->segment(10): 'DESC';
 				$fields = '*';
 				$where['start_date'] = $start_date;
 				$where['end_date'] = $end_start;
