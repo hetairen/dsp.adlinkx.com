@@ -32,8 +32,8 @@ class Store_model extends ADLINKX_Model{
 			"plat" => 'site',
 			"other" => "{}",
 		);
-		$insert = $this->db->insert('store',$param);
-		return $insert && $this->db->affected_rows() > 0 ? true : false ;
+		$query = $this->db->insert('store',$param);
+		return $query && $this->db->affected_rows() > 0 ? $shop_id : false ;
 	}
 
 	public function get($where = array()){
@@ -47,8 +47,8 @@ class Store_model extends ADLINKX_Model{
 	public function lists($where, $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*',&$count){
 		unset($where['start_date']);
 		unset($where['end_date']);
-		$sql = 'select `s`.`shop_title`, `s`.`shop_id`, `s`.`money` AS `store_money`,`s`.`own_id`,`s`.`user_nick`,`s`.`website`,`s`.`update_time`, `u`.`money` AS `account_money`,`u`.`phone`,ifnull(`u`.`money_adv`,0) AS `money_adv`,ifnull(`u`.`money_agent`,0) AS `money_agent`,`u`.`charge_today`,`u`.`charge_yesterday`,`u`.`username`,`u`.`channel_id`,IFNULL(SUM(`dsate`.`ds_click`), 0) AS `click`,IFNULL(ROUND(SUM(`dsate`.`ds_charge`) / 100, 2),
-            0) AS `adv_charge`,IFNULL(SUM(`dsate`.`ds_click`) * 0.5, 0) AS `agent_charge` from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
+		$sql = 'select `s`.`shop_title`, `s`.`shop_id`, `s`.`money` AS `store_money`,`s`.`own_id`,`s`.`user_nick`,`s`.`website`,`s`.`update_time`, `u`.`money` AS `account_money`,`u`.`phone`,ifnull(`u`.`money_adv`,0) AS `money_adv`,ifnull(`u`.`money_agent`,0) AS `money_agent`,`u`.`charge_today`,`u`.`charge_yesterday`,`u`.`username`,`u`.`channel_id`,IFNULL(`dsate`.`ds_click`, 0) AS `click`,IFNULL(ROUND(`dsate`.`ds_charge` / 100, 2),
+            0) AS `adv_charge`,IFNULL(`dsate`.`ds_click` * 0.5, 0) AS `agent_charge` from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
     `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id` order by '. $key .' '.$stor . ' limit ' . intval(($offset-1)/$num) . ',' .$num;
 		$count_sql = 'select count(*) as count from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
     `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id`';

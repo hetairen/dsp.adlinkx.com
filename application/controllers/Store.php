@@ -27,6 +27,7 @@ class Store extends ADLINKX_Controller{
 	public function add_to(){
 		$data = $this->input->post();
 		$status = $this->store->add($data);
+		var_dump($status);
 		if($status){
 			$this->output_json(true,'');
 		}else{
