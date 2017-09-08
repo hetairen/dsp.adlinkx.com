@@ -48,7 +48,8 @@ class User_model extends ADLINKX_Model {
 		$this->aliyun_db->where($where);
 		$this->aliyun_db->from('user');
 		$query = $this->aliyun_db->get();
-		return $query && $query->num_rows() > 0 ? $query->result_array()[0] : array();
+		// var_dump($this->aliyun_db->last_query());
+		return $query && $query->num_rows() > 0 ? $query->row_array() : array();
 	}
 
 	public function lists() {

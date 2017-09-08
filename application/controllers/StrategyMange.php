@@ -69,7 +69,7 @@ class StrategyMange extends ADLINKX_Controller {
 		$shop_id = $this->uri->segment(7) ? $this->uri->segment(7) :'';
 		$key_words = $this->uri->segment(8) ? $this->uri->segment(8) : '';
 		$uid = $this->session->userdata('uid');
-		$this->get_plan_lists($uid,$plan_id,$shop_id);
+		$this->get_plan($uid,$plan_id,$shop_id);
 		$count = 0;
 		$where = $plan_id && $shop_id && $key_words ? array('uid' => $uid, 'plan_id' => $plan_id, 'shop_id' => $shop_id, 'unit_name' => $key_words) : ($plan_id && $shop_id ? array('uid' => $uid, 'plan_id' => $plan_id,'shop_id' => $shop_id, 'is_del' => 0) : array('uid' => $uid, 'is_del' => 0));
 		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
@@ -90,10 +90,11 @@ class StrategyMange extends ADLINKX_Controller {
 		}
 	}
 
-	public function get_plan_lists($uid, $plan_id, $shop_id){
+	public function get_plan($uid, $plan_id){
 		$count = 0;
-		$plan_lists = $this->launch->lists(array('uid' => $uid, 'plan_id' =>$plan_id, 'shop_id' => $shop_id),20,1,'shop_id','desc','*',$count);
-		$this->assign('plan_list',$plan_lists);
+		$plan = $this->launch->get(array('uid' => $uid, 'plan_id' =>$plan_id));
+		// var_dump($plan);
+		$this->assign('plan',$plan);
 		
 	}
 

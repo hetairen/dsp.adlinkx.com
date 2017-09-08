@@ -14,6 +14,7 @@ class Store extends ADLINKX_Controller{
 		parent::__construct();
 		$this->initialization();
 		$this->load->model('store_model','store');
+		$this->load->model('user_model','user');
 	}
 
 	public function add(){
@@ -27,22 +28,10 @@ class Store extends ADLINKX_Controller{
 		$data = $this->input->post();
 		$status = $this->store->add($data);
 		if($status){
-			$result = array(
-				'code' => 1,
-				'msg' => 'success',
-				'data' => '',
-			);
+			$this->output_json(true,'');
 		}else{
-			$result = array(
-				'code' => 0,
-				'msg' => 'error',
-				'data' => '',
-			);
+			$this->output_json(false,'');
 		}
-		$this->output
-    		->set_content_type('application/json','utf-8')
-    		->set_output(json_encode($result));
-
 	}
 
 	public function edit(){
@@ -59,6 +48,7 @@ class Store extends ADLINKX_Controller{
 	}
 
 	public function lists(){
+		$this->get_user();
 		$count = 0;
 		$where =  array(
 			'own_id' => $this->session->userdata('uid'),
@@ -89,24 +79,29 @@ class Store extends ADLINKX_Controller{
 		// exit;
 		$status = $this->store->delete($where);
 		if($status){
-			$result = array(
-				'code' => 1,
-				'msg' => 'success',
-				'data' => ''
-			);
+			$this->output_json(true,'');
 		}else{
-			$result = array(
-				'code' => 0,
-				'msg' => 'error',
-				'data' => ''
-			);
+			$this->output_json(false,'');
 		}
-		$this->output
-    		->set_content_type('application/json','utf-8')
-    		->set_output(json_encode($result));
 	}
 
 	public function update(){
 
 	}
+
+	public function alloc_quota(){
+		$data = $this->input->post();
+		$store_money_up = $this->store->update_money(array('money' => $data['value']),array('shop_id' => $data['shop_id'],'uid' => $data['uid']));
+		if($store_money_up){
+			$this->output_json(true,'');
+		}else{
+			$this->output_json(false,'');
+		}
+	}
+
+	public function get_user(){
+		$user = $this->user->get(array('uid' => $this->session->userdata('uid')));
+		$this->assign('user',$user);
+	}
+
 }

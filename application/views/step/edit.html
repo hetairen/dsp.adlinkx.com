@@ -348,15 +348,15 @@
                                     <div class="buts-block-box">
                                         <{if $action eq 'strategy' and $step eq 2}>
                                             <a href="/strategyMange/lists/campaign/strategy/0/<{if $but_fn eq 'add'}><{$plan_id}><{else}><{$strategy.plan_id}><{/if}>" class="callback-lists-buts">返回列表</a>
-                                            <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建创意&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
-                                            <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存</a>
+                                            <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建创意&nbsp;&nbsp;<i class="save-and-next fa fa-caret-right m3"></i></a>
+                                            <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存<i class="icon-loading fa fa-spinner fa-spin m3"></i></a>
                                             <{elseif $action eq 'creative' and $step eq 3}>
                                                 <a href="/creativeMange/lists/campaign/creative/0/<{$unit_id}>" class="callback-lists-buts">返回列表</a>
                                                 <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>" data-unit-id="<{$unit_id}>">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                                 <{else}>
                                                     <a href="/launchMange/lists/campaign/launch/0" class="callback-lists-buts">返回列表</a>
-                                                    <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建策略&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
-                                                    <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存</a>
+                                                    <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建策略&nbsp;&nbsp;<i class="save-and-next fa fa-caret-right m3"></i></a>
+                                                    <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存<i class="icon-loading fa fa-spinner fa-spin m3"></i></a>
                                                     <{/if}>
                                     </div>
                                 </div>
@@ -404,7 +404,12 @@
             var local_tags = $('.label-market').attr('data-value') ? $('.label-market').attr('data-value') : '<{$strategy.tags_value}>';
             new labelMarket($,local_tags).main();
             $(document).on('click', '.submit-buts', function() {
-                var type = $(this).attr('data-type'),tmp = [],date_tmp=[];
+                var type = $(this).attr('data-type'),tmp = [],date_tmp=[],_this=this;
+                if(type == 1){
+                    $(this).find('.icon-loading').css('display','inline-block');
+                }else{
+                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
+                }
                 if($('#unit-name').val() == ''){
                      $('#unit-name').css('border-color', '#F00');
                 }else{
@@ -430,10 +435,12 @@
                     console.log(res);
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
+                            $(_this).find('.save-and-next').removeClass('fa-spinner fa-spin').addClass('fa-caret-right');
                             ADLINKX.alert('保存成功',2,function(){
                                 window.location.href='/step/edit/campaign/creative/3_1/'+res.data.unit_id;
                             });
                         }else{
+                            $(_this).find('.icon-loading').css('display','none');
                             ADLINKX.alert('保存成功',2,function(){
                                 window.location.reload();
                             });
@@ -490,6 +497,10 @@
 
 
             $(document).on('click','.submit-buts',function(){
+                var type = $(this).attr('data-type'),_this=this;
+                if(type == 2){
+                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
+                }
                 if($('#board-name').val() == ''){
                     $('#board-name').css('border-color', '#F00');
                 }else{
@@ -534,6 +545,7 @@
                  post_data(url,data,function(res){
                     console.log(res);
                     if(res.code == 1 && res.msg == 'success'){
+                        $(_this).find('.save-and-next').removeClass('fa-spinner fa-spin').addClass('fa-caret-right');
                         ADLINKX.alert('保存成功',2,function(){
                             window.location.href = '/creativeMange/lists/campaign/creative/0/'+data.unit_id;
                         });
@@ -550,7 +562,12 @@
                 range: '~',
             });
             $(document).on('click', '.submit-buts', function() {
-                var type = $(this).attr('data-type');
+                var type = $(this).attr('data-type'),_this = this;
+                if(type == 1){
+                    $(this).find('.icon-loading').css('display','inline-block');
+                }else{
+                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
+                }
                 <{if $but_fn eq 'update'}>
                     data.plan_id='<{$launch.plan_id}>';
                 <{else}>
@@ -588,10 +605,12 @@
                     console.log(res);
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
+                            $(_this).find('.save-and-next').removeClass('fa-spinner fa-spin').addClass('fa-caret-right');
                             ADLINKX.alert('保存成功',2,function(){
                                 window.location.href='/step/edit/campaign/strategy/2_1/'+res.data.plan_id;
                             });
                         }else{
+                            $(_this).find('.icon-loading').css('display','none');
                             ADLINKX.alert('保存成功',2,function(){
                                 window.location.reload();
                             });

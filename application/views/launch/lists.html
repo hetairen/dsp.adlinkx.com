@@ -19,7 +19,7 @@
                     <div class="pageheader">
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>投放管理</span></h2>
                         <div class="breadcrumb-wrapper">
-                            <div class="select-brands-title">品牌选择：</div>
+                            <div class="select-brands-title">所属品牌：</div>
                             <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$store_lists[0].shop_id}>"><{$store_lists[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
                             <div class="brands-lists-block" style="display:none;">
                                 <{foreach $store_lists item=store key=i}>
@@ -38,10 +38,10 @@
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <div class="table-header-bloxk-box">
-                                        <a class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
-                                        <a class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
-                                        <a class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
-                                        <a class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
+                                        <a href="javascript:void(0);" class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a href="javascript:void(0);" class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                        <a href="javascript:void(0);" class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
+                                        <a href="javascript:void(0);" class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
                                         <span class="sreach-block-box">
                                             <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=launch-search-keyword><a href="javascript:void(0);" class="launch-search-buts">确定</a>
                                         </span>

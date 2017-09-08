@@ -268,3 +268,11 @@ input {
 .sreach-block-box .creative-search-buts{display:block;float:left;width:60px;height:30px;line-height:30px;text-align:center;background:#0781ec;color:#fff;border:1px solid #0781ec;border-radius:0 2px 2px 0;margin:5px 0 0 0;}
 
 .select-buts{display:inline-block;width:auto;height:20px;line-height:20px;color:#636e7b;padding:0 0 0 10px;}
+
+
+.icon-loading{display:none;}
+
+/**
+ * 分配配额
+ */
+.allocation-quota-popup-block{display:block;}

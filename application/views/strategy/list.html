@@ -19,31 +19,31 @@
                     <div class="pageheader">
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>策略管理</span></h2>
                         <div class="breadcrumb-wrapper">
-                            <div class="select-brands-title">投放选择：</div>
-                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-plan-id="<{$plan_list[0].plan_id}>"><{$plan_list[0].plan_name}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
-                            <div class="brands-lists-block" style="display:none;">
+                            <div class="select-brands-title">所属投放：</div>
+                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-plan-id="<{$plan.plan_id}>"><a href="http://dsp.adlinkx.com/launchMange/lists/campaign/launch/0/<{$plan.shop_id}>"><{$plan.plan_name}></a></span><!-- <i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i> --></div>
+                            <!-- <div class="brands-lists-block" style="display:none;">
                                 <{foreach $plan_list item=store key=i}>
                                     <div class="brands-lists" data-plan-id="<{$store.plan_id}>"><{$store.plan_name}></div>
                                 <{/foreach}>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="contentpanel">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">策略管理</div>
-                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/strategy/2_1/<{$plan_list[0].plan_id}>/<{$plan_list[0].shop_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增策略</a></div>
+                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/strategy/2_1/<{$plan.plan_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增策略</a></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <div class="table-header-bloxk-box">
-                                        <a class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
-                                        <a class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
-                                        <a class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
-                                        <a class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
+                                        <a href="javascript:void(0);" class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a href="javascript:void(0);" href="javascript:void(0);" class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                        <a href="javascript:void(0);" class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
+                                        <a href="javascript:void(0);" class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
                                         <span class="sreach-block-box">
-                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="strategy-search-keyword" value="" placeholder="输入要搜索的内容" id="strategy-search-keyword"><a href="javascript:void(0);" class="strategy-search-buts" data-shop-id="<{$plan_list[0].shop_id}>">确定</a>
+                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="strategy-search-keyword" value="" placeholder="输入要搜索的内容" id="strategy-search-keyword"><a href="javascript:void(0);" class="strategy-search-buts" data-shop-id="<{$plan.shop_id}>">确定</a>
                                         </span>
                                     </div>
                                     <table class="table table-striped" id="table2">

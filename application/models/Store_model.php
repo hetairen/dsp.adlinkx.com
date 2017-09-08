@@ -14,6 +14,7 @@ class Store_model extends ADLINKX_Model{
 	public function __construct() {
 		parent::__construct();
 		$this->db = $this->get_database('aliyun');
+		$this->load->model('user_model','user');
 	}
 
 	public function add($data = array()){
@@ -46,16 +47,16 @@ class Store_model extends ADLINKX_Model{
 	public function lists($where, $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*',&$count){
 		unset($where['start_date']);
 		unset($where['end_date']);
-		$sql = 'select * from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` order by '. $key .' '.$stor . ' limit ' . intval(($offset-1)/$num) . ',' .$num;
-		$count_sql = 'select count(*) as count from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id`';
-		// $date_start = $where['start_date'];
-		// $date_end = $where['end_date'];
-		// unset($where['start_date']);
-		// unset($where['end_date']);
+		$sql = 'select `s`.`shop_title`, `s`.`shop_id`, `s`.`money` AS `store_money`,`s`.`own_id`,`s`.`user_nick`,`s`.`website`,`s`.`update_time`, `u`.`money` AS `account_money`,`u`.`phone`,ifnull(`u`.`money_adv`,0) AS `money_adv`,ifnull(`u`.`money_agent`,0) AS `money_agent`,`u`.`charge_today`,`u`.`charge_yesterday`,`u`.`username`,`u`.`channel_id`,IFNULL(SUM(`dsate`.`ds_click`), 0) AS `click`,IFNULL(ROUND(SUM(`dsate`.`ds_charge`) / 100, 2),
+            0) AS `adv_charge`,IFNULL(SUM(`dsate`.`ds_click`) * 0.5, 0) AS `agent_charge` from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
+    `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id` order by '. $key .' '.$stor . ' limit ' . intval(($offset-1)/$num) . ',' .$num;
+		$count_sql = 'select count(*) as count from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
+    `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id`';
 		// $sql = "select * from (select `owner`,`shop_name`,uid,username,shop_site as shop_url,company_name,company_addr,contact,phone,email,fax,qq,add_time,ifnull(`channel_id`,'') as channel_id,ifnull(`money_agent`,0) as money_agent,ifnull(`money_adv`,0) as money_adv, charge_today, charge_yesterday from `huihe_marketing_system`.`user` where ".$this->build_where($where).") A left join (SELECT s.own_id,s.shop_id,sum(dsate.ds_click) click,ROUND(sum(dsate.ds_charge)/100,2) adv_charge, sum(dsate.ds_click)*0.5 agent_charge FROM store s left join `dsp_stats_ad_task_effects` dsate on s.shop_id = dsate.store_id and dsate.date between '" . $date_start . "' and '" . $date_end . "' group by s.own_id) as B on A.uid=B.own_id order by $key $stor limit ".intval(($offset-1)*$num).",".$num;
 // var_dump($sql);
 		$count = $this->db->query($count_sql)->result_array()[0]['count'];
 		$query = $this->db->query($sql);
+		// var_dump($query->result_array());
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
 
@@ -85,5 +86,25 @@ class Store_model extends ADLINKX_Model{
 			}
 		}
 		return $tmp != '' ? substr($tmp,0,strlen($tmp)-5): '';
+	}
+
+	public function update_money($data,$where){
+		//开启事务
+		$this->db->trans_start();
+		$user = $this->user->get(array('uid' => $where['uid']),array('money'));
+		$new_money = $user['money']-$data['money'];
+		$up_user_money_sql = 'UPDATE `huihe_marketing_system`.`user` SET `money`='.$new_money.' WHERE `uid`='.$where['uid'];
+		$up_store_money_sql = 'UPDATE `huihe_marketing_system`.`store` SET `money`='.$data['money'].' WHERE `shop_id`='.$where['shop_id'].' AND `own_id`='.$where['uid'];
+		//更新帐户余额
+		$this->db->query($up_user_money_sql);
+		//更新配额
+		$this->db->query($up_store_money_sql);
+		//提交事务
+		$this->db->trans_complete();
+		if ($this->db->trans_status()){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

@@ -19,8 +19,8 @@
                     <div class="pageheader">
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>创意管理</span></h2>
                         <div class="breadcrumb-wrapper">
-                            <div class="select-brands-title">策略选择：</div>
-                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$unit.unit_id}>"><{$unit.unit_name}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
+                            <div class="select-brands-title">所属策略：</div>
+                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$unit.unit_id}>"><a href="http://dsp.adlinkx.com/strategyMange/lists/campaign/strategy/0/<{$unit.plan_id}>"><{$unit.unit_name}></a></span><!-- <i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i> --></div>
                             <!-- <div class="brands-lists-block" style="display:none;">
                                 <{foreach $unit_lists item=unit key=i}>
                                     <div class="brands-lists" data-shop-id="<{$unit.unit_id}>"><{$unit.unit_name}></div>
@@ -38,10 +38,10 @@
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <div class="table-header-bloxk-box">
-                                        <a class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
-                                        <a class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
-                                        <a class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
-                                        <a class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
+                                        <a href="javascript:void(0);" class="select-all-buts" data-is-checked="false"><i class="fa fa-square-o fa-lg"></i>&nbsp;全选</a>
+                                        <a href="javascript:void(0);" class="delete-all-buts"><i class="fa fa-trash-o fa-lg"></i>&nbsp;批量删除</a>
+                                        <a href="javascript:void(0);" class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
+                                        <a href="javascript:void(0);" class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
                                         <span class="sreach-block-box">
                                             <label>搜索：</label><input type="text/submit/hidden/button/etc" name="launch-search" value="" placeholder="输入要搜索的内容" id=creative-search-keyword><a href="javascript:void(0);" class="creative-search-buts">确定</a>
                                         </span>
@@ -67,7 +67,7 @@
                                             <{if $creatives|@count neq 0}>
                                                 <{foreach $creatives item=lists key=i}>
                                                     <tr>                 
-                                                    <td><a class="select-buts" data-is-checked="false" data-id="<{$lists.id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                    <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-id="<{$lists.id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
                                                     <td><{$lists.borad_name}></td>
                                                     <td><{$lists.unit_name}></td>
                                                     <td><{$lists.plan_name}></td>
