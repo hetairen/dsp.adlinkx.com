@@ -79,7 +79,7 @@ class LaunchMange extends ADLINKX_Controller {
 	public function lists() {
 		$this->get_store_lists();
 		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
-		$shop_id=$this->uri->segment(6) ? $this->uri->segment(6) : $this->session->userdata('shop_id');
+		$shop_id=$this->uri->segment(6) ? $this->uri->segment(6) :'';
 		$key_words = $this->uri->segment(7) ? $this->uri->segment(7) : '';
 		$uid = $this->session->userdata('uid');
 		$count = 0;
@@ -91,6 +91,7 @@ class LaunchMange extends ADLINKX_Controller {
 		// $shop_id = $this->uri->segment(9) ? $this->uri->segment(9) : null ;
 		// var_dump($shop_id);
 		$where = $shop_id && $key_words ? array('uid' => $uid, 'shop_id' => $shop_id, 'is_del' => 0 ,'plan_name' => $key_words) : ($shop_id ? array('uid' => $uid, 'shop_id' => $shop_id, 'is_del' => 0) : array('uid' => $uid, 'is_del' => 0));
+		// var_dump($where);
 		$result = $this->launch->lists($where, $num, $offset, $key, $stor, $fields, $count);
 		if($is_ajax){
 			$this->output_json(true,array('count' => ceil($count/$num), 'current'=> $offset, 'num' => $num, 'list' => $result));

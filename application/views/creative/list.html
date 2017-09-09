@@ -20,19 +20,20 @@
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>创意管理</span></h2>
                         <div class="breadcrumb-wrapper">
                             <div class="select-brands-title">所属策略：</div>
-                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$unit.unit_id}>"><a href="http://dsp.adlinkx.com/strategyMange/lists/campaign/strategy/0/<{$unit.plan_id}>"><{$unit.unit_name}></a></span><!-- <i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i> --></div>
-                            <!-- <div class="brands-lists-block" style="display:none;">
-                                <{foreach $unit_lists item=unit key=i}>
-                                    <div class="brands-lists" data-shop-id="<{$unit.unit_id}>"><{$unit.unit_name}></div>
+                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-unit-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
+                            <div class="brands-lists-block" style="display:none;">
+                                <div class="brands-lists" data-unit-id="">全部</div>
+                                <{foreach $units item=unit key=i}>
+                                    <div class="brands-lists" data-unit-id="<{$unit.unit_id}>"><{$unit.unit_name}></div>
                                 <{/foreach}>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="contentpanel">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">创意管理</div>
-                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/creative/3_1/<{$unit.unit_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增创意</a></div>
+                                <div class="add-but-block"><a href="javascript:void(0);" class="add-buts but-24ac45" data-unit-id=""><i class="fa fa-plus-circle ml10 mr4"></i>新增创意</a></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
@@ -145,11 +146,22 @@
             
         });
         $(document).on('click','.brands-lists',function(e){
-            $('#store-title-box').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
+            var unit_id = $(this).attr('data-unit-id');
+            $('#store-title-box').html($(this).html()).attr('data-unit-id',unit_id);
             $('.select-brands-but').attr('data-is-click',false);
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
-            $('.add-buts').attr('href','/step/edit/campaign/launch/1/'+$(this).attr('data-shop-id'));
+            $('.add-buts').attr('data-unit-id',unit_id);
+            get_creative_list(unit_id,'');
+        });
+
+
+        $(document).on('click','.add-buts',function(){
+            if($(this).attr('data-unit-id') == ''){
+                ADLINKX.alert('请选择策略');
+            }else{
+                window.location.href='/step/edit/campaign/creative/3_1/'+$(this).attr('data-unit-id');
+            }
         });
 
         $(document).on('click','.delete-all-buts',function(){
@@ -201,7 +213,11 @@
 
         $(document).on('click','.creative-search-buts',function(){
             var key_words = $('#creative-search-keyword').val();
-            get_creative_list(key_words);
+            if(key_words == ''){
+                ADLINKX.alert('请输入要搜索的关键字;');
+            }else{
+                get_creative_list('0',key_words);
+            }
         });
 
         $(document).on('click',function(){
@@ -256,9 +272,9 @@
         }
 
 
-        function get_creative_list(key_words){
+        function get_creative_list(unit_id,key_words){
             $.ajax({
-                url:'/creativeMange/lists/campaign/creative/1/0/0/0/'+key_words,
+                url:'/creativeMange/lists/campaign/creative/1/'+unit_id+'/'+key_words,
                 type:'GET',
                 success:function(res){
                     if(res.code ==1 && res.msg == 'success'){
@@ -280,7 +296,7 @@
                                     '<td>0</td>'+
                                     '<td>0</td>'+
                                     '<td>0</td>'+
-                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" data-shop-id="'+list[i].shop_id+'" data-plan-id="'+list[i].plan_id+'" data-plan-id="'+list[i].unit_id+'" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].borad_id+'/'+list[i].shop_id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
                                 '</tr>';
                             }
                         }else{

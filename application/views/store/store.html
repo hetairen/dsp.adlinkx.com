@@ -192,6 +192,9 @@
 
         $(document).on('click', '.search-buts', function() {
             var key_words = $('#search-keywords-box').val();
+            if(key_words == ''){
+                ADLINKX.alert('请输入要搜索的关键字;');
+            }
             $.ajax({
                 url: encodeURI('/ajax_api/store/lists/0/0/' + key_words + '/1/20'),
                 type: 'GET',

@@ -62,6 +62,12 @@ class Launch_model extends ADLINKX_Model {
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
 
+	public function get_all($where){
+		$sql = 'select * from `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where);
+		$query = $this->db->query($sql);
+		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
+	}
+
 	public function update($data = array(), $where =array()){
 		$this->db->where($where);
 		$query = $this->db->update($this->table_name,$data);

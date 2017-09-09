@@ -66,16 +66,24 @@ class StrategyMange extends ADLINKX_Controller {
 	public function lists() {
 		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 		$plan_id = $this->uri->segment(6) ? $this->uri->segment(6) : '';
-		$shop_id = $this->uri->segment(7) ? $this->uri->segment(7) :'';
-		$key_words = $this->uri->segment(8) ? $this->uri->segment(8) : '';
+		$key_words = $this->uri->segment(7) ? $this->uri->segment(7) : '';
 		$uid = $this->session->userdata('uid');
-		$this->get_plan($uid,$plan_id,$shop_id);
+		$this->get_plan_list($uid,$plan_id);
 		$count = 0;
-		$where = $plan_id && $shop_id && $key_words ? array('uid' => $uid, 'plan_id' => $plan_id, 'shop_id' => $shop_id, 'unit_name' => $key_words) : ($plan_id && $shop_id ? array('uid' => $uid, 'plan_id' => $plan_id,'shop_id' => $shop_id, 'is_del' => 0) : array('uid' => $uid, 'is_del' => 0));
-		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
-		$num = $this->uri->segment(10) ? $this->uri->segment(10) : 20;
-		$key = $this->uri->segment(11) ? $this->uri->segment(11) : 'unit_id';
-		$stor = $this->uri->segment(12) ? $this->uri->segment(12) : 'DESC';
+		$where = array();
+		$where['uid'] = $uid;
+		if($plan_id){
+			$where['plan_id'] = $plan_id;
+		}
+		if($key_words){
+			$where['unit_name'] = $key_words;
+		}
+		
+		$wehre['is_del'] = 0;
+		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
+		$num = $this->uri->segment(9) ? $this->uri->segment(9) : 20;
+		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'unit_id';
+		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$fields = '*';
 		$result = $this->strategy->lists($where, $num, $offset, $key, $stor, $fields ,$count);
 		// var_dump($result);
@@ -90,11 +98,10 @@ class StrategyMange extends ADLINKX_Controller {
 		}
 	}
 
-	public function get_plan($uid, $plan_id){
-		$count = 0;
-		$plan = $this->launch->get(array('uid' => $uid, 'plan_id' =>$plan_id));
-		// var_dump($plan);
-		$this->assign('plan',$plan);
+	public function get_plan_list($uid, $plan_id){
+		$plans = $this->launch->get_all(array('uid' => $uid, 'plan_id' =>$plan_id));
+		// var_dump($plans);
+		$this->assign('plans',$plans);
 		
 	}
 

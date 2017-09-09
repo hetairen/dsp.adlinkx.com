@@ -20,19 +20,20 @@
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>策略管理</span></h2>
                         <div class="breadcrumb-wrapper">
                             <div class="select-brands-title">所属投放：</div>
-                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-plan-id="<{$plan.plan_id}>"><a href="http://dsp.adlinkx.com/launchMange/lists/campaign/launch/0/<{$plan.shop_id}>"><{$plan.plan_name}></a></span><!-- <i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i> --></div>
-                            <!-- <div class="brands-lists-block" style="display:none;">
-                                <{foreach $plan_list item=store key=i}>
+                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-plan-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
+                            <div class="brands-lists-block" style="display:none;">
+                                <div class="brands-lists" data-plan-id="">全部</div>
+                                <{foreach $plans item=store key=i}>
                                     <div class="brands-lists" data-plan-id="<{$store.plan_id}>"><{$store.plan_name}></div>
                                 <{/foreach}>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="contentpanel">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">策略管理</div>
-                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/strategy/2_1/<{$plan.plan_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增策略</a></div>
+                                <div class="add-but-block"><a class="add-buts but-24ac45" href="javascript:void(0);" data-plan-id=""><i class="fa fa-plus-circle ml10 mr4"></i>新增策略</a></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
@@ -43,7 +44,7 @@
                                         <a href="javascript:void(0);" class="start-buts"><i class="fa fa-play-circle fa-lg"></i>&nbsp;开启</a>
                                         <a href="javascript:void(0);" class="stop-buts"><i class="fa fa-pause-circle fa-lg"></i>&nbsp;暂停</a>
                                         <span class="sreach-block-box">
-                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="strategy-search-keyword" value="" placeholder="输入要搜索的内容" id="strategy-search-keyword"><a href="javascript:void(0);" class="strategy-search-buts" data-shop-id="<{$plan.shop_id}>">确定</a>
+                                            <label>搜索：</label><input type="text/submit/hidden/button/etc" name="strategy-search-keyword" value="" placeholder="输入要搜索的内容" id="strategy-search-keyword"><a href="javascript:void(0);" class="strategy-search-buts">确定</a>
                                         </span>
                                     </div>
                                     <table class="table table-striped" id="table2">
@@ -141,9 +142,16 @@
             $('.select-brands-but').attr('data-is-click',false);
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
-            $('.add-buts').attr('href','/step/edit/campaign/launch/1/'+$(this).attr('data-shop-id'));
-            var shop_id = $('.strategy-search-buts').attr('data-shop-id');
-            get_strategy_list($(this).attr('data-plan-id'),shop_id,'');
+            $('.add-buts').attr('data-plan-id',$(this).attr('data-plan-id'));
+            get_strategy_list($(this).attr('data-plan-id'),'');
+        });
+
+        $(document).on('click','.add-buts',function(){
+            if($(this).attr('data-plan-id') == ''){
+                ADLINKX.alert('请选择投放');
+            }else{
+                window.location.href="/step/edit/campaign/strategy/2_1/"+$(this).attr('data-plan-id');
+            }
         });
 
 
@@ -204,15 +212,12 @@
 
         $(document).on('click','.strategy-search-buts',function(){
             var key_words = $('#strategy-search-keyword').val();
-            var shop_id = $(this).attr('data-shop-id');
-            var plan_id = $('#store-title-box').attr('data-plan-id');
-            
-            get_strategy_list(plan_id,shop_id,key_words);
+            get_strategy_list(0,key_words);
         });
 
-        function get_strategy_list(plan_id,shop_id,key_words){
+        function get_strategy_list(plan_id,key_words){
             $.ajax({
-                url:'/strategyMange/lists/campaign/strategy/1/'+plan_id+'/'+shop_id+'/'+key_words,
+                url:'/strategyMange/lists/campaign/strategy/1/'+plan_id+'/'+key_words,
                 type:'GET',
                 success:function(res){
                     console.log(res);
@@ -234,7 +239,7 @@
                                     '<td>0</td>'+
                                     '<td>0</td>'+
                                     '<td>0</td>'+
-                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-unit-id="'+list[i].unit_id+'" class="strategy-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/'+list[i].unit_id+'/'+list[i].shop_id+'/'+list[i].plan_id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-unit-id="'+list[i].unit_id+'" class="strategy-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/'+list[i].unit_id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
                                 '</tr>';
                             }
                         }else{

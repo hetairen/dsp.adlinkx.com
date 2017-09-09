@@ -208,6 +208,11 @@
         $(document).on('click','.launch-search-buts',function(){
             var key_words = $('#launch-search-keyword').val();
             var shop_id = $('#store-title-box').attr('data-shop-id');
+            if(key_words == ''){
+                ADLINKX.alert('请输入要搜索的关键字;');
+            }else{
+                get_creative_list('0',key_words);
+            }
             get_launch_list(shop_id,key_words);
         });
 

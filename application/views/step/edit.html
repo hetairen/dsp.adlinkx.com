@@ -208,7 +208,11 @@
                                                                     <{/if}>
                                                                     
                                                                 </div>
-                                                                <input type="hidden" name="unit-id" value="<{$unit_id}>" id="unit-id">
+                                                                <{if $but_fn eq 'add'}>
+                                                                    <input type="hidden" name="unit-id" value="<{$unit_id}>" id="unit-id">
+                                                                <{else}>
+                                                                    <input type="hidden" name="unit-id" value="<{$creative.unit_id}>" id="unit-id">
+                                                                <{/if}>
                                                                 <input type="hidden" name="upload-pic-path" value="" id="upload-pic-path" />
                                                                 <input type="hidden" name="upload-pic-width" value="" id="upload-pic-width" />
                                                                 <input type="hidden" name="upload-pic-height" value="" id="upload-pic-height" />
@@ -351,8 +355,8 @@
                                             <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建创意&nbsp;&nbsp;<i class="save-and-next fa fa-caret-right m3"></i></a>
                                             <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存<i class="icon-loading fa fa-spinner fa-spin m3"></i></a>
                                             <{elseif $action eq 'creative' and $step eq 3}>
-                                                <a href="/creativeMange/lists/campaign/creative/0/<{$unit_id}>" class="callback-lists-buts">返回列表</a>
-                                                <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>" data-unit-id="<{$unit_id}>">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                                <a href="/creativeMange/lists/campaign/creative/0/<{if but_fn eq 'add'}><{$unit_id}><{else}><{$creative.unit_id}><{/if}>" class="callback-lists-buts">返回列表</a>
+                                                <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>" data-unit-id="<{if but_fn eq 'add'}><{$unit_id}><{else}><{$creative.unit_id}><{/if}>">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                                 <{else}>
                                                     <a href="/launchMange/lists/campaign/launch/0" class="callback-lists-buts">返回列表</a>
                                                     <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建策略&nbsp;&nbsp;<i class="save-and-next fa fa-caret-right m3"></i></a>

@@ -50,8 +50,9 @@ class Step extends ADLINKX_Controller {
 					$this->assign('unit_id',$unit_id);
 					$this->assign('but_fn','add');
 				}else{
-					$borad_id = $this->uri->segment(6);
-					$creative = $this->creative->get(array('borad_id' => $borad_id));
+					$id = $this->uri->segment(6);
+					$creative = $this->creative->get(array('id' => $id));
+					// var_dump($creative);
 					$this->assign('but_fn','update');
 				}
 				//borad_url,pic_path,pic_height,pic_width,pic_size,gxb_monitor_url
