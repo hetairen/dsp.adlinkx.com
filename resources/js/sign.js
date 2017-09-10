@@ -216,7 +216,7 @@ $(document).ready(function() {
             success: function(res) {
                 console.log(typeof res);
                 res = typeof res == 'string' ? (JSON.parse ? JSON.parse(res) : jQuery.parseJSON(res)) : res;
-                if (res.code == 0) {
+                if (res.code == 1 && res.msg == 'success') {
                     ADLINKX.alert((type == 'agreement' ? '注册成功' : '登录成功'), 2, function() {
                         if (type == 'agreement') { //注册成功，跳转至登录
                             window.location.href = ADLINKX.domain + '/user/login';

@@ -50,6 +50,7 @@ class User extends ADLINKX_Controller {
 
 			unset($check_status['password']);
 			$this->session->set_userdata($check_status); //设置session
+			$this->session->set_userdata('source_oa_flag',1);
 			if ($remember) {
 //记住密码
 				foreach ($check_status AS $key => $value) {
@@ -57,18 +58,10 @@ class User extends ADLINKX_Controller {
 					set_cookie($key, $value, (time() + 3600 * 24 * 7), 'dsp.adease.com', '/', true, false);
 				}
 			}
-			$result['code'] = 0;
-			$result['msg'] = 'SUCCESS';
-			$result['data'] = '';
+			$this->output_json(true,'');
 		} else {
-			$result['code'] = 1;
-			$result['msg'] = 'ERROR';
-			$result['data'] = '';
+			$this->output_json(false,'');
 		}
-
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($result));
 	}
 
 	public function sigin_up() {
@@ -132,18 +125,10 @@ class User extends ADLINKX_Controller {
 		// $loger_status = $this->loger->add($loger_data);
 
 		if ($user_status) {
-			$result['code'] = 0;
-			$result['msg'] = 'SUCCESS';
-			$result['data'] = '';
+			$this->output_json(true,'');
 		} else {
-			$result['code'] = 1;
-			$result['msg'] = 'ERROR';
-			$result['data'] = '';
+			$this->output_json(false,'');
 		}
-
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($result));
 	}
 
 	public function Verification() {
@@ -170,9 +155,9 @@ class User extends ADLINKX_Controller {
 	}
 
 	public function sign_out() {
-		$sesion_items = array('uid', 'group', 'permissions', 'name', 'avatar');
+		$sesion_items = array('uid', 'group', 'permissions', 'username', 'avatar','user_nick_oa','source_oa_flag');
 		$this->session->unset_userdata($sesion_items);
-		redirect('https://www.adlinkx.com/user/login', 'auto ', 301);
+		redirect('http://dsp.adlinkx.com', 'auto ', 301);
 	}
 
 

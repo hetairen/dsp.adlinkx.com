@@ -10,11 +10,12 @@
  */
 class Store_model extends ADLINKX_Model{
 	private $db;
-
+	private $tbale_name;
 	public function __construct() {
 		parent::__construct();
 		$this->db = $this->get_database('aliyun');
 		$this->load->model('user_model','user');
+		$this->tbale_name = 'store';
 	}
 
 	public function add($data = array()){
@@ -58,6 +59,14 @@ class Store_model extends ADLINKX_Model{
 		$query = $this->db->query($sql);
 		// var_dump($query->result_array());
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
+	}
+
+	public function get_all($where){
+		$this->db->select('*');
+		$this->db->from($this->tbale_name);
+		$this->db->where($where);
+		$query = $this->db->get();
+		return $query && $query->num_rows() > 0 ?$query->result_array() : array();
 	}
 
 	public function update($data = array(), $where =array()){
