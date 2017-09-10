@@ -48,7 +48,8 @@ class Store_model extends ADLINKX_Model{
 	public function lists($where, $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*',&$count){
 		unset($where['start_date']);
 		unset($where['end_date']);
-		$sql = 'select `s`.`shop_title`, `s`.`shop_id`, `s`.`money` AS `store_money`,`s`.`own_id`,`s`.`user_nick`,`s`.`website`,`s`.`update_time`, `u`.`money` AS `account_money`,`u`.`phone`,ifnull(`u`.`money_adv`,0) AS `money_adv`,ifnull(`u`.`money_agent`,0) AS `money_agent`,`u`.`charge_today`,`u`.`charge_yesterday`,`u`.`username`,`u`.`channel_id`,IFNULL(`dsate`.`ds_click`, 0) AS `click`,IFNULL(ROUND(`dsate`.`ds_charge` / 100, 2),
+		$sql = 'select `s`.`shop_title`, `s`.`shop_id`, `s`.`money` AS `store_money`,`s`.`own_id`,`s`.`user_nick`,`s`.`website`,`s`.`update_time`, `u`.`money` AS `account_money`,`u`.`phone`,ifnull(`u`.`money_adv`,0) AS `money_adv`,ifnull(`u`.`money_agent`,0) AS `money_agent`,`u`.`charge_today`,`u`.`charge_yesterday`,`u`.`username`,`u`.`channel_id`,`u`.`company_name`,
+    `u`.`contact`,`u`.`add_time`,IFNULL(`dsate`.`ds_click`, 0) AS `click`,IFNULL(ROUND(`dsate`.`ds_charge` / 100, 2),
             0) AS `adv_charge`,IFNULL(`dsate`.`ds_click` * 0.5, 0) AS `agent_charge` from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
     `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id` order by '. $key .' '.$stor . ' limit ' . intval(($offset-1)/$num) . ',' .$num;
 		$count_sql = 'select count(*) as count from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
@@ -104,10 +105,13 @@ class Store_model extends ADLINKX_Model{
 		$new_money = $user['money']-$data['money'];
 		$up_user_money_sql = 'UPDATE `huihe_marketing_system`.`user` SET `money`='.$new_money.' WHERE `uid`='.$where['uid'];
 		$up_store_money_sql = 'UPDATE `huihe_marketing_system`.`store` SET `money`='.$data['money'].' WHERE `shop_id`='.$where['shop_id'].' AND `own_id`='.$where['uid'];
+		$log_sql = 'INSERT INTO `huihe_marketing_system`.`dsp_log_charge` (uid,date,time,money,type,user_money,remark,detail) VALUES ('.$where['uid'].',"'.date('Y-m-d',time()).'","'.date('Y-m-d H:i:s',time()).'",'.$data['money'].',1,'.$new_money.',"分配配额，网站名称：'.$where['shop_title'].'","[]")';
 		//更新帐户余额
 		$this->db->query($up_user_money_sql);
 		//更新配额
 		$this->db->query($up_store_money_sql);
+		//记录操作日志
+		$this->db->query($log_sql);
 		//提交事务
 		$this->db->trans_complete();
 		if ($this->db->trans_status()){

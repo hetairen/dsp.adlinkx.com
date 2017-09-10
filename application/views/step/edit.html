@@ -165,7 +165,7 @@
                                                             <div class="form-input-block">
                                                                 <input type="" name="monitor-url" value="<{$creative.gxb_monitor_url}>" id="monitor-url" placeholder="https://" />
                                                             </div>
-                                                            <div class="form-tip-block">第三方监测连接必填</div>
+                                                            <div class="form-tip-block">第三方监测连接选填</div>
                                                         </div>
                                                         <!-- <div class="form-list-block-box">
                                                             <div class="form-controller">第三方爆光连接：</div>
@@ -416,11 +416,16 @@
                 }
                 if($('#unit-name').val() == ''){
                      $('#unit-name').css('border-color', '#F00');
+                     return false;
                 }else{
                     data.unit_name = $('#unit-name').val();
                 }
                 if($('#price').val() == ''){
                     $('#price').css('border-color', '#F00');
+                    return false;
+                }else if(!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test($('#price').val()))){
+                    alert('请输入正确的金额数');
+                    return false;
                 }else{
                     data.price = $('#price').val();
                 }
@@ -507,11 +512,13 @@
                 }
                 if($('#board-name').val() == ''){
                     $('#board-name').css('border-color', '#F00');
+                    return false;
                 }else{
                     data.board_name = $('#board-name').val();
                 }
                 if($('#url').val() == ''){
                     $('#url').css('border-color', '#F00');
+                    return false;
                 }else{
                     data.url = $('#url').val();
                 }
@@ -581,16 +588,19 @@
                     $('#plan-name').css('border-color', '#F00');
                 } else {
                     data.plan_name = $('#plan-name').val();
+                    return false;
                 }
                 if ($('#budget-value').val() == '') {
                     data.budget = 0;
                 } else {
                     data.budget = $('#budget-value').val();
+                    return false;
                 }
                 if ($('#device-type').val() == '-1') {
                     $('#device-type').css('border-color', '#F00');
                 } else {
                     data.device = $('#device-type').val();
+                    return false;
                 }
                 if ($('#hook-time-but').val() == '') {
                     $('#hook-time-but').parent().css('border-color', '#F00');
@@ -598,11 +608,7 @@
                     var timer = $('#hook-time-but').val().split(' ~ ');
                     data.startdate = timer[0];
                     data.enddate = timer[1];
-                }
-                if ($('#hook-time-but').val() == '') {
-                    $('#hook-time-but').css('border-color', '#F00');
-                } else {
-
+                    return false;
                 }
                 // console.log(data);
                 post_data(url,data,function(res){

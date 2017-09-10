@@ -53,7 +53,6 @@ class Launch_model extends ADLINKX_Model {
 
 	public function lists($where = array(), $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*', &$count){
 		$count_sql = 'SELECT COUNT(*) AS `count` FROM `huihe_marketing_system`.`diy_plan` '. $this->build_where($where);
-		$sql = 'SELECT * FROM ``.`` '.$this->build_where($where);
 		// var_dump($count_sql);
 		$count = $this->db->query($count_sql)->result_array()[0]['count'];
 		$sql = 'SELECT * FROM `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where).' ORDER BY '.$key.' '.$stor.' LIMIT '.intval(($offset-1)*$num).','.$num;

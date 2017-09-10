@@ -68,7 +68,7 @@
                                                 <{foreach $result item=lists key=i}>
                                                     <tr>
                                                         <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="<{$lists.plan_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
-                                                        <td><a href="/strategyMange/lists/campaign/strategy/0/<{$lists.plan_id}>/<{$lists.shop_id}>" class=""><{$lists.plan_name}></a></td>
+                                                        <td><a href="/strategyMange/lists/campaign/strategy/0/<{$lists.plan_id}>" class=""><{$lists.plan_name}></a></td>
                                                         <td><{if $lists.status eq 1}>开启<{else}>已暂停<{/if}></td>
                                                         <td><{$lists.startdate}>~<{$lists.enddate}></td>
                                                         <td><{if $lists.budget eq 0}>不限<{else}><{$lists.budget}><{/if}></td>
@@ -231,7 +231,7 @@
                             for(var i=0;i<list.length;i++){
                                 html += '<tr>'+
                                     '<td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-plan-id="'+list[i].plan_id+'"><i class="fa fa-square-o"></i>&nbsp;'+(i+1)+'</a></td>'+
-                                    '<td><a href="/strategyMange/lists/campaign/strategy/0/'+list[i].plan_id+'/'+list[i].shop_id+'" class="">'+list[i].plan_name+'</a></td>'+
+                                    '<td><a href="/strategyMange/lists/campaign/strategy/0/'+list[i].plan_id+'" class="">'+list[i].plan_name+'</a></td>'+
                                     '<td>'+(list[i].status == 1 ? '开启' : '已暂停')+'</td>'+
                                     '<td>'+(list[i].budget == 0 ? '不限' : list[i].budget)+'</td>'+
                                     '<td>'+get_device_type(list[i].device)+'</td>'+

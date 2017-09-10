@@ -21,7 +21,7 @@
                         <div class="breadcrumb-wrapper">
                             <span class="label">在这里</span>
                             <ol class="breadcrumb">
-                                <li><a href="https://www.adlinkx.com">返回</a></li>
+                                <li><a href="http://dsp.adlinkx.com">返回</a></li>
                                 <li class="active">首页</li>
                             </ol>
                         </div>
@@ -47,22 +47,22 @@
                                         <thead>
                                             <tr>
                                                 <th>序号</th>
-                                                <th>网站名称</th>
-                                                <th>网站地址</th>
+                                                <th>投放广告主</th>
+                                                <th>店铺名称</th>
+                                                <th>公司名称</th>
                                                 <th>联系人</th>
                                                 <th>联系电话</th>
-                                                <th>店铺余额</th>
-                                                <th>帐户余额</th>
                                                 <th>所属渠道</th>
-                                                <th>今日消耗</th>
+                                                <th>网站余额</th>
+                                                <th>帐户余额</th>
                                                 <th>昨日消耗</th>
+                                                <th>今日消耗</th>
                                                 <th>总消耗帐金额</th>
                                                 <th>总消耗点击</th>
                                                 <!-- <th>tanx行业类目</th>
                                                 <th>bes行业类目</th>
                                                 <th>vm行业类目</th> -->
                                                 <th>添加时间</th>
-                                                <th>广告主</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
@@ -73,16 +73,22 @@
                                                         <a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-shop-id="<{$store.shop_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i}></a>
                                                     </td>
                                                     <td colspan="" rowspan="" headers="">
-                                                        <{$store.shop_title}>
+                                                        <{$store.username}>
                                                     </td>
                                                     <td colspan="" rowspan="" headers="">
                                                         <a href="<{$store.website}>" target="_blank">
-                                                            <{$store.website}>
+                                                            <{$store.shop_title}>
                                                         </a>
                                                     </td>
-                                                    <td colspan="" rowspan="" headers=""></td>
+                                                    <td colspan="" rowspan="" headers=""><{$store.company_name}></td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{$store.contact}>
+                                                    </td>
                                                     <td colspan="" rowspan="" headers="">
                                                         <{$store.phone}>
+                                                    </td>
+                                                    <td colspan="" rowspan="" headers="">
+                                                        <{if $store.channel_id eq '225' }>领效<{/if}>
                                                     </td>
                                                     <td colspan="" rowspan="" headers="">
                                                         <{$store.store_money}>
@@ -90,19 +96,12 @@
                                                     <td colspan="" rowspan="" headers="">
                                                         <{$store.account_money}>
                                                     </td>
-                                                    <td colspan="" rowspan="" headers=""><{if $store.channel_id eq '225' }>领效<{/if}></td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.charge_today}></td>
                                                     <td colspan="" rowspan="" headers=""><{$store.charge_yesterday}></td>
+                                                    <td colspan="" rowspan="" headers=""><{$store.charge_today}></td>
                                                     <td colspan="" rowspan="" headers=""><{$store.agent_charge}></td>
                                                     <td colspan="" rowspan="" headers=""><{$store.click}></td>
-                                                    <!-- <td colspan="" rowspan="" headers=""><{$store.tanx_category}></td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.bes_industry_code}></td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.vm_category}></td> -->
                                                     <td colspan="" rowspan="" headers="">
-                                                        <{$store.update_time}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$store.username}>
+                                                        <{$store.add_time}>
                                                     </td>
                                                     <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="<{$store.shop_id}>" title="删除"><i class="fa fa-trash-o"></i></a><a href="/store/edit/store/lists/<{$store.shop_id}>" class="edit-store" data-shop-id="<{$store.shop_id}>" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" data-websit-name="<{$store.shop_title}>" style="margin:0 0 0 10px;"  title="分配配额"><i class="fa fa-gg-circle"></i></a></td>
                                                 </tr>
@@ -303,7 +302,7 @@
                         '<td colspan="" rowspan="" headers="">0.0</td>' +
                         '<td colspan="" rowspan="" headers="">0</td>' +
                         '<td colspan="" rowspan="" headers="">' + data[i]['update_time'] + '</td>' +
-                        '<td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="' + data[i]['shop_id'] + '">删除</a><a href="javascript:void(0);" class="edit-store" data-shop-id="' + data[i]['shop_id'] + '">编辑</a></td>' +
+                        '<td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-store" data-shop-id="' + data[i]['shop_id'] + '" title="删除"><i class="fa fa-trash-o"></i></a><a href="javascript:void(0);" class="edit-store" data-shop-id="' + data[i]['shop_id'] + '" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" calss="allocation-quota-buts" data-websit-name="'+ data[i]['shop_title']+'" data-shop-id="'+ data[i]['shop_id']+'" data-uid="'+ data[i]['own_id']+'" tite="分配配额"><i class="fa fa-gg-circle"></i></a></td>' +
                         +'</tr>';
                 }
             } else {
@@ -331,17 +330,27 @@
                             $('#allocation-quota-value').css('border-color','#F00');
                         }else if(!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test($('#allocation-quota-value').val()))){
                             alert('输入正确的金额数');
+                            return false;
                         }else if($('#allocation-quota-value').val() > account_money){
                             alert('输入的金额不能大于帐户金额');
+                            return false;
                         }else{
                             value = $('#allocation-quota-value').val();
                         }
                         $.ajax({
                             url:'/store/alloc_quota',
                             type:'POST',
-                            data:{'shop_id':shop_id,'uid':uid,'value':value},
-                            success:function(err){
-                                console.log(err);
+                            data:{'shop_id':shop_id,'uid':uid,'value':value,'shop_title':shop_title},
+                            success:function(res){
+                                if(res.code == 1 && res.msg == 'success'){
+                                    ADLINKX.alert('配额分配成功',2,function(){
+                                        window.location.reload();
+                                    });
+                                }else{
+                                    ADLINKX.alert('配额分配失败',2,function(){
+                                        window.location.reload();
+                                    });
+                                }
                             },
                             error:function(err){
                                 console.log(err);

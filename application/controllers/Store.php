@@ -92,7 +92,7 @@ class Store extends ADLINKX_Controller{
 
 	public function alloc_quota(){
 		$data = $this->input->post();
-		$store_money_up = $this->store->update_money(array('money' => $data['value']),array('shop_id' => $data['shop_id'],'uid' => $data['uid']));
+		$store_money_up = $this->store->update_money(array('money' => $data['value']),array('shop_id' => $data['shop_id'],'uid' => $data['uid'], 'shop_title' => $data['shop_title']));
 		if($store_money_up){
 			$this->output_json(true,'');
 		}else{
