@@ -433,6 +433,16 @@ Adlinkx.prototype.pages = function(json){
 
 Adlinkx.prototype.popup_layer = function(title,text,json){
     var _this = this;
+    var but_html = '';
+    if(json.confirm && !json.cancel){
+        but_html = '<div class="poup-footer-block"><a href="javascript:void(0);" class="confirm-but-block">'+(json.confirm ? json.confirm.title : '确定')+'</a></div>';
+    }else if(!json.confirm && json.cancel){
+        but_html = '<div class="poup-footer-block"><a href="javascript:void(0);" class="cancel-but-block">'+(json.cancel ? json.cancel.title : '取消')+'</a></div>';
+    }else if(json.confirm && json.cancel){
+        but_html = '<div class="poup-footer-block"><a href="javascript:void(0);" class="confirm-but-block">'+(json.confirm ? json.confirm.title : '确定')+'</a><a href="javascript:void(0);" class="cancel-but-block">'+(json.cancel ? json.cancel.title : '取消')+'</a></div>';
+    }else{
+        but_html = '';
+    }
     this.createElement('div', {
         'className': 'popup-mask-layer',
         'width': this.winW + 'px',
@@ -457,7 +467,7 @@ Adlinkx.prototype.popup_layer = function(title,text,json){
         'overflow': 'hidden',
         'zIndex': 10000,
         'border': '1px solid #c1c1c1',
-        'innerHTML': '<div class="popup-header-block"><span class="popup-title">'+title+':</span><a href="javascript:void(0);" class="popup-close-but" title="关闭"><i class="fa fa-times"></i></a></div><div class="popup-body-block">'+text+'</div><div class="poup-footer-block"><a href="javascript:void(0);" class="confirm-but-block">'+(json.confirm ? json.confirm.title : '确定')+'</a><a href="javascript:void(0);" class="cancel-but-block">'+(json.cancel ? json.cancel.title : '取消')+'</a></div>'+
+        'innerHTML': '<div class="popup-header-block"><span class="popup-title">'+title+':</span><a href="javascript:void(0);" class="popup-close-but" title="关闭"><i class="fa fa-times"></i></a></div><div class="popup-body-block">'+text+'</div>'+but_html+
         '<style>'+
             '.popup-header-block{width:'+parseInt(json.width-10)+'px;height:40px;line-height:40px;padding:0 0 0 20px;}'+
             '.popup-title{display:block;float:left;width:auto;height:40px;line-height:40px;}'+

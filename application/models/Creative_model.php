@@ -57,7 +57,7 @@ class Creative_model extends ADLINKX_Model {
 			'unit_id' => $unit['unit_id'],
 			'unit_name' => $unit['unit_name'],
 			'borad_id' => $board['board_id'],
-			'borad_name' => $data['board_name'],
+			'borad_name' => $data['borad_name'],
 			'borad_url' => $data['url'],
 			'kid' => $kid,
 			'k_url' => $k_url,
@@ -71,14 +71,14 @@ class Creative_model extends ADLINKX_Model {
 			'pic_height' => $data['pic_height'],
 			'status' => 0,
 			'pic_size' => $data['pic_width'] . '*' . $data['pic_height'],
-			'gxb_monitor_url' => $data['monitor_url'],
+			'gxb_monitor_url' => isset($data['monitor_url']) ? $data['monitor_url'] : '',
 			'mz_audit_stat' => 1
 		));
 		return $query && $this->db->affected_rows() > 0 ? $ad_task_id : false;
 	}
 
-	public function get($where = array()){
-		$this->db->select('*');
+	public function get($where = array(),$fields = '*'){
+		$this->db->select($fields);
 		$this->db->from($this->table_name);
 		$this->db->where($where);
 		$query = $this->db->get();
@@ -95,7 +95,18 @@ class Creative_model extends ADLINKX_Model {
 
 	public function update($data = array(), $where = array()){
 		$this->db->where($where);
-		$query = $this->db->update($this->table_name,$data);
+		$query = $this->db->update($this->table_name,array(
+			'borad_name' => $data['borad_name'],
+			'borad_url' => $data['url'],
+			'gxb_monitor_url' => isset($data['monitor_url']) ? $data['monitor_url'] : '',
+			'pic_path' => $data['pic_path'],
+			'pic_width' => $data['pic_width'],
+			'pic_height' => $data['pic_height'],
+			'pic_size' => $data['pic_width'] . '*' . $data['pic_height'],
+			'k_url' => $data['url'],
+			'j_url' => $data['url'],
+
+		));
 		// var_dump($this->db->last_query());
 		return $query && $this->db->affected_rows() > 0 ? true: false;
 	}

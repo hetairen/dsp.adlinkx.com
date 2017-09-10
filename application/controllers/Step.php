@@ -57,6 +57,7 @@ class Step extends ADLINKX_Controller {
 				}
 				//borad_url,pic_path,pic_height,pic_width,pic_size,gxb_monitor_url
 				if(empty($creative)){
+					$creative['id'] = '';
 					$creative['borad_name'] = '';
 					$creative['borad_url'] = '';
 					$creative['pic_path'] = '';

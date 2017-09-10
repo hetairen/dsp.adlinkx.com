@@ -79,7 +79,7 @@
                                                     <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                    <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="creative-list-delete-but"  title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.id}>" class="launch-list-edit-buts"  title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="<{$lists.id}>" title="创意预览" data-pic-path="<{$lists.pic_path}>" data-borad-url="<{$lists.borad_url}>"><i class="fa fa-eye"></i></a></td>
                                                 </tr>
                                                 <{/foreach}>
                                             <{else}>
@@ -220,6 +220,34 @@
             }
         });
 
+        $(document).on('click','.preview-buts',function(){
+            var id = $(this).attr('data-id');
+            var html = '';
+            $.ajax({
+                url:'/creativeMange/get/'+id,
+                type:'GET',
+                success:function(res){
+                    if(res.code ==1 && res.msg == 'success'){
+                        html = '<div style="width:100%;height:auto;padding:1% 2%"><a href="'+res.data.borad_url+'" target="_blank"><img src="http://dsp.adlinkx.com/resources/images/board/'+res.data.pic_path+'" style="display:block;width:300px;"></a></div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意地址：<a href="http://dsp.adlinkx.com/resources/images/board/'+res.data.pic_path+'">http://dsp.adlinkx.com/resources/images/board/'+res.data.pic_path+'</a></div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意格式：'+res.data.pic_path.split('.')[1]+'</div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意宽度：'+res.data.pic_width+'px</div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意高度：'+res.data.pic_height+'px</div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意连接：<a href="'+res.data.borad_url+'" target="_blank">'+res.data.borad_url+'</a></div>';
+                    }else{
+                        html = '<div style="width:100%;height:auto;padding:1% 2%;text-align:center;">获取创意数据失败</div>';
+                    }
+                    ADLINKX.popup_layer('创意预览',html,{
+                        width:640,
+                        height:480,
+                    });
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
+        });
+
         $(document).on('click',function(){
             $('.select-brands-but').attr('data-is-click',false);
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
@@ -296,11 +324,11 @@
                                     '<td>0</td>'+
                                     '<td>0</td>'+
                                     '<td>0</td>'+
-                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" class="creative-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" class="creative-list-delete-but" title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].id+'" class="launch-list-edit-buts" title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="'+list[i].id+'" title="创意预览" data-pic-path="'+list[i].pic_path+'" data-borad-url="'+list[i].borad_url+'"><i class="fa fa-eye"></i></a></td>'+
                                 '</tr>';
                             }
                         }else{
-                            html = '<tr><td colspan="12">暂无数据</td></tr>';
+                            html = '<tr><td colspan="12" style="text-align:center;">暂无数据</td></tr>';
                         }
                         $('#table2').find('tbody').html(html);
                         $('#pages-box').attr('data-count',count);

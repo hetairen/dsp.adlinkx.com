@@ -34,7 +34,15 @@ class CreativeMange extends ADLINKX_Controller {
 	}
 
 	public function update() {
-
+		$data = $this->input->post();
+		$where['id'] = $data['id'];
+		unset($data['id']);
+		$status = $this->creative->update($data,$where);
+		if($status){
+			$this->output_json(true,'');
+		}else{
+			$this->output_json(false,'');
+		}
 	}
 
 	public function delete() {
@@ -53,7 +61,13 @@ class CreativeMange extends ADLINKX_Controller {
 	}
 
 	public function get() {
-
+		$id = $this->uri->segment(3);
+		$creative = $this->creative->get(array('id' => $id));
+		if($creative && !empty($creative)){
+			$this->output_json(true,$creative);
+		}else{
+			$this->output_json(false,'');
+		}
 	}
 
 	public function lists() {

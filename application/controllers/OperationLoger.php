@@ -22,7 +22,7 @@ class OperationLoger extends ADLINKX_Controller {
 		$where = array('uid' => $this->uid);
 		$offset = $this->uri->segment(5) ? $this->uri->segment(5): 1;
 		$num = $this->uri->segment(6) ? $this->uri->segment(6): 20;
-		$key = $this->uri->segment(7) ? $this->uri->segment(7): 'date';
+		$key = $this->uri->segment(7) ? $this->uri->segment(7): 'time';
 		$sort = $this->uri->segment(8) ? $this->uri->segment(8): 'DESC';
 		$fields = array('*');
 		$result = $this->getAll($where, $num, $offset, $key, $sort, $fields, $count);

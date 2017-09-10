@@ -328,6 +328,7 @@
                         var value = 0;
                         if($('#allocation-quota-value').val() == ''){
                             $('#allocation-quota-value').css('border-color','#F00');
+                            return false;
                         }else if(!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test($('#allocation-quota-value').val()))){
                             alert('输入正确的金额数');
                             return false;
@@ -357,6 +358,9 @@
                             }
                         });
                     }
+                },
+                cancel:{
+                    title:'确定',
                 }
             });
         });

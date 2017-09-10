@@ -12,7 +12,7 @@
                 var fn = 'strategy';
             <{elseif $action eq 'creative' and $step eq 3}>
                 window.local_tags = null;
-                var url = '/creativeMange/add';
+                var url = '/creativeMange/<{$but_fn}>';
                 var fn = 'creative';
             <{else}>
                 var url = '/launchMange/<{$but_fn}>';
@@ -149,7 +149,7 @@
                                                         <div class="form-list-block-box">
                                                             <div class="form-controller">创意名称：</div>
                                                             <div class="form-input-block">
-                                                                <input type="" name="board-name" value="<{$creative.borad_name}>" id="board-name" placeholder="创意名称" />
+                                                                <input type="" name="borad-name" value="<{$creative.borad_name}>" id="borad-name" placeholder="创意名称" />
                                                             </div>
                                                             <div class="form-tip-block">创意名称必填</div>
                                                         </div>
@@ -211,13 +211,15 @@
                                                                 <{if $but_fn eq 'add'}>
                                                                     <input type="hidden" name="unit-id" value="<{$unit_id}>" id="unit-id">
                                                                 <{else}>
-                                                                    <input type="hidden" name="unit-id" value="<{$creative.unit_id}>" id="unit-id">
+                                                                    <input type="hidden" name="id" value="<{$creative.id}>" id="id">
                                                                 <{/if}>
-                                                                <input type="hidden" name="upload-pic-path" value="" id="upload-pic-path" />
-                                                                <input type="hidden" name="upload-pic-width" value="" id="upload-pic-width" />
-                                                                <input type="hidden" name="upload-pic-height" value="" id="upload-pic-height" />
-                                                                <input type="hidden" name="upload-pic-ext" value="" id="upload-pic-ext" />
-                                                                <input type="hidden" name="board-id" value="" id="board-id" />
+                                                                <input type="hidden" name="upload-pic-path" value="<{$creative.pic_path}>" id="upload-pic-path" />
+                                                                <input type="hidden" name="upload-pic-width" value="<{$creative.pic_width}>" id="upload-pic-width" />
+                                                                <input type="hidden" name="upload-pic-height" value="<{$creative.pic_height}>" id="upload-pic-height" />
+                                                                <{if $but_fn eq 'add'}>
+                                                                    <input type="hidden" name="upload-pic-ext" value="<{$creative.pic_extension}>" id="upload-pic-ext" />
+                                                                <{/if}>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="add-creative-block">
@@ -355,8 +357,8 @@
                                             <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建创意&nbsp;&nbsp;<i class="save-and-next fa fa-caret-right m3"></i></a>
                                             <a href="javascript:void(0);" class="submit-buts save-buts" data-type="1" data-but-fn="<{$but_fn}>">保存<i class="icon-loading fa fa-spinner fa-spin m3"></i></a>
                                             <{elseif $action eq 'creative' and $step eq 3}>
-                                                <a href="/creativeMange/lists/campaign/creative/0/<{if but_fn eq 'add'}><{$unit_id}><{else}><{$creative.unit_id}><{/if}>" class="callback-lists-buts">返回列表</a>
-                                                <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>" data-unit-id="<{if but_fn eq 'add'}><{$unit_id}><{else}><{$creative.unit_id}><{/if}>">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
+                                                <a href="/creativeMange/lists/campaign/creative/0/<{if $but_fn eq 'add'}><{$unit_id}><{else}><{$creative.unit_id}><{/if}>" class="callback-lists-buts">返回列表</a>
+                                                <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>" data-unit-id="<{if $but_fn eq 'add'}><{$unit_id}><{else}><{$creative.unit_id}><{/if}>">保存并下一步&nbsp;&nbsp;<i class="fa fa-caret-right m3"></i></a>
                                                 <{else}>
                                                     <a href="/launchMange/lists/campaign/launch/0" class="callback-lists-buts">返回列表</a>
                                                     <a href="javascript:void(0);" class="submit-buts save-and-confirm-buts" data-type="2" data-but-fn="<{$but_fn}>">保存并创建策略&nbsp;&nbsp;<i class="save-and-next fa fa-caret-right m3"></i></a>
@@ -409,11 +411,6 @@
             new labelMarket($,local_tags).main();
             $(document).on('click', '.submit-buts', function() {
                 var type = $(this).attr('data-type'),tmp = [],date_tmp=[],_this=this;
-                if(type == 1){
-                    $(this).find('.icon-loading').css('display','inline-block');
-                }else{
-                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
-                }
                 if($('#unit-name').val() == ''){
                      $('#unit-name').css('border-color', '#F00');
                      return false;
@@ -439,6 +436,11 @@
                 });
                 data.tags_value = '{"tags":['+tmp.toString()+']}';
                 data.date_value = JSON.stringify(date_tmp);
+                if(type == 1){
+                    $(this).find('.icon-loading').css('display','inline-block');
+                }else{
+                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
+                }
                 // console.log(data);
                 post_data(url,data,function(res){
                     console.log(res);
@@ -507,14 +509,11 @@
 
             $(document).on('click','.submit-buts',function(){
                 var type = $(this).attr('data-type'),_this=this;
-                if(type == 2){
-                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
-                }
-                if($('#board-name').val() == ''){
-                    $('#board-name').css('border-color', '#F00');
+                if($('#borad-name').val() == ''){
+                    $('#borad-name').css('border-color', '#F00');
                     return false;
                 }else{
-                    data.board_name = $('#board-name').val();
+                    data.borad_name = $('#borad-name').val();
                 }
                 if($('#url').val() == ''){
                     $('#url').css('border-color', '#F00');
@@ -523,9 +522,12 @@
                     data.url = $('#url').val();
                 }
                 if($('#monitor-url').val() == ''){
-                    $('#monitor-url').css('border-color', '#F00');
+                    data.monitor_url = '';
                 }else{
                     data.monitor_url = $('#monitor-url').val();
+                }
+                if(type == 2){
+                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
                 }
                 if(creative_type == 1){
                     data.pic_path = $('#upload-pic-path').val();
@@ -550,8 +552,11 @@
                     }
                     data.pic_extension = $('#creative-type').val();
                 }
-                data.unit_id = $('#unit-id').val();
-                data.board_id = $('#board-id').val();
+                <{if $but_fn eq 'add'}>
+                    data.unit_id = $('#unit-id').val();
+                <{else}>
+                    data.id = $('#id').val();
+                <{/if}>
                 console.log(data);
                  post_data(url,data,function(res){
                     console.log(res);
@@ -574,11 +579,6 @@
             });
             $(document).on('click', '.submit-buts', function() {
                 var type = $(this).attr('data-type'),_this = this;
-                if(type == 1){
-                    $(this).find('.icon-loading').css('display','inline-block');
-                }else{
-                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
-                }
                 <{if $but_fn eq 'update'}>
                     data.plan_id='<{$launch.plan_id}>';
                 <{else}>
@@ -586,29 +586,33 @@
                 <{/if}>
                 if ($('#plan-name').val() == '') {
                     $('#plan-name').css('border-color', '#F00');
+                    return false;
                 } else {
                     data.plan_name = $('#plan-name').val();
-                    return false;
                 }
                 if ($('#budget-value').val() == '') {
                     data.budget = 0;
                 } else {
                     data.budget = $('#budget-value').val();
-                    return false;
                 }
                 if ($('#device-type').val() == '-1') {
                     $('#device-type').css('border-color', '#F00');
+                    return false;
                 } else {
                     data.device = $('#device-type').val();
-                    return false;
                 }
                 if ($('#hook-time-but').val() == '') {
                     $('#hook-time-but').parent().css('border-color', '#F00');
+                    return false;
                 } else {
                     var timer = $('#hook-time-but').val().split(' ~ ');
                     data.startdate = timer[0];
                     data.enddate = timer[1];
-                    return false;
+                }
+                if(type == 1){
+                    $(this).find('.icon-loading').css('display','inline-block');
+                }else{
+                    $(this).find('.save-and-next').removeClass('fa-caret-right').addClass('fa-spinner fa-spin');
                 }
                 // console.log(data);
                 post_data(url,data,function(res){
