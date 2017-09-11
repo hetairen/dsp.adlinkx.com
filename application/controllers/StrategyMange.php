@@ -34,7 +34,7 @@ class StrategyMange extends ADLINKX_Controller {
 
 	public function update() {
 		$data = $this->input->post();
-		$where = array('unit_id' => $data['unit_id'], 'plan_id' => $data['plan_id'], 'shop_id' => $data['shop_id'], 'uid' => $this->session->userdata('uid'));
+		$where = array('unit_id' => $data['unit_id'], 'uid' => $this->session->userdata('uid'));
 		$data = array('unit_name' => $data['unit_name'], 'price' => $data['price'], 'tags_value' => $data['tags_value'], 'date_value' => $data['date_value']);
 		$up = $this->strategy->update_strategy($data,$where);
 		if($up){
