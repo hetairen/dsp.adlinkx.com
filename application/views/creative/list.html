@@ -79,7 +79,7 @@
                                                     <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="creative-list-delete-but"  title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.id}>" class="launch-list-edit-buts"  title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="<{$lists.id}>" title="创意预览" data-pic-path="<{$lists.pic_path}>" data-borad-url="<{$lists.borad_url}>"><i class="fa fa-eye"></i></a></td>
+                                                    <td><a href="javascript:void(0);" data-id="<{$lists.id}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-plan-id="<{$lists.unit_id}>" class="delete-but"  title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/<{$lists.id}>" class="edit-buts"  title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="<{$lists.id}>" title="创意预览" data-pic-path="<{$lists.pic_path}>" data-borad-url="<{$lists.borad_url}>"><i class="fa fa-eye"></i></a></td>
                                                 </tr>
                                                 <{/foreach}>
                                             <{else}>
@@ -178,7 +178,7 @@
             }
         });
 
-        $(document).on('click','.creative-list-delete-but',function(){
+        $(document).on('click','.delete-but',function(){
             var ids = $(this).attr('data-id');
             delete_creative(ids);
         });
@@ -324,7 +324,7 @@
                                     '<td>0</td>'+
                                     '<td>0</td>'+
                                     '<td>0</td>'+
-                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" class="creative-list-delete-but" title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].id+'" class="launch-list-edit-buts" title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="'+list[i].id+'" title="创意预览" data-pic-path="'+list[i].pic_path+'" data-borad-url="'+list[i].borad_url+'"><i class="fa fa-eye"></i></a></td>'+
+                                    '<td><a href="javascript:void(0);" data-id="'+list[i].id+'" class="delete-but" title="删除创意"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/creative/3_2/'+list[i].id+'" class="edit-buts" title="编辑创意"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="preview-buts" data-id="'+list[i].id+'" title="创意预览" data-pic-path="'+list[i].pic_path+'" data-borad-url="'+list[i].borad_url+'"><i class="fa fa-eye"></i></a></td>'+
                                 '</tr>';
                             }
                         }else{

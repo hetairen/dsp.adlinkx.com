@@ -78,7 +78,7 @@
                                                         <td>0</td>
                                                         <td>0</td>
                                                         <td>0</td>
-                                                        <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" class="launch-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/<{$lists.plan_id}>" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                        <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" class="delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/<{$lists.plan_id}>" class="edit-buts"><i class="fa fa-edit"></i></a></td>
                                                     </tr>
                                                 <{/foreach}>
                                             <{else}>
@@ -172,7 +172,7 @@
             
         });
 
-        $(document).on('click','.launch-list-delete-but',function(){
+        $(document).on('click','.delete-but',function(){
             var ids = $(this).attr('data-plan-id');
             delete_plan(ids);
         });
@@ -240,7 +240,7 @@
                                     '<td>0</td>'+
                                     '<td>0</td>'+
                                     '<td>0</td>'+
-                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-plan-id="'+list[i].plan_id+'" class="launch-list-delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/'+list[i].plan_id+'" class="launch-list-edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-plan-id="'+list[i].plan_id+'" class="delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/'+list[i].plan_id+'" class="edit-buts"><i class="fa fa-edit"></i></a></td>'+
                                 '</tr>';
                             }
                         }else{
