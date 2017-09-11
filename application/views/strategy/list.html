@@ -76,7 +76,7 @@
                                                     <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-unit-id="<{$lists.unit_id}>" class="delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/<{$lists.unit_id}>" class="edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                    <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-unit-id="<{$lists.unit_id}>" class="delete-buts"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/<{$lists.unit_id}>" class="edit-buts"><i class="fa fa-edit"></i></a></td>
                                                 </tr>
                                             <{/foreach}>
                                         </tbody>
@@ -170,7 +170,7 @@
             
         });
 
-        $(document).on('click','.delete-but',function(){
+        $(document).on('click','.delete-buts',function(){
             var ids = $(this).attr('data-unit-id');
             delete_strategy(ids);
         });
@@ -239,7 +239,7 @@
                                     '<td>0</td>'+
                                     '<td>0</td>'+
                                     '<td>0</td>'+
-                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-unit-id="'+list[i].unit_id+'" class="delete-but"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/'+list[i].unit_id+'" class="edit-buts"><i class="fa fa-edit"></i></a></td>'+
+                                    '<td><a href="javascript:void(0);" data-uid="'+list[i].uid+'" data-shop-id="'+list[i].shop_id+'" data-unit-id="'+list[i].unit_id+'" class="delete-buts"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/'+list[i].unit_id+'" class="edit-buts"><i class="fa fa-edit"></i></a></td>'+
                                 '</tr>';
                             }
                         }else{
