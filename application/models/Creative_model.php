@@ -114,7 +114,8 @@ class Creative_model extends ADLINKX_Model {
 	public function delete($where = array()){
 		$FB = null;
 		for($i=0;$i<count($where);$i++){
-			$FB = $this->update(array('is_del' => 1), $where[$i]);
+			$this->db->where($where);
+			$FB = $this->db->update($this->table_name, array('is_del' => 1));
 		}
 		return $FB;
 	}
