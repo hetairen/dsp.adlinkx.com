@@ -68,7 +68,7 @@
                                                         <{$loger.remark}>
                                                     </td>
                                                     <td class="center">
-                                                        <a href="javascript:void(0);" class="delete-loger-buts" data-uid="<{$loger.uid}>" data-id="<{$loger.id}>" title="删除"><i class="fa fa-trash-o"></i></a>
+                                                        <a href="javascript:void(0);" class="delete-buts" data-uid="<{$loger.uid}>" data-id="<{$loger.id}>" title="删除"><i class="fa fa-trash-o"></i></a>
                                                     </td>
                                                 </tr>
                                                 <{/foreach}>
@@ -130,7 +130,7 @@
             }
         });
 
-        $('.delete-loger-buts').on('click', function() {
+        $('.delete-buts').on('click', function() {
             var uid = $(this).attr('data-uid') ? $(this).attr('data-uid') : "<{ $smarty.session.uid }>" ;
             var id = $(this).attr('data-id');
             $.ajax({
