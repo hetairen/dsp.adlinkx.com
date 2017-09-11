@@ -280,52 +280,12 @@
             return tmp;
         }
 
-        function get_pages(el,url){
-            ADLINKX.pages({
-                id: 'pages-box',
-                first: {
-                    text: '首页',
-                    callback: null,
-                    enable: true
-                },
-                last: {
-                    text: '尾页',
-                    callback: null,
-                    enable: true
-                },
-                next: {
-                    text: '下一页',
-                    callback: null,
-                    enable: true
-                },
-                previ: {
-                    text: '上一页',
-                    callback: null,
-                    enable: true
-                },
-                search: {
-                    text: '搜索',
-                    callback: null,
-                    enable: true
-                },
-                count: $('#'+el).attr('data-count'),
-                current: $('#'+el).attr('data-current'),
-                num: 20,
-                color: '#0781ec',
-                is_ajax: true,
-                url: url,
-                callback: function(res) {
-                    console.log(res);
-                }
-            });
-        }
-
         $('.allocation-quota-buts').on('click',function(){
             var account_money = <{$user.money}>;
             var shop_id = $(this).attr('data-shop-id');
             var shop_title = $(this).attr('data-websit-name');
             var uid = $(this).attr('data-uid');
-            html = '<div class="account-money"style="width:100%;height:40px;"><span style="display:block;float:left;width:120px;height:40px;line-height:40px;text-align:right;">帐户余额：</span><span style="display:block;float:left;width:120px;height:38px;line-height:38px;margin:0 0 0 10px;"><{$user.money}></span></div>'+
+            var html = '<div class="account-money"style="width:100%;height:40px;"><span style="display:block;float:left;width:120px;height:40px;line-height:40px;text-align:right;">帐户余额：</span><span style="display:block;float:left;width:120px;height:38px;line-height:38px;margin:0 0 0 10px;"><{$user.money}></span></div>'+
                     '<div class="account-money"style="width:100%;height:40px;"><span style="display:block;float:left;width:120px;height:40px;line-height:40px;text-align:right;">网站名称：</span><span style="display:block;float:left;width:140px;height:38px;line-height:38px;margin:0 0 0 10px;">'+shop_title+'</span></div>'+
                     '<div class="allocation-quota-input-block" style="width:100%;height:40px;"><span style="display:block;float:left;width:120px;height:40px;line-height:40px;text-align:right;">输入要分配的额度：</span><input type="text" value="" name="allocation-quota-value" id="allocation-quota-value" style="display:block;float:left;width:100px;height:38px;line-height:38px;padding:0 0 0 10px;border:1px solid #c1c1c1;border-radius:2px;"/><span style="display:block;float:left;width:210px;height:40px;line-height:40px;">&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;&nbsp;分配的额度不能大于帐户余额</span></div>';
             ADLINKX.popup_layer('分配配额',html,{
@@ -369,10 +329,50 @@
                     }
                 },
                 cancel:{
-                    title:'确定',
+                    title:'取消',
                 }
             });
         });
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: 'pages-box',
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable: true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable: true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable: true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable: true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable: true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num: 20,
+                color: '#0781ec',
+                is_ajax: true,
+                url: url,
+                callback: function(res) {
+                    console.log(res);
+                }
+            });
+        }
     });
     </script>
 </body>
