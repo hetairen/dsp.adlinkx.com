@@ -485,7 +485,7 @@ Adlinkx.prototype.popup_layer = function(title,text,json){
     });
 
     this.jQuery(document).on('click','.cancel-but-block',function(){
-        if(json.cancel){
+        if(json.cancel && json.cancel.callback){
             json.cancel.callback();
         }
         _this.jQuery('.popup-mask-layer').remove();
@@ -493,7 +493,7 @@ Adlinkx.prototype.popup_layer = function(title,text,json){
     });
 
     this.jQuery(document).on('click','.confirm-but-block',function(){
-        if(json.confirm){
+        if(json.confirm && json.confirm.callback){
             json.confirm.callback();
         }
         
