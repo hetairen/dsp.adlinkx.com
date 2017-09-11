@@ -91,10 +91,9 @@ class CreativeMange extends ADLINKX_Controller {
 		$stor = $this->uri->segment(13) ? $this->uri->segment(13) : 'DESC';
 		$fields = '*';
 		$creative_lists = $this->creative->lists($where, $offset, $num, $key, $stor, $fields, $count);
-		var_dump($creative_lists);
 		if($creative_lists && !empty($creative_lists) && count($creative_lists) > 0){
 			for($i=0;$i<count($creative_lists);$i++){
-				$creative_lists[$i]['ext'] = explode('.',$creative_lists[$i]['pic_path'])[1];
+				$creative_lists[$i]['ext'] = $creative_lists[$i]['pic_path'] && !empty($creative_lists[$i]['pic_path']) ? explode('.',$creative_lists[$i]['pic_path'])[1] : '';
 			}
 		}
 		if($is_ajax){
