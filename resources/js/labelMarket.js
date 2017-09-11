@@ -42,7 +42,7 @@ function labelMarket($, local_tags) {
             '.label-content-model-block{width:100%;height:auto;background:#f8f8f8;padding:1% 0;}\n' +
             '.label-content-model-lists{width:98%;height:50px;overflow:hidden;background:#FFF;margin:0 1% 10px 1%;}\n' +
             '.label-content-model-lists:last-child{width:98%;height:50px;overflow:hidden;background:#FFF;margin:0 1% 0 1%;}\n' +
-            '.label-content-header{width:98%;height:50px;line-height:50px;font-size:13px;background:#ededed;padding:0 0 0 2%;border-bottom:1px solid #c1c1c1;}\n' +
+            '.label-content-header{width:100%;height:50px;line-height:50px;font-size:13px;background:#ededed;padding:0 0 0 2%;border-bottom:1px solid #c1c1c1;}\n' +
             '.label-content-header:hover{cursor:pointer;background:#bfdef1;}\n' +
             '.label-content-body{width:100%;height:auto;}\n' +
             '.tages-title-block{width:98%;height:50px;}\n' +

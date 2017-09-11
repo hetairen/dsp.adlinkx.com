@@ -226,13 +226,13 @@ input {
 .form-list-block-box{width:100%;height:40px;margin-bottom:20px;}
 .form-list-block-box:first-child{margin-top:60px;}
 .form-list-block-box:nth-child(1){margin-top:60px;}
-.form-controller{float:left;width:170px;height:40px;text-align: right;line-height: 40px;font-size:14px;font-weight: bold;color:#62687e;padding:0 10px 0 0;}
-.form-input-block{float:left;width:520px;height:40px;}
+.form-controller{float:left;width:15%;height:40px;text-align: right;line-height: 40px;font-size:14px;font-weight: bold;color:#62687e;padding:0 10px 0 0;}
+.form-input-block{float:left;width:40%;height:40px;}
 .form-input-block select{width:100%;height:38px;line-height: 38px;border:1px solid #c1c1c1;border-radius:3px;padding:0 0 0 10px;}
 .form-input-block input{width:100%;height:38px;line-height: 38px;border:1px solid #c1c1c1;border-radius:3px;padding:0 0 0 10px;}
 .select-time-buts{display:block;float:left;width:40px;height:38px;line-height:40px;text-align:center;}
-#hook-time-but{display:block;float:left;width:478px;height:38px;border:none;}
-.form-tip-block{float:left;width:370px;height:40px;line-height:40px;padding:0 0 0 10px;position:relative;}
+#hook-time-but{display:block;float:left;width:50%;height:38px;border:none;}
+.form-tip-block{float:left;width:45%;height:40px;line-height:40px;padding:0 0 0 10px;position:relative;font-size:12px;}
 .buts-block-box{width:100%;height:40px;margin:100px 0 0 0;}
 .save-buts{display:block;float:right;width:auto;height:40px;line-height:40px;padding:0 20px;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:3px;margin:0 4px 0 0;}
 .save-buts:hover{background:#0081f4;border-color:#0053cd;color:#FFF;text-decoration: none;}
