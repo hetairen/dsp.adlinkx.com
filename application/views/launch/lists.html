@@ -3,6 +3,9 @@
 
 <head>
     <{include file="common/header.html" }>
+    <script type="text/javascript">
+        var flg = null;
+    </script>
 </head>
 
 <body>
@@ -20,11 +23,17 @@
                         <h2><i class="fa fa-paper-plane"></i>首页<span>活动管理</span> <span>投放管理</span></h2>
                         <div class="breadcrumb-wrapper">
                             <div class="select-brands-title">所属品牌：</div>
-                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$store_lists[0].shop_id}>"><{$store_lists[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
+                            <div class="select-brands-but" data-is-click="false"><{if $store_lists|@count neq 0}><span id="store-title-box" data-shop-id="<{$store_lists[0].shop_id}>"><{$store_lists[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{else}><span id="store-title-box" data-shop-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{/if}></div>
                             <div class="brands-lists-block" style="display:none;">
-                                <{foreach $store_lists item=store key=i}>
-                                    <div class="brands-lists" data-shop-id="<{$store.shop_id}>"><{$store.shop_title}></div>
-                                <{/foreach}>
+                                <{if $store_lists|@count neq 0}>
+                                    <div class="brands-lists" data-shop-id="">全部</div>
+                                    <{foreach $store_lists item=store key=i}>
+                                        <div class="brands-lists" data-shop-id="<{$store.shop_id}>"><{$store.shop_title}></div>
+                                    <{/foreach}>
+                                <{else}>
+                                    <div class="brands-lists" data-shop-id="">全部</div>
+                                <{/if}>
+                               
                             </div>
                         </div>
                     </div>
@@ -32,7 +41,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">投放管理</div>
-                                <div class="add-but-block"><a class="add-buts but-24ac45" href="/step/edit/campaign/launch/1_1/<{$store_lists[0].shop_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增投放</a></div>
+                                <div class="add-but-block"><a class="add-buts but-24ac45" href="javascript:void(0);" data-shop-id="<{if $store_lists|@count neq 0}><{$store_lists[0].shop_id}><{else}><{/if}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增投放</a></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
@@ -148,9 +157,19 @@
             $('.select-brands-but').attr('data-is-click',false);
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
-            $('.add-buts').attr('href','/step/edit/campaign/launch/1_1/'+$(this).attr('data-shop-id'));
+            $('.add-buts').attr('data-shop-id',$(this).attr('data-shop-id'));
             get_launch_list($(this).attr('data-shop-id'),'');
         });
+
+        $(document).on('click','.add-buts',function(){
+            var shop_id = $(this).attr('data-shop-id');
+            if(shop_id == ''){
+                ADLINKX.alert('请选择品牌');
+            }else{
+                window.location.href='/step/edit/campaign/launch/1_1/'+shop_id;
+            }
+        });
+
         $(document).on('click',function(){
             $('.select-brands-but').attr('data-is-click',false);
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
@@ -178,6 +197,7 @@
         });
 
         $(document).on('click','.start-buts',function(){
+            var shop_id = $('#store-title-box').attr('data-shop-id');
             var ids = [];
             $('.select-buts').each(function(index, el) {
                 if($(this).attr('data-is-checked') == 'true'){
@@ -185,13 +205,35 @@
                 }
             });
             if(ids.length > 0){
-                update_launch(ids.toString(),'start');
+                $.ajax({
+                    url:'/store/check_money/'+shop_id,
+                    type:'GET',
+                    success:function(res){
+                        if(res.code == 1 && res.msg == 'success'){
+                            if(res.data.money > 50){
+                               update_launch(ids.toString(),'start');
+                            }else{
+                               ADLINKX.alert('网站余额少于50元，请先充值并分配配额');
+                            }
+                        }else{
+                            ADLINKX.alert('获取网站余额失败',2,function(){
+                                window.location.reload();
+                            });
+                        }
+                    },
+                    error:function(err){
+                        console.error(err);
+                    }
+                });
+                console.log(check_store_money(shop_id));
+                
             }else{
                 ADLINKX.alert('请选择要开启的投放');
             }
         });
 
         $(document).on('click','.stop-buts',function(){
+            
             var ids = [];
             $('.select-buts').each(function(index, el) {
                 if($(this).attr('data-is-checked') == 'true'){
@@ -365,6 +407,7 @@
                 },
             });
         }
+
     });
     </script>
 </body>

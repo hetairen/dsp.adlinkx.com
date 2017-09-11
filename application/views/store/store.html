@@ -67,45 +67,50 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <{foreach $store_lists item=store key=i}>
-                                                <tr>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-shop-id="<{$store.shop_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i}></a>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$store.username}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <a href="<{$store.website}>" target="_blank">
-                                                            <{$store.shop_title}>
-                                                        </a>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.company_name}></td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$store.contact}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$store.phone}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{if $store.channel_id eq '225' }>领效<{/if}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$store.store_money}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$store.account_money}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.charge_yesterday}></td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.charge_today}></td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.agent_charge}></td>
-                                                    <td colspan="" rowspan="" headers=""><{$store.click}></td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$store.add_time}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-buts" data-shop-id="<{$store.shop_id}>" title="删除"><i class="fa fa-trash-o"></i></a><a href="/store/edit/store/lists/<{$store.shop_id}>" class="edit-buts" data-shop-id="<{$store.shop_id}>" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" data-websit-name="<{$store.shop_title}>" style="margin:0 0 0 10px;"  title="分配配额"><i class="fa fa-gg-circle"></i></a></td>
-                                                </tr>
+                                            <{if $store_lists|@count neq 0}>
+                                                <{foreach $store_lists item=store key=i}>
+                                                    <tr>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-shop-id="<{$store.shop_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i}></a>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.username}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <a href="<{$store.website}>" target="_blank">
+                                                                <{$store.shop_title}>
+                                                            </a>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.company_name}></td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.contact}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.phone}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{if $store.channel_id eq '225' }>领效<{/if}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.store_money}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.account_money}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.charge_yesterday}></td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.charge_today}></td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.agent_charge}></td>
+                                                        <td colspan="" rowspan="" headers=""><{$store.click}></td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$store.add_time}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-buts" data-shop-id="<{$store.shop_id}>" title="删除"><i class="fa fa-trash-o"></i></a><a href="/store/edit/store/lists/<{$store.shop_id}>" class="edit-buts" data-shop-id="<{$store.shop_id}>" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" class="allocation-quota-buts" data-shop-id="<{$store.shop_id}>" data-uid="<{$store.own_id}>" data-websit-name="<{$store.shop_title}>" style="margin:0 0 0 10px;"  title="分配配额"><i class="fa fa-gg-circle"></i></a></td>
+                                                    </tr>
                                                 <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="16" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
                                         </tbody>
                                     </table>
                                     <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
@@ -128,45 +133,8 @@
     <script src="/resources/js/libarays/custom.js"></script>
     <script>
     jQuery(document).ready(function() {
-
-        ADLINKX.pages({
-            id: 'pages-box',
-            first: {
-                text: '首页',
-                callback: null,
-                enable:true
-            },
-            last: {
-                text: '尾页',
-                callback: null,
-                enable:true
-            },
-            next: {
-                text: '下一页',
-                callback: null,
-                enable:true
-            },
-            previ: {
-                text: '上一页',
-                callback: null,
-                enable:true
-            },
-            search: {
-                text: '搜索',
-                callback: null,
-                enable:true
-            },
-            count: $('#pages-box').attr('data-count'),
-            current: $('#pages-box').attr('data-current'),
-            num:20,
-            color: '#0781ec',
-            is_ajax: true,
-            url:'/ajax_api/store/lists/0/0/',
-            callback:function(res){
-                console.log(res);
-            }
-        });
-
+        'use strict';
+        get_pages('pages-box','/ajax_api/store/lists/0/0/');
         $(document).on('click', '.delete-buts', function() {
             $.ajax({
                 url: '/store/delete/' + $(this).attr('data-shop-id'),
@@ -312,6 +280,46 @@
             return tmp;
         }
 
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: 'pages-box',
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable: true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable: true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable: true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable: true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable: true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num: 20,
+                color: '#0781ec',
+                is_ajax: true,
+                url: url,
+                callback: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+
         $('.allocation-quota-buts').on('click',function(){
             var account_money = <{$user.money}>;
             var shop_id = $(this).attr('data-shop-id');
@@ -365,7 +373,6 @@
                 }
             });
         });
-
     });
     </script>
 </body>

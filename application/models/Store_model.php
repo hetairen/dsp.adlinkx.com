@@ -37,8 +37,8 @@ class Store_model extends ADLINKX_Model{
 		return $query && $this->db->affected_rows() > 0 ? $shop_id : false ;
 	}
 
-	public function get($where = array()){
-		$this->db->select('*');
+	public function get($where = array(),$fields = '*'){
+		$this->db->select($fields);
 		$this->db->from('store');
 		$this->db->where($where);
 		$query = $this->db->get();

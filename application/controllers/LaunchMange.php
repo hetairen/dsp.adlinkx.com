@@ -15,6 +15,8 @@ class LaunchMange extends ADLINKX_Controller {
 		$this->initialization();
 		$this->load->model('store_model','store');
 		$this->load->model('launch_model','launch');
+		$this->load->model('strategy_model','strategy');
+		$this->load->model('creative_model','creative');
 		$this->load->model('loger_model','loger');
 	}
 	public function index() {
@@ -111,7 +113,9 @@ class LaunchMange extends ADLINKX_Controller {
 		$count = 0;
 		$store_lists = $this->store->lists(array('own_id' =>$this->session->userdata('uid'), 'start_date' => date('Y-m-d',time()),
 			'end_date' => date('Y-m-d',time())),20,1,'update_time','desc','*',$count);
-		$this->session->set_userdata('shop_id',$store_lists[0]['shop_id']);
+		if($store_lists && !empty($store_lists)){
+			$this->session->set_userdata('shop_id',$store_lists[0]['shop_id']);
+		}
 		$this->assign('store_lists',$store_lists);
 	}
 
@@ -121,7 +125,10 @@ class LaunchMange extends ADLINKX_Controller {
 		$action = $this->input->post('action');
 		$ids2arr = explode(',', $ids);
 		for($i=0;$i<count($ids2arr);$i++){
-			$FB = $this->launch->update(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
+			$launch_status = $this->launch->update(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
+			$unit_status = $this->strategy->update(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
+			$creative_status = $this->creative->updata(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
+			$FB = $launch_status = $unit_status = $creative_status;
 		}
 		if($FB){
 			$this->output_json(true,'');

@@ -19,12 +19,16 @@
                 <h2><i class="fa fa-paper-plane"></i>首页<span>数据统计</span></h2>
                         <div class="breadcrumb-wrapper">
                             <div class="select-brands-title">网站选择：</div>
-                            <div class="select-brands-but" data-is-click="false"><span id="store-title-box" data-shop-id="<{$store[0].shop_id}>"><{$store[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i></div>
+                            <div class="select-brands-but" data-is-click="false"><{if $store|@count neq 0}><span id="store-title-box" data-shop-id="<{$store[0].shop_id}>"><{$store[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{else}><span id="store-title-box" data-shop-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:160px;top:0;border:none;margin:0 0 0 10px;"></i><{/if}></div>
                             <div class="brands-lists-block" style="display:none;">
+                            <{if $store|@count neq 0}>
                                 <div class="brands-lists" data-shop-id="">全部</div>
                                 <{foreach $store item=list key=i}>
                                     <div class="brands-lists" data-shop-id="<{$list.shop_id}>"><{$list.shop_title}></div>
                                 <{/foreach}>
+                            <{else}>
+                                <div class="brands-lists" data-shop-id="">全部</div>
+                            <{/if}>
                             </div>
                         </div>
             </div>
@@ -42,7 +46,7 @@
                         </div>
                         <div class="tady-budget-box">
                             <p>今日预算</p>
-                            <span><{$launch[0].budget}></span>￥
+                            <span><{if $launch|@count neq 0}><{$launch[0].budget}><{else}>0.00<{/if}></span>￥
                         </div>
                         <div class="launch-num-box">
                             <p>投放中的计划个数</p>
@@ -54,9 +58,9 @@
                     <div class="home-header-box"><span><i class="fa fa-pie-chart"></i>&nbsp;数据趋势</span><span class="show-hidden-but" data-click="false" data-type=""><i class="fa fa-chevron-down"></i></span></div>
                     <div class="home-body-box" style="height:500px;">
                         <div class="home-body-fn-box">
-                            <a href="javascript:void(0);" data-shop-id="<{$store[0].shop_id}>" data-fn="month" class="home-function-but month-but">按月</a>
-                            <a href="javascript:void(0);" data-shop-id="<{$store[0].shop_id}>" data-fn="week" class="home-function-but week-but">按周</a>
-                            <a href="javascript:void(0);" data-shop-id="<{$store[0].shop_id}>" data-fn="day" class="home-function-but day-but">按天</a>
+                            <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="month" class="home-function-but month-but">按月</a>
+                            <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="week" class="home-function-but week-but">按周</a>
+                            <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="day" class="home-function-but day-but">按天</a>
                         </div>
                         <div id="main" style="width: 100%;height:400px;"></div>
                     </div>

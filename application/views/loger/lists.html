@@ -44,34 +44,39 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <{foreach $logers.data item=loger key=i}>
-                                                <tr class="gradeA">
-                                                    <td>
-                                                        <{$i}>
-                                                    </td>
-                                                    <td>
-                                                        <{$loger.money}>
-                                                    </td>
-                                                    <td>
-                                                        <{if $loger.type eq 1}>手工充值
-                                                            <{elseif $loger.type eq 2}>日常投放。
-                                                                <{else}>在线充值
-                                                                    <{/if}>
-                                                    </td>
-                                                    <td class="center">
-                                                        <{$loger.user_money}>
-                                                    </td>
-                                                    <td class="center">
-                                                        <{$loger.time}>
-                                                    </td>
-                                                    <td colspan="" rowspan="" headers="">
-                                                        <{$loger.remark}>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="javascript:void(0);" class="delete-buts" data-uid="<{$loger.uid}>" data-id="<{$loger.id}>" title="删除"><i class="fa fa-trash-o"></i></a>
-                                                    </td>
-                                                </tr>
+                                            <{if $logers|@count neq 0}>
+                                                <{foreach $logers.data item=loger key=i}>
+                                                    <tr class="gradeA">
+                                                        <td>
+                                                            <{$i}>
+                                                        </td>
+                                                        <td>
+                                                            <{$loger.money}>
+                                                        </td>
+                                                        <td>
+                                                            <{if $loger.type eq 1}>手工充值
+                                                                <{elseif $loger.type eq 2}>日常投放。
+                                                                    <{else}>在线充值
+                                                                        <{/if}>
+                                                        </td>
+                                                        <td class="center">
+                                                            <{$loger.user_money}>
+                                                        </td>
+                                                        <td class="center">
+                                                            <{$loger.time}>
+                                                        </td>
+                                                        <td colspan="" rowspan="" headers="">
+                                                            <{$loger.remark}>
+                                                        </td>
+                                                        <td class="center">
+                                                            <a href="javascript:void(0);" class="delete-buts" data-uid="<{$loger.uid}>" data-id="<{$loger.id}>" title="删除"><i class="fa fa-trash-o"></i></a>
+                                                        </td>
+                                                    </tr>
                                                 <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="7" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
                                         </tbody>
                                     </table>
                                     <div id="pages-box" data-count="<{$logers.count}>" data-num="<{$logers.num}>" data-current="<{$logers.current}>"></div>
@@ -92,43 +97,7 @@
     <script>
     jQuery(document).ready(function() {
         "use strict";
-        ADLINKX.pages({
-            id: 'pages-box',
-            first: {
-                text: '首页',
-                callback: null,
-                enable: true
-            },
-            last: {
-                text: '尾页',
-                callback: null,
-                enable: true
-            },
-            next: {
-                text: '下一页',
-                callback: null,
-                enable: true
-            },
-            previ: {
-                text: '上一页',
-                callback: null,
-                enable: true
-            },
-            search: {
-                text: '搜索',
-                callback: null,
-                enable: true
-            },
-            count: $('#pages-box').attr('data-count'),
-            current: $('#pages-box').attr('data-current'),
-            num: 20,
-            color: '#0781ec',
-            is_ajax: true,
-            url: '/ajax_api/store/lists/0/0/',
-            callback: function(res) {
-                console.log(res);
-            }
-        });
+        get_pages('pages-box','/operationLoger/index/loger/lists/1');
 
         $('.delete-buts').on('click', function() {
             var uid = $(this).attr('data-uid') ? $(this).attr('data-uid') : "<{ $smarty.session.uid }>" ;
@@ -153,6 +122,47 @@
                 }
             });
         });
+
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: 'pages-box',
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable: true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable: true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable: true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable: true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable: true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num: 20,
+                color: '#0781ec',
+                is_ajax: true,
+                url: url,
+                callback: function(res) {
+                    console.log(res);
+                }
+            });
+        }
     });
     </script>
 </body>

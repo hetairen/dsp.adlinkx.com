@@ -50,6 +50,7 @@ class Store extends ADLINKX_Controller{
 
 	public function lists(){
 		$this->get_user();
+		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 		$count = 0;
 		$where =  array(
 			'own_id' => $this->session->userdata('uid'),
@@ -63,10 +64,21 @@ class Store extends ADLINKX_Controller{
 		$fields = '*';
 		$store_lists = $this->store->lists($where, $num, $offset, $key, $stor, $fields, $count);
 		// var_dump($store_lists);
-		$this->assign('store_lists',$store_lists);
-		$this->assign('count',ceil($count/$num));
-		$this->assign('current',$offset);
-		$this->display('store/store.html');	
+		if($is_ajax){
+			$this->output_json(true,array(
+				'count' => ceil($count/$num),
+				'current' => $offset,
+				'num' => $num,
+				'list' => $store_lists
+			));
+		}else{
+			$this->assign('store_lists',$store_lists);
+			$this->assign('count',ceil($count/$num));
+			$this->assign('current',$offset);
+			$this->assign('num',$num);
+			$this->display('store/store.html');
+		}
+		
 	}
 
 	public function delete(){
@@ -103,6 +115,16 @@ class Store extends ADLINKX_Controller{
 	public function get_user(){
 		$user = $this->user->get(array('uid' => $this->session->userdata('uid')));
 		$this->assign('user',$user);
+	}
+
+	public function check_money(){
+		$shop_id = $this->uri->segment(3);
+		$money = $this->store->get(array('shop_id' => $shop_id, 'own_id' => $this->session->userdata('uid')),'money');
+		if($money && count($money) > 0){
+			$this->output_json(true,$money);
+		}else{
+			$this->output_json(false,'');
+		}
 	}
 
 }

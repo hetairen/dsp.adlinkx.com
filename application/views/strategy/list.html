@@ -64,21 +64,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <{foreach $result item=lists key=i}>
-                                                <tr>          
-                                                    <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-unit-id="<{$lists.unit_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
-                                                    <td><a href="/creativeMange/lists/campaign/creative/0/<{$lists.unit_id}>"><{$lists.unit_name}></a></td>
-                                                    <td><{$lists.plan_name}></td>
-                                                    <td><{if $lists.status eq 1}>正在推广<{else}>停止推广<{/if}></td>
-                                                    <td><{$lists.price}></td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-unit-id="<{$lists.unit_id}>" class="delete-buts"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/<{$lists.unit_id}>" class="edit-buts"><i class="fa fa-edit"></i></a></td>
-                                                </tr>
-                                            <{/foreach}>
+                                            <{if $result|@count neq 0}>
+                                                <{foreach $result item=lists key=i}>
+                                                    <tr>          
+                                                        <td><a href="javascript:void(0);" class="select-buts" data-is-checked="false" data-unit-id="<{$lists.unit_id}>"><i class="fa fa-square-o"></i>&nbsp;<{$i+1}></a></td>
+                                                        <td><a href="/creativeMange/lists/campaign/creative/0/<{$lists.unit_id}>"><{$lists.unit_name}></a></td>
+                                                        <td><{$lists.plan_name}></td>
+                                                        <td><{if $lists.status eq 1}>正在推广<{else}>停止推广<{/if}></td>
+                                                        <td><{$lists.price}></td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" data-unit-id="<{$lists.unit_id}>" class="delete-buts"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/strategy/2_2/<{$lists.unit_id}>" class="edit-buts"><i class="fa fa-edit"></i></a></td>
+                                                    </tr>
+                                                <{/foreach}>
+                                            <{else}>
+                                                <tr><td colspan="12" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
+                                            <{/if}>
+                                            
                                         </tbody>
                                     </table>
                                     <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
