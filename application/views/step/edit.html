@@ -218,6 +218,7 @@
                                                                 <input type="hidden" name="upload-pic-height" value="<{$creative.pic_height}>" id="upload-pic-height" />
                                                                 <{if $but_fn eq 'add'}>
                                                                     <input type="hidden" name="upload-pic-ext" value="<{$creative.pic_extension}>" id="upload-pic-ext" />
+                                                                    <input type="hidden" name="board-id" value="<{$creative.pic_extension}>" id="board-id" />
                                                                 <{/if}>
                                                                 
                                                             </div>
@@ -552,6 +553,7 @@
                 }
                 <{if $but_fn eq 'add'}>
                     data.unit_id = $('#unit-id').val();
+                    data.board_id = $('#board-id').val();
                 <{else}>
                     data.id = $('#id').val();
                 <{/if}>
