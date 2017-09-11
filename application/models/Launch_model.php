@@ -56,6 +56,7 @@ class Launch_model extends ADLINKX_Model {
 		// var_dump($count_sql);
 		$count = $this->db->query($count_sql)->result_array()[0]['count'];
 		$sql = 'SELECT * FROM `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where).' ORDER BY '.$key.' '.$stor.' LIMIT '.intval(($offset-1)*$num).','.$num;
+		// var_dump($sql);
 		$query = $this->db->query($sql);
 		// var_dump($this->db->last_query());
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
