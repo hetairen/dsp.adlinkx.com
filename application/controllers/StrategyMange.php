@@ -38,7 +38,7 @@ class StrategyMange extends ADLINKX_Controller {
 		$data = array('unit_name' => $data['unit_name'], 'price' => $data['price'], 'tags_value' => $data['tags_value'], 'date_value' => $data['date_value']);
 		$up = $this->strategy->update_strategy($data,$where);
 		if($up){
-			$this->output_json(true,'');
+			$this->output_json(true,array('unit_id' => $data['unit_id']));
 		}else{
 			$this->output_json(false,'');
 		}
