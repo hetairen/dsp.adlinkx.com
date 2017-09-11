@@ -135,7 +135,8 @@
                                                     <{if $but_fn eq 'add'}>
                                                         <input type="hidden" name="plan-id" value="<{$plan_id}>" id="plan-id" />
                                                     <{else}>
-                                                        <input type="hidden" name="unit-id" value="<{$unit_id}>" id="unit-id" />
+                                                        <input type="hidden" name="unit-id" value="<{$strategy.unit_id}>" id="unit-id" />
+                                                        <input type="hidden" name="plan-id" value="<{$strategy.plan_id}>" id="plan-id" />
                                                     <{/if}>
                                                     
                                                 </div>
