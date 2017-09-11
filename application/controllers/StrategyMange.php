@@ -79,7 +79,7 @@ class StrategyMange extends ADLINKX_Controller {
 			$where['unit_name'] = $key_words;
 		}
 		
-		$wehre['is_del'] = 0;
+		$wehre['is_del'] = '0';
 		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
 		$num = $this->uri->segment(9) ? $this->uri->segment(9) : 20;
 		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'unit_id';

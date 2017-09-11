@@ -84,7 +84,7 @@ class CreativeMange extends ADLINKX_Controller {
 			$where['borad_name'] = $key_words;
 		}
 		$where['uid'] = $this->session->userdata('uid');
-		$where['is_del'] = 0;
+		$where['is_del'] = '0';
 		$offset = $this->uri->segment(10) ? $this->uri->segment(10) : 1;
 		$num = $this->uri->segment(11) ? $this->uri->segment(11) : 20;
 		$key = $this->uri->segment(12) ? $this->uri->segment(12) : 'id';

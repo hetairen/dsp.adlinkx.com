@@ -88,7 +88,7 @@ class LaunchMange extends ADLINKX_Controller {
 		$fields = '*';
 		$where = array();
 		$where['uid'] = $this->session->userdata('uid');
-		$where['is_del'] = 0;
+		$where['is_del'] = '0';
 		if($shop_id){
 			$where['shop_id'] = $shop_id;
 		}
