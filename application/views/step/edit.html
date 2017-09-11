@@ -407,6 +407,7 @@
                 data.plan_id = $('#plan-id').val();
             <{else}>
                 data.unit_id = $('#unit-id').val();
+                data.plan_id = $('#plan-id').val();
             <{/if}>
             
             var local_tags = $('.label-market').attr('data-value') ? $('.label-market').attr('data-value') : '<{$strategy.tags_value}>';
