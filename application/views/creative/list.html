@@ -302,7 +302,7 @@
 
         function get_creative_list(unit_id,key_words){
             $.ajax({
-                url:'/creativeMange/lists/campaign/creative/1/'+unit_id+'/'+key_words,
+                url:encodeURI('/creativeMange/lists/campaign/creative/1/'+unit_id+'/'+key_words),
                 type:'GET',
                 success:function(res){
                     if(res.code ==1 && res.msg == 'success'){

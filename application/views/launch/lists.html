@@ -217,7 +217,7 @@
 
         function get_launch_list(shop_id,key_words){
             $.ajax({
-                url:'/launchMange/lists/campaign/launch/1/'+shop_id+'/'+key_words,
+                url:encodeURI('/launchMange/lists/campaign/launch/1/'+shop_id+'/'+key_words),
                 type:'GET',
                 success:function(res){
                     console.log(res);

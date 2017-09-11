@@ -74,7 +74,7 @@ class CreativeMange extends ADLINKX_Controller {
 		$count = 0;
 		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 		$unit_id = $this->uri->segment(6) && $this->uri->segment(6) !=0 ? $this->uri->segment(6) : '';
-		$key_words = $this->uri->segment(9) ? $this->uri->segment(9) : '';
+		$key_words = $this->uri->segment(9) ? urldecode($this->uri->segment(9)) : '';
 		$this->get_unit_list($unit_id);
 		$where = array();
 		if($unit_id){

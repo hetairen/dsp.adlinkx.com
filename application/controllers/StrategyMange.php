@@ -66,7 +66,7 @@ class StrategyMange extends ADLINKX_Controller {
 	public function lists() {
 		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 		$plan_id = $this->uri->segment(6) ? $this->uri->segment(6) : '';
-		$key_words = $this->uri->segment(7) ? $this->uri->segment(7) : '';
+		$key_words = $this->uri->segment(7) ? urldecode($this->uri->segment(7)) : '';
 		$uid = $this->session->userdata('uid');
 		$this->get_plan_list($uid,$plan_id);
 		$count = 0;

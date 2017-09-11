@@ -80,16 +80,21 @@ class LaunchMange extends ADLINKX_Controller {
 		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 		$shop_id=$this->uri->segment(6) ? $this->uri->segment(6) :'';
 		$key_words = $this->uri->segment(7) ? urldecode($this->uri->segment(7)) : '';
-		$uid = $this->session->userdata('uid');
 		$count = 0;
 		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
 		$num = $this->uri->segment(9) ? $this->uri->segment(9) : 20;
 		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'plan_id';
 		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$fields = '*';
-		// $shop_id = $this->uri->segment(9) ? $this->uri->segment(9) : null ;
-		// var_dump($shop_id);
-		$where = $key_words ? array('uid' => $uid, 'is_del' => 0 ,'plan_name' => $key_words) : ($shop_id ? array('uid' => $uid, 'shop_id' => $shop_id, 'is_del' => 0) : array('uid' => $uid, 'is_del' => 0));
+		$where = array();
+		$where['uid'] = $this->session->userdata('uid');
+		$where['is_del'] = 0;
+		if($shop_id){
+			$where['shop_id'] = $shop_id;
+		}
+		if($key_words){
+			$where['plan_name'] = $key_words;
+		}
 		$result = $this->launch->lists($where, $num, $offset, $key, $stor, $fields, $count);
 		if($is_ajax){
 			$this->output_json(true,array('count' => ceil($count/$num), 'current'=> $offset, 'num' => $num, 'list' => $result));

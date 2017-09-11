@@ -217,7 +217,7 @@
 
         function get_strategy_list(plan_id,key_words){
             $.ajax({
-                url:'/strategyMange/lists/campaign/strategy/1/'+plan_id+'/'+key_words,
+                url:encodeURI('/strategyMange/lists/campaign/strategy/1/'+plan_id+'/'+key_words),
                 type:'GET',
                 success:function(res){
                     console.log(res);
