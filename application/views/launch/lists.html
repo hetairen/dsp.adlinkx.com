@@ -211,9 +211,8 @@
             if(key_words == ''){
                 ADLINKX.alert('请输入要搜索的关键字;');
             }else{
-                get_creative_list('0',key_words);
+                get_launch_list(shop_id,key_words);
             }
-            get_launch_list(shop_id,key_words);
         });
 
         function get_launch_list(shop_id,key_words){
