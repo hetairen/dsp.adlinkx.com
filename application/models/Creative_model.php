@@ -95,7 +95,21 @@ class Creative_model extends ADLINKX_Model {
 
 	public function update($data = array(), $where = array()){
 		$this->db->where($where);
-		$query = $this->db->update($this->table_name,array(
+		$query = $this->db->update($this->table_name,$data);
+		// var_dump($this->db->last_query());
+		return $query && $this->db->affected_rows() > 0 ? true: false;
+	}
+
+	public function delete($where = array()){
+		$FB = null;
+		for($i=0;$i<count($where);$i++){
+			$FB = $this->update(array('is_del' => 1), $where[$i]);
+		}
+		return $FB;
+	}
+
+	public function edit_creative($data,$where){
+		$creative_data = array(
 			'borad_name' => $data['borad_name'],
 			'borad_url' => $data['url'],
 			'gxb_monitor_url' => isset($data['monitor_url']) ? $data['monitor_url'] : '',
@@ -106,18 +120,8 @@ class Creative_model extends ADLINKX_Model {
 			'k_url' => $data['url'],
 			'j_url' => $data['url'],
 
-		));
-		// var_dump($this->db->last_query());
-		return $query && $this->db->affected_rows() > 0 ? true: false;
-	}
-
-	public function delete($where = array()){
-		$FB = null;
-		for($i=0;$i<count($where);$i++){
-			$this->db->where($where);
-			$FB = $this->db->update($this->table_name, array('is_del' => 1));
-		}
-		return $FB;
+		);
+		return $this->update($creative_data, $where);
 	}
 
 	public function build_where($where = array()){

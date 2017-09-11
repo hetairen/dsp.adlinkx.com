@@ -37,7 +37,7 @@ class CreativeMange extends ADLINKX_Controller {
 		$data = $this->input->post();
 		$where['id'] = $data['id'];
 		unset($data['id']);
-		$status = $this->creative->update($data,$where);
+		$status = $this->creative->edit_creative($data,$where);
 		if($status){
 			$this->output_json(true,'');
 		}else{
@@ -49,7 +49,6 @@ class CreativeMange extends ADLINKX_Controller {
 		$where = array();
 		$ids = $this->input->post('ids');
 		$ids2arr = explode(',', $ids);
-		var_dump($ids2arr);
 		for($i=0;$i<count($ids2arr);$i++){
 			$where[$i]['id'] = $ids2arr[$i];
 		}
