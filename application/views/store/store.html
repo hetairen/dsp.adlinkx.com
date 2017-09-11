@@ -292,16 +292,17 @@
                         '<td colspan="" rowspan="" headers="">' + i + '</td>' +
                         '<td colspan="" rowspan="" headers="">' + data[i]['username'] + '</td>' +
                         '<td colspan="" rowspan="" headers="">' + data[i]['shop_title'] + '</td>' +
-                        '<td colspan="" rowspan="" headers="">' + data[i]['website'] + '</td>' +
-                        '<td colspan="" rowspan="" headers=""></td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['company_name'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['contact']+ '</td>' +
                         '<td colspan="" rowspan="" headers="">' + data[i]['phone'] + '</td>' +
-                        '<td colspan="" rowspan="" headers="">' + data[i]['money'] + '</td>' +
-                        '<td colspan="" rowspan="" headers="">领效</td>' +
-                        '<td colspan="" rowspan="" headers="">0.0</td>' +
-                        '<td colspan="" rowspan="" headers="">0.0</td>' +
-                        '<td colspan="" rowspan="" headers="">0.0</td>' +
-                        '<td colspan="" rowspan="" headers="">0</td>' +
-                        '<td colspan="" rowspan="" headers="">' + data[i]['update_time'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + (data[i]['channel_id'] == 225 ? '领效' : '') + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['store_money'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['account_money'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['charge_yesterday'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['charge_today'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['agent_charge'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['click'] + '</td>' +
+                        '<td colspan="" rowspan="" headers="">' + data[i]['add_time'] + '</td>' +
                         '<td colspan="" rowspan="" headers=""><a href="javascript:void(0);" class="delete-buts" data-shop-id="' + data[i]['shop_id'] + '" title="删除"><i class="fa fa-trash-o"></i></a><a href="javascript:void(0);" class="edit-buts" data-shop-id="' + data[i]['shop_id'] + '" title="编辑"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" calss="allocation-quota-buts" data-websit-name="'+ data[i]['shop_title']+'" data-shop-id="'+ data[i]['shop_id']+'" data-uid="'+ data[i]['own_id']+'" tite="分配配额"><i class="fa fa-gg-circle"></i></a></td>' +
                         +'</tr>';
                 }
