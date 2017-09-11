@@ -447,9 +447,7 @@
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
                             $(_this).find('.save-and-next').removeClass('fa-spinner fa-spin').addClass('fa-caret-right');
-                            ADLINKX.alert('保存成功',2,function(){
-                                window.location.href='/step/edit/campaign/creative/3_1/'+res.data.unit_id;
-                            });
+                            window.location.href='/step/edit/campaign/creative/3_1/'+res.data.unit_id;
                         }else{
                             $(_this).find('.icon-loading').css('display','none');
                             ADLINKX.alert('保存成功',2,function(){
@@ -620,9 +618,7 @@
                     if(res.code ==1 && res.msg=='success'){
                         if(type == 2){
                             $(_this).find('.save-and-next').removeClass('fa-spinner fa-spin').addClass('fa-caret-right');
-                            ADLINKX.alert('保存成功',2,function(){
-                                window.location.href='/step/edit/campaign/strategy/2_1/'+res.data.plan_id;
-                            });
+                            window.location.href='/step/edit/campaign/strategy/2_1/'+res.data.plan_id;
                         }else{
                             $(_this).find('.icon-loading').css('display','none');
                             ADLINKX.alert('保存成功',2,function(){
