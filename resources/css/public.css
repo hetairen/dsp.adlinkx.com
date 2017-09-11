@@ -253,7 +253,7 @@ input {
 /**
  * launch
  */
-.delete-but{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:2px;}
+.delete-buts{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:2px;}
 .edit-buts{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:2px;margin:0 0 0 8px;}
 .preview-buts{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;background:#2d9af9;color:#FFF;border:1px solid #148ef8;border-radius:2px;margin:0 0 0 8px;}
 .table-header-bloxk-box{width:100%;height:40px;background:#efefef;}
