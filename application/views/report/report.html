@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <{include file="common/header.html" }>
+    <link rel="stylesheet" type="text/css" href="/resources/css/home.css">
+    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+        <{include file="common/leftpanel.html" }>
+            <!-- leftpanel -->
+            <div class="mainpanel">
+                <{include file="common/headerbar.html" }>
+                    <!-- headerbar -->
+                    <div class="pageheader">
+                        <h2><i class="fa fa-line-chart"></i>首页<span>数据报表</span> <span>投放报表</span></h2>
+                        <div class="breadcrumb-wrapper">
+                            <span class="label">在这里</span>
+                            <ol class="breadcrumb">
+                                <li><a href="https://www.adlinkx.com">返回</a></li>
+                                <li class="active">首页</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="contentpanel">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="page-title">投放报表</div>
+                                <div class="report-select-shop-box" data-is-click="false">
+                                    <div class="select-brands-title">网站选择：</div>
+                                    <div class="select-brands-but" data-is-click="false"><{if $store|@count neq 0}><span id="store-title-box" data-shop-id="<{$store[0].shop_id}>"><{$store[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:240px;top:8px;border:none;margin:0 0 0 10px;"></i><{else}><span id="store-title-box" data-shop-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:2400px;top:8px;border:none;margin:0 0 0 10px;"></i><{/if}></div>
+                                    <div class="brands-lists-block" style="display:none;">
+                                    <{if $store|@count neq 0}>
+                                        <div class="brands-lists" data-shop-id="">全部</div>
+                                        <{foreach $store item=list key=i}>
+                                            <div class="brands-lists" data-shop-id="<{$list.shop_id}>"><{$list.shop_title}></div>
+                                        <{/foreach}>
+                                    <{else}>
+                                        <div class="brands-lists" data-shop-id="">全部</div>
+                                    <{/if}>
+                                    </div>
+                                </div>
+                                <div class="add-but-block"><a class="export-buts but-0781ec" href="javascript:void(0);" data-shop-id='<{$store[0].shop_id}>'><i class="fa fa-download ml10 mr4"></i>导出数据</a></div>
+                                <div class="space-box"></div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div class="home-block-box" data-is-hidden="false" style="height:556px;">
+                                        <div class="home-header-box"><span><i class="fa fa-pie-chart"></i>&nbsp;数据趋势</span><span class="show-hidden-but" data-click="false" data-type=""><i class="fa fa-chevron-down"></i></span></div>
+                                        <div class="home-body-box" style="height:500px;">
+                                            <div class="home-body-fn-box">
+                                                <div class="report-select-target-but-box" data-is-click="false">
+                                                    <i class="fa fa-line-chart"></i>
+                                                    <a class="target-values">展现量、点击数</a>
+                                                    <i class="fa fa-caret-right" style="position:absolute;left:230px;top:13px;"></i>
+                                                    <div class="traget-values-box" style="display:none;">
+                                                        <div class="traget-values-box-header">投放相关</div>
+                                                        <div class="traget-values-box-body">
+                                                            <a class="target-value-option" data-option-value="1" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>展现量</span></a>
+                                                            <a class="target-value-option" data-option-value="2" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>点击数</span></a>
+                                                            <a class="target-value-option" data-option-value="3" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>点击率</span></a>
+                                                            <a class="target-value-option" data-option-value="4" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>总消耗</span></a>
+                                                        </div>
+                                                        <div class="traget-values-box-footer">（可同时选择<d style="color:#c80000;font-weight: bold;">2</d>项）</div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="home-body-fn-time-box">
+                                                    <i class="fa fa-calendar time-icon"></i>
+                                                    <a href="javascript:void(0);" id="home-body-hook-time-but"></a>
+                                                </div> -->
+                                                <div class="home-body-fn-buts-box">
+                                                    <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="month" class="home-function-but month-but">按月</a>
+                                                    <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="week" class="home-function-but week-but">按周</a>
+                                                    <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="day" class="home-function-but day-but">按天</a>
+                                                </div>
+                                            </div>
+                                            <div id="main" style="width: 100%;height:400px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="home-block-box" data-is-hidden="false" style="height:556px;">
+                                        <div class="home-header-box"><span><i class="fa fa-table"></i>&nbsp;数据表格</span><span class="show-hidden-but" data-click="false" data-type="overview"><i class="fa fa-chevron-down"></i></span></div>
+                                        <div class="home-body-box" style="height:500px;">
+                                            <div class="report-data-table-buts-box">
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="day" data-checked="true"><i class="fa fa-dot-circle-o"></i>&nbsp;按天查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="plan" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按推广计划查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="unit" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按推广组查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="creative" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按推广创意查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="device" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按设备查看</a>
+                                            </div>
+                                            <div class="report-data-table-body">
+                                                <table class="table table-striped" id="table2">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>header</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>data</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- contentpanel -->
+                    <{include file="common/footerbar.html" }>
+            </div>
+            <!-- mainpanel -->
+    </section>
+    <script src="/resources/js/libarays/bootstrap.min.js"></script>
+    <script src="/resources/js/libarays/modernizr.min.js"></script>
+    <script src="/resources/js/libarays/jquery.sparkline.min.js"></script>
+    <script src="/resources/js/libarays/toggles.min.js"></script>
+    <script src="/resources/js/libarays/jquery.cookies.js"></script>
+    <script src="/resources/js/libarays/custom.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+        var insl = laydate.render({
+            elem: '#home-body-hook-time-but',
+            max:0,
+            range: '~',
+            value:'2017-09-12 ~ 2017-09-12',
+            done:function(data){
+                var start_date = data.split(' ~ ')[0];
+                var end_date = data.split(' ~ ')[1];
+                console.log(start_date);
+                console.log(end_date);
+            }
+        });
+
+        $(document).on('click','.report-select-shop-box',function(e){
+            e.stopPropagation();
+            if($(this).attr('data-is-click') == 'false'){
+                $(this).attr('data-is-click',true);
+                $('.brands-lists-block').css('display','block');
+                $(this).find('.select-brands-but i').removeClass('fa-caret-right').addClass('fa-caret-down');
+            }else{
+                $(this).attr('data-is-click',false);
+                $('.brands-lists-block').css('display','none');
+                $(this).find('.select-brands-but i').removeClass('fa-caret-down').addClass('fa-caret-right');
+            }
+            
+        });
+
+        $(document).on('mouseover','.brands-lists',function(e){
+            $('.brands-lists').css('background','#FFF');
+            $(this).css('background','#c1c1c1');
+        });
+
+        $(document).on('click','.brands-lists',function(e){
+            $('#store-title-box').html($(this).html()).attr('data-shop-id', $(this).attr('data-shop-id'));
+            $('.export-buts').attr('data-shop-id',$(this).attr('data-shop-id'));
+            $('.brands-lists-block').css('display','none');
+        });
+
+        $(document).on('click',function(){
+            $('.brands-lists-block').css('display','none');
+            $('.traget-values-box').css('display','none');
+            $('.report-select-shop-box').attr('data-is-click',false).find('.select-brands-but i').removeClass('fa-chevron-down').addClass('fa-chevron-right')
+            $('.report-select-target-but-box').attr('data-is-click',false).find('i').eq(1).removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        });
+
+        $(document).on('click','.show-hidden-but',function(){
+            if($(this).attr('data-click') == 'false'){
+                    $(this).attr('data-click',true);
+                    $(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                    $(this).parent().parent().css({'height':50,'overflow':'hidden'});
+            }else{
+                $(this).attr('data-click',false);
+                $(this).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                if($(this).attr('data-type') == 'overview'){
+                    $(this).parent().parent().css('height',150);
+                }else{
+                    $(this).parent().parent().css('height',556);
+                }
+                    
+            }
+        });
+
+        $(document).on('click','.report-select-target-but-box',function(e){
+            e.stopPropagation();
+            if($(this).attr('data-is-click') == 'false'){
+                $(this).attr('data-is-click',true);
+                $(this).find('i').eq(1).removeClass('fa-caret-right').addClass('fa-caret-down');
+                $('.traget-values-box').css('display','block');
+            }else{
+                $(this).attr('data-is-click',false);
+                $(this).find('i').eq(1).removeClass('fa-caret-down').addClass('fa-caret-right');
+                $('.traget-values-box').css('display','none');
+            }
+        });
+
+        $(document).on('click','.target-value-option',function(e){
+            e.stopPropagation();
+            var text = '';
+            if($(this).attr('data-checked') == 'false'){
+                $(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+                $(this).attr('data-checked',true);
+            }else{
+                $(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+                $(this).attr('data-checked',false);
+            }
+            $('.target-value-option').each(function(index, el) {
+                if($(this).attr('data-checked') == 'true'){
+                    text += $(this).find('span').html()+'、';
+                }
+            });
+            $('.target-values').html(text.substr(0,parseInt(text.length-1)));
+        });
+
+        var but_type = 'day';
+        $(document).on('click','.report-query-buttons',function(){
+            var but_type = $(this).attr('data-type');
+            $('.report-query-buttons').attr('data-checked',false).css({'color':'#636e7b','background':'#FFF','border-color':'#c1c1c1'}).find('i').removeClass('fa-dot-circle-o').addClass('fa-circle-o');
+            $(this).attr('data-checked',true).css({'color':'#FFF','background':'#0781ec','border-color':'#066eca'}).find('i').removeClass('fa-circle-o').addClass('fa-dot-circle-o');
+            console.log(but_type);
+        });
+
+        drag_line();
+            function drag_line(){
+                var myChart = echarts.init(document.getElementById('main'));
+                option = {
+                    title: {
+                        text: '折线图'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['展现','点击','点击率','总消耗']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['周一','周二','周三','周四','周五','周六','周日']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name:'展现',
+                            type:'line',
+                            stack: '总量',
+                            data:[3243, 0, 2342434, 0, 0, 0, 0]
+                        },
+                        {
+                            name:'点击',
+                            type:'line',
+                            stack: '总量',
+                            data:[0, 122030, 0, 0, 0, 0, 0]
+                        },
+                        {
+                            name:'点击率',
+                            type:'line',
+                            stack: '总量',
+                            data:[0, 0, 123123, 0, 0, 0, 0]
+                        },
+                        {
+                            name:'总消耗',
+                            type:'line',
+                            stack: '总量',
+                            data:[0, 0, 0, 0, 0, 354356, 0]
+                        }
+                    ]
+                };
+
+                myChart.setOption(option);
+            }
+
+
+
+    });
+    </script>
+</body>
+
+</html>

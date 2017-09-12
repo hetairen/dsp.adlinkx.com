@@ -38,15 +38,15 @@
                     <div class="home-body-box">
                         <div class="account-money-box">
                             <p>帐户余额</p>
-                            <span><{$user.money}></span>￥
+                            <span><{$user.money}></span>
                         </div>
                         <div class="yestady-consume-box">
                             <p>昨日消耗</p>
-                            <span><{$user.charge_today}></span>￥
+                            <span><{$user.charge_today}></span>
                         </div>
                         <div class="tady-budget-box">
                             <p>今日预算</p>
-                            <span><{if $launch|@count neq 0}><{$launch[0].budget}><{else}>0.00<{/if}></span>￥
+                            <span><{if $launch|@count neq 0}><{$launch[0].budget}><{else}>0.00<{/if}></span>
                         </div>
                         <div class="launch-num-box">
                             <p>投放中的计划个数</p>
@@ -58,9 +58,15 @@
                     <div class="home-header-box"><span><i class="fa fa-pie-chart"></i>&nbsp;数据趋势</span><span class="show-hidden-but" data-click="false" data-type=""><i class="fa fa-chevron-down"></i></span></div>
                     <div class="home-body-box" style="height:500px;">
                         <div class="home-body-fn-box">
-                            <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="month" class="home-function-but month-but">按月</a>
-                            <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="week" class="home-function-but week-but">按周</a>
-                            <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="day" class="home-function-but day-but">按天</a>
+                            <div class="home-body-fn-time-box">
+                                <i class="fa fa-calendar time-icon"></i>
+                                <a href="javascript:void(0);" id="home-body-hook-time-but"></a>
+                            </div>
+                            <div class="home-body-fn-buts-box">
+                                <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="month" class="home-function-but month-but">按月</a>
+                                <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="week" class="home-function-but week-but">按周</a>
+                                <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="day" class="home-function-but day-but">按天</a>
+                            </div>
                         </div>
                         <div id="main" style="width: 100%;height:400px;"></div>
                     </div>
@@ -87,6 +93,7 @@
     <script src="/resources/js/libarays/raphael-2.1.0.min.js"></script>
     <script src="/resources/js/libarays/custom.js"></script>
     <!-- <script src="/resources/js/libarays/dashboard.js"></script> -->
+    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
     <script>
         jQuery(document).ready(function(){
             $(document).on('click','.show-hidden-but',function(){
@@ -120,12 +127,12 @@
             });
 
             $(document).on('click','.brands-lists',function(e){
-            $('#store-title-box').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
-            $('.select-brands-but').attr('data-is-click',false);
-            $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
-            $('.brands-lists-block').css('display','none');
-            // get_strategy_list($(this).attr('data-plan-id'),'');
-        });
+                $('#store-title-box').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
+                $('.select-brands-but').attr('data-is-click',false);
+                $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+                $('.brands-lists-block').css('display','none');
+                // get_strategy_list($(this).attr('data-plan-id'),'');
+            });
 
             $(document).on('click',function(){
                 $('.select-brands-but').attr('data-is-click',false);
@@ -140,12 +147,25 @@
                 console.log(fn);
             });
 
+            var insl = laydate.render({
+                elem: '#home-body-hook-time-but',
+                max:0,
+                range: '~',
+                value:'2017-09-12 ~ 2017-09-12',
+                done:function(data){
+                    var start_date = data.split(' ~ ')[0];
+                    var end_date = data.split(' ~ ')[1];
+                    console.log(start_date);
+                    console.log(end_date);
+                }
+            });
+
             drag_line();
             function drag_line(){
                 var myChart = echarts.init(document.getElementById('main'));
                 option = {
                     title: {
-                        text: '折线图堆叠'
+                        text: '折线图'
                     },
                     tooltip: {
                         trigger: 'axis'
@@ -177,25 +197,25 @@
                             name:'展现',
                             type:'line',
                             stack: '总量',
-                            data:[0, 0, 0, 0, 0, 0, 0]
+                            data:[3243, 0, 2342434, 0, 0, 0, 0]
                         },
                         {
                             name:'点击',
                             type:'line',
                             stack: '总量',
-                            data:[0, 0, 0, 0, 0, 0, 0]
+                            data:[0, 122030, 0, 0, 0, 0, 0]
                         },
                         {
                             name:'点击率',
                             type:'line',
                             stack: '总量',
-                            data:[0, 0, 0, 0, 0, 0, 0]
+                            data:[0, 0, 123123, 0, 0, 0, 0]
                         },
                         {
                             name:'总消耗',
                             type:'line',
                             stack: '总量',
-                            data:[0, 0, 0, 0, 0, 0, 0]
+                            data:[0, 0, 0, 0, 0, 354356, 0]
                         }
                     ]
                 };
