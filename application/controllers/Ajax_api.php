@@ -140,7 +140,7 @@ class Ajax_api extends ADLINKX_Controller {
 			$legend = array('总消耗');
 			$keys = array('charge');
 		}else{
-			$legend = array('浏览量','点击','总消耗');
+			$legend = array('展现量','点击','总消耗');
 			$keys = array('pv','click','charge');
 
 		}
@@ -225,10 +225,10 @@ class Ajax_api extends ADLINKX_Controller {
 		$type = $this->uri->segment(3) ?$this->uri->segment(3) : '';
 		// $shop_id = $this->uri->segment(4) ?$this->uri->segment(4) : '';
 		$shop_id = '288230376259247377';
-		$start_date = $this->uri->segment(5) ?$this->uri->segment(5) : '';
-		$end_date = $this->uri->segment(6) ?$this->uri->segment(6) : '';
-		$format = $this->uri->segment(7) ?$this->uri->segment(7) : '';
-		$metric = $this->uri->segment(8) ?$this->uri->segment(8) : '';
+		$start_date = $this->uri->segment(5) ?$this->uri->segment(5) : date('Y-m-d',time());
+		$end_date = $this->uri->segment(6) ?$this->uri->segment(6) : date('Y-m-d',time());
+		$format = $this->uri->segment(7) ?$this->uri->segment(7) : 'chart';
+		$metric = $this->uri->segment(8) ?$this->uri->segment(8) : 'ds_pv#ds_click';
 		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
 		$num = $this->uri->segment(10) ? $this->uri->segment(10) : 20;
 		$key = $this->uri->segment(11) ? $this->uri->segment(11) : 'id';
@@ -236,7 +236,68 @@ class Ajax_api extends ADLINKX_Controller {
 		$fields = '*';
 		$count = 0;
 		$result = $this->api->dsp_satef($type,$shop_id,$start_date,$end_date,$format,$metric,$offset,$num,$key,$stor,$fields,$count);
-		var_dump($result);
+		$field = array();
+		$tmp = array();
+		$data = array();
+		$key = array();
+		// for($i=0;$i<count($keys);$i++){
+		// 		$tmp['name'] = $legend[$i];
+		// 		$tmp['type'] = 'line';
+		// 		$tmp['stack'] = '总量';
+		// 		$tmp['data'] = $this->get_format_data($fields,$type,$keys[$i],$metric,$result);
+		// 		array_push($data,$tmp);
+		// 	}
+		if($metric == 'pv_crt' || $metric == 'crt_pv'){
+			$legend = array('展现量','点击率');
+			$key = array('ds_pv','ds_crt');
+		}elseif($metric == 'pv_charge' || $metric == 'charge_pv'){
+			$legend = array('展现量','总消耗');
+			$key = array('ds_pv','ds_charge');
+		}elseif($metric == 'click_crt' || $metric == 'crt_click'){
+			$legend = array('点击','点击率');
+			$key = array('ds_click','ds_crt');
+		}elseif($metric == 'click_charge' || $metric == 'charge_click'){
+			$legend = array('点击','总消耗');
+			$key = array('ds_click','ds_charge');
+		}elseif($metric == 'crt_charge' || $metric == 'charge_crt'){
+			$legend = array('点击率','总消耗');
+			$$key = array('ds_crt','ds_charge');
+		}else{//pv_click
+			$legend = array('展现量','点击');
+			$key = array('ds_pv','ds_click');
+		}
+		// var_dump($result);
+		$tmp = array();
+		$cache = array();
+		$field = $this->dsp_satef_format_fields($result);
+		for($i=0;$i<count($key);$i++){
+			$tmp['name'] = $legend[$i];
+			$tmp['type'] = 'line';
+			$tmp['stack'] = '总量';
+			$tmp['data'] = $this->dsp_satef_format_data($key[$i],$result);
+			array_push($data,$tmp);
+		}
+		$this->output_json(true,array(
+			'legend' => $legend,
+			'field' => $field,
+			'data' => $data
+		));
+	}
+
+	public function dsp_satef_format_data($key,$list){
+		$tmp = array();
+		for($i=0;$i<count($list);$i++){
+			array_push($tmp,$list[$i][$key]);
+		}
+		return $tmp;
+	}
+
+	public function dsp_satef_format_fields($list){
+		$tmp = array();
+		for($i=0;$i<count($list);$i++){
+			array_push($tmp,$list[$i]['date']);
+		}
+		return $tmp;
 	}
 
 
@@ -244,45 +305,86 @@ class Ajax_api extends ADLINKX_Controller {
 		$type = $this->uri->segment(3) ? $this->uri->segment(3) : '';
 		// $shop_id = $this->uri->segment(4) ? $this->uri->segment(4) : '';
 		$shop_id = '288230376259247377';
-		$offset = $this->uri->segment(5) ? $this->uri->segment(5) : 1;
-		$num = $this->uri->segment(6) ? $this->uri->segment(7) : 20;
-		$key = $this->uri->segment(7) ? $this->uri->segment(7) : 'id';
-		$stor = $this->uri->segment(8) ? $this->uri->segment(8) : 'DESC';
+		// $offset = $this->uri->segment(5) ? $this->uri->segment(5) : date('Y-m-d',time());
+		$start_date = '2017-09-07';
+		// $offset = $this->uri->segment(6) ? $this->uri->segment(6) : date('Y-m-d',time());
+		$end_date = '2017-09-13';
+		$action = $this->uri->segment(7) ? $this->uri->segment(7) : 0;
+		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
+		$num = $this->uri->segment(8) ? $this->uri->segment(9) : 20;
+		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'id';
+		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$count = 0;
 		$fields = '*';
-		$result = $this->api->get_table_data($type,$shop_id,$offset,$num,$key,$stor,$fields,$count);
+		// $uid = $this->session-userdata('uid');
+		$uid = '107535632';
+		$result = $this->api->get_table_data($type,$uid,$shop_id,$start_date,$end_date,$offset,$num,$key,$stor,$fields,$count);
 		// var_dump($result);
 		if($result){
 			$res = array();
 			switch($type){
 				case 'plan':
 					$res['item'] = array('推广计划','展现量','点击数','点击率','总消耗');
+					$columns = array('plan_name','ds_pv','ds_click','ds_ctr','ds_charge');
 				break;
 				case 'unit':
 					$res['item'] = array('推广组	','推广计划','展现量','点击数','点击率	','总消耗');
+					$columns = array('unit_name','plan_name','ds_pv','ds_click','ds_ctr','ds_charge');
 				break;
 				case 'creative':
 					$res['item'] = array('创意名称','推广组','推广计划','展现量','点击数','点击率','总消耗');
+					$columns = array('borad_name','unit_name','plan_name','ds_pv','ds_click','ds_ctr','ds_charge');
 				break;
-				case 'divec':
+				case 'device':
 					$res['item'] = array('终端类型','展现量','点击数','点击率','总消耗');
+					$columns = array('device','ds_pv','ds_click','ds_ctr','ds_charge');
 				break;
 				default:
 					$res['item'] = array('日期','展现量','点击数','点击率','总消耗');
+					$columns = array('date','ds_pv','ds_click','ds_ctr','ds_charge');
 				break;
+			}
+			for($i=0;$i<count($result);$i++){
+				$result[$i]['ds_charge'] = sprintf('%.2f',($result[$i]['ds_charge']/100));
+				$result[$i]['ds_ctr'] = round($result[$i]['ds_ctr'],2);
+				$result[$i]['ds_pv'] = number_format($result[$i]['ds_pv']);
 			}
 			$res['list'] = $result;
 			$res['count'] = ceil($count/$num);
-			$res['offset'] = $offset;
+			$res['current'] = $offset;
 			$res['num'] = $num;
-			$this->output_json(true,$res);
+			if($action){
+				$this->export_data_to_excel($columns,$res['item'],$result);
+			}else{
+				$this->output_json(true,$res);
+			}
 		}else{
 			$this->output_json(true,array());
 		}
-		// day :
-		// plan:
-		// unit:
-		// creative:
-		// divec:
+	}
+
+
+	public function export_data_to_excel($columns,$title,$data){
+		$excel_name = date('Y-m-d').'.xls';
+		$this->download_excel($columns,$title,$data, $excel_name);
+	}
+
+	public function download_excel($columns_key,$excel_title,$data, $excel_name) {
+		header("Content-Type: application/vnd.ms-excel; charset=UTF-8");
+		$this->_import("Export");
+		//数据库对应的字段名称
+		$field_column_arr = array("referer_pv", "pv", "uv", "sv", "jump_rate", "achieve_trades", "achieve_users", "achieve_payment", "achieve_rate", "per_customer_transaction", "pat_trades", "pat_users", "pat_payment", "store_fov", "item_fov", "cart");
+		// $columns_key_arr = explode(",", $excel_title);
+		// $result_arr = $this->zuan_model->get_zuan_detail_table($param, $field_column_arr);
+		// $result = $result_arr['tabledata'];
+		$excel_arr = array();
+		$i = 0;
+		foreach ($data as $key => $value) {
+			foreach ($columns_key as $key2 => $value2) {
+				$excel_arr[$i][$value2] = $value[$value2];
+			}
+			$i++;
+		}
+		Export::excel($excel_title, $excel_arr, $excel_name);
 	}
 }

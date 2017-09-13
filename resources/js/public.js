@@ -383,6 +383,10 @@ Adlinkx.prototype.ckeckLogin = function() {
     }
 }
 
+Adlinkx.prototype.isUndefind = function(obj){
+    return obj === void 0 ? true : false;
+}
+
 Adlinkx.prototype.pages = function(json){
     var _this = this;
     var href = json.is_ajax ? 'javascript:void(0);': json.url;
@@ -413,8 +417,9 @@ Adlinkx.prototype.pages = function(json){
     this.jQuery(document).on('click','.pages-buts',function(){
         var offset = _this.jQuery(this).attr('data-num');
         var key_words = _this.jQuery('#search-keywords-box') ? _this.jQuery('#search-keywords-box').val(): '';
+        var url = key_words ? json.url+key_words+'/'+offset+'/'+json.num : json.url+offset+'/'+json.num;
         _this.jQuery.ajax({
-            url:encodeURI(json.url+key_words+'/'+offset+'/'+json.num),
+            url:encodeURI(url),
             type:'GET',
             success:json.callback,
             error:function(err){

@@ -46,7 +46,7 @@
                                     <{/if}>
                                     </div>
                                 </div>
-                                <div class="add-but-block"><a class="export-buts but-0781ec" href="javascript:void(0);" data-shop-id='<{$store[0].shop_id}>'><i class="fa fa-download ml10 mr4"></i>导出数据</a></div>
+                                <div class="add-but-block"></div>
                                 <div class="space-box"></div>
                             </div>
                             <div class="panel-body">
@@ -83,15 +83,16 @@
                                             <div id="main" style="width: 100%;height:400px;"></div>
                                         </div>
                                     </div>
-                                    <div class="home-block-box" data-is-hidden="false" style="height:556px;">
-                                        <div class="home-header-box"><span><i class="fa fa-table"></i>&nbsp;数据表格</span><span class="show-hidden-but" data-click="false" data-type="overview"><i class="fa fa-chevron-down"></i></span></div>
+                                    <div class="home-block-box" data-is-hidden="false" style="height:590px;">
+                                        <div class="home-header-box"><span><i class="fa fa-table"></i>&nbsp;数据表格</span><span class="show-hidden-but" data-click="false" data-type="data-table"><i class="fa fa-chevron-down"></i></span></div>
                                         <div class="home-body-box" style="height:500px;">
                                             <div class="report-data-table-buts-box">
-                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="day" data-checked="true"><i class="fa fa-dot-circle-o"></i>&nbsp;按天查看</a>
-                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="plan" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按推广计划查看</a>
-                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="unit" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按推广组查看</a>
-                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="creative" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按推广创意查看</a>
-                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="device" data-checked="false"><i class="fa fa-circle-o"></i>&nbsp;按设备查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="day" data-checked="true" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"><i class="fa fa-dot-circle-o"></i>&nbsp;按天查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="plan" data-checked="false" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"><i class="fa fa-circle-o"></i>&nbsp;按推广计划查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="unit" data-checked="false" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"><i class="fa fa-circle-o"></i>&nbsp;按推广组查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="creative" data-checked="false" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"><i class="fa fa-circle-o"></i>&nbsp;按推广创意查看</a>
+                                                <a href="javascript:void(0);" class="report-query-buttons" data-type="device" data-checked="false" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"><i class="fa fa-circle-o"></i>&nbsp;按设备查看</a>
+                                                <a class="export-buts but-0781ec" href="javascript:void(0);" data-shop-id='<{$store[0].shop_id}>'><i class="fa fa-download ml10 mr4"></i>导出数据</a>
                                             </div>
                                             <div class="report-data-table-body">
                                                 <table class="table table-striped" id="table2">
@@ -106,6 +107,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                <div id="pages-box" data-count="" data-current=""></div>
                                             </div>
                                         </div>
                                     </div>
@@ -126,28 +128,40 @@
     <script src="/resources/js/libarays/custom.js"></script>
     <script>
     jQuery(document).ready(function() {
+        var myDate = new Date();
+        var newDate = myDate.getDate();
+        myDate.setDate(myDate.getDate() - 7);
+        var  weekDay= myDate.getDate();
+        var week_time = myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(weekDay > 9 ? weekDay: '0'+weekDay);
+        var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
+        date_value = week_time+' ~ '+new_time;
         var insl = laydate.render({
             elem: '#home-body-hook-time-but',
             max:0,
             range: '~',
-            value:'2017-09-12 ~ 2017-09-12',
+            value:date_value,
             done:function(data){
                 var start_date = data.split(' ~ ')[0];
                 var end_date = data.split(' ~ ')[1];
-                console.log(start_date);
-                console.log(end_date);
+                get_dsp_satef('day',{
+                    'shop_id':$(this).attr('data-shop-id'),
+                    'start_date':start_date,
+                    'end_start':end_date,
+                    'metric':'pv_click',
+                    'format':'chart'
+                });
             }
         });
 
         get_dsp_satef('day',{
             'shop_id':$('#store-title-box').attr('data-shop-id'),
-            'start_date':0,
-            'end_start':0,
-            'metric':'ds_pv#ds_click',
+            'start_date':week_time,
+            'end_start':new_time,
+            'metric':'pv_click',
             'format':'chart'
         });
 
-        get_table_data('day',$('#store-title-box').attr('data-shop-id'));
+        get_table_data('day',$('#store-title-box').attr('data-shop-id'),'0','0','0');
 
         $(document).on('click','.report-select-shop-box',function(e){
             e.stopPropagation();
@@ -192,8 +206,8 @@
             }else{
                 $(this).attr('data-click',false);
                 $(this).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
-                if($(this).attr('data-type') == 'overview'){
-                    $(this).parent().parent().css('height',150);
+                if($(this).attr('data-type') == 'data-table'){
+                    $(this).parent().parent().css('height',590);
                 }else{
                     $(this).parent().parent().css('height',556);
                 }
@@ -235,9 +249,27 @@
         var but_type = 'day';
         $(document).on('click','.report-query-buttons',function(){
             var but_type = $(this).attr('data-type');
+            var shop_id = $(this).attr('data-shop-id');
+            var start_date = $('#home-body-hook-time-but').html().split(' ~ ')[0];
+            var end_date = $('#home-body-hook-time-but').html().split(' ~ ')[1];
             $('.report-query-buttons').attr('data-checked',false).css({'color':'#636e7b','background':'#FFF','border-color':'#c1c1c1'}).find('i').removeClass('fa-dot-circle-o').addClass('fa-circle-o');
             $(this).attr('data-checked',true).css({'color':'#FFF','background':'#0781ec','border-color':'#066eca'}).find('i').removeClass('fa-circle-o').addClass('fa-dot-circle-o');
-            console.log(but_type);
+            // console.log(but_type);
+            get_table_data(but_type,shop_id,start_date,end_date,'0');
+        });
+
+        $(document).on('click','.export-buts',function(){
+            var type = null;
+            var shop_id = null;
+            var start_date = $('#home-body-hook-time-but').html().split(' ~ ')[0];
+            var end_date = $('#home-body-hook-time-but').html().split(' ~ ')[1];
+            $('.report-query-buttons').each(function(index, el) {
+                if($(this).attr('data-checked') == 'true'){
+                    type = $(this).attr('data-type');
+                    shop_id = $(this).attr('data-shop-id');
+                }
+            });
+            get_table_data(type,shop_id,start_date,end_date,'1');
         });
 
         function get_dsp_satef(type,json){
@@ -245,7 +277,9 @@
                 url:'/ajax_api/dsp_satef/'+type+'/'+json.shop_id+'/'+json.start_date+'/'+json.end_start+'/'+json.format+'/'+json.metric,
                 type:'GET',
                 success:function(res){
-                    console.log(res);
+                    if(res.code == 1 && res.msg == 'success'){
+                        drag_line(res.data.legend,res.data.field,res.data.data);
+                    }
                 },
                 error:function(err){
                     console.error(err);
@@ -254,9 +288,9 @@
         }
 
 
-        function get_table_data(type,shop_id){
+        function get_table_data(type,shop_id,start_date,end_date,action){
             $.ajax({
-                url:'/ajax_api/get_table_data/'+type+'/'+shop_id,
+                url:'/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action,
                 type:'GET',
                 success:function(res){
                     if(res.code == 1 && res.msg == 'success'){
@@ -264,8 +298,12 @@
                         var tb_html = '';
                         var item = res.data.item;
                         var list = res.data.list;
+                        var td_num = item.length;
                         $('#table2').find('thead').html(output_thead_html(item));
-                        $('#table2').find('tbody').html(output_tbody_html(list));
+                        $('#table2').find('tbody').html(output_tbody_html(type,td_num,list));
+                        $('#pages-box').attr('data-count',res.data.count);
+                        $('#pages-box').attr('data-current',res.data.current);
+                        // get_pages('pages-box','/ajax_api/get_table_data/'+type+'/'+shop_id+'/');
                     }
                 },
                 error:function(err){
@@ -282,16 +320,113 @@
             return '<tr>'+tmp+'</tr>';
         }
 
-        function output_tbody_html(list){
+        function output_tbody_html(type,td_num,list){
             var tmp = '';
-            for(var i=0;i<list.length;i++){
-                tmp += '<tr><td>'+list[i]['date']+'</td><td>'+list[i]['ds_pv']+'</td><td>'+list[i]['ds_click']+'</td><td>'+list[i]['ds_charge']+'</td><td></td></tr>';
+            if(list.length > 0){
+                switch(type){
+                    case 'plan':
+                        for(var i=0;i<list.length;i++){
+                            tmp += '<tr><td>'+list[i]['plan_name']+'</td><td>'+list[i]['ds_pv']+'</td><td>'+list[i]['ds_click']+'</td><td>'+list[i]['ds_ctr']+'%</td><td>'+list[i]['ds_charge']+'</td></tr>';
+                        }
+                    break;
+                    case 'unit':
+                        for(var i=0;i<list.length;i++){
+                            tmp += '<tr><td>'+list[i]['unit_name']+'</td><td>'+list[i]['plan_name']+'</td><td>'+list[i]['ds_pv']+'</td><td>'+list[i]['ds_click']+'</td><td>'+list[i]['ds_ctr']+'%</td><td>'+list[i]['ds_charge']+'</td></tr>';
+                        }
+                    break;
+                    case 'creative':
+                        for(var i=0;i<list.length;i++){
+                            tmp += '<tr><td>'+list[i]['borad_name']+'</td><td>'+list[i]['unit_name']+'</td><td>'+list[i]['plan_name']+'</td><td>'+list[i]['ds_pv']+'</td><td>'+list[i]['ds_click']+'</td><td>'+list[i]['ds_ctr']+'%</td><td>'+list[i]['ds_charge']+'</td></tr>';
+                        }
+                    break;
+                    case 'device':
+                        for(var i=0;i<list.length;i++){
+
+                            tmp += '<tr><td>'+out_put_device(list[i]['device'])+'</td><td>'+list[i]['ds_pv']+'</td><td>'+list[i]['ds_click']+'</td><td>'+list[i]['ds_ctr']+'%</td><td>'+list[i]['ds_charge']+'</td></tr>';
+                        }
+                    break;
+                    default:
+                        for(var i=0;i<list.length;i++){
+                            tmp += '<tr><td>'+list[i]['date']+'</td><td>'+list[i]['ds_pv']+'</td><td>'+list[i]['ds_click']+'</td><td>'+list[i]['ds_ctr']+'%</td><td>'+list[i]['ds_charge']+'</td></tr>';
+                        }
+                    break;
+                }
+                
+            }else{
+                tmp += '<tr><td colspan="'+td_num+'" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>';
+            }
+            
+            return tmp;
+        }
+
+        function out_put_device(device){
+            var tmp = '';
+            switch(parseInt(device)){
+                case 1:
+                    tmp = 'PC端';
+                break;
+                case 2:
+                    tmp = '无线端';
+                break;
+                case 3:
+                    tmp = 'APP';
+                break;
+                case 4:
+                    tmp = 'Native'
+                break;
+                default:
+                    tmp = '不限设备';
+                break;
             }
             return tmp;
         }
 
-        drag_line();
+
+        function get_pages(el,url){
+            ADLINKX.pages({
+                id: 'pages-box',
+                first: {
+                    text: '首页',
+                    callback: null,
+                    enable: true
+                },
+                last: {
+                    text: '尾页',
+                    callback: null,
+                    enable: true
+                },
+                next: {
+                    text: '下一页',
+                    callback: null,
+                    enable: true
+                },
+                previ: {
+                    text: '上一页',
+                    callback: null,
+                    enable: true
+                },
+                search: {
+                    text: '搜索',
+                    callback: null,
+                    enable: true
+                },
+                count: $('#'+el).attr('data-count'),
+                current: $('#'+el).attr('data-current'),
+                num: 20,
+                color: '#0781ec',
+                is_ajax: true,
+                url: url,
+                callback: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+
+        // drag_line();
             function drag_line(legend,fields,data){
+                console.log(legend);
+                console.log(fields);
+                console.log(data);
                 var myChart = echarts.init(document.getElementById('main'));
                 option = {
                     title: {
@@ -301,7 +436,7 @@
                         trigger: 'axis'
                     },
                     legend: {
-                        data:['展现','点击','点击率','总消耗']
+                        data:legend
                     },
                     grid: {
                         left: '3%',
@@ -317,37 +452,12 @@
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: ['周一','周二','周三','周四','周五','周六','周日']
+                        data: fields
                     },
                     yAxis: {
                         type: 'value'
                     },
-                    series: [
-                        {
-                            name:'展现',
-                            type:'line',
-                            stack: '总量',
-                            data:[3243, 0, 2342434, 0, 0, 0, 0]
-                        },
-                        {
-                            name:'点击',
-                            type:'line',
-                            stack: '总量',
-                            data:[0, 122030, 0, 0, 0, 0, 0]
-                        },
-                        {
-                            name:'点击率',
-                            type:'line',
-                            stack: '总量',
-                            data:[0, 0, 123123, 0, 0, 0, 0]
-                        },
-                        {
-                            name:'总消耗',
-                            type:'line',
-                            stack: '总量',
-                            data:[0, 0, 0, 0, 0, 354356, 0]
-                        }
-                    ]
+                    series: data
                 };
 
                 myChart.setOption(option);

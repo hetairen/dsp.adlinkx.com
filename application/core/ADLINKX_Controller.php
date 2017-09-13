@@ -51,6 +51,10 @@ class ADLINKX_Controller extends CI_Controller {
 		return $_GET[$name] ? $_GET[$name]:($this->input->get($name) ? $this->input->get($name): null) ;
 	}
 
+	protected function _import($file_name) {
+		require APPPATH . "libraries/" . $file_name . ".php";
+	}
+
 	public function output_json($fl = true, $msg = ''){
 		$result = array();
 		if($fl){
