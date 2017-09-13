@@ -47,6 +47,10 @@ class ADLINKX_Controller extends CI_Controller {
 		redirect($url, $method, $code);
 	}
 
+	protected function _get($name){
+		return $_GET[$name] ? $_GET[$name]:($this->input->get($name) ? $this->input->get($name): null) ;
+	}
+
 	public function output_json($fl = true, $msg = ''){
 		$result = array();
 		if($fl){

@@ -13,10 +13,15 @@ class Ajax_api extends ADLINKX_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->initialization();
+		$this->load->model('store_model','store');
+		$this->load->model('user_model','user');
+		$this->load->model('launch_model','launch');
+		$this->load->model('Dsp_stats_ad_task_model','dsatm');
+		$this->load->model('api_model','api');
 	}
 
 	public function store(){
-		$this->load->model('store_model','store');
+		
 		$type = $this->uri->segment(3);
 		// var_dump($type);
 		$result = array();
@@ -46,21 +51,12 @@ class Ajax_api extends ADLINKX_Controller {
 					$where['own_id'] = $this->session->userdata('uid');
 				}
 				$store_lists = $this->store->lists($where,$num,$offset,$key,$stor,$fields,$count);
-				if($store_lists && count($store_lists) > 0){
-					$result['code'] = 1;
-					$result['msg'] = 'success';
-					$result['data'] = array(
-						'count' => $count,
-						'current' => $offset,
-						'lists' => $store_lists
-					);
-				}else{
-					$result['code'] = 0;
-					$result['msg'] = 'error';
-					$result['data'] = array();
-				}
+				$this->output_json(true,$store_lists);
 			break;
 			case 'get':
+				$shop_id = $this->uri->segment(4);
+				$store = $this->store->get(array('shop_id' => $shop_id, 'own_id' => $this->session->userdata('uid')));
+				$this->output_json(true,$store);
 			break;
 			case 'delete':
 			break;
@@ -69,9 +65,158 @@ class Ajax_api extends ADLINKX_Controller {
 			default:
 			break;
 		}
+	}
 
-		$this->output
-    		->set_content_type('application/json','utf-8')
-    		->set_output(json_encode($result));
+
+
+	public function user(){
+		
+		$model = $this->uri->segment(3);
+		switch($model){
+			case 'get':
+				$user = $this->user->get(array('uid' => $this->session->userdata('uid')));
+				$this->output_json(true,$user);
+			break;
+			default:
+			break;
+		}
+	}
+
+
+	public function launch(){
+		
+		$model = $this->uri->segment(3);
+		switch($model){
+			case 'get_all':
+				$launch_num = 0;
+				$start_launch_num = 0;
+				$shop_id = $this->uri->segment(4);
+				$launchs = $this->launch->get_all(array('shop_id' => $shop_id, 'uid' => $this->session->userdata('uid')));
+				$launch_num = count($launchs);
+				if($launch_num > 0){
+					for($i=0;$i<$launch_num;$i++){
+						if($launchs[$i]['status'] == 1){
+							$start_launch_num ++;
+						}
+					}
+				}
+				$this->output_json(true,array(
+					'start_launch' => $start_launch_num,
+					'launch_num' => $launch_num,
+					'list' => $launchs
+				));
+				
+			break;
+			default:
+			break;
+		}
+	}
+
+
+	public function query_list(){
+		$type = $this->uri->segment(3) ? $this->uri->segment(3) : '';
+		// $shop_id = $this->uri->segment(4) ? $this->uri->segment(4) : '';
+		$shop_id = '288230376259247377';
+		// $start_date = $this->uri->segment(5) ? $this->uri->segment(5) : '';
+		$start_date = '2017-08-01';
+		// $end_date = $this->uri->segment(6) ? $this->uri->segment(6) : '';
+		$end_date = '2017-08-31';
+		$format = $this->uri->segment(7) ? $this->uri->segment(7) : 'chart';
+		$metric = $this->uri->segment(8) ? str_replace('ds_','',$this->uri->segment(8)) : 'pv';
+		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
+		$num = $this->uri->segment(10) ? $this->uri->segment(10) : 20;
+		$key = $this->uri->segment(11) ? $this->uri->segment(11) : 'id';
+		$stor = $this->uri->segment(12) ? $this->uri->segment(12) : 'DESC';
+		$fields = '*';
+		$count = 0;
+		$data = array();
+		if($metric == 'pv'){
+			$legend = array('展现量');
+			$keys = array('pv');
+		}elseif($metric == 'click'){
+			$legend = array('点击');
+			$keys = array('click');
+		}elseif($metric == 'charge'){
+			$legend = array('总消耗');
+			$keys = array('charge');
+		}else{
+			$legend = array('浏览量','点击','总消耗');
+			$keys = array('pv','click','charge');
+
+		}
+		if($type == 'week'){
+			$fields = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'];
+			$type = 'date';
+		}elseif($type == 'month'){
+			$fields = ['01月份','02月份','03月份','04月份','05月份','06月份','07月份','08月份','09月份','10月份','11月份','12月份'];
+			$type = 'date';
+			$result = $this->api->query_list($type,$shop_id,$start_date,$end_date,$format,$metric,$offset,$num,$key,$stor,$fields,$count);
+			// var_dump($result);
+			// $tmp = array();
+			for($i=0;$i<count($keys);$i++){
+				$tmp['name'] = $legend[$i];
+				$tmp['type'] = 'line';
+				$tmp['stack'] = '总量';
+				$tmp['data'] = $this->get_format_data($fields,$type,$keys[$i],$metric,$result);
+				array_push($data,$tmp);
+			}
+		}else{
+			$fields = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'];
+			$type = 'hour';
+			$result = $this->api->query_list($type,$shop_id,$start_date,$end_date,$format,$metric,$offset,$num,$key,$stor,$fields,$count);
+			// var_dump($result);
+			$tmp = array();
+			for($i=0;$i<count($keys);$i++){
+				$tmp['name'] = $legend[$i];
+				$tmp['type'] = 'line';
+				$tmp['stack'] = '总量';
+				$tmp['data'] = $this->get_format_data($fields,$type,$keys[$i],$metric,$result);
+				array_push($data,$tmp);
+			}
+		}
+		$this->output_json(true,array(
+			'legend' => $legend,
+			'fields' => $fields,
+			'data' => $data
+		));
+	}
+
+	public function get_format_data($fields,$type,$key,$metric,$data){
+		$tmp = array();
+		$arr = $this->tow_arr_to_arr($type,$key,$data);
+		// var_dump($arr);
+		$num =  0;
+		if($type == 'week'){
+			$num = 7;
+		}elseif($type == 'date'){
+			$num = 13;
+			for($i=1;$i<$num;$i++){
+				$a = '0'.$i;
+				if(!empty($arr[$a])){
+					array_push($tmp,intval($arr[$a]));
+				}else{
+					array_push($tmp,0);
+				}
+			}
+		}else{
+			$num = 23;
+			for($i=0;$i<$num;$i++){
+				if(!empty($arr[$i])){
+					array_push($tmp,intval($arr[$i]));
+				}else{
+					array_push($tmp,0);
+				}
+			}
+		} 
+		
+		return $tmp;
+	}
+
+	public function tow_arr_to_arr($type,$key,$data){
+		$tmp = array();
+		for($i=0;$i<count($data);$i++){
+			$tmp[$data[$i][$type]] = $data[$i][$key];
+		}
+		return $tmp;
 	}
 }

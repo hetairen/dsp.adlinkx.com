@@ -52,10 +52,15 @@ class Launch_model extends ADLINKX_Model {
 	}
 
 	public function lists($where = array(), $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*', &$count){
-		$count_sql = 'SELECT COUNT(*) AS `count` FROM `huihe_marketing_system`.`diy_plan` '. $this->build_where($where);
+		if(!isset($where['shop_id'])){
+			$count_sql = 'SELECT COUNT(*) AS `count` FROM (SELECT shop_id FROM `huihe_marketing_system`.`store` WHERE own_id='.$where['uid'].' AND is_del=0) AS `s` LEFT JOIN `huihe_marketing_system`.`diy_plan` AS `dp` ON `dp`.`shop_id`=`s`.`shop_id` AND `dp`.`uid`='.$where['uid'].' AND `dp`.`is_del`='.$where['is_del'];
+			$sql = 'SELECT * FROM (SELECT shop_id FROM `huihe_marketing_system`.`store` WHERE own_id='.$where['uid'].' AND is_del=0) AS `s` LEFT JOIN `huihe_marketing_system`.`diy_plan` AS `dp` ON `dp`.`shop_id`=`s`.`shop_id` AND `dp`.`uid`='.$where['uid'].' AND `dp`.`is_del`='.$where['is_del'].' ORDER BY `dp`.`'.$key.'` '.$stor.' LIMIT '. intval(($offset-1)*$num) .','.$num;
+		}else{
+			$count_sql = 'SELECT COUNT(*) AS `count` FROM `huihe_marketing_system`.`diy_plan` '. $this->build_where($where);
+			$sql = 'SELECT * FROM `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where).' ORDER BY '.$key.' '.$stor.' LIMIT '.intval(($offset-1)*$num).','.$num;
+		}
 		// var_dump($count_sql);
 		$count = $this->db->query($count_sql)->result_array()[0]['count'];
-		$sql = 'SELECT * FROM `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where).' ORDER BY '.$key.' '.$stor.' LIMIT '.intval(($offset-1)*$num).','.$num;
 		// var_dump($sql);
 		$query = $this->db->query($sql);
 		// var_dump($this->db->last_query());
@@ -64,6 +69,7 @@ class Launch_model extends ADLINKX_Model {
 
 	public function get_all($where){
 		$sql = 'select * from `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where);
+		// var_dump($sql);
 		$query = $this->db->query($sql);
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
@@ -85,7 +91,7 @@ class Launch_model extends ADLINKX_Model {
 	public function build_where($where = array()){
 		$tmp = '';
 		foreach($where AS $k => $v){
-			if(!empty($v)){
+			if($v != ''){
 				if($k == 'plan_name'){
 					$tmp .= '`' . $k . '`' . ' like "%' . $v .'%" and ';
 				}else{

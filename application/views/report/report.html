@@ -24,14 +24,14 @@
                             <span class="label">在这里</span>
                             <ol class="breadcrumb">
                                 <li><a href="https://www.adlinkx.com">返回</a></li>
-                                <li class="active">首页</li>
+                                <li class="">首页</li>
                             </ol>
                         </div>
                     </div>
                     <div class="contentpanel">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="page-title">投放报表</div>
+                                <div class="page-title" style="width:70%;">投放报表</div>
                                 <div class="report-select-shop-box" data-is-click="false">
                                     <div class="select-brands-title">网站选择：</div>
                                     <div class="select-brands-but" data-is-click="false"><{if $store|@count neq 0}><span id="store-title-box" data-shop-id="<{$store[0].shop_id}>"><{$store[0].shop_title}></span><i class="fa fa-caret-right" style="position:absolute;left:240px;top:8px;border:none;margin:0 0 0 10px;"></i><{else}><span id="store-title-box" data-shop-id="">全部</span><i class="fa fa-caret-right" style="position:absolute;left:2400px;top:8px;border:none;margin:0 0 0 10px;"></i><{/if}></div>
@@ -56,24 +56,24 @@
                                         <div class="home-body-box" style="height:500px;">
                                             <div class="home-body-fn-box">
                                                 <div class="report-select-target-but-box" data-is-click="false">
-                                                    <i class="fa fa-line-chart"></i>
+                                                    <i class="fa fa-line-chart" style="margin:0 10px;"></i>
                                                     <a class="target-values">展现量、点击数</a>
-                                                    <i class="fa fa-caret-right" style="position:absolute;left:230px;top:13px;"></i>
+                                                    <i class="fa fa-caret-right" style="position:absolute;left:170px;top:13px;"></i>
                                                     <div class="traget-values-box" style="display:none;">
                                                         <div class="traget-values-box-header">投放相关</div>
                                                         <div class="traget-values-box-body">
-                                                            <a class="target-value-option" data-option-value="1" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>展现量</span></a>
-                                                            <a class="target-value-option" data-option-value="2" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>点击数</span></a>
-                                                            <a class="target-value-option" data-option-value="3" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>点击率</span></a>
-                                                            <a class="target-value-option" data-option-value="4" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>总消耗</span></a>
+                                                            <a class="target-value-option" data-option-value="ds_pv" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>展现量</span></a>
+                                                            <a class="target-value-option" data-option-value="ds_click" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>点击数</span></a>
+                                                            <a class="target-value-option" data-option-value="ds_ctr" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>点击率</span></a>
+                                                            <a class="target-value-option" data-option-value="ds_charge" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-checked="false"><i class="fa fa-square-o"></i>&nbsp;<span>总消耗</span></a>
                                                         </div>
                                                         <div class="traget-values-box-footer">（可同时选择<d style="color:#c80000;font-weight: bold;">2</d>项）</div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="home-body-fn-time-box">
+                                                <div class="home-body-fn-time-box">
                                                     <i class="fa fa-calendar time-icon"></i>
-                                                    <a href="javascript:void(0);" id="home-body-hook-time-but"></a>
-                                                </div> -->
+                                                    <a href="javascript:void(0);" id="home-body-hook-time-but" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"></a>
+                                                </div>
                                                 <div class="home-body-fn-buts-box">
                                                     <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="month" class="home-function-but month-but">按月</a>
                                                     <a href="javascript:void(0);" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>" data-fn="week" class="home-function-but week-but">按周</a>
@@ -159,7 +159,10 @@
         });
 
         $(document).on('click','.brands-lists',function(e){
-            $('#store-title-box').html($(this).html()).attr('data-shop-id', $(this).attr('data-shop-id'));
+            var shop_id = $(this).attr('data-shop-id');
+            $('#store-title-box').html($(this).html()).attr('data-shop-id', shop_id);
+            $('.home-function-but').attr('data-shop-id',shop_id);
+            $('.target-value-option').attr('data-shop-id',shop_id);
             $('.export-buts').attr('data-shop-id',$(this).attr('data-shop-id'));
             $('.brands-lists-block').css('display','none');
         });

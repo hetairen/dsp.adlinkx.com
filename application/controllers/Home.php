@@ -20,14 +20,15 @@ class Home extends ADLINKX_Controller {
 
 	public function index() {
 		$data = array();
-		$user = $this->user->get(array('uid' => $this->session->userdata('uid'),'channel_id' => 225, 'isdel' => 0));
-		$store = $this->store->get_all(array('own_id' => $this->session->userdata('uid'), 'is_del' => 0));
+		$user = $this->user->get(array('uid' => $this->session->userdata('uid'),'channel_id' => 225, 'isdel' => '0'));
+		$store = $this->store->get_all(array('own_id' => $this->session->userdata('uid'), 'is_del' => '0'));
 		if($user && !empty($user) && $store && !empty($store)){
-			$launch = $this->launch->get_all(array('uid' => $this->session->userdata('uid'),'shop_id' =>$store[0]['shop_id'], 'id_del' => 0));
+			$launch = $this->launch->get_all(array('uid' => $this->session->userdata('uid'),'shop_id' =>$store[0]['shop_id'], 'is_del' => '0'));
 		}else{
-			$launch = $this->launch->get_all(array('uid' => $this->session->userdata('uid'), 'id_del' => 0));
+			$launch = $this->launch->get_all(array('uid' => $this->session->userdata('uid'), 'is_del' => '0'));
 		}
 
+		// var_dump($launch);
 		$start_launch_num = 0;
 		$launch_num = count($launch);
 		if($launch_num > 0){
