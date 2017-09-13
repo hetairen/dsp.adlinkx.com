@@ -199,7 +199,7 @@ class Ajax_api extends ADLINKX_Controller {
 				}
 			}
 		}else{
-			$num = 23;
+			$num = 24;
 			for($i=0;$i<$num;$i++){
 				if(!empty($arr[$i])){
 					array_push($tmp,intval($arr[$i]));
