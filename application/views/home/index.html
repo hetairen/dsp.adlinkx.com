@@ -293,7 +293,7 @@
 
             function get_dsp_sadt(type,json){
             	$.ajax({
-            		url:'/ajax_api/query_list/'+type+'/'+json.shop_id+'/'+json.start_date+'/'+json.end_date+'/chart/'+json.metric,
+            		url:'/ajax_api/query_list/'+type+'/'+json.shop_id+'/'+json.start_date+'/'+json.end_date+'/'+json.format+'/'+json.metric,
             		type:'GET',
             		success:function(res){
             			console.log(res);

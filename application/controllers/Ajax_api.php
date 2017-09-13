@@ -219,4 +219,70 @@ class Ajax_api extends ADLINKX_Controller {
 		}
 		return $tmp;
 	}
+
+
+	public function dsp_satef(){
+		$type = $this->uri->segment(3) ?$this->uri->segment(3) : '';
+		// $shop_id = $this->uri->segment(4) ?$this->uri->segment(4) : '';
+		$shop_id = '288230376259247377';
+		$start_date = $this->uri->segment(5) ?$this->uri->segment(5) : '';
+		$end_date = $this->uri->segment(6) ?$this->uri->segment(6) : '';
+		$format = $this->uri->segment(7) ?$this->uri->segment(7) : '';
+		$metric = $this->uri->segment(8) ?$this->uri->segment(8) : '';
+		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
+		$num = $this->uri->segment(10) ? $this->uri->segment(10) : 20;
+		$key = $this->uri->segment(11) ? $this->uri->segment(11) : 'id';
+		$stor = $this->uri->segment(12) ? $this->uri->segment(12) : 'DESC';
+		$fields = '*';
+		$count = 0;
+		$result = $this->api->dsp_satef($type,$shop_id,$start_date,$end_date,$format,$metric,$offset,$num,$key,$stor,$fields,$count);
+		var_dump($result);
+	}
+
+
+	public function get_table_data(){
+		$type = $this->uri->segment(3) ? $this->uri->segment(3) : '';
+		// $shop_id = $this->uri->segment(4) ? $this->uri->segment(4) : '';
+		$shop_id = '288230376259247377';
+		$offset = $this->uri->segment(5) ? $this->uri->segment(5) : 1;
+		$num = $this->uri->segment(6) ? $this->uri->segment(7) : 20;
+		$key = $this->uri->segment(7) ? $this->uri->segment(7) : 'id';
+		$stor = $this->uri->segment(8) ? $this->uri->segment(8) : 'DESC';
+		$count = 0;
+		$fields = '*';
+		$result = $this->api->get_table_data($type,$shop_id,$offset,$num,$key,$stor,$fields,$count);
+		// var_dump($result);
+		if($result){
+			$res = array();
+			switch($type){
+				case 'plan':
+					$res['item'] = array('推广计划','展现量','点击数','点击率','总消耗');
+				break;
+				case 'unit':
+					$res['item'] = array('推广组	','推广计划','展现量','点击数','点击率	','总消耗');
+				break;
+				case 'creative':
+					$res['item'] = array('创意名称','推广组','推广计划','展现量','点击数','点击率','总消耗');
+				break;
+				case 'divec':
+					$res['item'] = array('终端类型','展现量','点击数','点击率','总消耗');
+				break;
+				default:
+					$res['item'] = array('日期','展现量','点击数','点击率','总消耗');
+				break;
+			}
+			$res['list'] = $result;
+			$res['count'] = ceil($count/$num);
+			$res['offset'] = $offset;
+			$res['num'] = $num;
+			$this->output_json(true,$res);
+		}else{
+			$this->output_json(true,array());
+		}
+		// day :
+		// plan:
+		// unit:
+		// creative:
+		// divec:
+	}
 }
