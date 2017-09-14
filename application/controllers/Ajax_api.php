@@ -286,17 +286,30 @@ class Ajax_api extends ADLINKX_Controller {
 
 	public function dsp_satef_format_data($key,$list){
 		$tmp = array();
-		for($i=0;$i<count($list);$i++){
-			array_push($tmp,$list[$i][$key]);
+		if($list && count($list) > 0){
+			for($i=0;$i<count($list);$i++){
+				array_push($tmp,$list[$i][$key]);
+			}
+		}else{
+			$tmp = array('0','0','0');
 		}
+		
 		return $tmp;
 	}
 
 	public function dsp_satef_format_fields($list){
 		$tmp = array();
-		for($i=0;$i<count($list);$i++){
-			array_push($tmp,$list[$i]['date']);
+		$day_1 = date('Y-m-d',time());
+		$day_2 = date('Y-m-d',strtotime('-1 days'));
+		$day_3 = date('Y-m-d',strtotime('-2 days'));
+		if($list && count($list) > 0){
+			for($i=0;$i<count($list);$i++){
+				array_push($tmp,$list[$i]['date']);
+			}
+		}else{
+			$tmp = array($day_1,$day_2,$day_3);
 		}
+		
 		return $tmp;
 	}
 
