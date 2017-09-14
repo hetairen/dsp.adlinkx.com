@@ -289,27 +289,31 @@
 
 
         function get_table_data(type,shop_id,start_date,end_date,action){
-            $.ajax({
-                url:'/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action,
-                type:'GET',
-                success:function(res){
-                    if(res.code == 1 && res.msg == 'success'){
-                        var th_html = '';
-                        var tb_html = '';
-                        var item = res.data.item;
-                        var list = res.data.list;
-                        var td_num = item.length;
-                        $('#table2').find('thead').html(output_thead_html(item));
-                        $('#table2').find('tbody').html(output_tbody_html(type,td_num,list));
-                        $('#pages-box').attr('data-count',res.data.count);
-                        $('#pages-box').attr('data-current',res.data.current);
-                        // get_pages('pages-box','/ajax_api/get_table_data/'+type+'/'+shop_id+'/');
+            if(action){
+                window.open('/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action);
+            }else{
+                $.ajax({
+                    url:'/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action,
+                    type:'GET',
+                    success:function(res){
+                        if(res.code == 1 && res.msg == 'success'){
+                            var th_html = '';
+                            var tb_html = '';
+                            var item = res.data.item;
+                            var list = res.data.list;
+                            var td_num = item.length;
+                            $('#table2').find('thead').html(output_thead_html(item));
+                            $('#table2').find('tbody').html(output_tbody_html(type,td_num,list));
+                            $('#pages-box').attr('data-count',res.data.count);
+                            $('#pages-box').attr('data-current',res.data.current);
+                            // get_pages('pages-box','/ajax_api/get_table_data/'+type+'/'+shop_id+'/');
+                        }
+                    },
+                    error:function(err){
+                        console.error(err);
                     }
-                },
-                error:function(err){
-                    console.error(err);
-                }
-            });
+                });
+            }
         }
 
         function output_thead_html(item){
