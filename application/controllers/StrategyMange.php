@@ -74,6 +74,9 @@ class StrategyMange extends ADLINKX_Controller {
 		$where['uid'] = $uid;
 		if($plan_id){
 			$where['plan_id'] = $plan_id;
+			$this->assign('plan_id',$plan_id);
+		}else{
+			$this->assign('plan_id','');
 		}
 		if($key_words){
 			$where['unit_name'] = $key_words;
@@ -101,6 +104,7 @@ class StrategyMange extends ADLINKX_Controller {
 	public function get_plan_list($uid, $plan_id){
 		$plans = $this->launch->get_all(array('uid' => $uid, 'plan_id' =>$plan_id));
 		// var_dump($plans);
+		
 		$this->assign('plans',$plans);
 		
 	}

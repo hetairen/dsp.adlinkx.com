@@ -44,14 +44,19 @@
                                         <div class="account-form-list-box">
                                             <label for="money">帐户余额：</label>
                                             <input type="text" name="money" id="money" value="<{$account.money}>" placeholder="" disabled="disabled">
-                                            <a href="javascript:void(0);" data-is-show="false" class="show-recharge-box-but">充值</a></span>
+                                            <{if $smarty.session.permissions eq 1}>
+                                                <span><a href="javascript:void(0);" data-is-show="false" class="show-recharge-box-but">充值</a></span>
+                                            <{/if}>
+
                                         </div>
-                                        <div class="recharge-block-box" style="display:none;">
-                                            <div class="recharge-input-box">
-                                                <label for="recharge">输入充值金额：</label>
-                                                <input type="text" id="recharge" name="recharge" value="" placeholder="输入充值金额" /><span class="recharge-tip-box">元</span></div>
-                                            <div class="recharge-buts-box"><a href="javascript:void(0);" class="recharge-buts">充值</a></div>
-                                        </div>
+                                        <{if $smarty.session.permissions eq 1}>
+                                            <div class="recharge-block-box" style="display:none;">
+                                                <div class="recharge-input-box">
+                                                    <label for="recharge">输入充值金额：</label>
+                                                    <input type="text" id="recharge" name="recharge" value="" placeholder="输入充值金额" /><span class="recharge-tip-box">元</span></div>
+                                                <div class="recharge-buts-box"><a href="javascript:void(0);" class="recharge-buts">充值</a></div>
+                                            </div>
+                                        <{/if}>
                                         <div class="account-form-list-box">
                                             <label for="shop_name">店铺名称：</label>
                                             <input type="text" name="shop_name" id="shop_name" value="<{$account.shop_name}>" placeholder="">
@@ -113,29 +118,31 @@
                 $(this).attr('data-is-show', false);
             }
         });
-        $('.recharge-buts').on('click', function() {
-            var money = $('#recharge').val();
-            $.ajax({
-                url: '/account/recharge',
-                type: 'POST',
-                data: { 'money': money },
-                success: function(res) {
-                    console.log(res)
-                    if (res.code == 1 && res.msg == 'success') {
-                        ADLINKX.alert('充值成功', 2, function() {
-                            window.location.reload();
-                        });
-                    } else {
-                        ADLINKX.alert('充值失败', 2, function() {
-                            window.location.reload();
-                        });
+        <{if $smarty.session.permissions eq 1}>
+            $('.recharge-buts').on('click', function() {
+                var money = $('#recharge').val();
+                $.ajax({
+                    url: '/account/recharge',
+                    type: 'POST',
+                    data: { 'money': money },
+                    success: function(res) {
+                        console.log(res)
+                        if (res.code == 1 && res.msg == 'success') {
+                            ADLINKX.alert('充值成功', 2, function() {
+                                window.location.reload();
+                            });
+                        } else {
+                            ADLINKX.alert('充值失败', 2, function() {
+                                window.location.reload();
+                            });
+                        }
+                    },
+                    error: function(err) {
+                        console.error(err);
                     }
-                },
-                error: function(err) {
-                    console.error(err);
-                }
+                });
             });
-        });
+        <{/if}>
 
         $('.modify-account-info-buts').on('click', function() {
             var uid = $(this).attr('data-uid') ? $(this).attr('data-uid') : "<{ $smarty.session.uid }>";

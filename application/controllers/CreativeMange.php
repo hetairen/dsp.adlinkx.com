@@ -79,6 +79,9 @@ class CreativeMange extends ADLINKX_Controller {
 		$where = array();
 		if($unit_id){
 			$where['unit_id'] = $unit_id;
+			$this->assign('unit_id',$unit_id);
+		}else{
+			$this->assign('unit_id','');
 		}
 		if($key_words){
 			$where['borad_name'] = $key_words;

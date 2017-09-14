@@ -34,23 +34,10 @@ class User extends ADLINKX_Controller {
 		unset($input_data['isChecked']);
 		$check_status = $this->check_password($input_data);
 		if ($check_status && isset($check_status) && !empty($check_status)) {
-
-			// $signin_date = time();
-			// $loger_data = array(
-			// 	'uid' => $check_status['uid'],
-			// 	'actions' => '用户登录',
-			// 	'remarks' => '尊敬的用户[' . $check_status['name'] . ']:您于' . date('Y-m-d', $signin_date) . '登录成功。<a href="https://www.adease.com">www.adease.com</a>',
-			// 	'ip' => sprintf("%u", ip2long($_SERVER['REMOTE_ADDR'])),
-			// 	'is_del' => 0,
-			// 	'timer' => $signin_date,
-			// 	'group' => '',
-			// 	'permissions' => 'rw',
-			// );
-			// $loger_status = $this->loger->add($loger_data);
-
 			unset($check_status['password']);
 			$this->session->set_userdata($check_status); //设置session
 			$this->session->set_userdata('source_oa_flag',1);
+			$this->session->set_userdata('permissions',0);
 			if ($remember) {
 //记住密码
 				foreach ($check_status AS $key => $value) {
@@ -170,6 +157,7 @@ class User extends ADLINKX_Controller {
 			if($user_info && !empty($user_info)){
 				$this->session->set_userdata('uid',$user_info['uid']);
 				$this->session->set_userdata('username',$user_info['username']);
+				$this->session->set_userdata('permissions',0);
 				$this->_redirect('http://dsp.adlinkx.com');
 			}else{
 				$this->_redirect('http://dsp.adlinkx.com/user/login');
