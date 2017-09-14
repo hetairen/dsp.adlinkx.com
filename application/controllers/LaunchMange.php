@@ -127,7 +127,7 @@ class LaunchMange extends ADLINKX_Controller {
 		for($i=0;$i<count($ids2arr);$i++){
 			$launch_status = $this->launch->update(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
 			$unit_status = $this->strategy->update(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
-			$creative_status = $this->creative->updata(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
+			$creative_status = $this->creative->update(array('status' => ($action == 'start' ? 1 : 0 )),array('plan_id' => $ids2arr[$i]));
 			$FB = $launch_status = $unit_status = $creative_status;
 		}
 		if($FB){
