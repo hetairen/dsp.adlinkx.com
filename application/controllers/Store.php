@@ -15,6 +15,9 @@ class Store extends ADLINKX_Controller{
 		$this->initialization();
 		$this->load->model('store_model','store');
 		$this->load->model('user_model','user');
+		$this->load->model('launch_model','launch');
+		$this->load->model('strategy_model','strategy');
+		$this->load->model('creative_model','creative');
 	}
 
 	public function add(){
@@ -27,7 +30,6 @@ class Store extends ADLINKX_Controller{
 	public function add_to(){
 		$data = $this->input->post();
 		$status = $this->store->add($data);
-		var_dump($status);
 		if($status){
 			$this->output_json(true,'');
 		}else{
@@ -90,7 +92,14 @@ class Store extends ADLINKX_Controller{
 		}
 		// var_dump($where);
 		// exit;
+		// 删除店铺
 		$status = $this->store->delete($where);
+		//删除该店铺下所有计划
+		$this->launch->delete($where);
+		//删除该店铺下所有策略
+		$this->strategy->delete($where);
+		//删除该店铺下所有创意
+		$this->creative->delete($where);
 		if($status){
 			$this->output_json(true,'');
 		}else{
