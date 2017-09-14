@@ -40,7 +40,7 @@ class Api_model extends ADLINKX_Model {
 			$sql = 'SELECT '.$fields.' FROM (`huihe_marketing_system`.`dsp_stats_ad_task` AS `ds`) WHERE `ds`.`uid` = "0" '.$where.' AND `ds`.`store_id` = "'.$shop_id.'" GROUP BY '.$group_by;
 		}else{
 			$count_sql = 'SELECT COUNT(*) AS `count` FROM (`huihe_marketing_system`.`dsp_stats_ad_task` AS `ds`) WHERE `ds`.`uid` = "0" AND `ds`.`date` >= "'.$start_date.'" AND `ds`.`date` <= "'.$end_date.'" AND `ds`.`store_id` = "'.$shop_id.'" GROUP BY `ds`.`'.$type.'`';
-			$sql = 'SELECT '.$fields.' FROM (`huihe_marketing_system`.`dsp_stats_ad_task` AS `ds`) WHERE `ds`.`uid` = "0" '.$where.' AND `ds`.`store_id` = "'.$shop_id.'" GROUP BY `ds`.`'.$type.'` ORDER BY '.$key.' '.$stor.' LIMIT '.intval(($offset-1)/$num).','.$num;
+			$sql = 'SELECT '.$fields.' FROM (`huihe_marketing_system`.`dsp_stats_ad_task` AS `ds`) WHERE `ds`.`uid` = "0" '.$where.' AND `ds`.`store_id` = "'.$shop_id.'" GROUP BY `ds`.`'.$type.'`';
 		}
 		// var_dump($sql);
 		$query = $this->db->query($sql);
