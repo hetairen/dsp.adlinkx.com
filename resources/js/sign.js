@@ -40,6 +40,7 @@ $(document).ready(function() {
             $('.passwd-tip').css('display', 'block');
         } else {
             passwd = str_md5($(this).val());
+            passwd = $(this).val();
             $('.passwd-tip').css('display', 'none');
             $(this).css({
                 'border': '1px solid #8a8a8a',
@@ -63,7 +64,7 @@ $(document).ready(function() {
             $('.confirm-passwd-tip').css('display', 'block');
             $('.confirm-passwd-tip').html('两次输入密码不同；');
         } else {
-            confirmPasswd = str_md5($(this).val());
+            confirmPasswd = $(this).val();
             $(this).css({
                 'border': '1px solid #8a8a8a',
                 'box-shadow': 'none'
@@ -148,22 +149,23 @@ $(document).ready(function() {
         if ($(this).attr('data-submit-type') == 'login') { //登录
             var url = encodeURI(ADLINKX.domain + '/user/sign_in');
             var data = { 'account': account, 'passwd': passwd, 'isChecked': isChecked };
-            if (isChecked) {
-                ADLINKX.confirm('您确定要记住密码吗?', {
-                    'confirm': {
-                        'title': '确定',
-                        'callback': function() {
-                            postData(url, data);
-                        }
-                    },
-                    'cancel': {
-                        'title': '取消',
-                        'callback': function() {
-                            return false;
-                        }
-                    }
-                });
-            }
+            postData(url, data);
+            // if (isChecked) {
+            //     ADLINKX.confirm('您确定要记住密码吗?', {
+            //         'confirm': {
+            //             'title': '确定',
+            //             'callback': function() {
+            //                 postData(url, data);
+            //             }
+            //         },
+            //         'cancel': {
+            //             'title': '取消',
+            //             'callback': function() {
+            //                 return false;
+            //             }
+            //         }
+            //     });
+            // }
 
         } else { //注册
             if (!account) {
