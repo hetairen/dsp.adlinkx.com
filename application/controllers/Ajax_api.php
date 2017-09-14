@@ -326,22 +326,27 @@ class Ajax_api extends ADLINKX_Controller {
 				case 'plan':
 					$res['item'] = array('推广计划','展现量','点击数','点击率','总消耗');
 					$columns = array('plan_name','ds_pv','ds_click','ds_ctr','ds_charge');
+					$excel_name = '按推广计划查看';
 				break;
 				case 'unit':
 					$res['item'] = array('推广组	','推广计划','展现量','点击数','点击率	','总消耗');
 					$columns = array('unit_name','plan_name','ds_pv','ds_click','ds_ctr','ds_charge');
+					$excel_name = '按推广组查看';
 				break;
 				case 'creative':
 					$res['item'] = array('创意名称','推广组','推广计划','展现量','点击数','点击率','总消耗');
 					$columns = array('borad_name','unit_name','plan_name','ds_pv','ds_click','ds_ctr','ds_charge');
+					$excel_name = '按推广创意查看';
 				break;
 				case 'device':
 					$res['item'] = array('终端类型','展现量','点击数','点击率','总消耗');
 					$columns = array('device','ds_pv','ds_click','ds_ctr','ds_charge');
+					$excel_name = '按设备查看';
 				break;
 				default:
 					$res['item'] = array('日期','展现量','点击数','点击率','总消耗');
 					$columns = array('date','ds_pv','ds_click','ds_ctr','ds_charge');
+					$excel_name = ' 按天查看';
 				break;
 			}
 			for($i=0;$i<count($result);$i++){
@@ -354,7 +359,7 @@ class Ajax_api extends ADLINKX_Controller {
 			$res['current'] = $offset;
 			$res['num'] = $num;
 			if($action){
-				$this->export_data_to_excel($columns,$res['item'],$result);
+				$this->export_data_to_excel($excel_name,$columns,$res['item'],$result);
 			}else{
 				$this->output_json(true,$res);
 			}
@@ -364,8 +369,8 @@ class Ajax_api extends ADLINKX_Controller {
 	}
 
 
-	public function export_data_to_excel($columns,$title,$data){
-		$excel_name = date('Y-m-d').'.xls';
+	public function export_data_to_excel($excel_name,$columns,$title,$data){
+		$excel_name = date('Y-m-d').'_'.$excel_name.'.xls';
 		$this->download_excel($columns,$title,$data, $excel_name);
 	}
 
