@@ -329,7 +329,7 @@ class Ajax_api extends ADLINKX_Controller {
 		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$count = 0;
 		$fields = '*';
-		$uid = $this->session-userdata('uid');
+		$uid = $this->session->userdata('uid');
 		// $uid = '107535632';
 		$result = $this->api->get_table_data($type,$uid,$shop_id,$start_date,$end_date,$offset,$num,$key,$stor,$fields,$count);
 		// var_dump($result);

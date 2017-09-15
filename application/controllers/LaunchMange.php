@@ -107,6 +107,11 @@ class LaunchMange extends ADLINKX_Controller {
 		$where['start_date'] = $start_date;
 		$where['end_date'] = $end_date;
 		$result = $this->launch->lists($where, $num, $offset, $key, $stor, $fields, $count);
+		for($i=0;$i<count($result);$i++){
+			$result[$i]['ctr'] = sprintf("%.2f", $result[$i]['ctr']);
+			$result[$i]['charge'] = sprintf("%.2f", ($result[$i]['charge']/100));
+			$result[$i]['click_pric'] = sprintf("%.2f", ($result[$i]['charge']/$result[$i]['click']));
+		}
 		if($is_ajax){
 			$this->output_json(true,array('count' => ceil($count/$num), 'current'=> $offset, 'num' => $num, 'list' => $result));
 		}else{
