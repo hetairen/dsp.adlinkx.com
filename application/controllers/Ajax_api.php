@@ -115,12 +115,12 @@ class Ajax_api extends ADLINKX_Controller {
 
 	public function query_list(){
 		$type = $this->uri->segment(3) ? $this->uri->segment(3) : '';
-		// $shop_id = $this->uri->segment(4) ? $this->uri->segment(4) : '';
-		$shop_id = '288230376259247377';
-		// $start_date = $this->uri->segment(5) ? $this->uri->segment(5) : '';
-		$start_date = '2017-08-01';
-		// $end_date = $this->uri->segment(6) ? $this->uri->segment(6) : '';
-		$end_date = '2017-08-31';
+		$shop_id = $this->uri->segment(4) ? $this->uri->segment(4) : '';
+		// $shop_id = '288230376259247377';
+		$start_date = $this->uri->segment(5) ? $this->uri->segment(5) : '';
+		// $start_date = '2017-08-01';
+		$end_date = $this->uri->segment(6) ? $this->uri->segment(6) : '';
+		// $end_date = '2017-08-31';
 		$format = $this->uri->segment(7) ? $this->uri->segment(7) : 'chart';
 		$metric = $this->uri->segment(8) ? str_replace('ds_','',$this->uri->segment(8)) : 'pv';
 		$offset = $this->uri->segment(9) ? $this->uri->segment(9) : 1;
@@ -223,8 +223,8 @@ class Ajax_api extends ADLINKX_Controller {
 
 	public function dsp_satef(){
 		$type = $this->uri->segment(3) ?$this->uri->segment(3) : '';
-		// $shop_id = $this->uri->segment(4) ?$this->uri->segment(4) : '';
-		$shop_id = '288230376259247377';
+		$shop_id = $this->uri->segment(4) ?$this->uri->segment(4) : '';
+		// $shop_id = '288230376259247377';
 		$start_date = $this->uri->segment(5) ?$this->uri->segment(5) : date('Y-m-d',time());
 		$end_date = $this->uri->segment(6) ?$this->uri->segment(6) : date('Y-m-d',time());
 		$format = $this->uri->segment(7) ?$this->uri->segment(7) : 'chart';
@@ -316,12 +316,12 @@ class Ajax_api extends ADLINKX_Controller {
 
 	public function get_table_data(){
 		$type = $this->uri->segment(3) ? $this->uri->segment(3) : '';
-		// $shop_id = $this->uri->segment(4) ? $this->uri->segment(4) : '';
-		$shop_id = '288230376259247377';
-		// $offset = $this->uri->segment(5) ? $this->uri->segment(5) : date('Y-m-d',time());
-		$start_date = '2017-09-07';
-		// $offset = $this->uri->segment(6) ? $this->uri->segment(6) : date('Y-m-d',time());
-		$end_date = '2017-09-13';
+		$shop_id = $this->uri->segment(4) ? $this->uri->segment(4) : '';
+		// $shop_id = '288230376259247377';
+		$start_date = $this->uri->segment(5) ? $this->uri->segment(5) : date('Y-m-d',time());
+		// $start_date = '2017-09-07';
+		$end_date = $this->uri->segment(6) ? $this->uri->segment(6) : date('Y-m-d',time());
+		// $end_date = '2017-09-13';
 		$action = $this->uri->segment(7) ? $this->uri->segment(7) : 0;
 		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
 		$num = $this->uri->segment(8) ? $this->uri->segment(9) : 20;
@@ -329,8 +329,8 @@ class Ajax_api extends ADLINKX_Controller {
 		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$count = 0;
 		$fields = '*';
-		// $uid = $this->session-userdata('uid');
-		$uid = '107535632';
+		$uid = $this->session-userdata('uid');
+		// $uid = '107535632';
 		$result = $this->api->get_table_data($type,$uid,$shop_id,$start_date,$end_date,$offset,$num,$key,$stor,$fields,$count);
 		// var_dump($result);
 		if($result){
