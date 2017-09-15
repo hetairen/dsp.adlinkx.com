@@ -229,6 +229,7 @@
                 success:function(res){
                     if(res.code ==1 && res.msg == 'success'){
                         html = '<div style="width:100%;height:auto;padding:1% 2%"><a href="'+res.data.borad_url+'" target="_blank"><img src="https://images.ztcadx.com/img/board/'+res.data.pic_path+'" style="display:block;width:300px;"></a></div>'+
+                        '<div  style="width:100%;height:auto;padding:1% 2%">创意ID：'+res.data.borad_id+'</div>'+
                         '<div  style="width:100%;height:auto;padding:1% 2%">创意地址：<a href="https://images.ztcadx.com/img/board/'+res.data.pic_path+'" target="_blank">https://images.ztcadx.com/img/board/'+res.data.pic_path+'</a></div>'+
                         '<div  style="width:100%;height:auto;padding:1% 2%">创意格式：'+res.data.pic_path.split('.')[1]+'</div>'+
                         '<div  style="width:100%;height:auto;padding:1% 2%">创意宽度：'+res.data.pic_width+'px</div>'+

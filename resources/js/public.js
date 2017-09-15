@@ -503,9 +503,19 @@ Adlinkx.prototype.popup_layer = function(title,text,json){
         }
         
     });
+}
 
-    
-    
+
+Adlinkx.prototype.autoResizeImage = function(width,height,img){
+    var imgOBJ = new Image();
+    imgOBJ.scr = img;
+    var ratio = 1; // 比例，默认1：1 
+    var ratio_w;
+    var ratio_w;
+    var w = imgOBJ.width;
+    var h = imgOBJ.height;
+    ratio_w = width/w;
+    ratio_h = height/h;
 }
 
 window.ADLINKX = new Adlinkx(jQuery);
