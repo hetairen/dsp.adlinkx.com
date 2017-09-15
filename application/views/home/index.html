@@ -110,14 +110,14 @@
 
             var myDate = new Date();
             var newDate = myDate.getDate();
-            myDate.setDate(myDate.getDate() - 7);
-            var  weekDay= myDate.getDate();
-            var week_time = myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(weekDay > 9 ? weekDay: '0'+weekDay);
+            // myDate.setDate(myDate.getDate() - 7);
+            // var  weekDay= myDate.getDate();
+            // var week_time = myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(weekDay > 9 ? weekDay: '0'+weekDay);
             var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
-            var date_value = week_time+' ~ '+new_time;
+            var date_value = new_time+' ~ '+new_time;
         
         	get_dsp_sadt('today',{
-        		'start_date':week_time,
+        		'start_date':new_time,
                 'end_date':new_time,
                 'shop_id':$('#store-title-box').attr('data-shop-id'),
                 'metric':'ds_pv',
