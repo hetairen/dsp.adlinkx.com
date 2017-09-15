@@ -65,7 +65,12 @@ class LaunchMange extends ADLINKX_Controller {
 		for($i=0;$i<count($ids2arr);$i++){
 			$where[$i]['plan_id'] = $ids2arr[$i];
 		}
+		// 删除投放
 		$del = $this->launch->delete($where);
+		// 删除策略
+		$this->strategy->delete($where);
+		// 删除创意
+		$this->creative->delete($where);
 		if($del){
 			$this->output_json(true,'');
 		}else{

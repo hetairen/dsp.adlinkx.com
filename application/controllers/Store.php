@@ -92,7 +92,7 @@ class Store extends ADLINKX_Controller{
 		}
 		// var_dump($where);
 		// exit;
-		// 删除店铺
+		// 删除店铺 所有删除操作都是只是逻辑删除，并非物理删除
 		$status = $this->store->delete($where);
 		//删除该店铺下所有计划
 		$this->launch->delete($where);

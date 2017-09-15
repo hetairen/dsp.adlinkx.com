@@ -145,6 +145,7 @@ class CreativeMange extends ADLINKX_Controller {
 				'pic_height'	=> $file_height,
 				'pic_size'	=> $file_width.'*'.$file_height,
 				'pic_extension'	=> $file_ext,
+				
 			));
 			if($board_id){
 				echo '{"upload_file_name":"'.$new_file_name.'","ext":"'.$file_ext.'","width":"'.$file_width.'","height":"'.$file_height.'","board_id":'.$board_id.'}';
@@ -155,7 +156,13 @@ class CreativeMange extends ADLINKX_Controller {
 	}
 
 	public function get_unit_list($unit_id){
-		$units = $this->strategy->get_all(array('uid' => $this->session->userdata('uid'), 'unit_id' => $unit_id));
+		$where = array();
+		$where['uid'] = $this->session->userdata('uid');
+		$where['is_del'] = '0';
+		if($unit_id){
+			$where['unit_id'] = $unit_id;
+		}
+		$units = $this->strategy->get_all($where);
 		$this->assign('units',$units);
 	}
 

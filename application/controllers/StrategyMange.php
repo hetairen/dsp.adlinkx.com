@@ -15,6 +15,7 @@ class StrategyMange extends ADLINKX_Controller {
 		$this->initialization();
 		$this->load->model('launch_model','launch');
 		$this->load->model('strategy_model','strategy');
+		$this->load->model('creative_model','creative');
 	}
 	public function index() {
 
@@ -51,7 +52,10 @@ class StrategyMange extends ADLINKX_Controller {
 		for($i=0;$i<count($ids2arr);$i++){
 			$where[$i]['unit_id'] = $ids2arr[$i];
 		}
+		// 删除策略
 		$del = $this->strategy->delete($where);
+		// 删除创意
+		$this->creative->delete($where);
 		if($del){
 			$this->output_json(true,'');
 		}else{
@@ -82,7 +86,7 @@ class StrategyMange extends ADLINKX_Controller {
 			$where['unit_name'] = $key_words;
 		}
 		
-		$wehre['is_del'] = '0';
+		$where['is_del'] = '0';
 		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
 		$num = $this->uri->segment(9) ? $this->uri->segment(9) : 20;
 		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'unit_id';
@@ -102,7 +106,7 @@ class StrategyMange extends ADLINKX_Controller {
 	}
 
 	public function get_plan_list($uid, $plan_id){
-		$plans = $this->launch->get_all(array('uid' => $uid, 'plan_id' =>$plan_id));
+		$plans = $this->launch->get_all(array('uid' => $uid, 'plan_id' =>$plan_id, 'is_del' => '0'));
 		// var_dump($plans);
 		
 		$this->assign('plans',$plans);
@@ -115,7 +119,9 @@ class StrategyMange extends ADLINKX_Controller {
 		$action = $this->input->post('action');
 		$ids2arr = explode(',', $ids);
 		for($i=0;$i<count($ids2arr);$i++){
-			$FB = $this->strategy->update(array('status' => ($action == 'start' ? 1 : 0 )),array('unit_id' => $ids2arr[$i]));
+			$strategy = $this->strategy->update(array('status' => ($action == 'start' ? 1 : 0 )),array('unit_id' => $ids2arr[$i]));
+			$creative = $this->creative->update(array('status' => ($action == 'start' ? 1 : 0 )),array('unit_id' => $ids2arr[$i]));
+			$FB = $strategy = $creative;
 		}
 		if($FB){
 			$this->output_json(true,'');

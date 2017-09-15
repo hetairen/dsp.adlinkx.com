@@ -33,7 +33,7 @@ class Strategy_model extends ADLINKX_Model {
 			'plat_name'	=> '秒针',
 			'uid'		=> $plan['uid'],
 			'is_del'	=> 0,
-			'status'	=> 1,
+			'status'	=> 0,
 			'price'		=> $data['price'],
 			'unit_create_time' => date('Y-m-d H:i:s'),
 			'tags_value' => $data['tags_value']
@@ -97,7 +97,7 @@ class Strategy_model extends ADLINKX_Model {
 	public function build_where($where = array()){
 		$tmp = '';
 		foreach($where AS $k => $v){
-			if(!empty($v)){
+			if($v != ''){
 				if($k == 'unit_name'){
 					$tmp .= '`' . $k . '`' . ' like "%' . $v .'%" and ';
 				}else{
