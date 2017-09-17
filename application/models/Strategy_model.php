@@ -54,13 +54,10 @@ class Strategy_model extends ADLINKX_Model {
 	}
 
 	public function lists($where = array(), $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*', &$count){
-		$count_sql = 'SELECT COUNT(*) AS `count` FROM `huihe_marketing_system`.`'.$this->table_name.'` '.$this->build_where($where);
+		$count_sql = "SELECT COUNT(*) AS `count` FROM (`diy_unit` AS `u`) LEFT JOIN `store` AS `s` ON s.shop_id = u.shop_id LEFT JOIN `dsp_stats_ad_task` AS `ds` ON ds.date BETWEEN '".$where['start_date']."' AND '".$where['end_date']."' AND ds.unit_id = u.unit_id WHERE `u`.`uid` = '".$where['uid']."' AND `u`.`plat_id` = '134' ".(isset($where['shop_id']) ? "AND `u`.`shop_id` = '".$where['shop_id']."'":'')." AND `u`.`is_del` = '0' ".(isset($where['plan_id']) ? "AND `u`.`plan_id` = '".$where['plan_id']."'": '')." GROUP BY `u`.`unit_id` ORDER BY `u`.`status`";
 		$count = $this->db->query($count_sql)->result_array()[0]['count'];
-		$sql = 'SELECT * FROM `huihe_marketing_system`.`'.$this->table_name.'` ' . $this->build_where($where) .' ORDER BY '.$key.' '.$stor.' LIMIT '.intval(($offset-1)/$num) . ',' .$num;
-		// var_dump($sql);
-		// exit;
+		$sql = "SELECT `u`.`unit_id`, `u`.`unit_name`, `u`.`plan_id`, `u`.`plan_name`, `u`.`type`, `u`.`shop_id`, `u`.`plat_id`, `u`.`plat_name`, `u`.`uid`, `u`.`status`, `u`.`price`, `s`.`shop_title`, SUM(`ds`.`pv`) AS `pv`, SUM(`ds`.`click`) AS `click`, SUM(`ds`.`charge`) AS `charge`, IFNULL(SUM(`ds`.`click`) / SUM(`ds`.`pv`) * 100, 0) AS `ctr`, IFNULL(SUM(`ds`.`charge`) / SUM(`ds`.`click`), 0) AS `click_cost` FROM (`diy_unit` AS `u`) LEFT JOIN `store` AS `s` ON s.shop_id = u.shop_id LEFT JOIN `dsp_stats_ad_task` AS `ds` ON ds.date BETWEEN '".$where['start_date']."' AND '".$where['end_date']."' AND ds.unit_id = u.unit_id WHERE `u`.`uid` = '".$where['uid']."' AND `u`.`plat_id` = '134' ".(isset($where['shop_id']) ? "AND `u`.`shop_id` = '".$where['shop_id']."'":'')." AND `u`.`is_del` = '0' ".(isset($where['plan_id']) ? "AND `u`.`plan_id` = '".$where['plan_id']."'": '')." GROUP BY `u`.`unit_id` ORDER BY `u`.`status` DESC LIMIT 20";
 		$query = $this->db->query($sql);
-		// var_dump($this->db->last_query());
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
 

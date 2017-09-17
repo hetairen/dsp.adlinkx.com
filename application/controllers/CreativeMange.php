@@ -93,10 +93,18 @@ class CreativeMange extends ADLINKX_Controller {
 		$key = $this->uri->segment(12) ? $this->uri->segment(12) : 'id';
 		$stor = $this->uri->segment(13) ? $this->uri->segment(13) : 'DESC';
 		$fields = '*';
+		$start_date = $this->uri->segment(14) ? $this->uri->segment(14) : date('Y-m-d',time());
+		$end_date = $this->uri->segment(15) ? $this->uri->segment(15) : date('Y-m-d',time());
+		$where['start_date'] = $start_date;
+		$where['end_date'] = $end_date;
 		$creative_lists = $this->creative->lists($where, $offset, $num, $key, $stor, $fields, $count);
+		// var_dump($creative_lists);
 		if($creative_lists && !empty($creative_lists) && count($creative_lists) > 0){
 			for($i=0;$i<count($creative_lists);$i++){
 				$creative_lists[$i]['ext'] = $creative_lists[$i]['pic_path'] && !empty($creative_lists[$i]['pic_path']) ? explode('.',$creative_lists[$i]['pic_path'])[1] : '';
+				$creative_lists[$i]['ctr'] = sprintf("%.2f", $creative_lists[$i]['ctr']);
+				$creative_lists[$i]['charge'] = sprintf("%.2f", ($creative_lists[$i]['charge']/100));
+				$creative_lists[$i]['click_cost'] = sprintf("%.2f", ($creative_lists[$i]['click_cost']/100));
 			}
 		}
 		if($is_ajax){

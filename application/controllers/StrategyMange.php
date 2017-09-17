@@ -92,8 +92,17 @@ class StrategyMange extends ADLINKX_Controller {
 		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'unit_id';
 		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$fields = '*';
+		$start_date = $this->uri->segment(12) ? $this->uri->segment(12) : date('Y-m-d',time());
+		$end_date = $this->uri->segment(13) ? $this->uri->segment(13) : date('Y-m-d',time());
+		$where['start_date'] = $start_date;
+		$where['end_date'] = $end_date;
 		$result = $this->strategy->lists($where, $num, $offset, $key, $stor, $fields ,$count);
 		// var_dump($result);
+		for($i=0;$i<count($result);$i++){
+			$result[$i]['ctr'] = sprintf("%.2f", $result[$i]['ctr']);
+			$result[$i]['charge'] = sprintf("%.2f", ($result[$i]['charge']/100));
+			$result[$i]['click_cost'] = sprintf("%.2f", ($result[$i]['click_cost']/100));
+		}
 		if($is_ajax){
 			$this->output_json(true,array('count' => ceil($count/$num), 'current'=> $offset, 'num' => $num, 'list' => $result));
 		}else{

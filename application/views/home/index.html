@@ -38,19 +38,19 @@
                     <div class="home-body-box">
                         <div class="account-money-box">
                             <p>帐户余额</p>
-                            <span><{if $store|@count neq 0}><{$store[0].money}><{else}>0<{/if}></span>
+                            <span><{if $store|@count neq 0}><{$store[0].money|string_format:"%.2f"}><{else}>0<{/if}></span>
                         </div>
                         <div class="yestady-consume-box">
                             <p>昨日消耗</p>
-                            <span><{$user.charge_today}></span>
+                            <span><{$user.charge_today|string_format:"%.2f"}></span>
                         </div>
                         <div class="tady-budget-box">
                             <p>今日预算</p>
-                            <span><{if $launch|@count neq 0}><{$launch[0].budget}><{else}>0.00<{/if}></span>
+                            <span><{if $launch|@count neq 0}><{$launch[0].budget|string_format:"%.2f"}><{else}>0.00<{/if}></span>
                         </div>
                         <div class="launch-num-box">
                             <p>投放中的计划个数</p>
-                            <span><{$start_launch_num}>/<{$launch_num}></span>
+                            <span><{$start_launch_num|string_format:"%d"}>/<{$launch_num|string_format:"%d"}></span>
                         </div>
                     </div>
                 </div>

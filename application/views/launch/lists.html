@@ -64,8 +64,8 @@
                                                 <th>投放时间</th>
                                                 <th>每日预算</th>
                                                 <th>投放类型</th>
-                                                <th>展现量</th>
-                                                <th>点击数</th>
+                                                <th>展现量(次)</th>
+                                                <th>点击数(个)</th>
                                                 <th>点击率(%)</th>
                                                 <th>点击单价(元)</th>
                                                 <th>消耗(元)</th>
@@ -82,11 +82,11 @@
                                                         <td><{$lists.startdate}>~<{$lists.enddate}></td>
                                                         <td><{if $lists.budget eq 0}>不限<{else}><{$lists.budget}><{/if}></td>
                                                         <td><{if $lists.device eq 1}>PC端<{elseif $lists.device eq 2}>无线端<{elseif $lists.device eq 3}>APP<{elseif $lists.device eq 4}>Native<{else}>不限设备<{/if}></td>
-                                                        <td><{$lists.pv}></td>
-                                                        <td><{$lists.click}></td>
-                                                        <td><{$lists.ctr}>%</td>
-                                                        <td><{$lists.click_pric}></td>
-                                                        <td><{$lists.charge}></td>
+                                                        <td><{$lists.pv|string_format:"%d"}></td>
+                                                        <td><{$lists.click|string_format:"%d"}></td>
+                                                        <td><{$lists.ctr|string_format:"%.2f"}>%</td>
+                                                        <td><{$lists.click_cost|string_format:"%.2f"}></td>
+                                                        <td><{$lists.charge|string_format:"%.2f"}></td>
                                                         <td><a href="javascript:void(0);" data-uid="<{$lists.uid}>" data-shop-id="<{$lists.shop_id}>" data-plan-id="<{$lists.plan_id}>" class="delete-buts"><i class="fa fa-trash-o"></i></a><a href="/step/edit/campaign/launch/1_2/<{$lists.plan_id}>" class="edit-buts"><i class="fa fa-edit"></i></a></td>
                                                     </tr>
                                                 <{/foreach}>
