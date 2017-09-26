@@ -296,16 +296,28 @@
                     url:'/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action,
                     type:'GET',
                     success:function(res){
+                        console.log(res);
                         if(res.code == 1 && res.msg == 'success'){
                             var th_html = '';
                             var tb_html = '';
-                            var item = res.data.item;
-                            var list = res.data.list;
-                            var td_num = item.length;
-                            $('#table2').find('thead').html(output_thead_html(item));
-                            $('#table2').find('tbody').html(output_tbody_html(type,td_num,list));
-                            $('#pages-box').attr('data-count',res.data.count);
-                            $('#pages-box').attr('data-current',res.data.current);
+                            // if(res.data.length > 0){
+                                var th_html = '';
+                                var tb_html = '';
+                                var item = res.data.item;
+                                var list = res.data.list;
+                                var td_num = item.length;
+                                $('#table2').find('thead').html(output_thead_html(item));
+                                $('#table2').find('tbody').html(output_tbody_html(type,td_num,list));
+                                $('#pages-box').attr('data-count',res.data.count);
+                                $('#pages-box').attr('data-current',res.data.current);
+                            // }else{
+                            //     var th_html = '<tr><td>日期</td><td>展现量</td><td>点击数</td><td>点击率</td><td>总消耗</td></tr>';
+                            //     var tb_html = '<tr><td colspan="5" style="text-align:center;">暂无数据</td></tr>';
+                            //     $('#table2').find('thead').html(th_html);
+                            //     $('#table2').find('tbody').html(tb_html);
+                            // }
+                            // $('#pages-box').attr('data-count',res.data.count);
+                            // $('#pages-box').attr('data-current',res.data.current);
                             // get_pages('pages-box','/ajax_api/get_table_data/'+type+'/'+shop_id+'/');
                         }
                     },
