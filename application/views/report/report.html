@@ -161,7 +161,7 @@
             'format':'chart'
         });
 
-        get_table_data('day',$('#store-title-box').attr('data-shop-id'),'0','0',0);
+        get_table_data('day',$('#store-title-box').attr('data-shop-id'),'0','0',0,1);
 
         $(document).on('click','.report-select-shop-box',function(e){
             e.stopPropagation();
@@ -255,7 +255,7 @@
             $('.report-query-buttons').attr('data-checked',false).css({'color':'#636e7b','background':'#FFF','border-color':'#c1c1c1'}).find('i').removeClass('fa-dot-circle-o').addClass('fa-circle-o');
             $(this).attr('data-checked',true).css({'color':'#FFF','background':'#0781ec','border-color':'#066eca'}).find('i').removeClass('fa-circle-o').addClass('fa-dot-circle-o');
             // console.log(but_type);
-            get_table_data(but_type,shop_id,start_date,end_date,0);
+            get_table_data(but_type,shop_id,start_date,end_date,0,1);
         });
 
         $(document).on('click','.export-buts',function(){
@@ -269,7 +269,7 @@
                     shop_id = $(this).attr('data-shop-id');
                 }
             });
-            get_table_data(type,shop_id,start_date,end_date,1);
+            get_table_data(type,shop_id,start_date,end_date,1,1);
         });
 
         function get_dsp_satef(type,json){
@@ -288,12 +288,12 @@
         }
 
 
-        function get_table_data(type,shop_id,start_date,end_date,action){
+        function get_table_data(type,shop_id,start_date,end_date,action,offset){
             if(action){
-                window.open('/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action);
+                window.open('/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action+'/'+offset);
             }else{
                 $.ajax({
-                    url:'/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action,
+                    url:'/ajax_api/get_table_data/'+type+'/'+shop_id+'/'+start_date+'/'+end_date+'/'+action+'/'+offset,
                     type:'GET',
                     success:function(res){
                         console.log(res);

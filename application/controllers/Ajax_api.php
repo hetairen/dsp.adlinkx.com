@@ -319,7 +319,7 @@ class Ajax_api extends ADLINKX_Controller {
 		// $end_date = '2017-09-13';
 		$action = $this->uri->segment(7) ? $this->uri->segment(7) : 0;
 		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
-		$num = $this->uri->segment(8) ? $this->uri->segment(9) : 20;
+		$num = $this->uri->segment(9) ? $this->uri->segment(9) : 20;
 		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'id';
 		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$count = 0;
