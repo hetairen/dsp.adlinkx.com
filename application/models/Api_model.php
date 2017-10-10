@@ -80,7 +80,9 @@ class Api_model extends ADLINKX_Model {
 			break;
 		}
 
-		$count = $this->db->query($count_sql)->result_array()[0]['count'];
+		$count_query = $this->db->query($count_sql);
+		
+		$count = $count_query && $count_query->num_rows() > 0 ? $count_query->result_array()[0]['count']: 0;
 		$query = $this->db->query($sql);
 		// var_dump($sql);
 		// var_dump($count_sql);
