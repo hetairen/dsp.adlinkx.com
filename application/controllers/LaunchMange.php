@@ -106,7 +106,7 @@ class LaunchMange extends ADLINKX_Controller {
 		}
 		$where['start_date'] = $start_date;
 		$where['end_date'] = $end_date;
-		var_dump($where);
+		// var_dump($where);
 		$result = $this->launch->lists($where, $num, $offset, $key, $stor, $fields, $count);
 		// var_dump($result);
 		for ($i = 0; $i < count($result); $i++) {
