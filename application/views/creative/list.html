@@ -113,8 +113,9 @@
     jQuery(document).ready(function() {
         var myDate = new Date();
         var newDate = myDate.getDate();
-        var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
-        var date_value = new_time+' ~ '+new_time;
+        var start_date= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
+        var end_date = start_date;
+        var date_value = start_date+' ~ '+end_date;
         var insl = laydate.render({
             elem: '#hook-time-but',
             max:0,
@@ -174,8 +175,7 @@
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
             $('.add-buts').attr('data-unit-id',unit_id);
-            
-            get_creative_list(unit_id,'','','','','','','');
+            get_creative_list(unit_id,'','','','','',start_date,end_date);
         });
 
 
