@@ -33,6 +33,10 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="page-title">策略管理</div>
+                                <div class="date-hook-box">
+                                    <i class="fa fa-calendar" style="float:left;margin:8px;"></i>
+                                    <a href="javascript:void(0);" id="hook-time-but" data-shop-id="" style="width:80%;"></a>
+                                </div>
                                 <div class="add-but-block"><a class="add-buts but-24ac45" href="javascript:void(0);" data-plan-id="<{$plan_id}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增策略</a></div>
                                 <div class="space-box"></div>
                             </div>
@@ -99,8 +103,32 @@
     <script src="/resources/js/libarays/toggles.min.js"></script>
     <script src="/resources/js/libarays/jquery.cookies.js"></script>
     <script src="/resources/js/libarays/custom.js"></script>
+    <script type="text/javascript" src="/resources/js/libarays/laydate/laydate.js" charset="utf-8"></script>
     <script>
     jQuery(document).ready(function() {
+        var newDate = myDate.getDate();
+        var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
+        var date_value = new_time+' ~ '+new_time;
+        var insl = laydate.render({
+            elem: '#hook-time-but',
+            max:0,
+            range: '~',
+            value:date_value,
+            done:function(data){
+                var start_date = data.split(' ~ ')[0];
+                var end_date = data.split(' ~ ')[1];
+                var shop_id = $('#home-body-hook-time-but').attr('data-shop-id');
+                var metric = $('#targets-text').attr('data-targets-values');
+                // get_dsp_sadt('today',{
+                //     'start_date':start_date,
+                //     'end_date':end_date,
+                //     'shop_id':shop_id,
+                //     'metric':metric,
+                //     'format':'chart'
+                // });
+            }
+        });
+
         get_pages('pages-box','/launchMange/lists/campaign/strategy/1/');
 
         $(document).on('click','.select-all-buts',function(){
