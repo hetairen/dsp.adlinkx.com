@@ -78,7 +78,14 @@ input {
 
 .page-title {
     float: left;
-    width: 80%;
+    width: 60%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.date-hook-box{
+    float: left;
+    width: 15%;
     height: 30px;
     line-height: 30px;
 }
