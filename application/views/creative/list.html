@@ -326,7 +326,7 @@
 
         function get_creative_list(unit_id,key_words,offset,num,key,stor,start_date,end_date){
             $.ajax({
-                url:encodeURI('/creativeMange/lists/campaign/creative/1/'+unit_id+'/'+key_words+'/'+offset+'/'+num+'/'+key+'/'+stor+'/'+start_date+'/'+end_date),
+                url:encodeURI('/creativeMange/lists/campaign/creative/1/'+(unit_id ? unit_id : 0)+'/'+ (key_words ? key_words : 0)+'/'+(offset ? offset: 0)+'/'+(num?num:0)+'/'+(key?key:0)+'/'+(stor?stor:0)+'/'+(start_date?start_date:0)+'/'+(end_date?end_date:0)),
                 type:'GET',
                 success:function(res){
                     if(res.code ==1 && res.msg == 'success'){
