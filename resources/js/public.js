@@ -472,6 +472,7 @@ Adlinkx.prototype.popup_layer = function(title,text,json){
         'overflow': 'hidden',
         'zIndex': 10000,
         'border': '1px solid #c1c1c1',
+        'overflow':'auto',
         'innerHTML': '<div class="popup-header-block"><span class="popup-title">'+title+':</span><a href="javascript:void(0);" class="popup-close-but" title="关闭"><i class="fa fa-times"></i></a></div><div class="popup-body-block">'+text+'</div>'+but_html+
         '<style>'+
             '.popup-header-block{width:'+parseInt(json.width-10)+'px;height:40px;line-height:40px;padding:0 0 0 20px;}'+
