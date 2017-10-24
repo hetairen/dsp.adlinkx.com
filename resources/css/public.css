@@ -291,7 +291,7 @@ input {
 /**
  * home
  */
-.home-body-fn-time-box{float:left;width:20%;height:40px;border:1px solid #c1c1c1;border-radius:3px;}
+.home-body-fn-time-box{float:left;width:23%;height:40px;border:1px solid #c1c1c1;border-radius:3px;}
 .home-body-fn-buts-box{float:right;width:40%;height:40px;}
 .time-icon{display:block;float:left;margin:13px;}
 #home-body-hook-time-but{display:block;width:100%;height:40px;line-height:40px;}
