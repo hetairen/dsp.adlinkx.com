@@ -74,7 +74,7 @@ class CreativeMange extends ADLINKX_Controller {
 		$count = 0;
 		$is_ajax = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
 		$unit_id = $this->uri->segment(6) && $this->uri->segment(6) !=0 ? $this->uri->segment(6) : '';
-		$key_words = $this->uri->segment(9) ? urldecode($this->uri->segment(9)) : '';
+		$key_words = $this->uri->segment(7) ? urldecode($this->uri->segment(7)) : '';
 		$this->get_unit_list($unit_id);
 		$where = array();
 		if($unit_id){
@@ -88,13 +88,13 @@ class CreativeMange extends ADLINKX_Controller {
 		}
 		$where['uid'] = $this->session->userdata('uid');
 		$where['is_del'] = '0';
-		$offset = $this->uri->segment(10) ? $this->uri->segment(10) : 1;
-		$num = $this->uri->segment(11) ? $this->uri->segment(11) : 20;
-		$key = $this->uri->segment(12) ? $this->uri->segment(12) : 'id';
-		$stor = $this->uri->segment(13) ? $this->uri->segment(13) : 'DESC';
+		$offset = $this->uri->segment(8) ? $this->uri->segment(8) : 1;
+		$num = $this->uri->segment(9) ? $this->uri->segment(9) : 20;
+		$key = $this->uri->segment(10) ? $this->uri->segment(10) : 'id';
+		$stor = $this->uri->segment(11) ? $this->uri->segment(11) : 'DESC';
 		$fields = '*';
-		$start_date = $this->uri->segment(14) ? $this->uri->segment(14) : date('Y-m-d',time());
-		$end_date = $this->uri->segment(15) ? $this->uri->segment(15) : date('Y-m-d',time());
+		$start_date = $this->uri->segment(12) ? $this->uri->segment(12) : date('Y-m-d',time());
+		$end_date = $this->uri->segment(13) ? $this->uri->segment(14) : date('Y-m-d',time());
 		$where['start_date'] = $start_date;
 		$where['end_date'] = $end_date;
 		$creative_lists = $this->creative->lists($where, $offset, $num, $key, $stor, $fields, $count);

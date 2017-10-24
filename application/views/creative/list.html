@@ -123,15 +123,8 @@
             done:function(data){
                 var start_date = data.split(' ~ ')[0];
                 var end_date = data.split(' ~ ')[1];
-                var shop_id = $('#home-body-hook-time-but').attr('data-shop-id');
-                var metric = $('#targets-text').attr('data-targets-values');
-                // get_dsp_sadt('today',{
-                //     'start_date':start_date,
-                //     'end_date':end_date,
-                //     'shop_id':shop_id,
-                //     'metric':metric,
-                //     'format':'chart'
-                // });
+                var unit_id = $('#store-title-box').attr('data-unit-id');
+                get_creative_list(unit_id,'','','','','',start_date,end_date);
             }
         });
 
@@ -181,7 +174,8 @@
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
             $('.add-buts').attr('data-unit-id',unit_id);
-            get_creative_list(unit_id,'');
+            
+            get_creative_list(unit_id,'','','','','','','');
         });
 
 
@@ -245,7 +239,7 @@
             if(key_words == ''){
                 ADLINKX.alert('请输入要搜索的关键字;');
             }else{
-                get_creative_list('0',key_words);
+                get_creative_list('0',key_words,'','','','','','');
             }
         });
 
@@ -330,9 +324,9 @@
         }
 
 
-        function get_creative_list(unit_id,key_words){
+        function get_creative_list(unit_id,key_words,offset,num,key,stor,start_date,end_date){
             $.ajax({
-                url:encodeURI('/creativeMange/lists/campaign/creative/1/'+unit_id+'/'+key_words),
+                url:encodeURI('/creativeMange/lists/campaign/creative/1/'+unit_id+'/'+key_words+'/'+offset+'/'+num+'/'+key+'/'+stor+'/'+start_date+'/'+end_date),
                 type:'GET',
                 success:function(res){
                     if(res.code ==1 && res.msg == 'success'){
