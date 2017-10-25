@@ -121,6 +121,8 @@
         var myDate = new Date();
         var newDate = myDate.getDate();
         var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
+        var start_date = new_time;
+        var end_date = start_date;
         var date_value = new_time+' ~ '+new_time;
         var insl = laydate.render({
             elem: '#hook-time-but',
@@ -187,7 +189,7 @@
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
             $('.add-buts').attr('data-shop-id',$(this).attr('data-shop-id'));
-            get_launch_list($(this).attr('data-shop-id'),'');
+            get_launch_list($(this).attr('data-shop-id'),0,0,0,0,0,start_date,end_date);
         });
 
         $(document).on('click','.add-buts',function(){
@@ -282,13 +284,13 @@
             if(key_words == ''){
                 ADLINKX.alert('请输入要搜索的关键字;');
             }else{
-                get_launch_list(shop_id,key_words);
+                get_launch_list(shop_id,key_words,0,0,0,0,start_date,end_date);
             }
         });
 
-        function get_launch_list(shop_id,key_words){
+        function get_launch_list(shop_id,key_words,offset,num,key,stor,start_date,end_date){
             $.ajax({
-                url:encodeURI('/launchMange/lists/campaign/launch/1/'+shop_id+'/'+key_words),
+                url:encodeURI('/launchMange/lists/campaign/launch/1/'+shop_id+'/'+key_words+'/'+offset+'/'+num+'/'+key+'/'+stor+'/'+start_date+'/'+end_date),
                 type:'GET',
                 success:function(res){
                     console.log(res);
