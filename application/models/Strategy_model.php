@@ -54,7 +54,10 @@ class Strategy_model extends ADLINKX_Model {
 	}
 
 	public function lists($where = array(), $num = 20, $offset = 1, $key = 'id', $stor = 'desc', $fields = '*', &$count) {
-		$count_sql = "SELECT COUNT(*) AS `count` FROM (`diy_unit` AS `u`) LEFT JOIN `store` AS `s` ON s.shop_id = u.shop_id LEFT JOIN `dsp_stats_ad_task` AS `ds` ON ds.date BETWEEN '" . $where['start_date'] . "' AND '" . $where['end_date'] . "' AND ds.unit_id = u.unit_id WHERE `u`.`uid` = '" . $where['uid'] . "' AND `u`.`plat_id` = '134' " . (isset($where['shop_id']) ? "AND `u`.`shop_id` = '" . $where['shop_id'] . "'" : '') . " AND `u`.`is_del` = '0' " . (isset($where['plan_id']) ? "AND `u`.`plan_id` = '" . $where['plan_id'] . "'" : '') . " GROUP BY `u`.`unit_id` ORDER BY `u`.`status`";
+		// $count_sql = "SELECT COUNT(*) AS `count` FROM (`diy_unit` AS `u`) LEFT JOIN `store` AS `s` ON s.shop_id = u.shop_id LEFT JOIN `dsp_stats_ad_task` AS `ds` ON ds.date BETWEEN '" . $where['start_date'] . "' AND '" . $where['end_date'] . "' AND ds.unit_id = u.unit_id WHERE `u`.`uid` = '" . $where['uid'] . "' AND `u`.`plat_id` = '134' " . (isset($where['shop_id']) ? "AND `u`.`shop_id` = '" . $where['shop_id'] . "'" : '') . " AND `u`.`is_del` = '0' " . (isset($where['plan_id']) ? "AND `u`.`plan_id` = '" . $where['plan_id'] . "'" : '') . " GROUP BY `u`.`unit_id` ORDER BY `u`.`status`";
+
+		$count_sql = 'select count(*) as count from `diy_unit` where uid="'.$where['uid'].'"'.(isset($where['plan_id']) ? 'and plan_id="'.$where['plan_id'].'"': '').(isset($where['start_date']) || isset($where['end_date']) ? 'and unit_create_time between "'.$where['start_date'].'" and "'.$where['end_date'].'"': '');
+		//unit_create_time BETWEEN "" and "" ';
 		// var_dump($count_sql);
 		$count_qurty = $this->db->query($count_sql);
 		$count = $count_qurty && $count_qurty->num_rows() > 0 ? $count_qurty->result_array()[0]['count'] : 0;
