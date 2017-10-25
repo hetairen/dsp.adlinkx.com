@@ -177,7 +177,7 @@
             $('.select-brands-but').find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.brands-lists-block').css('display','none');
             $('.add-buts').attr('data-plan-id',$(this).attr('data-plan-id'));
-            get_strategy_list($(this).attr('data-plan-id'),0,0,0,0,0,start_date,end_date);
+            get_strategy_list(($(this).attr('data-plan-id') ? $(this).attr('data-plan-id') : 0),0,0,0,0,0,start_date,end_date);
         });
 
         $(document).on('click','.add-buts',function(){
