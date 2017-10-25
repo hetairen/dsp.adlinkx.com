@@ -65,6 +65,15 @@ class Store extends ADLINKX_Controller{
 		$key = $this->uri->segment(10) != '' ? $this->uri->segment(10) : 'shop_id' ;
 		$fields = '*';
 		$store_lists = $this->store->lists($where, $num, $offset, $key, $stor, $fields, $count);
+		if(is_array($store_lists) && count($store_lists) > 0){
+			for($i=0;$i<count($store_lists);$i++){
+				$store_lists[$i]['store_money'] = sprintf("%.2f",$store_lists[$i]['store_money']);
+				$store_lists[$i]['account_money'] = sprintf("%.2f",$store_lists[$i]['account_money']);
+				$store_lists[$i]['charge_yesterday'] = sprintf("%.2f",$store_lists[$i]['charge_yesterday']);
+				$store_lists[$i]['charge_today'] = sprintf("%.2f",$store_lists[$i]['charge_today']);
+				$store_lists[$i]['agent_charge'] = sprintf("%.2f",$store_lists[$i]['agent_charge']);
+			}
+		}
 		// var_dump($store_lists);
 		if($is_ajax){
 			$this->output_json(true,array(

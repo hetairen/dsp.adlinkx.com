@@ -50,6 +50,15 @@ class Ajax_api extends ADLINKX_Controller {
 			}
 			$where['own_id'] = $this->session->userdata('uid');
 			$store_lists = $this->store->lists($where, $num, $offset, $key, $stor, $fields, $count);
+			if(count($store_lists) > 0){
+				for($i=0;$i<count($store_lists);$i++){
+					$store_lists[$i]['store_money'] = sprintf("%.2f",$store_lists[$i]['store_money']);
+					$store_lists[$i]['account_money'] = sprintf("%.2f",$store_lists[$i]['account_money']);
+					$store_lists[$i]['charge_yesterday'] = sprintf("%.2f",$store_lists[$i]['charge_yesterday']);
+					$store_lists[$i]['charge_today'] = sprintf("%.2f",$store_lists[$i]['charge_today']);
+					$store_lists[$i]['agent_charge'] = sprintf("%.2f",$store_lists[$i]['agent_charge']);
+				}
+			}
 			$this->output_json(true, $store_lists);
 			break;
 		case 'get':
