@@ -87,11 +87,11 @@ class Creative_model extends ADLINKX_Model {
 
 	public function lists($where = array(), $offset = 0, $num = 20, $key = 'id', $stor = 'desc', $fields = '*', &$count) {
 		$count_sql = "SELECT COUNT(*) AS `count` FROM (`huihe_marketing_system`.`diy_ad_task` AS `dat`) LEFT JOIN `huihe_marketing_system`.`store` AS `s` ON s.shop_id = dat.shop_id LEFT JOIN `huihe_marketing_system`.`dsp_stats_ad_task` AS `ds` ON ds.date BETWEEN '".$where['start_date']."' AND '".$where['end_date']."' AND ds.ad_task_id = dat.borad_id WHERE `dat`.`uid` = '" . $where['uid'] . "' " . (isset($where['shop_id']) ? "AND `dat`.`shop_id`=" . $where['shop_id'] : '') . " AND `dat`.`plat_id` = '134' " . (isset($where['unit_id']) ? "AND `dat`.`unit_id`=" . $where['unit_id'] : '') . " AND `dat`.`is_del` = '0' GROUP BY `dat`.`borad_id` ORDER BY `dat`.`status`";
-		var_dump($count_sql);
+		// var_dump($count_sql);
 		$count_query = $this->db->query($count_sql);
 		$count = $count_query && $count_query->num_rows() > 0 ? $count_query->result_array()[0]['count'] : 0;
 		$sql = "SELECT `dat`.`id`,`dat`.`borad_id`, `dat`.`borad_name`, `dat`.`unit_id`, `dat`.`unit_name`, `dat`.`plan_id`, `dat`.`plan_name`, `dat`.`shop_id`, `dat`.`plat_id`, `dat`.`plat_name`, `dat`.`uid`, `dat`.`status`, `dat`.`pic_path`,`dat`.`pic_size`,`dat`.`borad_url`, `s`.`shop_title`, IFNULL(SUM(`ds`.`pv`), 0) AS 'pv', IFNULL(SUM(`ds`.`click`), 0) AS 'click', IFNULL(SUM(`ds`.`charge`), 0) AS 'charge', IFNULL(SUM(`ds`.`click`) / SUM(`ds`.`pv`) * 100, 0) AS `ctr`, IFNULL(SUM(`ds`.`charge`) / SUM(`ds`.`click`), 0) AS `click_cost` FROM (`huihe_marketing_system`.`diy_ad_task` AS `dat`) LEFT JOIN `huihe_marketing_system`.`store` AS `s` ON s.shop_id = dat.shop_id LEFT JOIN `huihe_marketing_system`.`dsp_stats_ad_task` AS `ds` ON ds.date BETWEEN '".$where['start_date']."' AND '".$where['end_date']."' AND ds.ad_task_id = dat.borad_id WHERE `dat`.`uid` = '" . $where['uid'] . "' " . (isset($where['shop_id']) ? "AND `dat`.`shop_id`=" . $where['shop_id'] : '') . " AND `dat`.`plat_id` = '134' " . (isset($where['unit_id']) ? "AND `dat`.`unit_id`=" . $where['unit_id'] : '') . " AND `dat`.`is_del` = '0' GROUP BY `dat`.`borad_id` ORDER BY `dat`.`status` DESC LIMIT " . intval(($offset - 1) / $num) . "," . $num;
-		var_dump($sql);
+		// var_dump($sql);
 		$query = $this->db->query($sql);
 		return $query && $query->num_rows() > 0 ? $query->result_array() : array();
 	}
