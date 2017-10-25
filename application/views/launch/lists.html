@@ -43,7 +43,8 @@
                                 <div class="page-title">投放管理</div>
                                 <div class="date-hook-box">
                                     <i class="fa fa-calendar" style="float:left;margin:8px;"></i>
-                                    <a href="javascript:void(0);" id="hook-time-but" data-shop-id="" style="width:80%;"></a>
+                                    <{$store_lists[0].shop_id}>
+                                    <a href="javascript:void(0);" id="hook-time-but" data-shop-id="<{if $store_lists|@count neq 0}><{$store_lists[0].shop_id}><{else}><{/if}>" style="width:80%;"></a>
                                 </div>
                                 <div class="add-but-block"><a class="add-buts but-24ac45" href="javascript:void(0);" data-shop-id="<{if $store_lists|@count neq 0}><{$store_lists[0].shop_id}><{else}><{/if}>"><i class="fa fa-plus-circle ml10 mr4"></i>新增投放</a></div>
                                 <div class="space-box"></div>
@@ -132,15 +133,8 @@
             done:function(data){
                 var start_date = data.split(' ~ ')[0];
                 var end_date = data.split(' ~ ')[1];
-                var shop_id = $('#home-body-hook-time-but').attr('data-shop-id');
-                var metric = $('#targets-text').attr('data-targets-values');
-                // get_dsp_sadt('today',{
-                //     'start_date':start_date,
-                //     'end_date':end_date,
-                //     'shop_id':shop_id,
-                //     'metric':metric,
-                //     'format':'chart'
-                // });
+                var shop_id = $('#hook-time-but').attr('data-shop-id');
+                get_launch_list(shop_id,0,0,0,0,0,start_date,end_date);
             }
         });
 
