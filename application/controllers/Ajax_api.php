@@ -47,9 +47,8 @@ class Ajax_api extends ADLINKX_Controller {
 				} else {
 					$where['shop_title'] = $key_words;
 				}
-			} else {
-				$where['own_id'] = $this->session->userdata('uid');
 			}
+			$where['own_id'] = $this->session->userdata('uid');
 			var_dump($where);
 			$store_lists = $this->store->lists($where, $num, $offset, $key, $stor, $fields, $count);
 			$this->output_json(true, $store_lists);

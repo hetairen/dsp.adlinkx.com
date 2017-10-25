@@ -54,8 +54,10 @@ class Store_model extends ADLINKX_Model{
             0) AS `adv_charge`,IFNULL(`dsate`.`ds_click` * 0.5, 0) AS `agent_charge` from (select * from `huihe_marketing_system`.`store` where '.$this->build_where($where).' and `is_del`=0) as `s` left join `huihe_marketing_system`.`user` as `u` on `u`.`uid`=`s`.`own_id` LEFT JOIN
     `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id` group by `shop_id` order by '. $key .' '.$stor . ' limit ' . intval(($offset-1)/$num) . ',' .$num;
 		$count_sql = 'SELECT COUNT(*) AS `count` FROM (SELECT COUNT(*) FROM (SELECT * FROM `huihe_marketing_system`.`store` WHERE
-        `own_id` = 108096704 AND `is_del` = 0) AS `s` LEFT JOIN `huihe_marketing_system`.`user` AS `u` ON `u`.`uid` = `s`.`own_id` LEFT JOIN `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id` GROUP BY shop_id) AS a';
+        `own_id` = "'.$where['own_id'].'" AND `is_del` = 0) AS `s` LEFT JOIN `huihe_marketing_system`.`user` AS `u` ON `u`.`uid` = `s`.`own_id` LEFT JOIN `huihe_marketing_system`.`dsp_stats_ad_task_effects` AS `dsate` ON `dsate`.`store_id` = `s`.`shop_id` GROUP BY shop_id) AS a';
 		// $sql = "select * from (select `owner`,`shop_name`,uid,username,shop_site as shop_url,company_name,company_addr,contact,phone,email,fax,qq,add_time,ifnull(`channel_id`,'') as channel_id,ifnull(`money_agent`,0) as money_agent,ifnull(`money_adv`,0) as money_adv, charge_today, charge_yesterday from `huihe_marketing_system`.`user` where ".$this->build_where($where).") A left join (SELECT s.own_id,s.shop_id,sum(dsate.ds_click) click,ROUND(sum(dsate.ds_charge)/100,2) adv_charge, sum(dsate.ds_click)*0.5 agent_charge FROM store s left join `dsp_stats_ad_task_effects` dsate on s.shop_id = dsate.store_id and dsate.date between '" . $date_start . "' and '" . $date_end . "' group by s.own_id) as B on A.uid=B.own_id order by $key $stor limit ".intval(($offset-1)*$num).",".$num;
+		var_dump($sql);
+		var_dump($count_sql);
 		$count = $this->db->query($count_sql)->result_array()[0]['count'];
 		$query = $this->db->query($sql);
 		// var_dump($query->result_array());
