@@ -488,7 +488,7 @@
                     data:null,//要传到后台的参数，没有可以不写  
                     secureuri : false,//是否启用安全提交，默认为false  
                     fileElementId:'upload-file-but',//文件选择框的id属性  
-                    dataType: 'JSON',//服务器返回的格式  
+                    dataType: 'json',//服务器返回的格式  
                     async : false,  
                     success: function (data, status){
                         $('.show-creative-link').attr('href','https://images.ztcadx.com/img/board/'+data.upload_file_name).html('https://images.ztcadx.com/img/board/'+data.upload_file_name);
