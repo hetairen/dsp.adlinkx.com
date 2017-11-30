@@ -161,7 +161,7 @@ class CreativeMange extends ADLINKX_Controller {
 
 			));
 			if ($board_id) {
-				echo '{"upload_file_name":"' . $new_file_name . '","ext":"' . $file_ext . '","width":"' . $file_width . '","height":"' . $file_height . '","board_id":' . $board_id . '}';
+				echo '{"upload_file_name":"' . $new_file_name . '.' . $file_ext . '","ext":"' . $file_ext . '","width":"' . $file_width . '","height":"' . $file_height . '","board_id":' . $board_id . '}';
 			}
 		} else {
 			$this->output_json(false, '移动文件失败');
