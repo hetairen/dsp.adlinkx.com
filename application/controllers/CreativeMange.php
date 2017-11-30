@@ -143,10 +143,13 @@ class CreativeMange extends ADLINKX_Controller {
 		if ($error != 0) {
 			$this->output_json(false, $error);
 		}
-		$new_file_name = 'd_' . md5(microtime()) . '.' . $file_ext;
-		$new_file_path = $upload_dir . '/' . $new_file_name;
+		$new_file_name = 'd_' . md5(microtime());
+
+		$new_file_path = $upload_dir . '/' . $new_file_name . '.' . $file_ext;
+		$cp_file_path = $upload_dir . '/' . $new_file_name . '_logo.' . $file_ext;
 		if (move_uploaded_file($tmp_name, $new_file_path)) {
-//move upload file
+			exec("cp " . $new_file_path . " " . $cp_file_path); //复制上传的图片做为带_logo的图片
+			//move upload file
 			$board_id = $this->diy_board->add(array(
 				'board_name' => $name,
 				'pic_path' => $new_file_name,
