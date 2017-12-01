@@ -128,14 +128,16 @@
     <script src="/resources/js/libarays/custom.js"></script>
     <script>
     jQuery(document).ready(function() {
-        var myDate = new Date();
-        var newDate = myDate.getDate();
-        myDate.setDate(myDate.getDate() - 7);
-        var  weekDay= myDate.getDate();
-        var week_time = myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(weekDay > 9 ? weekDay: '0'+weekDay);
-        var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
-
-        alert(myDate.getMonth());
+        var MyDate = new Date();
+        var NowFullYear = MyDate.getFullYear(); //获取当前的四位数年份
+        var NowDate = MyDate.getDate(); //获取当前的日期
+        var NowMonth = MyDate.getMonth()+1; //获取当前的月份
+        MyDate.setDate(MyDate.getDate() - 7);   //将时间设置为7天以前
+        var  WeekDay= MyDate.getDate(); //获取7天以前的日期
+        //获取7天之前完整的年、月、日
+        var week_time = MyDate.getFullYear()+'-'+((MyDate.getMonth()+1) > 9 ? (MyDate.getMonth()+1) : '0'+(MyDate.getMonth()+1))+'-'+(WeekDay > 9 ? WeekDay: '0'+WeekDay);
+        //获取现在的完整的年、月、日
+        var new_time= NowFullYear+'-'+(NowMonth > 9 ? NowMonth : '0'+NowMonth)+'-'+(NowDate > 9 ? NowDate: '0'+NowDate);
         var date_value = week_time+' ~ '+new_time;
         var insl = laydate.render({
             elem: '#home-body-hook-time-but',
