@@ -156,17 +156,17 @@ class CreativeMange extends ADLINKX_Controller {
 			 * @var [type]
 			 */
 			//获取要添加logo的目标图片资源
-			$dis_img = imagecreatefromstring(file_get_contents($upload_dir . $new_file_name . "_logo." . $ext));
+			$dis_img = imagecreatefromstring(file_get_contents($upload_dir . $new_file_name . "_logo." . $file_ext));
 			//获取logo图片资源
 			$src_img = imagecreatefromstring(file_get_contents($upload_dir . "new_add.png"));
 			//合并成一张图片
 			imagecopymerge($dis_img, $src_img, 0, imagesy($dis_img) - imagesy($src_img), 0, 0, imagesx($src_img), imagesy($src_img), 100);
-			$image_save_name = $new_file_name . "_logo." . $ext;
-			if (in_array($ext, array('jpg', 'jpe', 'jpeg'))) {
+			$image_save_name = $new_file_name . "_logo." . $file_ext;
+			if (in_array($file_ext, array('jpg', 'jpe', 'jpeg'))) {
 				imagejpeg($dis_img, $logo_path . $image_save_name);
-			} elseif (in_array($ext, array('png'))) {
+			} elseif (in_array($file_ext, array('png'))) {
 				imagepng($dis_img, $logo_path . $image_save_name);
-			} elseif (in_array($ext, array('gif'))) {
+			} elseif (in_array($file_ext, array('gif'))) {
 				imagegif($dis_img, $logo_path . $image_save_name);
 			}
 			//将图片信息保存到数据库中
