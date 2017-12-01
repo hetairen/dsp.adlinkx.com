@@ -121,6 +121,7 @@ class CreativeMange extends ADLINKX_Controller {
 	public function upload_files() {
 		$ext_lists = array('jpg', 'jpeg', 'png', 'gif', 'swf', 'avi', 'wmv', '3gp');
 		$upload_dir = '/home/wwwroot/sigma.huihex.dsp/img/board/';
+		$logo_path = '/home/wwwroot/sigma.huihex.dsp/img/logo/';
 		// $upload_dir = '/home/wwwroot/dsp.adlinkx.com/resources/images/board';
 		// $upload_dir = 'C:/web/www/dsp.adlinkx.com/resources/images/board';
 		$name = $_FILES['files']['name'];
@@ -148,8 +149,27 @@ class CreativeMange extends ADLINKX_Controller {
 		$new_file_path = $upload_dir . '/' . $new_file_name . '.' . $file_ext;
 		$cp_file_path = $upload_dir . '/' . $new_file_name . '_logo.' . $file_ext;
 		if (move_uploaded_file($tmp_name, $new_file_path)) {
+//move upload file
 			exec("cp " . $new_file_path . " " . $cp_file_path); //复制上传的图片做为带_logo的图片
-			//move upload file
+			/**
+			 * 生成一张带有汇合营销logo的图片
+			 * @var [type]
+			 */
+			//获取要添加logo的目标图片资源
+			$dis_img = imagecreatefromstring(file_get_contents($upload_dir . $new_file_name . "_logo." . $ext));
+			//获取logo图片资源
+			$src_img = imagecreatefromstring(file_get_contents($upload_dir . "new_add.png"));
+			//合并成一张图片
+			imagecopymerge($dis_img, $src_img, 0, imagesy($dis_img) - imagesy($src_img), 0, 0, imagesx($src_img), imagesy($src_img), 100);
+			$image_save_name = $new_file_name . "_logo." . $ext;
+			if (in_array($ext, array('jpg', 'jpe', 'jpeg'))) {
+				imagejpeg($dis_img, $logo_path . $image_save_name);
+			} elseif (in_array($ext, array('png'))) {
+				imagepng($dis_img, $logo_path . $image_save_name);
+			} elseif (in_array($ext, array('gif'))) {
+				imagegif($dis_img, $logo_path . $image_save_name);
+			}
+			//将图片信息保存到数据库中
 			$board_id = $this->diy_board->add(array(
 				'board_name' => $name,
 				'pic_path' => $new_file_name,
