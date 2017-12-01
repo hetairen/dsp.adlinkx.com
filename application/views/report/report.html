@@ -134,6 +134,8 @@
         var  weekDay= myDate.getDate();
         var week_time = myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(weekDay > 9 ? weekDay: '0'+weekDay);
         var new_time= myDate.getFullYear()+'-'+((myDate.getMonth()+1) > 9 ? (myDate.getMonth()+1) : '0'+(myDate.getMonth()+1))+'-'+(newDate > 9 ? newDate: '0'+newDate);
+
+        alert(myDate.getMonth());
         var date_value = week_time+' ~ '+new_time;
         var insl = laydate.render({
             elem: '#home-body-hook-time-but',
