@@ -94,7 +94,7 @@
                                                 <a href="javascript:void(0);" class="report-query-buttons" data-type="device" data-checked="false" data-shop-id="<{if $store|@count neq 0}><{$store[0].shop_id}><{else}><{/if}>"><i class="fa fa-circle-o"></i>&nbsp;按设备查看</a>
                                                 <a class="export-buts but-0781ec" href="javascript:void(0);" data-shop-id='<{$store[0].shop_id}>'><i class="fa fa-download ml10 mr4"></i>导出数据</a>
                                             </div>
-                                            <div class="report-data-table-body">
+                                            <div class="report-data-table-body" style="height:530px;overflow:auto">
                                                 <table class="table table-striped" id="table2">
                                                     <thead>
                                                         <tr>
