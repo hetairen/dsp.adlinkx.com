@@ -35,39 +35,39 @@ class ADLINKX_Controller extends CI_Controller {
 			$data['user']['username'] = $this->session->userdata('username') !== '' ? $this->session->userdata('username') : '';
 			$data['user']['avatar'] = $this->session->userdata('avatar') !== '' ? '/resources/images/avatar/' . $this->session->userdata('avatar') : '/resources/images/photos/loggeduser.png';
 			$this->assign('user', $data['user']);
-			$this->assign('model',$m);
-			$this->assign('action',$a);
+			$this->assign('model', $m);
+			$this->assign('action', $a);
 		} else {
 			$this->_redirect('http://dsp.adlinkx.com/user/login', 'auto ', 301);
 		}
 
 	}
 
-	public function _redirect($url,$method = 'auto', $code = 301){
+	public function _redirect($url, $method = 'auto', $code = 301) {
 		redirect($url, $method, $code);
 	}
 
-	protected function _get($name){
-		return $_GET[$name] ? $_GET[$name]:($this->input->get($name) ? $this->input->get($name): null) ;
+	protected function _get($name) {
+		return $_GET[$name] ? $_GET[$name] : ($this->input->get($name) ? $this->input->get($name) : null);
 	}
 
 	protected function _import($file_name) {
 		require APPPATH . "libraries/" . $file_name . ".php";
 	}
 
-	public function output_json($fl = true, $msg = ''){
+	public function output_json($fl = true, $msg = '') {
 		$result = array();
-		if($fl){
+		if ($fl) {
 			$result['code'] = 1;
 			$result['msg'] = 'success';
 			$result['data'] = $msg;
-		}else{
+		} else {
 			$result['code'] = 0;
 			$result['msg'] = 'error';
 			$result['data'] = $msg;
 		}
 		$this->output
-    		->set_content_type('application/json','utf-8')
-    		->set_output(json_encode($result));
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($result));
 	}
 }
