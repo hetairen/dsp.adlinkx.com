@@ -7,7 +7,7 @@
  * @Data 2017-01-02
  */
 function Adlinkx($) {
-    this.domain = 'http://dsp.adlinkx.com';
+    this.domain = 'http://dsp.baixiaox.com';
     this.winW = document.documentElement.clientWidth || document.body.clientWidth;
     this.winH = document.documentElement.clientHeight || document.body.clientHeight;
     this.description = '此JS类是根据当前项目需要扩展的一些快捷使用的方法。有些方法可能常用的JS类库中已有，有些可能原生的JS中已支持，为了兼容低版本浏览器做了一些修改[覆盖]，主要还是看那些库中文档有点麻烦就自己根据项目需求写了一些方法';
@@ -505,17 +505,47 @@ Adlinkx.prototype.popup_layer = function(title,text,json){
     });
 }
 
-
+/**
+ * [autoResizeImage 自动设置图像大小]
+ * @param  {[type]} width  [description]
+ * @param  {[type]} height [description]
+ * @param  {[type]} img    [description]
+ * @return {[type]}        [description]
+ */
 Adlinkx.prototype.autoResizeImage = function(width,height,img){
     var imgOBJ = new Image();
     imgOBJ.scr = img;
-    var ratio = 1; // 比例，默认1：1 
+    var Ratio = 1; // 比例，默认1：1 
     var ratio_w;
     var ratio_w;
     var w = imgOBJ.width;
     var h = imgOBJ.height;
     ratio_w = width/w;
     ratio_h = height/h;
+    if (width ==0 && height==0){  
+        Ratio = 1;  
+    }else if (width==0){//  
+        if (ratio_h<1) Ratio = ratio_h;  
+    }else if (height==0){  
+        if (ratio_w<1) Ratio = ratio_w;  
+    }else if (ratio_w<1 || ratio_h<1){  
+        Ratio = (ratio_w<=ratio_h?ratio_w:ratio_h);  
+    }  
+    if (Ratio<1){  
+        w = w * Ratio;  
+        h = h * Ratio;  
+    }  
+    objImg.height = h;  
+    objImg.width = w; 
+}
+
+/**
+ * [isNaN 检测一个变量是不是非数字]
+ * @param  {[type]}  x [description]
+ * @return {Boolean}        [description]
+ */
+Adlinkx.prototype.isNaN = function(x){
+    return isNaN(x);
 }
 
 window.ADLINKX = new Adlinkx(jQuery);
