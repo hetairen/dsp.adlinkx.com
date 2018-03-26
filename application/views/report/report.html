@@ -145,10 +145,11 @@
             range: '~',
             value:date_value,
             done:function(data){
+                var shop_id = $('#store-title-box').attr('data-shop-id');
                 var start_date = data.split(' ~ ')[0];
                 var end_date = data.split(' ~ ')[1];
                 get_dsp_satef('day',{
-                    'shop_id':$(this).attr('data-shop-id'),
+                    'shop_id':shop_id,
                     'start_date':start_date,
                     'end_start':end_date,
                     'metric':'pv_click',
@@ -178,7 +179,7 @@
                 $('.brands-lists-block').css('display','none');
                 $(this).find('.select-brands-but i').removeClass('fa-caret-down').addClass('fa-caret-right');
             }
-            
+
         });
 
         $(document).on('mouseover','.brands-lists',function(e){
@@ -215,7 +216,7 @@
                 }else{
                     $(this).parent().parent().css('height',556);
                 }
-                    
+
             }
         });
 
@@ -371,11 +372,11 @@
                         }
                     break;
                 }
-                
+
             }else{
                 tmp += '<tr><td colspan="'+td_num+'" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>';
             }
-            
+
             return tmp;
         }
 
