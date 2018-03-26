@@ -33,7 +33,7 @@
                                 <{else}>
                                     <div class="brands-lists" data-shop-id="">全部</div>
                                 <{/if}>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                         </span>
                                     </div>
                                     <table class="table table-striped" id="table2">
-                                        <thead>                      
+                                        <thead>
                                             <tr>
                                                 <th>序号</th>
                                                 <th>推广计划</th>
@@ -97,7 +97,7 @@
                                             <{else}>
                                                 <tr><td colspan="12" rowspan="" headers="" style="text-align: center;">暂无数据</td></tr>
                                             <{/if}>
-                                            
+
                                         </tbody>
                                     </table>
                                     <div id="pages-box" data-count="<{$count}>" data-current="<{$current}>"></div>
@@ -174,7 +174,7 @@
                 $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
                 $('.brands-lists-block').css('display','none');
             }
-            
+
         });
         $(document).on('click','.brands-lists',function(e){
             $('#store-title-box').html($(this).html()).attr('data-shop-id',$(this).attr('data-shop-id'));
@@ -212,7 +212,7 @@
             }else{
                 ADLINKX.alert('请选择要删除的投放');
             }
-            
+
         });
 
         $(document).on('click','.delete-buts',function(){
@@ -250,14 +250,14 @@
                     }
                 });
                 //console.log(check_store_money(shop_id));
-                
+
             }else{
                 ADLINKX.alert('请选择要开启的投放');
             }
         });
 
         $(document).on('click','.stop-buts',function(){
-            
+
             var ids = [];
             $('.select-buts').each(function(index, el) {
                 if($(this).attr('data-is-checked') == 'true'){
@@ -328,22 +328,16 @@
         }
 
         function get_device_type(device){
-            switch(device){
-                case 1:
-                    return 'PC端';
-                break;
-                case 2:
-                    return '无线端';
-                break;
-                case 3:
-                    return 'APP';
-                break;
-                case 4:
-                    return 'Native';
-                break;
-                default:
-                    return '不限设备';
-                break;
+            if(device == 1){
+                return 'PC端';
+            }else if(device == 2){
+                return '无线端';
+            }else if(device == 3){
+                return 'APP';
+            }else if(device == 4){
+                return 'Native';
+            }else{
+                return '不限设备';
             }
         }
 
